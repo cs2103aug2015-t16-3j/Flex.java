@@ -248,24 +248,27 @@ public class Flex{
 		if(whitespaceIndex1 < 0 ){
 		
 			if(previousAction.equalsIgnoreCase("add")){
-				System.out.println("previousChangeTerm: " + previousChangeTerm);
-				System.out.println("previousAction: "+ previousAction);
-				System.out.println("previousTask: " + previousTask.printTaskString());
+				// for checking
+				// System.out.println("previousChangeTerm: " + previousChangeTerm);
+				// System.out.println("previousAction: " + previousAction);
+				// System.out.println("previousTask: " + previousTask.printTaskString());
 				deleteTask(filename, previousTask.getDate(), previousTask.getTaskTitle(), previousChangeTerm, previousAction, previousTask);
 			}
 			else if(previousAction.equalsIgnoreCase("delete")){
-				System.out.println("previousChangeTerm: " + previousChangeTerm);
-				System.out.println("previousAction: "+ previousAction);
-				System.out.println("previousTask: " + previousTask.printTaskString());
+				// for checking
+				// System.out.println("previousChangeTerm: " + previousChangeTerm);
+				// System.out.println("previousAction: " + previousAction);
+				// System.out.println("previousTask: " + previousTask.printTaskString());
 				addTask(filename, previousTask.printTaskString(), previousChangeTerm, previousAction, previousTask);
 			}
 		}
 		else{
 			
 			if(previousAction.substring(0, whitespaceIndex1).trim().equalsIgnoreCase("change")){
-				System.out.println("previousChangeTerm: " + previousChangeTerm);
-				System.out.println("previousAction: " + previousAction);
-				System.out.println("previousTask: " + previousTask.printTaskString());	
+				// for checking
+				// System.out.println("previousChangeTerm: " + previousChangeTerm);
+				// System.out.println("previousAction: " + previousAction);
+				// System.out.println("previousTask: " + previousTask.printTaskString());	
 				int whitespaceIndex2 = previousAction.indexOf(" ");			
 				changeTaskVariable(filename, previousAction.substring(whitespaceIndex2 + 1).trim() + " " + previousTask.getDate() + ", " + previousTask.getTaskTitle() + ", " + previousChangeTerm, previousChangeTerm, previousAction, previousTask);
 			}
