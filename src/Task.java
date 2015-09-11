@@ -26,94 +26,94 @@ public class Task {
 	
 	public Task(String taskInformation){
 		// for checking
-		System.out.println("taskInformation for Task() constructor: " + taskInformation);
+		// System.out.println("taskInformation for Task() constructor: " + taskInformation);
 		
 		String remainingString = new String("");
 		remainingString = taskInformation;
 		
 		// for checking
-		System.out.println("remainingString for Task() constructor before trim(): " + remainingString);
+		// System.out.println("remainingString for Task() constructor before trim(): " + remainingString);
 		
 		remainingString.trim();
 		
 		// for checking
-		System.out.println("remainingString for Task() constructor after trim(): " + remainingString);
+		//  System.out.println("remainingString for Task() constructor after trim(): " + remainingString);
 		
 		// extracts the date
 		int commaWhitespaceIndex1 = remainingString.indexOf(", ");
 		
 		// for checking
-		System.out.println("commaWhitespaceIndex1: " + commaWhitespaceIndex1);
+		// System.out.println("commaWhitespaceIndex1: " + commaWhitespaceIndex1);
 		
 		this.date = remainingString.substring(0, commaWhitespaceIndex1);
 		remainingString = remainingString.substring(commaWhitespaceIndex1 + 2);
 		
 		// for checking:
-		System.out.println("this.date: " + this.date);
+		// System.out.println("this.date: " + this.date);
 		
 		// extracts the starting time
 		int commaWhitespaceIndex2 = remainingString.indexOf(", ");
 		
 		// for checking
-		System.out.println("commaWhitespaceIndex2: " + commaWhitespaceIndex2);
+		// System.out.println("commaWhitespaceIndex2: " + commaWhitespaceIndex2);
 		
 		this.startingTime = remainingString.substring(0, commaWhitespaceIndex2);
 		remainingString = remainingString.substring(commaWhitespaceIndex2 + 2);
 		
 		// for checking:
-		System.out.println("this.startingTime: " + this.startingTime);
+		// System.out.println("this.startingTime: " + this.startingTime);
 		
 		// extracts the ending time
 		int commaWhitespaceIndex3 = remainingString.indexOf(", ");
 		
 		// for checking
-		System.out.println("commaWhitespaceIndex3: " + commaWhitespaceIndex3);
+		// System.out.println("commaWhitespaceIndex3: " + commaWhitespaceIndex3);
 		
 		this.endingTime = remainingString.substring(0, commaWhitespaceIndex3);
 		remainingString = remainingString.substring(commaWhitespaceIndex3 + 2);
 		
 		// for checking:
-		System.out.println("this.endingTime: " + this.endingTime);
+		// System.out.println("this.endingTime: " + this.endingTime);
 		
 		// extracts the task title
 		int commaWhitespaceIndex4 = remainingString.indexOf(", ");
 		
 		// for checking
-		System.out.println("commaWhitespaceIndex4: " + commaWhitespaceIndex4);
+		// System.out.println("commaWhitespaceIndex4: " + commaWhitespaceIndex4);
 		
 		this.taskTitle = remainingString.substring(0, commaWhitespaceIndex4);
 		remainingString = remainingString.substring(commaWhitespaceIndex4 + 2);
 		
 		// for checking:
-		System.out.println("this.taskTitle : " + this.taskTitle);
+		//  System.out.println("this.taskTitle : " + this.taskTitle);
 		
 		// extracts the task description
 		int commaWhitespaceIndex5 = remainingString.indexOf(", ");
 		
 		// for checking
-		System.out.println("commaWhitespaceIndex5: " + commaWhitespaceIndex5);
+		// System.out.println("commaWhitespaceIndex5: " + commaWhitespaceIndex5);
 		
 		this.taskDescription = remainingString.substring(0, commaWhitespaceIndex5);
 		remainingString = remainingString.substring(commaWhitespaceIndex5 + 2);
 		
 		// for checking:
-		System.out.println("this.taskDescription : " + this.taskDescription);
+		// System.out.println("this.taskDescription : " + this.taskDescription);
 
 		// extracts the priority level, and the category of the task
 		int commaWhitespaceIndex6 = remainingString.indexOf(", ");
 		
 		// for checking
-		System.out.println("commaWhitespaceIndex6: " + commaWhitespaceIndex6);
+		// System.out.println("commaWhitespaceIndex6: " + commaWhitespaceIndex6);
 		
 		this.priorityLevel = remainingString.substring(0, commaWhitespaceIndex6);
 		remainingString = remainingString.substring(commaWhitespaceIndex6 + 2);
 		category = remainingString;		
 		
 		// for checking:
-		System.out.println("this.priorityLevel : " + this.priorityLevel);
+		// System.out.println("this.priorityLevel : " + this.priorityLevel);
 		
 		// for checking:
-		System.out.println("this.category : " + this.category);
+		// System.out.println("this.category : " + this.category);
 		
 		String temp = this.date;
 		int slashIndex1 = temp.indexOf("/");
@@ -130,7 +130,7 @@ public class Task {
 		comparisonValue = (day - 1) * DAY_HOURS * HOUR_MINUTES + (month - 1) * MONTH_DAYS * DAY_HOURS * HOUR_MINUTES + (year - 1) * YEAR_DAYS * MONTH_DAYS * DAY_HOURS * HOUR_MINUTES + startingTimeHours * HOUR_MINUTES + startingTimeMinutes;
 		
 		// for checking
-		System.out.println("comparisonValue= " + comparisonValue);
+		// System.out.println("comparisonValue= " + comparisonValue);
 		
 	}
 
@@ -220,7 +220,7 @@ public class Task {
 	}
 	// displays the task on the screen
 	public void printTask(){
-		System.out.println(this.getDate() + ", " + this.getStartingTime() + ", " + this.getEndingTime() + "," + this.getTaskTitle() + ", " + this.getTaskDescription() + ", " + this.getPriorityLevel() + ", " + this.getCategory());
+		System.out.println(this.getDate() + ", " + this.getStartingTime() + ", " + this.getEndingTime() + ", " + this.getTaskTitle() + ", " + this.getTaskDescription() + ", " + this.getPriorityLevel() + ", " + this.getCategory());
 		// System.out.println("date: " + this.getDate() + ", " + this.getStartingTime() + " to " + this.getEndingTime() + ", task title: " + this.getTaskTitle() + ", task description: " + this.getTaskDescription() + ", priority level: " + this.getPriorityLevel() + ", category: " + this.getCategory());	
 	}
 }
