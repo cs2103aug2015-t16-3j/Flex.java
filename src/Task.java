@@ -207,7 +207,7 @@ public class Task {
 		this.comparisonValue = numberOfPastLeapYears * LEAP_YEAR_DAYS + numberOfPastNonLeapyears * YEAR_DAYS * DAY_HOURS * HOUR_MINUTES + (numberOfAccumulatedPastDaysInCurrentYear + leapYearFebruaryDay) * DAY_HOURS * HOUR_MINUTES + numberOfPastHours * HOUR_MINUTES + numberOfPastMinutes;
 		
 		// for checking
-		System.out.println("comparisonValue= " + comparisonValue);
+		// System.out.println("comparisonValue= " + comparisonValue);
 		
 	}
 	

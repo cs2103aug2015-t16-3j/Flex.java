@@ -21,8 +21,8 @@ public class Flex{
 		// java Flex.java schedule.txt
 		String filename = args[0];
 		
-		//for checking
-		System.out.println("filename: " + filename);
+		// for checking
+		// System.out.println("filename: " + filename);
 		
 		// this method takes care of the manipulation to be done, as well as the operation for exiting the program
 		readAndExecuteCommand(filename, null, null, null);
@@ -317,7 +317,7 @@ public class Flex{
 		int commaWhitespaceIndex1 = remainingCommandString1StartingWithDate.indexOf(", ");
 		
 		// for checking
-		System.out.println("remainingCommandString1StartingWithDate: "+ remainingCommandString1StartingWithDate);
+		// System.out.println("remainingCommandString1StartingWithDate: "+ remainingCommandString1StartingWithDate);
 		String tempDate = new String("");
 		tempDate = remainingCommandString1StartingWithDate.substring(0, commaWhitespaceIndex1);
 		
@@ -327,12 +327,12 @@ public class Flex{
 		String tempStartingTime = new String("");
 		
 		//for checking
-		System.out.println("remainingCommandString1StartingWithStartingTime: " + remainingCommandString1StartingWithStartingTime);
+		// System.out.println("remainingCommandString1StartingWithStartingTime: " + remainingCommandString1StartingWithStartingTime);
 		
 		tempStartingTime = remainingCommandString1StartingWithStartingTime.substring(0, commaWhitespaceIndex2);
 
 		// for checking
-		System.out.println("tempStartingTime: " + tempStartingTime);
+		// System.out.println("tempStartingTime: " + tempStartingTime);
 		
 		String remainingCommandString1StartingWithEndingTime = new String("");
 		remainingCommandString1StartingWithEndingTime = remainingCommandString1StartingWithStartingTime.substring(commaWhitespaceIndex2 +2).trim();
@@ -340,12 +340,12 @@ public class Flex{
 		String tempEndingTime = new String("");
 		
 		// for checking
-		System.out.println("remainingCommandString1StartingWithEndingTime: " + remainingCommandString1StartingWithEndingTime);
+		// System.out.println("remainingCommandString1StartingWithEndingTime: " + remainingCommandString1StartingWithEndingTime);
 		
 		tempEndingTime = remainingCommandString1StartingWithEndingTime.substring(0, commaWhitespaceIndex3);
 				
 		// for checking
-		System.out.println("tempEndingTime: " + tempEndingTime);
+		// System.out.println("tempEndingTime: " + tempEndingTime);
 		
 		for (int i=0; i<allTasksList.size(); i++){
 			if((allTasksList.get(i).getDate().equals(tempDate))&&(!allTasksList.get(i).getCategory().equalsIgnoreCase("done"))&&(((Integer.valueOf(allTasksList.get(i).getStartingTime()) <= Integer.valueOf(tempStartingTime))&&(Integer.valueOf(allTasksList.get(i).getEndingTime()) >= Integer.valueOf(tempStartingTime)))||((Integer.valueOf(allTasksList.get(i).getStartingTime()) <= Integer.valueOf(tempEndingTime))&&(Integer.valueOf(allTasksList.get(i).getEndingTime()) >= Integer.valueOf(tempEndingTime))))){
@@ -436,9 +436,10 @@ public class Flex{
 									
 		writer.close();
 		
-		System.out.println("previousChangeTerm: "+ previousChangeTerm);
-		System.out.println("previousAction is set to delete");		
-		System.out.println("previousTask(tempTask): " + tempTask.printTaskString());
+		// for checking
+		// System.out.println("previousChangeTerm: "+ previousChangeTerm);
+		// System.out.println("previousAction is set to delete");		
+		// System.out.println("previousTask(tempTask): " + tempTask.printTaskString());
 		readAndExecuteCommand(filename, previousChangeTerm, "delete", tempTask);	
 	}
 	
@@ -550,7 +551,7 @@ public class Flex{
 	// for sorting all tasks by date and starting time
 	private static void changeTaskVariable(String filename, String remainingCommandString, String previousChangeTerm, String previousAction, Task previousTask) throws IOException {		
 		// for checking
-		System.out.println("remainingCommandString for changeTaskVariable(): " + remainingCommandString);
+		// System.out.println("remainingCommandString for changeTaskVariable(): " + remainingCommandString);
 		
 		int whitespaceIndex1 = remainingCommandString.indexOf(" ");
 		
@@ -564,14 +565,14 @@ public class Flex{
 		changeVariableType = remainingCommandString.substring(0, whitespaceIndex1).trim();
 		
 		// for checking
-		System.out.println("changeVariableType: " + changeVariableType);
+		// System.out.println("changeVariableType: " + changeVariableType);
 		
 		String changeRemainingString = new String("");
 		changeRemainingString = remainingCommandString.substring(whitespaceIndex1 + 1).trim();
 		changeRemainingString.trim();
 		
 		// for checking
-		System.out.println("changeRemainingString: " + changeRemainingString);
+		// System.out.println("changeRemainingString: " + changeRemainingString);
 		
 		int commaWhitespaceIndex1 = changeRemainingString.indexOf(", ");
 		if(commaWhitespaceIndex1 < 0){
@@ -584,13 +585,13 @@ public class Flex{
 		currentDate = changeRemainingString.substring(0, commaWhitespaceIndex1);
 		
 		// for checking
-		System.out.println("currentDate: " + currentDate);
+		// System.out.println("currentDate: " + currentDate);
 		
 		changeRemainingString = changeRemainingString.substring(commaWhitespaceIndex1 + 2).trim();
 		changeRemainingString.trim();
 		
 		// for checking
-		System.out.println("changeRemainingString: " + changeRemainingString);
+		// System.out.println("changeRemainingString: " + changeRemainingString);
 		
 		int commaWhitespaceIndex2 = changeRemainingString.indexOf(", ");
 		if(commaWhitespaceIndex2 < 0){
@@ -604,10 +605,10 @@ public class Flex{
 		changeRemainingString.trim();
 		
 		// for checking
-		System.out.println("changeRemainingString: " + changeRemainingString);
+		// System.out.println("changeRemainingString: " + changeRemainingString);
 		
 		// for checking
-		System.out.println("currentTaskTitle: " + currentTaskTitle);
+		// System.out.println("currentTaskTitle: " + currentTaskTitle);
 		
 		changeRemainingString = changeRemainingString.substring(commaWhitespaceIndex2 + 2).trim();
 		changeRemainingString.trim();
@@ -620,7 +621,7 @@ public class Flex{
 		newTerm = changeRemainingString;
 		
 		// for checking
-		System.out.println("newTerm: " + newTerm);
+		// System.out.println("newTerm: " + newTerm);
 				
 		// reads in the file, line by line
 		BufferedReader reader = null;
@@ -739,9 +740,11 @@ public class Flex{
 		
 		
 		// for valid input cases
-		System.out.println("previousChangeTerm(changedTerm): " + changedTerm);
-		System.out.println("previousAction is set to: " + lastAction);		
-		System.out.println("previousTask(tempTask): " + tempTask.printTaskString());
+		
+		// for checking
+		// System.out.println("previousChangeTerm(changedTerm): " + changedTerm);
+		// System.out.println("previousAction is set to: " + lastAction);		
+		// System.out.println("previousTask(tempTask): " + tempTask.printTaskString());
 		readAndExecuteCommand(filename, changedTerm, lastAction, tempTask);	
 		
 		
