@@ -10,6 +10,10 @@ public class Flex{
 
 	private static Scanner sc;
 	private static final String INVALID_INPUT_MESSAGE = "Invalid input. Please try again.";
+	private static boolean isValid; // used to check if a new task to be added is valid
+	// that is, it is valid only if its starting time, or ending time, are NOT between the starting
+	// and ending times of existing tasks which are NOT DONE YET
+	
 	
 	public static void main(String[]args) throws IOException{
 		// whereby the user's input is
@@ -240,12 +244,21 @@ public class Flex{
 	// This is because there is no need to undo a search task
 	private static void undo(String filename, String previousAction, String previousChangeTerm, Task previousTask) throws IOException {
 		if(previousAction.equalsIgnoreCase("add")){
+			System.out.println("previousAction: "+ previousAction);
+			System.out.println("previousChangeTerm: " + previousChangeTerm);
+			System.out.println("previousTask: " + previousTask.printTaskString());
 			deleteTask(filename, previousTask.getDate(), previousTask.getTaskTitle(), previousChangeTerm, previousAction, previousTask);
 		}
 		else if(previousAction.equalsIgnoreCase("delete")){
+			System.out.println("previousAction: "+ previousAction);
+			System.out.println("previousChangeTerm: " + previousChangeTerm);
+			System.out.println("previousTask: " + previousTask.printTaskString());
 			addTask(filename, previousTask.printTaskString(), previousChangeTerm, previousAction, previousTask);
 		}
 		else if(previousAction.equalsIgnoreCase("change")){
+			System.out.println("previousAction: "+ previousAction);
+			System.out.println("previousChangeTerm: " + previousChangeTerm);
+			System.out.println("previousTask: " + previousTask.printTaskString());
 			changeTaskVariable(filename, "change " + previousTask.getDate() + " " + previousTask.getTaskTitle() + " " + previousChangeTerm, previousChangeTerm, previousAction, previousTask);
 		}
 		else{
@@ -288,9 +301,60 @@ public class Flex{
 		// for checking
 		// System.out.println("remainingCommandString1 for addTask(), before allTasksList.add(new Task(remainingCommandString1)): " + remainingCommandString1);
 		
+		isValid = true;
+		
+		// for example
+		// 14/9/2015, 1000, 1159, title two, description two, 1, blocked
+
+		String remainingCommandString1StartingWithDate = new String("");
+		remainingCommandString1StartingWithDate = remainingCommandString1;
+		int commaWhitespaceIndex1 = remainingCommandString1StartingWithDate.indexOf(", ");
+		
+		// for checking
+		System.out.println("remainingCommandString1StartingWithDate: "+ remainingCommandString1StartingWithDate);
+		String tempDate = new String("");
+		tempDate = remainingCommandString1StartingWithDate.substring(0, commaWhitespaceIndex1);
+		
+		String remainingCommandString1StartingWithStartingTime = new String("");
+		remainingCommandString1StartingWithStartingTime = remainingCommandString1StartingWithDate.substring(commaWhitespaceIndex1 + 2);
+		int commaWhitespaceIndex2 = remainingCommandString1StartingWithStartingTime.indexOf(", ");	
+		String tempStartingTime = new String("");
+		
+		//for checking
+		System.out.println("remainingCommandString1StartingWithStartingTime: " + remainingCommandString1StartingWithStartingTime);
+		
+		tempStartingTime = remainingCommandString1StartingWithStartingTime.substring(0, commaWhitespaceIndex2);
+
+		// for checking
+		System.out.println("tempStartingTime: " + tempStartingTime);
+		
+		String remainingCommandString1StartingWithEndingTime = new String("");
+		remainingCommandString1StartingWithEndingTime = remainingCommandString1StartingWithStartingTime.substring(commaWhitespaceIndex2 +2);
+		int commaWhitespaceIndex3 = remainingCommandString1StartingWithEndingTime.indexOf(", ");	
+		String tempEndingTime = new String("");
+		
+		// for checking
+		System.out.println("remainingCommandString1StartingWithEndingTime: " + remainingCommandString1StartingWithEndingTime);
+		
+		tempEndingTime = remainingCommandString1StartingWithEndingTime.substring(0, commaWhitespaceIndex3);
+				
+		// for checking
+		System.out.println("tempEndingTime: " + tempEndingTime);
+		
+		for (int i=0; i<allTasksList.size(); i++){
+			if((allTasksList.get(i).getDate().equals(tempDate))&&(!allTasksList.get(i).getCategory().equalsIgnoreCase("done"))&&(((Integer.valueOf(allTasksList.get(i).getStartingTime()) <= Integer.valueOf(tempStartingTime))&&(Integer.valueOf(allTasksList.get(i).getEndingTime()) >= Integer.valueOf(tempStartingTime)))||((Integer.valueOf(allTasksList.get(i).getStartingTime()) <= Integer.valueOf(tempStartingTime))&&(Integer.valueOf(allTasksList.get(i).getEndingTime()) >= Integer.valueOf(tempStartingTime))))){
+				
+				// if the new task's information is invalid
+				isValid = false;
+				System.out.println(INVALID_INPUT_MESSAGE);					
+				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);												
+			}
+		}
+		
+		
 		Task tempTask = new Task();
 		
-		allTasksList.add(new Task(remainingCommandString1));
+		allTasksList.add(new Task(remainingCommandString1));	
 		
 		tempTask = allTasksList.get(allTasksList.size()-1);
 		
@@ -310,6 +374,9 @@ public class Flex{
 									
 		writer.close();		
 		
+		System.out.println("previousChangeTerm: "+ previousChangeTerm);
+		System.out.println("previousAction is set to add");		
+		System.out.println("previousTask(tempTask): " + tempTask.printTaskString());
 		readAndExecuteCommand(filename, previousChangeTerm, "add", tempTask);	
 				
 	}	
@@ -363,6 +430,9 @@ public class Flex{
 									
 		writer.close();
 		
+		System.out.println("previousChangeTerm: "+ previousChangeTerm);
+		System.out.println("previousAction is set to delete");		
+		System.out.println("previousTask(tempTask): " + tempTask.printTaskString());
 		readAndExecuteCommand(filename, previousChangeTerm, "delete", tempTask);	
 	}
 	
@@ -464,7 +534,7 @@ public class Flex{
 		// invalid input case
 		else{
 			System.out.println(INVALID_INPUT_MESSAGE);
-		}
+		}		
 		
 		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 
@@ -650,8 +720,13 @@ public class Flex{
 									
 		writer.close();
 		
+		
 		// for valid input cases
+		System.out.println("previousChangeTerm(changedTerm): "+ previousAction);
+		System.out.println("previousAction is set to change");		
+		System.out.println("previousTask(tempTask): " + previousTask.printTaskString());
 		readAndExecuteCommand(filename, changedTerm, "change", tempTask);	
+		
 		
 	}
 
