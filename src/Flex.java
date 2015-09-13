@@ -1,6 +1,22 @@
+// Flex.java
+// Uses Task objects from Task.java
+// Able to
+// 1. Add a task - clashes with existing tasks, on the same date, which have not been marked as done
+// are prevented from being added (invalid case)
+// 2. Delete a task - tasks which do not exist, cannot be deleted (invalid case)
+// 3. Edit a Task's variable (attribute), EXCEPT for its comparisonValue 
+// 4. Automatically sort tasks by date and starting time after valid input for points 1. , 2. , and 3.
+// 5. Show tasks by "numerical" priorityLevel (where "1" is the highest), but not alter the schedule file
+// This method works only if the user has chosen to use positive integers as priority levels
+// i.e. The user can choose to use alphabets instead, for the priority levels, for 1. and 2.
+// 6. Search for tasks by one of the variables(attributes) for tasks, EXCEPT by the tasks' "comparisonValue" s
+// 7. Undo the very last VALID action done for 1. , 2. and 3. - searching and showing(displaying) commands will not have their last VALID action saved 
+// 8. Able to show tasks which has priority levels not being numbers (not all characters in the priority level string are numerical digits)
+
 import java.util.*;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,7 +29,11 @@ public class Flex{
 	private static boolean isValid; // used to check if a new task to be added is valid
 	// that is, it is valid only if its starting time, or ending time, are NOT between the starting
 	// and ending times of existing tasks which are NOT DONE YET
-	
+	private static final String NO_SEARCH_RESULTS_MESSSAGE = "Valid input, but with no search results."; 
+	private static final String TASK_DOES_NOT_EXIST_MESSAGE = "Task does not exist, so no such task can be deleted.";
+	private static final String EXIT_MESSAGE = "Exiting the program.";
+	private static final String BLOCKED_MESSAGE = "Unable to add the new task, because the new task clashes with existing tasks (on the same date) which have not been marked as tasks which have been done.";
+	private static final String PRIORITY_NOT_NUMBER_MESSAGE = "There is at least one task which has a priority level that is not equal to a number. Therefore, the tasks cannot be sorted (and displayed) by numerical priority level.";
 	
 	public static void main(String[]args) throws IOException{
 		// whereby the user's input is
@@ -61,7 +81,8 @@ public class Flex{
 			firstWord = command;
 			
 			// Case 1: The program Flex.java will exit itself in Command Line Prompt (cmd).
-			if(firstWord.equalsIgnoreCase("exit")){												
+			if(firstWord.equalsIgnoreCase("exit")){		
+				System.out.println(EXIT_MESSAGE);
 			   	return;
 			}	
 			// Case 2: undo the last action
@@ -230,7 +251,25 @@ public class Flex{
 				
 				
 			}
-			// case 9: If the user's command is invalid
+			else if(firstWord.equalsIgnoreCase("show")){
+				String remainingString = command.substring(whitespaceIndex+1).trim();		
+				remainingString.trim();
+				
+				if(remainingString.equalsIgnoreCase("by numerical priority")){
+					sortAndShowByNumericalPriority(filename, previousChangeTerm, previousAction, previousTask);				
+				}
+				else if(remainingString.equalsIgnoreCase("non-numerical priority")){
+					showNonNumericalPriority(filename, previousChangeTerm, previousAction, previousTask);
+				}
+				else{
+					System.out.println(INVALID_INPUT_MESSAGE);
+					
+					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
+				}
+
+
+			}
+			// case 10: If the user's command is invalid
 			else{
 				System.out.println(INVALID_INPUT_MESSAGE);
 				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
@@ -238,7 +277,129 @@ public class Flex{
 		}
 	}
 
-	// undo the previous action, only if the previous action was adding a task,
+	private static void showNonNumericalPriority(String filename, String previousChangeTerm, String previousAction,
+			Task previousTask) throws IOException {
+		BufferedReader reader = null;
+		
+		reader = new BufferedReader(new FileReader(filename));
+		String currentLine = null;
+		
+		ArrayList<Task> allTasksList = new ArrayList<Task>();
+		ArrayList<Task> nonNumericalPriorityList = new ArrayList<Task>();
+						
+		do{
+			currentLine = reader.readLine();
+			if(currentLine!=null){
+					
+				allTasksList.add(new Task(currentLine));				
+			}
+		}while(currentLine!=null);			
+		
+		if(reader!=null){
+			reader.close();
+		}				
+		
+		for(int i=0; i<allTasksList.size(); i++){
+			boolean isNumber = true;
+			int size = allTasksList.get(i).getPriorityLevel().length();
+			char[] temp = new char[size];
+			allTasksList.get(i).getPriorityLevel().getChars(0, size, temp, 0);
+			
+			for(int j=0; j<size; j++){
+				if(!Character.isDigit(temp[j])){
+					isNumber = false;
+				}	
+			}
+			
+			if(!isNumber){
+				nonNumericalPriorityList.add(allTasksList.get(i));
+			}
+		}
+		
+		for(int k=0; k<nonNumericalPriorityList.size(); k++){
+			System.out.println(nonNumericalPriorityList.get(k).printTaskString());
+		}
+		
+		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
+	}
+
+	private static void sortAndShowByNumericalPriority(String filename, String previousChangeTerm, String previousAction,
+			Task previousTask) throws IOException {
+		BufferedReader reader = null;
+		
+		reader = new BufferedReader(new FileReader(filename));
+		String currentLine = null;
+		
+		ArrayList<Task> allTasksList = new ArrayList<Task>();
+						
+		do{
+			currentLine = reader.readLine();
+			if(currentLine!=null){
+					
+				allTasksList.add(new Task(currentLine));				
+			}
+		}while(currentLine!=null);			
+		
+		if(reader!=null){
+			reader.close();
+		}				
+		
+		int size = allTasksList.size(); 
+		int i, start, min_index;
+				
+		for(start=0; start<size-1; start++){
+			min_index = start;
+			boolean iIsNumber = true;
+			boolean min_indexIsNumber = true;
+			
+			for(i=start+1; i<size; i++){
+				
+				int size1 = allTasksList.get(i).getPriorityLevel().length();
+				char[] dst1 = new char[size1];
+				allTasksList.get(i).getPriorityLevel().getChars(0, size1, dst1, 0);
+				
+				for(int k=0; k<size1; k++){
+					if(!Character.isDigit(dst1[k])){
+						iIsNumber = false;
+						System.out.println(PRIORITY_NOT_NUMBER_MESSAGE);
+						readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
+					}
+				}
+				
+				int size2 = allTasksList.get(min_index).getPriorityLevel().length();				
+				char[] dst2 = new char[size2];
+				allTasksList.get(min_index).getPriorityLevel().getChars(0, size2, dst2, 0);
+				
+				for(int l=0; l<size2; l++){
+					if(!Character.isDigit(dst2[l])){
+						min_indexIsNumber = false;
+						System.out.println(PRIORITY_NOT_NUMBER_MESSAGE);
+						readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
+					}
+				}
+				
+				if(Integer.valueOf(allTasksList.get(i).getPriorityLevel()) < Integer.valueOf(allTasksList.get(min_index).getPriorityLevel())){		
+					min_index = i;										
+				}
+			}
+			
+			Task temp1 = allTasksList.get(start);
+			Task temp2 = allTasksList.get(min_index);
+			allTasksList.set(start, temp2);
+			allTasksList.set(min_index, temp1);
+		}
+		
+		
+		
+		for(int j=0; j<size; j++){
+			System.out.println(allTasksList.get(j).printTaskString());
+		}
+		
+		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
+		
+	}
+
+	// undo the previous VALID action, only if the previous action was adding a task,
 	// deleting a task, 
 	// or changing a task's variable
 	// This is because there is no need to undo a search task
@@ -355,7 +516,7 @@ public class Flex{
 				
 				// if the new task's information is invalid
 				isValid = false;
-				System.out.println(INVALID_INPUT_MESSAGE);					
+				System.out.println(BLOCKED_MESSAGE);					
 				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);												
 			}
 		}
@@ -383,9 +544,10 @@ public class Flex{
 									
 		writer.close();		
 		
-		System.out.println("previousChangeTerm: "+ previousChangeTerm);
-		System.out.println("previousAction is set to add");		
-		System.out.println("previousTask(tempTask): " + tempTask.printTaskString());
+		// for checking
+		// System.out.println("previousChangeTerm: "+ previousChangeTerm);
+		// System.out.println("previousAction is set to add");		
+		// System.out.println("previousTask(tempTask): " + tempTask.printTaskString());
 		readAndExecuteCommand(filename, previousChangeTerm, "add", tempTask);	
 				
 	}	
@@ -394,6 +556,8 @@ public class Flex{
 	// deletes a task
 	private static void deleteTask(String filename, String date, String taskTitle, String previousChangeTerm, String previousAction, Task previousTask) throws IOException {
 		// reads in the file, line by line
+		boolean taskExists = false;
+		
 		BufferedReader reader = null;
 		
 		reader = new BufferedReader(new FileReader(filename));
@@ -421,6 +585,7 @@ public class Flex{
 			if((allTasksList.get(i).getDate().equals(date))&&(allTasksList.get(i).getTaskTitle().equals(taskTitle))){
 				tempTask = allTasksList.get(i);
 				allTasksList.remove(i);
+				taskExists = true;
 				// for checking
 				// System.out.println("matching task successfully deleted");
 			}
@@ -436,7 +601,12 @@ public class Flex{
 			writer.write(allTasksList.get(i).printTaskString());
 			writer.newLine();
 		}
-									
+
+		if(taskExists == false){
+			System.out.println(TASK_DOES_NOT_EXIST_MESSAGE);
+			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
+		}
+		
 		writer.close();
 		
 		// for checking
@@ -450,6 +620,8 @@ public class Flex{
 	private static void searchTask(String filename, String remainingCommandString, String previousChangeTerm, String previousAction, Task previousTask) throws IOException{
 		// for checking
 		// System.out.println("remainingCommandString for searchTask(): " + remainingCommandString);
+		
+		boolean hasResultWithValidInput = false;
 						
 		int whitespaceIndex1 = remainingCommandString.indexOf(" ");
 		
@@ -496,6 +668,7 @@ public class Flex{
 			for(int i=0; i<allTasksList.size(); i++){
 				if(allTasksList.get(i).getDate().equals(searchTerm)){
 					allTasksList.get(i).printTask();
+					hasResultWithValidInput = true;
 				}
 			}
 		}
@@ -503,6 +676,7 @@ public class Flex{
 			for(int i=0; i<allTasksList.size(); i++){
 				if(allTasksList.get(i).getStartingTime().equals(searchTerm)){
 					allTasksList.get(i).printTask();
+					hasResultWithValidInput = true;
 				}
 			}
 		}
@@ -510,6 +684,7 @@ public class Flex{
 			for(int i=0; i<allTasksList.size(); i++){
 				if(allTasksList.get(i).getEndingTime().equals(searchTerm)){
 					allTasksList.get(i).printTask();
+					hasResultWithValidInput = true;
 				}
 			}
 		}
@@ -517,6 +692,7 @@ public class Flex{
 			for(int i=0; i<allTasksList.size(); i++){
 				if(allTasksList.get(i).getTaskTitle().equals(searchTerm)){
 					allTasksList.get(i).printTask();
+					hasResultWithValidInput = true;
 				}
 			}
 		}
@@ -524,6 +700,7 @@ public class Flex{
 			for(int i=0; i<allTasksList.size(); i++){
 				if(allTasksList.get(i).getTaskDescription().equals(searchTerm)){
 					allTasksList.get(i).printTask();
+					hasResultWithValidInput = true;
 				}
 			}
 		}
@@ -531,6 +708,7 @@ public class Flex{
 			for(int i=0; i<allTasksList.size(); i++){
 				if(allTasksList.get(i).getPriorityLevel().equals(searchTerm)){
 					allTasksList.get(i).printTask();
+					hasResultWithValidInput = true;
 				}
 			}
 		}
@@ -538,6 +716,7 @@ public class Flex{
 			for(int i=0; i<allTasksList.size(); i++){
 				if(allTasksList.get(i).getCategory().equals(searchTerm)){
 					allTasksList.get(i).printTask();
+					hasResultWithValidInput = true;
 				}
 			}
 		}
@@ -546,6 +725,10 @@ public class Flex{
 			System.out.println(INVALID_INPUT_MESSAGE);
 		}		
 		
+		if(hasResultWithValidInput == false){
+			System.out.println(NO_SEARCH_RESULTS_MESSSAGE);
+		}
+			
 		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 
 	}
