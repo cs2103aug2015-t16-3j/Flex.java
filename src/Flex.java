@@ -378,6 +378,24 @@ public class Flex{
 		
 		String date1 = sc.nextLine();
 		
+		// check if this input by the user is valid
+		String tempDate = date1;
+		
+		int slashIndex1 = tempDate.indexOf("/");
+		
+		if(slashIndex1 < 0){
+			System.out.println(INVALID_INPUT_MESSAGE);
+			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
+		}
+		tempDate = tempDate.substring(slashIndex1 + 1).trim();
+		
+		int slashIndex2 = tempDate.indexOf("/");	
+		
+		if(slashIndex2 < 0){
+			System.out.println(INVALID_INPUT_MESSAGE);
+			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
+		}
+		
 		date1.trim();
 		
 		searchAndShowTask(filename, "date " + date1, previousChangeTerm, previousAction, previousTask);
