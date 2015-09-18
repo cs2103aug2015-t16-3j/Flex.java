@@ -383,7 +383,7 @@ public class Flex{
 		
 		int slashIndex1 = tempDate.indexOf("/");
 		
-		if(slashIndex1 < 0){
+		if(slashIndex1 <= 0){
 			System.out.println(INVALID_INPUT_MESSAGE);
 			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 		}
@@ -391,7 +391,7 @@ public class Flex{
 		
 		int slashIndex2 = tempDate.indexOf("/");	
 		
-		if(slashIndex2 < 0){
+		if(slashIndex2 <= 0){
 			System.out.println(INVALID_INPUT_MESSAGE);
 			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 		}
@@ -496,6 +496,24 @@ public class Flex{
 		}				
 				
 		if(searchVariableType.equalsIgnoreCase("date")){
+			// check if this input by the user is valid
+			String tempDate = searchTerm;
+			
+			int slashIndex1 = tempDate.indexOf("/");
+			
+			if(slashIndex1 <= 0){
+				System.out.println(INVALID_INPUT_MESSAGE);
+				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
+			}
+			tempDate = tempDate.substring(slashIndex1 + 1).trim();
+			
+			int slashIndex2 = tempDate.indexOf("/");	
+			
+			if(slashIndex2 <= 0){
+				System.out.println(INVALID_INPUT_MESSAGE);
+				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
+			}
+			
 			for(int i=0; i<allTasksList.size(); i++){
 				if(allTasksList.get(i).getDate().equals(searchTerm)){
 					allTasksList.get(i).printTask();
@@ -1305,6 +1323,31 @@ public class Flex{
 		}				
 		
 		if(searchVariableType.equalsIgnoreCase("date")){
+			
+			// check if this input by the user is valid
+			String tempDate = searchTerm;
+						
+			int slashIndex1 = tempDate.indexOf("/");
+						
+			if(slashIndex1 <= 0){
+				System.out.println(INVALID_INPUT_MESSAGE);
+				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
+			}
+			tempDate = tempDate.substring(slashIndex1 + 1).trim();
+						
+			int slashIndex2 = tempDate.indexOf("/");	
+						
+			if(slashIndex2 <= 0){
+				System.out.println(INVALID_INPUT_MESSAGE);
+				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
+			}
+						
+			for(int i=0; i<allTasksList.size(); i++){
+				if(allTasksList.get(i).getDate().equals(searchTerm)){
+					allTasksList.get(i).printTask();
+				}
+			}
+			
 			for(int i=0; i<allTasksList.size(); i++){
 				if(allTasksList.get(i).getDate().equals(searchTerm)){
 					allTasksList.get(i).printTask();
@@ -1476,6 +1519,25 @@ public class Flex{
 		String lastAction = new String("");
 		
 		if(changeVariableType.equalsIgnoreCase("date")){
+			
+			// check if this input by the user is valid
+			String tempDate = newTerm;
+						
+			int slashIndex1 = tempDate.indexOf("/");
+						
+			if(slashIndex1 <= 0){
+				System.out.println(INVALID_INPUT_MESSAGE);
+				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
+			}
+			tempDate = tempDate.substring(slashIndex1 + 1).trim();
+						
+			int slashIndex2 = tempDate.indexOf("/");	
+						
+			if(slashIndex2 <= 0){
+				System.out.println(INVALID_INPUT_MESSAGE);
+				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
+			}	
+			
 			for(int i=0; i<allTasksList.size(); i++){
 				if((allTasksList.get(i).getDate().equals(currentDate))&&(allTasksList.get(i).getTaskTitle().equals(currentTaskTitle))){
 					changedTerm = allTasksList.get(i).getDate();
