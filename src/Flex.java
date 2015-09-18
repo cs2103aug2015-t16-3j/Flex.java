@@ -16,24 +16,41 @@
 import java.util.*;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
 
+
 public class Flex{
 
+	
+	
 	private static Scanner sc;
 	private static final String INVALID_INPUT_MESSAGE = "Invalid input. Please try again.";
-	private static boolean isValid; // used to check if a new task to be added is valid
 	// that is, it is valid only if its starting time, or ending time, are NOT between the starting
 	// and ending times of existing tasks which are NOT DONE YET
 	private static final String NO_SEARCH_RESULTS_MESSSAGE = "Valid input, but with no search results."; 
 	private static final String TASK_DOES_NOT_EXIST_MESSAGE = "Task does not exist, so no such task can be deleted.";
 	private static final String EXIT_MESSAGE = "Exiting the program.";
 	private static final String BLOCKED_MESSAGE = "Unable to add the new task, because the new task clashes with existing tasks (on the same date) which have not been marked as tasks which have been done.";
-	private static final String PRIORITY_NOT_NUMBER_MESSAGE = "There is at least one task which has a priority level that is not equal to a number. Therefore, the tasks cannot be sorted (and displayed) by numerical priority level.";
+	
+	private static final int HOUR_MINUTES = 60;
+	
+	// number of days in each month 
+	private static final int JANUARY_DAYS = 31;
+	private static final int FEBRUARY_DAYS = 28;
+	private static final int MARCH_DAYS = 31;
+	private static final int APRIL_DAYS = 30;
+	private static final int MAY_DAYS = 31;
+	private static final int JUNE_DAYS = 30;
+	private static final int JULY_DAYS = 31;
+	private static final int AUGUST_DAYS = 31;
+	private static final int SEPTEMBER_DAYS = 30;
+	private static final int OCTOBER_DAYS = 31;
+	private static final int NOVEMBER_DAYS = 30;
+	private static final int DECEMBER_DAYS = 31;
+	
 	
 	public static void main(String[]args) throws IOException{
 		// whereby the user's input is
@@ -251,23 +268,81 @@ public class Flex{
 				
 				
 			}
+			// Case 9:
+			// Show tasks organized in groups
+			// or show all tasks
+			// in the schedule file
+			// without altering/editing/overwriting the schedule file
 			else if(firstWord.equalsIgnoreCase("show")){
 				String remainingString = command.substring(whitespaceIndex+1).trim();		
 				remainingString.trim();
+
+				// Note: The schedule file is already sorted by date and starting time 
 				
-				if(remainingString.equalsIgnoreCase("by numerical priority")){
-					sortAndShowByNumericalPriority(filename, previousChangeTerm, previousAction, previousTask);				
+				// Case 1: Show tasks by date, or show all tasks
+				// By displaying all tasks in the schedule list
+				if((remainingString.equalsIgnoreCase("by date"))||(remainingString.equalsIgnoreCase("all"))){					
+					readAndDisplayAll(filename, previousChangeTerm, previousAction, previousTask);
 				}
-				else if(remainingString.equalsIgnoreCase("non-numerical priority")){
-					showNonNumericalPriority(filename, previousChangeTerm, previousAction, previousTask);
+				// Case 2: Show tasks by starting time (in order of minutes)
+				else if((remainingString.equalsIgnoreCase("by starting time"))||(remainingString.equalsIgnoreCase("by start"))||(remainingString.equalsIgnoreCase("by start time"))){
+					sortAndShowByStartingTime(filename, previousChangeTerm, previousAction, previousTask);
 				}
+				// Case 3: Show tasks by ending time (in order of minutes)
+				else if(remainingString.equalsIgnoreCase(("by ending time"))||(remainingString.equalsIgnoreCase("by end"))||(remainingString.equalsIgnoreCase("by end time"))){
+					sortAndShowByEndingTime(filename, previousChangeTerm, previousAction, previousTask);
+				}
+				// Case 4: Show tasks by title (in alphabetical order)
+				else if(remainingString.equalsIgnoreCase("by title")){
+					sortAndShowByTaskTitle(filename, previousChangeTerm, previousAction, previousTask);
+				}
+				// Case 5: Show tasks by description (in alphabetical order)
+				else if(remainingString.equalsIgnoreCase("by description")){
+					sortAndShowByTaskDescription(filename, previousChangeTerm, previousAction, previousTask);
+				}
+				// Case 6: shows tasks sorted by priority,
+				// or rather, tasks with the same priority will be grouped together
+				// and only the tasks with the same number priorityLevels will be in numberical order
+				// from the smallest to the biggest number for their priorityLevels
+				else if(remainingString.equalsIgnoreCase("by priority")){
+				sortAndShowByPriority(filename, previousChangeTerm, previousAction, previousTask);				
+				}
+				// Case 7: show tasks by category (in alphabetical order)
+				// Meaning in this order - "blocked", "done", "pending"
+				else if(remainingString.equalsIgnoreCase("by category")){
+					sortAndShowByCategory(filename, previousChangeTerm, previousAction, previousTask);
+				}
+				// Case 8: show tasks which are done
+				else if(remainingString.equalsIgnoreCase("done")){
+					searchTask(filename, "category" + " " + "done", previousChangeTerm, previousAction, previousTask);
+				}
+				// Case 9: show tasks which are still pending
+				else if(remainingString.equalsIgnoreCase("pending")){
+					searchTask(filename, "category" + " " + "pending", previousChangeTerm, previousAction, previousTask);
+				}
+				// Case 10: show tasks which are still blocked
+				else if(remainingString.equalsIgnoreCase("blocked")){
+					searchTask(filename, "category" + " " + "blocked", previousChangeTerm, previousAction, previousTask);
+				}				
+				// Case 11: show tasks which are still pending or still blocked
+				// that is, tasks which are not marked as done yet
+				else if((remainingString.equalsIgnoreCase("blocked and pending"))||(remainingString.equalsIgnoreCase("blocked & pending"))||(remainingString.equalsIgnoreCase("pending and blocked"))||(remainingString.equalsIgnoreCase("pending & blocked"))||(remainingString.equalsIgnoreCase("not done"))){
+					sortAndShowByNotDoneTasks(filename, previousChangeTerm, previousAction, previousTask);
+				}		
+				// Case 12: show the week starting on the date given by the user
+				// the week includes the starting date of the week as one of the seven days in it
+				else if(remainingString.equalsIgnoreCase("week")){
+					showWeek(filename, previousChangeTerm, previousAction, previousTask);
+				}	
+				// Case 13: invalid input for user input command String starting with the word "show"
 				else{
 					System.out.println(INVALID_INPUT_MESSAGE);
 					
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 				}
-
-
+				// Case 13: show the week starting on the date given by the user
+				// the week includes the starting date of the week as one of the seven days in it
+				
 			}
 			// case 10: If the user's command is invalid
 			else{
@@ -276,21 +351,569 @@ public class Flex{
 			}
 		}
 	}
+	
+	private static void showWeek(String filename, String previousChangeTerm, String previousAction, Task previousTask) throws IOException {
+		BufferedReader reader = null;
+		
+		reader = new BufferedReader(new FileReader(filename));
+		String currentLine = null;
+	
+		ArrayList<Task> allTasksList = new ArrayList<Task>();
+		
+		do{
+			currentLine = reader.readLine();
+			if(currentLine!=null){
+				
+				allTasksList.add(new Task(currentLine));				
+			}
+		}while(currentLine!=null);			
+		
+		if(reader!=null){
+			reader.close();
+		}				
+		
+		System.out.println("Please enter the starting date (format: dd/mm/yyyy): ");
+		
+		// day 1
+		
+		String date1 = sc.nextLine();
+		
+		date1.trim();
+		
+		searchandShowTask(filename, "date " + date1, previousChangeTerm, previousAction, previousTask);
+		
+		// day 2
+		String date2 = generateNextDate(date1);
+		
+		date2.trim();
+		
+		searchandShowTask(filename, "date " + date2, previousChangeTerm, previousAction, previousTask);
+		
+		// day 3
+		String date3 = generateNextDate(date2);
+		
+		date3.trim();
+		
+		searchandShowTask(filename, "date " + date3, previousChangeTerm, previousAction, previousTask);
+		
+		// day 4
+		
+		String date4 = generateNextDate(date3);
+		
+		date4.trim();
+		
+		searchandShowTask(filename, "date " + date4, previousChangeTerm, previousAction, previousTask);
+		
+		// day 5
+		String date5 = generateNextDate(date4);
+		
+		date5.trim();
+		
+		searchandShowTask(filename, "date " + date5, previousChangeTerm, previousAction, previousTask);
+		
+		// day 6
+		String date6 = generateNextDate(date5);
+		
+		date6.trim();
+		
+		searchandShowTask(filename, "date " + date6, previousChangeTerm, previousAction, previousTask);
+		
+		
+		// day 7
+		String date7 = generateNextDate(date6);
+		
+		date7.trim();
+		
+		searchandShowTask(filename, "date " + date7, previousChangeTerm, previousAction, previousTask);
+				
+		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
+	}
 
-	private static void showNonNumericalPriority(String filename, String previousChangeTerm, String previousAction,
+	// the form of searching for tasks without executing readAndExecuteCommand() recursively
+	// related to the user input command String "show week"
+	private static void searchandShowTask(String filename, String remainingCommandString, String previousChangeTerm,
+			String previousAction, Task previousTask) throws IOException {
+		// for checking
+		// System.out.println("remainingCommandString for searchTask(): " + remainingCommandString);
+								
+		int whitespaceIndex1 = remainingCommandString.indexOf(" ");
+			
+		if(whitespaceIndex1 < 0){
+			System.out.println(INVALID_INPUT_MESSAGE);
+					
+			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
+		}
+				
+		String searchVariableType = new String("");
+		searchVariableType = remainingCommandString.substring(0, whitespaceIndex1).trim();
+
+		// for checking
+		// System.out.println("searchVariableType: " + searchVariableType);
+				
+		String searchTerm = new String("");
+		searchTerm = remainingCommandString.substring(whitespaceIndex1 + 1).trim();
+				
+		// for checking
+		// System.out.println("searchTerm: " + searchTerm);
+				
+		// reads in the file, line by line
+		BufferedReader reader = null;
+				
+		reader = new BufferedReader(new FileReader(filename));
+		String currentLine = null;		
+		ArrayList<Task> allTasksList = new ArrayList<Task>();
+								
+		do{
+			currentLine = reader.readLine();
+			if(currentLine!=null){
+				// for checking
+				// System.out.println("task added for searchTask()");
+	
+				allTasksList.add(new Task(currentLine));
+			}
+		}while(currentLine!=null);			
+			
+		if(reader!=null){
+			reader.close();
+		}				
+				
+		if(searchVariableType.equalsIgnoreCase("date")){
+			for(int i=0; i<allTasksList.size(); i++){
+				if(allTasksList.get(i).getDate().equals(searchTerm)){
+					allTasksList.get(i).printTask();
+				}
+			}
+		}
+		else if(searchVariableType.equalsIgnoreCase("start")){
+			for(int i=0; i<allTasksList.size(); i++){
+				if(allTasksList.get(i).getStartingTime().equals(searchTerm)){
+					allTasksList.get(i).printTask();
+				}
+			}
+		}
+		else if(searchVariableType.equalsIgnoreCase("end")){		
+			for(int i=0; i<allTasksList.size(); i++){
+				if(allTasksList.get(i).getEndingTime().equals(searchTerm)){
+					allTasksList.get(i).printTask();
+				}
+			}
+		}
+		else if(searchVariableType.equalsIgnoreCase("title")){
+			for(int i=0; i<allTasksList.size(); i++){
+				if(allTasksList.get(i).getTaskTitle().equals(searchTerm)){
+					allTasksList.get(i).printTask();
+				}
+			}
+		}
+		else if(searchVariableType.equalsIgnoreCase("description")){
+			for(int i=0; i<allTasksList.size(); i++){
+				if(allTasksList.get(i).getTaskDescription().equals(searchTerm)){
+					allTasksList.get(i).printTask();
+				}
+			}
+		}
+		else if(searchVariableType.equalsIgnoreCase("priority")){
+			for(int i=0; i<allTasksList.size(); i++){
+				if(allTasksList.get(i).getPriorityLevel().equals(searchTerm)){
+					allTasksList.get(i).printTask();
+				}
+			}
+		}
+		else if(searchVariableType.equalsIgnoreCase("category")){
+			for(int i=0; i<allTasksList.size(); i++){
+				if(allTasksList.get(i).getCategory().equals(searchTerm)){
+					allTasksList.get(i).printTask();
+				}
+			}
+		}
+		// invalid input case
+		else{
+			System.out.println(INVALID_INPUT_MESSAGE);
+		}			
+	}
+
+	// generates the next date, given the day, month and year of a date
+	// assumed to be in the format dd/mm/yyyy
+	private static String generateNextDate(String date) {
+		
+		String tempDate = date;
+		
+		// the three variables of the current date
+		int slashIndex1 = tempDate.indexOf("/");
+		int currentDay = Integer.valueOf(tempDate.substring(0, slashIndex1));
+		tempDate = tempDate.substring(slashIndex1 + 1).trim();
+		
+		int slashIndex2 = tempDate.indexOf("/");		
+		int currentMonth = Integer.valueOf(tempDate.substring(0, slashIndex2));
+		
+		int currentYear = Integer.valueOf(tempDate.substring(slashIndex2 + 1));		
+		
+		// the three variables of the next date
+		int newDay = -1;
+		int newMonth = -1;
+		int newYear = -1;
+				
+		boolean isLeapYear = false;
+		boolean isLastDayOfMonth = false;
+		boolean isLastDayOfYear = false;
+
+		if(currentYear%4==0){
+			isLeapYear = true;
+		}
+		
+		if(currentMonth==1){
+			if(currentDay==JANUARY_DAYS){
+				isLastDayOfMonth = true;
+			}
+		}
+		else if(currentMonth==2){
+			// if it is a leap year, the last day of February is 29th of February for that year
+			// Note: FEBRUARY_DAYS = 28;
+			if(isLeapYear){
+				if( currentDay == (FEBRUARY_DAYS + 1) ){
+					isLastDayOfMonth = true;
+				}
+			}
+			else{
+				if( currentDay == (FEBRUARY_DAYS) ){
+					isLastDayOfMonth = true;
+				}
+			}
+		}
+		else if(currentMonth==3){
+			if(currentDay==MARCH_DAYS){
+				isLastDayOfMonth = true;
+			}
+		}
+		else if(currentMonth==4){
+			if(currentDay==APRIL_DAYS){
+				isLastDayOfMonth = true;
+			}
+		}
+		else if(currentMonth==5){
+			if(currentDay==MAY_DAYS){
+				isLastDayOfMonth = true;
+			}
+		}
+		else if(currentMonth==6){
+			if(currentDay==JUNE_DAYS){
+				isLastDayOfMonth = true;
+			}
+		}
+		else if(currentMonth==7){
+			if(currentDay==JULY_DAYS){
+				isLastDayOfMonth = true;
+			}
+		}
+		else if(currentMonth==8){
+			if(currentDay==AUGUST_DAYS){
+				isLastDayOfMonth = true;
+			}
+		}
+		else if(currentMonth==9){
+			if(currentDay==SEPTEMBER_DAYS){
+				isLastDayOfMonth = true;
+			}
+		}
+		else if(currentMonth==10){
+			if(currentDay==OCTOBER_DAYS){
+				isLastDayOfMonth = true;
+			}
+		}
+		else if(currentMonth==11){
+			if(currentDay==NOVEMBER_DAYS){
+				isLastDayOfMonth = true;
+			}
+		}
+		else if(currentMonth==12){
+			if(currentDay==DECEMBER_DAYS){
+				isLastDayOfMonth = true;
+				isLastDayOfYear = true;
+			}
+		}
+		
+		// Case 1: if the date given is the last day of the year, that is
+		// 31st December of that year
+		if(isLastDayOfYear){
+			newDay = 1;
+			newMonth = 1;
+			newYear = currentYear + 1;
+		}
+		// Case 2: The given date is not the last day of the year,
+		// but it is the last day of the month
+		else if((!isLastDayOfYear)&&(isLastDayOfMonth)){
+			newDay = 1;
+			newMonth = currentMonth + 1; 
+			newYear = currentYear;
+		}
+		// Case 3: The given date is not the last day of the year,
+		// and also not the last day of the month
+		else if((!isLastDayOfYear)&&(!isLastDayOfMonth)){
+			newDay = currentDay + 1;
+			newMonth = currentMonth;
+			newYear = currentYear;
+		}
+		
+		
+		// for testing
+		// System.out.println("current date: " + currentDate + ", next date: " + newDay +  "/" + newMonth + "/" + newYear);
+		
+		return newDay +  "/" + newMonth + "/" + newYear;
+		
+	}
+
+	private static void sortAndShowByCategory(String filename, String previousChangeTerm, String previousAction,
 			Task previousTask) throws IOException {
 		BufferedReader reader = null;
 		
 		reader = new BufferedReader(new FileReader(filename));
 		String currentLine = null;
-		
+	
 		ArrayList<Task> allTasksList = new ArrayList<Task>();
-		ArrayList<Task> nonNumericalPriorityList = new ArrayList<Task>();
-						
+		
 		do{
 			currentLine = reader.readLine();
 			if(currentLine!=null){
-					
+				
+				allTasksList.add(new Task(currentLine));				
+			}
+		}while(currentLine!=null);			
+		
+		if(reader!=null){
+			reader.close();
+		}				
+		
+		int size = allTasksList.size(); 
+		int i, start, min_index;
+				
+		for(start=0; start<size-1; start++){
+			min_index = start;
+			
+			for(i=start+1; i<size; i++){
+				if(allTasksList.get(i).getCategory().compareToIgnoreCase(allTasksList.get(min_index).getCategory()) < 0) {		
+					min_index = i;					
+				}
+			}
+			
+			Task temp1 = allTasksList.get(start);
+			Task temp2 = allTasksList.get(min_index);
+			allTasksList.set(start, temp2);
+			allTasksList.set(min_index, temp1);
+		}
+		
+		for(int j=0; j<allTasksList.size(); j++){
+			System.out.println(allTasksList.get(j).printTaskString());
+		}
+		
+		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
+	}
+
+	private static void sortAndShowByTaskDescription(String filename, String previousChangeTerm, String previousAction,
+			Task previousTask) throws IOException {
+		BufferedReader reader = null;
+		
+		reader = new BufferedReader(new FileReader(filename));
+		String currentLine = null;
+	
+		ArrayList<Task> allTasksList = new ArrayList<Task>();
+		
+		do{
+			currentLine = reader.readLine();
+			if(currentLine!=null){
+				
+				allTasksList.add(new Task(currentLine));				
+			}
+		}while(currentLine!=null);			
+		
+		if(reader!=null){
+			reader.close();
+		}				
+		
+		int size = allTasksList.size(); 
+		int i, start, min_index;
+				
+		for(start=0; start<size-1; start++){
+			min_index = start;
+			
+			for(i=start+1; i<size; i++){
+				if(allTasksList.get(i).getTaskDescription().compareToIgnoreCase(allTasksList.get(min_index).getTaskDescription()) < 0) {		
+					min_index = i;					
+				}
+			}
+			
+			Task temp1 = allTasksList.get(start);
+			Task temp2 = allTasksList.get(min_index);
+			allTasksList.set(start, temp2);
+			allTasksList.set(min_index, temp1);
+		}
+		
+		for(int j=0; j<allTasksList.size(); j++){
+			System.out.println(allTasksList.get(j).printTaskString());
+		}
+		
+		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
+	}
+
+	private static void sortAndShowByTaskTitle(String filename, String previousChangeTerm, String previousAction,
+			Task previousTask) throws IOException {
+		BufferedReader reader = null;
+		
+		reader = new BufferedReader(new FileReader(filename));
+		String currentLine = null;
+	
+		ArrayList<Task> allTasksList = new ArrayList<Task>();
+		
+		do{
+			currentLine = reader.readLine();
+			if(currentLine!=null){
+				
+				allTasksList.add(new Task(currentLine));				
+			}
+		}while(currentLine!=null);			
+		
+		if(reader!=null){
+			reader.close();
+		}				
+		
+		int size = allTasksList.size(); 
+		int i, start, min_index;
+				
+		for(start=0; start<size-1; start++){
+			min_index = start;
+			
+			for(i=start+1; i<size; i++){
+				if(allTasksList.get(i).getTaskTitle().compareToIgnoreCase(allTasksList.get(min_index).getTaskTitle()) < 0) {		
+					min_index = i;					
+				}
+			}
+			
+			Task temp1 = allTasksList.get(start);
+			Task temp2 = allTasksList.get(min_index);
+			allTasksList.set(start, temp2);
+			allTasksList.set(min_index, temp1);
+		}
+		
+		for(int j=0; j<allTasksList.size(); j++){
+			System.out.println(allTasksList.get(j).printTaskString());
+		}
+		
+		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
+	}
+
+	private static void sortAndShowByEndingTime(String filename, String previousChangeTerm, String previousAction,
+			Task previousTask) throws IOException {
+		BufferedReader reader = null;
+		
+		reader = new BufferedReader(new FileReader(filename));
+		String currentLine = null;
+	
+		ArrayList<Task> allTasksList = new ArrayList<Task>();
+		
+		do{
+			currentLine = reader.readLine();
+			if(currentLine!=null){
+				
+				allTasksList.add(new Task(currentLine));				
+			}
+		}while(currentLine!=null);			
+		
+		if(reader!=null){
+			reader.close();
+		}				
+		
+		int size = allTasksList.size(); 
+		int i, start, min_index;
+				
+		for(start=0; start<size-1; start++){
+			min_index = start;
+			
+			for(i=start+1; i<size; i++){
+				int iEndingTimeValue = Integer.valueOf(allTasksList.get(i).getEndingTime().substring(0, 2)) * HOUR_MINUTES + Integer.valueOf(allTasksList.get(i).getEndingTime().substring(2, 4));
+				int min_IndexEndingTimeValue = Integer.valueOf(allTasksList.get(min_index).getEndingTime().substring(0, 2)) * HOUR_MINUTES + Integer.valueOf(allTasksList.get(min_index).getEndingTime().substring(2, 4));
+				
+				if(iEndingTimeValue<min_IndexEndingTimeValue){
+					min_index = i;	
+				}
+			}
+			
+			Task temp1 = allTasksList.get(start);
+			Task temp2 = allTasksList.get(min_index);
+			allTasksList.set(start, temp2);
+			allTasksList.set(min_index, temp1);
+		}
+		
+		for(int j=0; j<allTasksList.size(); j++){
+			System.out.println(allTasksList.get(j).printTaskString());
+		}
+		
+		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
+	}
+
+	private static void sortAndShowByStartingTime(String filename, String previousChangeTerm, String previousAction,
+			Task previousTask) throws IOException {
+		BufferedReader reader = null;
+		
+		reader = new BufferedReader(new FileReader(filename));
+		String currentLine = null;
+	
+		ArrayList<Task> allTasksList = new ArrayList<Task>();
+		
+		do{
+			currentLine = reader.readLine();
+			if(currentLine!=null){
+				
+				allTasksList.add(new Task(currentLine));				
+			}
+		}while(currentLine!=null);			
+		
+		if(reader!=null){
+			reader.close();
+		}						
+		
+		int size = allTasksList.size(); 
+		int i, start, min_index;
+		
+		for(start=0; start<size-1; start++){
+			min_index = start;
+			
+			for(i=start+1; i<size; i++){
+				int iEndingTimeValue = Integer.valueOf(allTasksList.get(i).getStartingTime().substring(0, 2)) * HOUR_MINUTES + Integer.valueOf(allTasksList.get(i).getStartingTime().substring(2, 4));
+				int min_IndexEndingTimeValue = Integer.valueOf(allTasksList.get(min_index).getStartingTime().substring(0, 2)) * HOUR_MINUTES + Integer.valueOf(allTasksList.get(min_index).getStartingTime().substring(2, 4));
+				
+				if(iEndingTimeValue<min_IndexEndingTimeValue){
+					min_index = i;	
+				}
+			}
+			
+			Task temp1 = allTasksList.get(start);
+			Task temp2 = allTasksList.get(min_index);
+			allTasksList.set(start, temp2);
+			allTasksList.set(min_index, temp1);
+		}
+		
+		for(int j=0; j<allTasksList.size(); j++){
+			System.out.println(allTasksList.get(j).printTaskString());
+		}
+		
+		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
+	}
+
+	// sorts and displays all tasks in the schedule file, which are not done
+	// without editing or overwriting the schedule file
+	private static void sortAndShowByNotDoneTasks(String filename, String previousChangeTerm, String previousAction,
+			Task previousTask) throws IOException {
+		BufferedReader reader = null;
+		
+		reader = new BufferedReader(new FileReader(filename));
+		String currentLine = null;
+	
+		ArrayList<Task> allTasksList = new ArrayList<Task>();
+		ArrayList<Task> notDoneList = new ArrayList<Task>();
+		
+		do{
+			currentLine = reader.readLine();
+			if(currentLine!=null){
+				
 				allTasksList.add(new Task(currentLine));				
 			}
 		}while(currentLine!=null);			
@@ -300,30 +923,60 @@ public class Flex{
 		}				
 		
 		for(int i=0; i<allTasksList.size(); i++){
-			boolean isNumber = true;
-			int size = allTasksList.get(i).getPriorityLevel().length();
-			char[] temp = new char[size];
-			allTasksList.get(i).getPriorityLevel().getChars(0, size, temp, 0);
-			
-			for(int j=0; j<size; j++){
-				if(!Character.isDigit(temp[j])){
-					isNumber = false;
-				}	
-			}
-			
-			if(!isNumber){
-				nonNumericalPriorityList.add(allTasksList.get(i));
+			if(!allTasksList.get(i).getCategory().equalsIgnoreCase("done")){
+				notDoneList.add(allTasksList.get(i));
 			}
 		}
 		
-		for(int k=0; k<nonNumericalPriorityList.size(); k++){
-			System.out.println(nonNumericalPriorityList.get(k).printTaskString());
+		
+		for(int j=0; j<notDoneList.size(); j++){
+			System.out.println(notDoneList.get(j).printTaskString());
 		}
 		
-		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
+		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
+	}
+	
+	// sorts and displays all tasks in the schedule file
+	// without editing or overwriting the schedule file
+	private static void readAndDisplayAll(String filename, String previousChangeTerm, String previousAction,
+			Task previousTask) throws IOException {
+			BufferedReader reader = null;
+		
+			reader = new BufferedReader(new FileReader(filename));
+			String currentLine = null;
+		
+			ArrayList<Task> allTasksList = new ArrayList<Task>();;
+						
+			do{
+				currentLine = reader.readLine();
+				if(currentLine!=null){
+					
+					allTasksList.add(new Task(currentLine));				
+				}
+			}while(currentLine!=null);			
+			
+			if(reader!=null){
+			reader.close();
+			}				
+		
+			for(int j=0; j<allTasksList.size(); j++){
+				System.out.println(allTasksList.get(j).printTaskString());
+			}
+		
+			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 	}
 
-	private static void sortAndShowByNumericalPriority(String filename, String previousChangeTerm, String previousAction,
+	// shows tasks sorted by priority
+	// do take note that tasks (the lines) have already been sorted by date and starting time
+	// when the file goes through add, delete or change
+	// without overwriting or editing the schedule file
+	// As tested,
+	// if the priorityLevel is a number
+	// it will be in order
+	// But if the priorityLevel is not a number,
+	// They will be grouped in different random groups together for such non-number priorityLevels
+	// Upper and lower cases are ignored
+	private static void sortAndShowByPriority(String filename, String previousChangeTerm, String previousAction,
 			Task previousTask) throws IOException {
 		BufferedReader reader = null;
 		
@@ -349,37 +1002,10 @@ public class Flex{
 				
 		for(start=0; start<size-1; start++){
 			min_index = start;
-			boolean iIsNumber = true;
-			boolean min_indexIsNumber = true;
 			
 			for(i=start+1; i<size; i++){
-				
-				int size1 = allTasksList.get(i).getPriorityLevel().length();
-				char[] dst1 = new char[size1];
-				allTasksList.get(i).getPriorityLevel().getChars(0, size1, dst1, 0);
-				
-				for(int k=0; k<size1; k++){
-					if(!Character.isDigit(dst1[k])){
-						iIsNumber = false;
-						System.out.println(PRIORITY_NOT_NUMBER_MESSAGE);
-						readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
-					}
-				}
-				
-				int size2 = allTasksList.get(min_index).getPriorityLevel().length();				
-				char[] dst2 = new char[size2];
-				allTasksList.get(min_index).getPriorityLevel().getChars(0, size2, dst2, 0);
-				
-				for(int l=0; l<size2; l++){
-					if(!Character.isDigit(dst2[l])){
-						min_indexIsNumber = false;
-						System.out.println(PRIORITY_NOT_NUMBER_MESSAGE);
-						readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
-					}
-				}
-				
-				if(Integer.valueOf(allTasksList.get(i).getPriorityLevel()) < Integer.valueOf(allTasksList.get(min_index).getPriorityLevel())){		
-					min_index = i;										
+				if(allTasksList.get(i).getPriorityLevel().compareToIgnoreCase(allTasksList.get(min_index).getPriorityLevel()) < 0) {		
+					min_index = i;					
 				}
 			}
 			
@@ -389,14 +1015,12 @@ public class Flex{
 			allTasksList.set(min_index, temp1);
 		}
 		
-		
-		
-		for(int j=0; j<size; j++){
+		for(int j=0; j<allTasksList.size(); j++){
 			System.out.println(allTasksList.get(j).printTaskString());
 		}
+	
 		
 		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
-		
 	}
 
 	// undo the previous VALID action, only if the previous action was adding a task,
@@ -471,7 +1095,7 @@ public class Flex{
 		// for checking
 		// System.out.println("remainingCommandString1 for addTask(), before allTasksList.add(new Task(remainingCommandString1)): " + remainingCommandString1);
 		
-		isValid = true;
+		
 		
 		// for example
 		// 14/9/2015, 1000, 1159, title two, description two, 1, blocked
@@ -514,8 +1138,6 @@ public class Flex{
 		for (int i=0; i<allTasksList.size(); i++){
 			if((allTasksList.get(i).getDate().equals(tempDate))&&(!allTasksList.get(i).getCategory().equalsIgnoreCase("done"))&&(((Integer.valueOf(allTasksList.get(i).getStartingTime()) <= Integer.valueOf(tempStartingTime))&&(Integer.valueOf(allTasksList.get(i).getEndingTime()) >= Integer.valueOf(tempStartingTime)))||((Integer.valueOf(allTasksList.get(i).getStartingTime()) <= Integer.valueOf(tempEndingTime))&&(Integer.valueOf(allTasksList.get(i).getEndingTime()) >= Integer.valueOf(tempEndingTime))))){
 				
-				// if the new task's information is invalid
-				isValid = false;
 				System.out.println(BLOCKED_MESSAGE);					
 				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);												
 			}
@@ -532,7 +1154,7 @@ public class Flex{
 		// System.out.println("new task successfully added");
 		
 		// sort all tasks by date and starting time
-		sortAllTasks(allTasksList);
+		sortAllTasksByDateAndStartingTime(allTasksList);
 		
 		// overwrites to the file, line by line
 		BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
@@ -592,7 +1214,7 @@ public class Flex{
 		}
 		
 		// sort all tasks by date and starting time
-		sortAllTasks(allTasksList);
+		sortAllTasksByDateAndStartingTime(allTasksList);
 		
 		// overwrites to the file, line by line
 		BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
@@ -912,7 +1534,7 @@ public class Flex{
 		}
 		
 		// sort all tasks by date and starting time 
-		sortAllTasks(allTasksList);
+		sortAllTasksByDateAndStartingTime(allTasksList);
 		
 		// overwrites to the file, line by line
 		BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
@@ -938,7 +1560,7 @@ public class Flex{
 
 	
 	// used to sort tasks by starting date and starting time
-	private static void sortAllTasks(ArrayList<Task> allTasksList){
+	private static void sortAllTasksByDateAndStartingTime(ArrayList<Task> allTasksList){
 		int size = allTasksList.size(); 
 		int i, start, min_index;
 				

@@ -1,3 +1,8 @@
+// Task.java
+// Contains the variables (attributes) in a Task
+// Flex.java should NOT allow the attribute "comparisonValue" to be edited
+
+
 public class Task {
 	// private String date = null;
 	// private String startingTime = null;
@@ -28,7 +33,7 @@ public class Task {
 	private static final int APRIL_DAYS = 30;
 	private static final int MAY_DAYS = 31;
 	private static final int JUNE_DAYS = 30;
-	private static final int JULY_DAYS = 31;
+	// private static final int JULY_DAYS = 31;
 	private static final int AUGUST_DAYS = 31;
 	private static final int SEPTEMBER_DAYS = 30;
 	private static final int OCTOBER_DAYS = 31;
@@ -190,12 +195,10 @@ public class Task {
 		// (2014 - 1) - 503 = 2013 - 503 = 1500
 		int numberOfPastNonLeapyears = (year - 1) - numberOfPastLeapYears;
 		
-		boolean isLeapYear = false;
 		int leapYearFebruaryDay = 0;
 		
 		// 2014%4 = 1
 		if((year%4==0) && ((month -1)>=2)){
-			isLeapYear = true;
 			leapYearFebruaryDay = 1;
 		}
 		
