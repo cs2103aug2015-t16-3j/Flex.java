@@ -380,21 +380,21 @@ public class Flex{
 		
 		date1.trim();
 		
-		searchandShowTask(filename, "date " + date1, previousChangeTerm, previousAction, previousTask);
+		searchAndShowTask(filename, "date " + date1, previousChangeTerm, previousAction, previousTask);
 		
 		// day 2
 		String date2 = generateNextDate(date1);
 		
 		date2.trim();
 		
-		searchandShowTask(filename, "date " + date2, previousChangeTerm, previousAction, previousTask);
+		searchAndShowTask(filename, "date " + date2, previousChangeTerm, previousAction, previousTask);
 		
 		// day 3
 		String date3 = generateNextDate(date2);
 		
 		date3.trim();
 		
-		searchandShowTask(filename, "date " + date3, previousChangeTerm, previousAction, previousTask);
+		searchAndShowTask(filename, "date " + date3, previousChangeTerm, previousAction, previousTask);
 		
 		// day 4
 		
@@ -402,21 +402,21 @@ public class Flex{
 		
 		date4.trim();
 		
-		searchandShowTask(filename, "date " + date4, previousChangeTerm, previousAction, previousTask);
+		searchAndShowTask(filename, "date " + date4, previousChangeTerm, previousAction, previousTask);
 		
 		// day 5
 		String date5 = generateNextDate(date4);
 		
 		date5.trim();
 		
-		searchandShowTask(filename, "date " + date5, previousChangeTerm, previousAction, previousTask);
+		searchAndShowTask(filename, "date " + date5, previousChangeTerm, previousAction, previousTask);
 		
 		// day 6
 		String date6 = generateNextDate(date5);
 		
 		date6.trim();
 		
-		searchandShowTask(filename, "date " + date6, previousChangeTerm, previousAction, previousTask);
+		searchAndShowTask(filename, "date " + date6, previousChangeTerm, previousAction, previousTask);
 		
 		
 		// day 7
@@ -424,14 +424,14 @@ public class Flex{
 		
 		date7.trim();
 		
-		searchandShowTask(filename, "date " + date7, previousChangeTerm, previousAction, previousTask);
+		searchAndShowTask(filename, "date " + date7, previousChangeTerm, previousAction, previousTask);
 				
 		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 	}
 
 	// the form of searching for tasks without executing readAndExecuteCommand() recursively
 	// related to the user input command String "show week"
-	private static void searchandShowTask(String filename, String remainingCommandString, String previousChangeTerm,
+	private static void searchAndShowTask(String filename, String remainingCommandString, String previousChangeTerm,
 			String previousAction, Task previousTask) throws IOException {
 		// for checking
 		// System.out.println("remainingCommandString for searchTask(): " + remainingCommandString);
