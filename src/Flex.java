@@ -112,12 +112,14 @@ public class Flex{
 		
 		command.trim();
 		
-		
 		String firstWord = new String("");
 		
 		int whitespaceIndex = 0;
 		
 		whitespaceIndex = command.indexOf(" ");
+		
+		// Note: clear the output display area after the user input command line has been entered
+		flexWindow.getTextArea().setText("");
 		
 		if(whitespaceIndex < 0){
 			
@@ -973,7 +975,7 @@ public class Flex{
 		}
 		
 		for(int j=0; j<allTasksList.size(); j++){
-			flexWindow.getTextArea().append(allTasksList.get(j).getPrintTaskString() +  "\n");
+			flexWindow.getTextArea().append(allTasksList.get(j).getPrintTaskString() + "\n");
 		}
 		
 		flexWindow.getTextArea().append("\n");
@@ -1329,13 +1331,7 @@ public class Flex{
 				flexWindow.getTextArea().append("\n");
 				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 			}
-						
-			for(int i=0; i<allTasksList.size(); i++){
-				if(allTasksList.get(i).getDate().equalsIgnoreCase(searchTerm)){
-					flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString());
-				}
-			}
-			
+								
 			for(int i=0; i<allTasksList.size(); i++){
 				if(allTasksList.get(i).getDate().equalsIgnoreCase(searchTerm)){
 					flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString() + "\n");
