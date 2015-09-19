@@ -65,24 +65,14 @@ public class Flex{
 		filename.trim();
 		int dotIndex = filename.indexOf(".");
 		
-		while (dotIndex < 0){
+		while((dotIndex < 0)||(!filename.substring(dotIndex + 1).equalsIgnoreCase("txt"))){
 			System.out.println(INVALID_INPUT_MESSAGE);
 			System.out.println(FILENAME_INPUT_MESSAGE);
 			System.out.println();
 			filename = sc.nextLine();
 			dotIndex = filename.indexOf(".");
 		}
-		
-
-		
-		while(!filename.substring(dotIndex + 1).equalsIgnoreCase("txt")){
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println(FILENAME_INPUT_MESSAGE);
-			System.out.println();
-			filename = sc.nextLine();
-			dotIndex = filename.indexOf(".");
-		}
-		
+				
 		System.out.println();
 		System.out.println(FILENAME_ACCEPTED_MESSAGE);
 		System.out.println();
