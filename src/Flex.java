@@ -281,7 +281,7 @@ public class Flex{
 				
 				// Case 1: Show tasks by date, or show all tasks
 				// By displaying all tasks in the schedule list
-				if((remainingString.equalsIgnoreCase("by date"))||(remainingString.equalsIgnoreCase("all"))){					
+				if((remainingString.equalsIgnoreCase("by date"))||(remainingString.equalsIgnoreCase("by day")||(remainingString.equalsIgnoreCase("all")))){					
 					readAndDisplayAll(filename, previousChangeTerm, previousAction, previousTask);
 				}
 				// Case 2: Show tasks by starting time (in order of minutes)
@@ -293,11 +293,11 @@ public class Flex{
 					sortAndShowByEndingTime(filename, previousChangeTerm, previousAction, previousTask);
 				}
 				// Case 4: Show tasks by title (in alphabetical order)
-				else if(remainingString.equalsIgnoreCase("by title")){
+				else if((remainingString.equalsIgnoreCase("by title"))||(remainingString.equalsIgnoreCase("by task title"))){
 					sortAndShowByTaskTitle(filename, previousChangeTerm, previousAction, previousTask);
 				}
 				// Case 5: Show tasks by description (in alphabetical order)
-				else if(remainingString.equalsIgnoreCase("by description")){
+				else if((remainingString.equalsIgnoreCase("by description"))||(remainingString.equalsIgnoreCase("by task description"))){
 					sortAndShowByTaskDescription(filename, previousChangeTerm, previousAction, previousTask);
 				}
 				// Case 6: shows tasks sorted by priority,
