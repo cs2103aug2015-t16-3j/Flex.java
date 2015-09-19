@@ -16,6 +16,7 @@
 import java.util.*;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -34,6 +35,8 @@ public class Flex{
 	private static final String BLOCKED_MESSAGE = "Unable to add the new task, because the new task clashes with existing tasks (on the same date) which have not been marked as tasks which have been done.";
 	private static final String FILENAME_ACCEPTED_MESSAGE = "Filename is accepted.";
 	private static final String PROCEED_MESSAGE = "Please proceed with the user input commands.";
+	private static final String FILENAME_INPUT_MESSAGE = "Please enter the .txt file's filename, which should be in the same directory as Flex, on your computer.";
+	
 	
 	private static final int HOUR_MINUTES = 60;
 	
@@ -54,7 +57,7 @@ public class Flex{
 
 	// Note: The programs starts by typing "java Flex" in command line prompt.
 	public static void main(String[]args) throws IOException{
-		System.out.println("Please enter the .txt file's filename, which should be in the same directory as Flex, on your computer.");
+		System.out.println(FILENAME_INPUT_MESSAGE);
 		System.out.println();
 		filename = new String("");
 		sc = new Scanner(System.in);
@@ -64,7 +67,7 @@ public class Flex{
 		
 		while (dotIndex < 0){
 			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println("Please enter the .txt file's filename, which should be in the same directory as Flex, on your computer.");
+			System.out.println(FILENAME_INPUT_MESSAGE);
 			System.out.println();
 			filename = sc.nextLine();
 			dotIndex = filename.indexOf(".");
@@ -74,7 +77,7 @@ public class Flex{
 		
 		while(!filename.substring(dotIndex + 1).equalsIgnoreCase("txt")){
 			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println("Please enter the .txt file's filename, which should be in the same directory as Flex, on your computer.");
+			System.out.println(FILENAME_INPUT_MESSAGE);
 			System.out.println();
 			filename = sc.nextLine();
 			dotIndex = filename.indexOf(".");
