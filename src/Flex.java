@@ -20,13 +20,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-
-
 public class Flex{
 
-	
-	
+
 	private static Scanner sc;
+	private static String filename;
 	private static final String INVALID_INPUT_MESSAGE = "Invalid input. Please try again.";
 	// that is, it is valid only if its starting time, or ending time, are NOT between the starting
 	// and ending times of existing tasks which are NOT DONE YET
@@ -34,6 +32,8 @@ public class Flex{
 	private static final String TASK_DOES_NOT_EXIST_MESSAGE = "Task does not exist, so no such task can be deleted.";
 	private static final String EXIT_MESSAGE = "Exiting the program.";
 	private static final String BLOCKED_MESSAGE = "Unable to add the new task, because the new task clashes with existing tasks (on the same date) which have not been marked as tasks which have been done.";
+	private static final String FILENAME_ACCEPTED_MESSAGE = "Filename is accepted.";
+	private static final String PROCEED_MESSAGE = "Please proceed with the user input commands.";
 	
 	private static final int HOUR_MINUTES = 60;
 	
@@ -51,17 +51,43 @@ public class Flex{
 	private static final int NOVEMBER_DAYS = 30;
 	private static final int DECEMBER_DAYS = 31;
 	
-	
+
+	// Note: The programs starts by typing "java Flex" in command line prompt.
 	public static void main(String[]args) throws IOException{
-		// whereby the user's input is
-		// for example:
-		// java Flex.java schedule.txt
-		String filename = args[0];
+		System.out.println("Please enter the .txt file's filename, which should be in the same directory as Flex, on your computer.");
+		System.out.println();
+		filename = new String("");
+		sc = new Scanner(System.in);
+		filename = sc.nextLine();
+		filename.trim();
+		int dotIndex = filename.indexOf(".");
 		
-		// for checking
-		// System.out.println("filename: " + filename);
+		while (dotIndex < 0){
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println("Please enter the .txt file's filename, which should be in the same directory as Flex, on your computer.");
+			System.out.println();
+			filename = sc.nextLine();
+			dotIndex = filename.indexOf(".");
+		}
 		
-		// this method takes care of the manipulation to be done, as well as the operation for exiting the program
+
+		
+		while(!filename.substring(dotIndex + 1).equalsIgnoreCase("txt")){
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println("Please enter the .txt file's filename, which should be in the same directory as Flex, on your computer.");
+			System.out.println();
+			filename = sc.nextLine();
+			dotIndex = filename.indexOf(".");
+		}
+		
+		System.out.println();
+		System.out.println(FILENAME_ACCEPTED_MESSAGE);
+		System.out.println();
+		System.out.println(PROCEED_MESSAGE);
+		System.out.println();
+		
+		
+		// this method takes care of the manipulation to be done, as well as the operation for exiting the program	
 		readAndExecuteCommand(filename, null, null, null);
 	}
 	
@@ -82,8 +108,6 @@ public class Flex{
 		
 		command.trim();
 		
-		// for checking
-		// System.out.println("command: " + command);
 		
 		String firstWord = new String("");
 		
@@ -92,8 +116,6 @@ public class Flex{
 		whitespaceIndex = command.indexOf(" ");
 		
 		if(whitespaceIndex < 0){
-			// for checking
-			// System.out.println("no whitespaces");
 			
 			firstWord = command;
 			
@@ -110,26 +132,21 @@ public class Flex{
 			// Case 3: invalid input
 			else{
 				System.out.println(INVALID_INPUT_MESSAGE);
-				
+				System.out.println();
 				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 			}
 		}
 		else{
-			//  for checking
-			// System.out.println("at least 1 whitespace in user input command");
 			
 			// first word in the user's input, if there is a whitespace character in  it
 			firstWord = command.substring(0, whitespaceIndex);
 			firstWord.trim();
 			
-			// for checking
-			// System.out.println("firstWord: " + firstWord);
-			
 			// Case 4: invalid input
 			if(firstWord.substring(0, 1).equals("")){
 				
 				System.out.println(INVALID_INPUT_MESSAGE);
-												
+				System.out.println();								
 				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 			}
 			// Case 5: adding a task
@@ -141,7 +158,7 @@ public class Flex{
 				if(remainingCommandString.equals("")){
 	
 					System.out.println(INVALID_INPUT_MESSAGE);
-					
+					System.out.println();
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);						
 				}				
 				
@@ -152,42 +169,48 @@ public class Flex{
 				
 				int commaWhitespaceIndex1 = remainingCommandStringCheck.indexOf(", ");
 				if(commaWhitespaceIndex1 < 0){				
-					System.out.println(INVALID_INPUT_MESSAGE);					
+					System.out.println(INVALID_INPUT_MESSAGE);		
+					System.out.println();
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);		
 				}
 				remainingCommandStringCheck = remainingCommandStringCheck.substring(commaWhitespaceIndex1 + 2).trim();
 				
 				int commaWhitespaceIndex2 = remainingCommandStringCheck.indexOf(", ");
 				if(commaWhitespaceIndex2 < 0){				
-					System.out.println(INVALID_INPUT_MESSAGE);					
+					System.out.println(INVALID_INPUT_MESSAGE);	
+					System.out.println();
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);		
 				}
 				remainingCommandStringCheck = remainingCommandStringCheck.substring(commaWhitespaceIndex2 + 2).trim();
 				
 				int commaWhitespaceIndex3 = remainingCommandStringCheck.indexOf(", ");
 				if(commaWhitespaceIndex3 < 0){				
-					System.out.println(INVALID_INPUT_MESSAGE);					
+					System.out.println(INVALID_INPUT_MESSAGE);	
+					System.out.println();
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);		
 				}
 				remainingCommandStringCheck = remainingCommandStringCheck.substring(commaWhitespaceIndex3 + 2).trim();
 				
 				int commaWhitespaceIndex4 = remainingCommandStringCheck.indexOf(", ");
 				if(commaWhitespaceIndex4 < 0){				
-					System.out.println(INVALID_INPUT_MESSAGE);					
+					System.out.println(INVALID_INPUT_MESSAGE);	
+					System.out.println();
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);		
 				}
 				remainingCommandStringCheck = remainingCommandStringCheck.substring(commaWhitespaceIndex4 + 2).trim();
 				
 				int commaWhitespaceIndex5 = remainingCommandStringCheck.indexOf(", ");			
 				if(commaWhitespaceIndex5 < 0){				
-					System.out.println(INVALID_INPUT_MESSAGE);					
+					System.out.println(INVALID_INPUT_MESSAGE);
+					System.out.println();
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);		
 				}
 				remainingCommandStringCheck = remainingCommandStringCheck.substring(commaWhitespaceIndex5 + 2).trim();	
 				
 				int commaWhitespaceIndex6 = remainingCommandStringCheck.indexOf(", ");
 				if(commaWhitespaceIndex6 < 0){				
-					System.out.println(INVALID_INPUT_MESSAGE);					
+					System.out.println(INVALID_INPUT_MESSAGE);	
+					System.out.println();
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);		
 				}
 				remainingCommandStringCheck = remainingCommandStringCheck.substring(commaWhitespaceIndex6 + 2).trim();
@@ -206,7 +229,7 @@ public class Flex{
 				if(remainingCommandString.equals("")){
 					
 					System.out.println(INVALID_INPUT_MESSAGE);
-					
+					System.out.println();
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 					
 				}				
@@ -215,7 +238,7 @@ public class Flex{
 				
 				if(whitespaceIndex1 < 0){
 					System.out.println(INVALID_INPUT_MESSAGE);
-					
+					System.out.println();
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);						
 				}
 				
@@ -237,7 +260,7 @@ public class Flex{
 				if(remainingString.equals("")){
 					
 					System.out.println(INVALID_INPUT_MESSAGE);
-					
+					System.out.println();
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 					
 				}			
@@ -257,7 +280,7 @@ public class Flex{
 				if(remainingString.equals("")){
 					
 					System.out.println(INVALID_INPUT_MESSAGE);
-					
+					System.out.println();
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 					
 				}				
@@ -273,7 +296,7 @@ public class Flex{
 			// or show all tasks
 			// in the schedule file
 			// without altering/editing/overwriting the schedule file
-			else if(firstWord.equalsIgnoreCase("show")){
+			else if((firstWord.equalsIgnoreCase("show"))||(firstWord.equalsIgnoreCase("display"))){
 				String remainingString = command.substring(whitespaceIndex+1).trim();		
 				remainingString.trim();
 
@@ -337,7 +360,7 @@ public class Flex{
 				// Case 13: invalid input for user input command String starting with the word "show"
 				else{
 					System.out.println(INVALID_INPUT_MESSAGE);
-					
+					System.out.println();
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 				}
 				// Case 13: show the week starting on the date given by the user
@@ -347,11 +370,14 @@ public class Flex{
 			// case 10: If the user's command is invalid
 			else{
 				System.out.println(INVALID_INPUT_MESSAGE);
+				System.out.println();
 				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 			}
 		}
 	}
 	
+	// used to show tasks which are in 7 consecutive days
+	// starting from the date the user indicates
 	private static void showWeek(String filename, String previousChangeTerm, String previousAction, Task previousTask) throws IOException {
 		BufferedReader reader = null;
 		
@@ -443,7 +469,8 @@ public class Flex{
 		date7.trim();
 		
 		searchAndShowTask(filename, "date " + date7, previousChangeTerm, previousAction, previousTask);
-				
+		
+		System.out.println();		
 		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 	}
 
@@ -451,28 +478,20 @@ public class Flex{
 	// related to the user input command String "show week"
 	private static void searchAndShowTask(String filename, String remainingCommandString, String previousChangeTerm,
 			String previousAction, Task previousTask) throws IOException {
-		// for checking
-		// System.out.println("remainingCommandString for searchTask(): " + remainingCommandString);
 								
 		int whitespaceIndex1 = remainingCommandString.indexOf(" ");
 			
 		if(whitespaceIndex1 < 0){
 			System.out.println(INVALID_INPUT_MESSAGE);
-					
+			System.out.println();		
 			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 		}
 				
 		String searchVariableType = new String("");
 		searchVariableType = remainingCommandString.substring(0, whitespaceIndex1).trim();
-
-		// for checking
-		// System.out.println("searchVariableType: " + searchVariableType);
 				
 		String searchTerm = new String("");
 		searchTerm = remainingCommandString.substring(whitespaceIndex1 + 1).trim();
-				
-		// for checking
-		// System.out.println("searchTerm: " + searchTerm);
 				
 		// reads in the file, line by line
 		BufferedReader reader = null;
@@ -484,8 +503,6 @@ public class Flex{
 		do{
 			currentLine = reader.readLine();
 			if(currentLine!=null){
-				// for checking
-				// System.out.println("task added for searchTask()");
 	
 				allTasksList.add(new Task(currentLine));
 			}
@@ -503,6 +520,7 @@ public class Flex{
 			
 			if(slashIndex1 <= 0){
 				System.out.println(INVALID_INPUT_MESSAGE);
+				System.out.println();
 				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 			}
 			tempDate = tempDate.substring(slashIndex1 + 1).trim();
@@ -690,14 +708,12 @@ public class Flex{
 			newYear = currentYear;
 		}
 		
-		
-		// for testing
-		// System.out.println("current date: " + currentDate + ", next date: " + newDay +  "/" + newMonth + "/" + newYear);
-		
 		return newDay +  "/" + newMonth + "/" + newYear;
 		
 	}
-
+	
+	// sort and show tasks by category
+	// without editing the schedule file
 	private static void sortAndShowByCategory(String filename, String previousChangeTerm, String previousAction,
 			Task previousTask) throws IOException {
 		BufferedReader reader = null;
@@ -741,9 +757,12 @@ public class Flex{
 			System.out.println(allTasksList.get(j).printTaskString());
 		}
 		
+		System.out.println();
 		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 	}
-
+	
+	// sort and show tasks alphabetically by task description
+	// without editing the schedule file
 	private static void sortAndShowByTaskDescription(String filename, String previousChangeTerm, String previousAction,
 			Task previousTask) throws IOException {
 		BufferedReader reader = null;
@@ -787,9 +806,12 @@ public class Flex{
 			System.out.println(allTasksList.get(j).printTaskString());
 		}
 		
+		System.out.println();
 		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 	}
-
+	
+	// sort and show tasks alphabetically by task title
+	// without editing the schedule file
 	private static void sortAndShowByTaskTitle(String filename, String previousChangeTerm, String previousAction,
 			Task previousTask) throws IOException {
 		BufferedReader reader = null;
@@ -833,9 +855,13 @@ public class Flex{
 			System.out.println(allTasksList.get(j).printTaskString());
 		}
 		
+		System.out.println();
 		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 	}
 
+	
+	// sort and show tasks by ending time
+	// without editing the schedule file
 	private static void sortAndShowByEndingTime(String filename, String previousChangeTerm, String previousAction,
 			Task previousTask) throws IOException {
 		BufferedReader reader = null;
@@ -882,9 +908,13 @@ public class Flex{
 			System.out.println(allTasksList.get(j).printTaskString());
 		}
 		
+		System.out.println();
 		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 	}
 
+	
+	// sort and show tasks alphabetically by starting time
+	// without editing the schedule file
 	private static void sortAndShowByStartingTime(String filename, String previousChangeTerm, String previousAction,
 			Task previousTask) throws IOException {
 		BufferedReader reader = null;
@@ -931,6 +961,7 @@ public class Flex{
 			System.out.println(allTasksList.get(j).printTaskString());
 		}
 		
+		System.out.println();
 		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 	}
 
@@ -969,6 +1000,7 @@ public class Flex{
 			System.out.println(notDoneList.get(j).printTaskString());
 		}
 		
+		System.out.println();
 		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 	}
 	
@@ -998,20 +1030,13 @@ public class Flex{
 			for(int j=0; j<allTasksList.size(); j++){
 				System.out.println(allTasksList.get(j).printTaskString());
 			}
-		
+			
+			System.out.println();
 			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 	}
 
-	// shows tasks sorted by priority
-	// do take note that tasks (the lines) have already been sorted by date and starting time
-	// when the file goes through add, delete or change
-	// without overwriting or editing the schedule file
-	// As tested,
-	// if the priorityLevel is a number
-	// it will be in order
-	// But if the priorityLevel is not a number,
-	// They will be grouped in different random groups together for such non-number priorityLevels
-	// Upper and lower cases are ignored
+	// shows tasks sorted by priority level
+	// without editing the schedule file
 	private static void sortAndShowByPriority(String filename, String previousChangeTerm, String previousAction,
 			Task previousTask) throws IOException {
 		BufferedReader reader = null;
@@ -1055,7 +1080,7 @@ public class Flex{
 			System.out.println(allTasksList.get(j).printTaskString());
 		}
 	
-		
+		System.out.println();
 		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 	}
 
@@ -1069,27 +1094,18 @@ public class Flex{
 		if(whitespaceIndex1 < 0 ){
 		
 			if(previousAction.equalsIgnoreCase("add")){
-				// for checking
-				// System.out.println("previousChangeTerm: " + previousChangeTerm);
-				// System.out.println("previousAction: " + previousAction);
-				// System.out.println("previousTask: " + previousTask.printTaskString());
+
 				deleteTask(filename, previousTask.getDate(), previousTask.getTaskTitle(), previousChangeTerm, previousAction, previousTask);
 			}
 			else if(previousAction.equalsIgnoreCase("delete")){
-				// for checking
-				// System.out.println("previousChangeTerm: " + previousChangeTerm);
-				// System.out.println("previousAction: " + previousAction);
-				// System.out.println("previousTask: " + previousTask.printTaskString());
+
 				addTask(filename, previousTask.printTaskString(), previousChangeTerm, previousAction, previousTask);
 			}
 		}
 		else{
 			
 			if(previousAction.substring(0, whitespaceIndex1).trim().equalsIgnoreCase("change")){
-				// for checking
-				// System.out.println("previousChangeTerm: " + previousChangeTerm);
-				// System.out.println("previousAction: " + previousAction);
-				// System.out.println("previousTask: " + previousTask.printTaskString());	
+
 				int whitespaceIndex2 = previousAction.indexOf(" ");			
 				changeTaskVariable(filename, previousAction.substring(whitespaceIndex2 + 1).trim() + " " + previousTask.getDate() + ", " + previousTask.getTaskTitle() + ", " + previousChangeTerm, previousChangeTerm, previousAction, previousTask);
 			}
@@ -1099,9 +1115,6 @@ public class Flex{
 	// adds a task
 	private static void addTask(String filename, String remainingCommandString, String previousChangeTerm, String previousAction, Task previousTask) throws IOException {
 		String remainingCommandString1 = remainingCommandString.trim();
-		
-		// for checking
-		// System.out.println("remainingCommandString1 for addTask(): " + remainingCommandString1);
 		
 		// reads in the file, line by line
 		BufferedReader reader = null;
@@ -1124,24 +1137,14 @@ public class Flex{
 		if(reader!=null){
 			reader.close();
 		}				
-		
-		// for checking
-		// System.out.println("BufferedReader closed");
-		
-		// for checking
-		// System.out.println("remainingCommandString1 for addTask(), before allTasksList.add(new Task(remainingCommandString1)): " + remainingCommandString1);
-		
-		
-		
+			
 		// for example
 		// 14/9/2015, 1000, 1159, title two, description two, 1, blocked
 
 		String remainingCommandString1StartingWithDate = new String("");
 		remainingCommandString1StartingWithDate = remainingCommandString1;
 		int commaWhitespaceIndex1 = remainingCommandString1StartingWithDate.indexOf(", ");
-		
-		// for checking
-		// System.out.println("remainingCommandString1StartingWithDate: "+ remainingCommandString1StartingWithDate);
+
 		String tempDate = new String("");
 		tempDate = remainingCommandString1StartingWithDate.substring(0, commaWhitespaceIndex1);
 		
@@ -1150,31 +1153,20 @@ public class Flex{
 		int commaWhitespaceIndex2 = remainingCommandString1StartingWithStartingTime.indexOf(", ");	
 		String tempStartingTime = new String("");
 		
-		//for checking
-		// System.out.println("remainingCommandString1StartingWithStartingTime: " + remainingCommandString1StartingWithStartingTime);
-		
 		tempStartingTime = remainingCommandString1StartingWithStartingTime.substring(0, commaWhitespaceIndex2);
-
-		// for checking
-		// System.out.println("tempStartingTime: " + tempStartingTime);
 		
 		String remainingCommandString1StartingWithEndingTime = new String("");
 		remainingCommandString1StartingWithEndingTime = remainingCommandString1StartingWithStartingTime.substring(commaWhitespaceIndex2 +2).trim();
 		int commaWhitespaceIndex3 = remainingCommandString1StartingWithEndingTime.indexOf(", ");	
 		String tempEndingTime = new String("");
-		
-		// for checking
-		// System.out.println("remainingCommandString1StartingWithEndingTime: " + remainingCommandString1StartingWithEndingTime);
-		
+	
 		tempEndingTime = remainingCommandString1StartingWithEndingTime.substring(0, commaWhitespaceIndex3);
-				
-		// for checking
-		// System.out.println("tempEndingTime: " + tempEndingTime);
 		
 		for (int i=0; i<allTasksList.size(); i++){
 			if((allTasksList.get(i).getDate().equals(tempDate))&&(!allTasksList.get(i).getCategory().equalsIgnoreCase("done"))&&(((Integer.valueOf(allTasksList.get(i).getStartingTime()) <= Integer.valueOf(tempStartingTime))&&(Integer.valueOf(allTasksList.get(i).getEndingTime()) >= Integer.valueOf(tempStartingTime)))||((Integer.valueOf(allTasksList.get(i).getStartingTime()) <= Integer.valueOf(tempEndingTime))&&(Integer.valueOf(allTasksList.get(i).getEndingTime()) >= Integer.valueOf(tempEndingTime))))){
 				
-				System.out.println(BLOCKED_MESSAGE);					
+				System.out.println(BLOCKED_MESSAGE);	
+				System.out.println();
 				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);												
 			}
 		}
@@ -1185,9 +1177,6 @@ public class Flex{
 		allTasksList.add(new Task(remainingCommandString1));	
 		
 		tempTask = allTasksList.get(allTasksList.size()-1);
-		
-		// for checking
-		// System.out.println("new task successfully added");
 		
 		// sort all tasks by date and starting time
 		sortAllTasksByDateAndStartingTime(allTasksList);
@@ -1202,10 +1191,7 @@ public class Flex{
 									
 		writer.close();		
 		
-		// for checking
-		// System.out.println("previousChangeTerm: "+ previousChangeTerm);
-		// System.out.println("previousAction is set to add");		
-		// System.out.println("previousTask(tempTask): " + tempTask.printTaskString());
+		System.out.println();
 		readAndExecuteCommand(filename, previousChangeTerm, "add", tempTask);	
 				
 	}	
@@ -1225,8 +1211,6 @@ public class Flex{
 		do{
 			currentLine = reader.readLine();
 			if(currentLine!=null){
-				// for checking
-				// System.out.println("task added for deleteTask()");
 				
 				allTasksList.add(new Task(currentLine));
 			}
@@ -1244,8 +1228,6 @@ public class Flex{
 				tempTask = allTasksList.get(i);
 				allTasksList.remove(i);
 				taskExists = true;
-				// for checking
-				// System.out.println("matching task successfully deleted");
 			}
 		}
 		
@@ -1262,22 +1244,18 @@ public class Flex{
 
 		if(taskExists == false){
 			System.out.println(TASK_DOES_NOT_EXIST_MESSAGE);
+			System.out.println();
 			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 		}
 		
 		writer.close();
-		
-		// for checking
-		// System.out.println("previousChangeTerm: "+ previousChangeTerm);
-		// System.out.println("previousAction is set to delete");		
-		// System.out.println("previousTask(tempTask): " + tempTask.printTaskString());
+
+		System.out.println();
 		readAndExecuteCommand(filename, previousChangeTerm, "delete", tempTask);	
 	}
 	
-	// search for tasks
+	// search for tasks 
 	private static void searchTask(String filename, String remainingCommandString, String previousChangeTerm, String previousAction, Task previousTask) throws IOException{
-		// for checking
-		// System.out.println("remainingCommandString for searchTask(): " + remainingCommandString);
 		
 		boolean hasResultWithValidInput = false;
 						
@@ -1291,15 +1269,9 @@ public class Flex{
 		
 		String searchVariableType = new String("");
 		searchVariableType = remainingCommandString.substring(0, whitespaceIndex1).trim();
-
-		// for checking
-		// System.out.println("searchVariableType: " + searchVariableType);
 		
 		String searchTerm = new String("");
 		searchTerm = remainingCommandString.substring(whitespaceIndex1 + 1).trim();
-		
-		// for checking
-		// System.out.println("searchTerm: " + searchTerm);
 		
 		// reads in the file, line by line
 		BufferedReader reader = null;
@@ -1311,8 +1283,6 @@ public class Flex{
 		do{
 			currentLine = reader.readLine();
 			if(currentLine!=null){
-				// for checking
-				// System.out.println("task added for searchTask()");
 			
 				allTasksList.add(new Task(currentLine));
 			}
@@ -1411,7 +1381,8 @@ public class Flex{
 		if(hasResultWithValidInput == false){
 			System.out.println(NO_SEARCH_RESULTS_MESSSAGE);
 		}
-			
+		
+		System.out.println();
 		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 
 	}
@@ -1419,65 +1390,45 @@ public class Flex{
 	// changes one of the variables in a task, EXCEPT for the comparison value
 	// for sorting all tasks by date and starting time
 	private static void changeTaskVariable(String filename, String remainingCommandString, String previousChangeTerm, String previousAction, Task previousTask) throws IOException {		
-		// for checking
-		// System.out.println("remainingCommandString for changeTaskVariable(): " + remainingCommandString);
 		
 		int whitespaceIndex1 = remainingCommandString.indexOf(" ");
 		
 		if(whitespaceIndex1 < 0){
 			System.out.println(INVALID_INPUT_MESSAGE);
-			
+			System.out.println();
 			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 		}
 		
 		String changeVariableType = new String("");
 		changeVariableType = remainingCommandString.substring(0, whitespaceIndex1).trim();
 		
-		// for checking
-		// System.out.println("changeVariableType: " + changeVariableType);
-		
 		String changeRemainingString = new String("");
 		changeRemainingString = remainingCommandString.substring(whitespaceIndex1 + 1).trim();
 		changeRemainingString.trim();
 		
-		// for checking
-		// System.out.println("changeRemainingString: " + changeRemainingString);
-		
 		int commaWhitespaceIndex1 = changeRemainingString.indexOf(", ");
 		if(commaWhitespaceIndex1 < 0){
 			System.out.println(INVALID_INPUT_MESSAGE);
-			
+			System.out.println();
 			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 		}
 		
 		String currentDate = new String("");
 		currentDate = changeRemainingString.substring(0, commaWhitespaceIndex1);
 		
-		// for checking
-		// System.out.println("currentDate: " + currentDate);
-		
 		changeRemainingString = changeRemainingString.substring(commaWhitespaceIndex1 + 2).trim();
 		changeRemainingString.trim();
-		
-		// for checking
-		// System.out.println("changeRemainingString: " + changeRemainingString);
 		
 		int commaWhitespaceIndex2 = changeRemainingString.indexOf(", ");
 		if(commaWhitespaceIndex2 < 0){
 			System.out.println(INVALID_INPUT_MESSAGE);
-			
+			System.out.println();
 			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 		}
 		
 		String currentTaskTitle = new String("");
 		currentTaskTitle = changeRemainingString.substring(0, commaWhitespaceIndex2).trim();
 		changeRemainingString.trim();
-		
-		// for checking
-		// System.out.println("changeRemainingString: " + changeRemainingString);
-		
-		// for checking
-		// System.out.println("currentTaskTitle: " + currentTaskTitle);
 		
 		changeRemainingString = changeRemainingString.substring(commaWhitespaceIndex2 + 2).trim();
 		changeRemainingString.trim();
@@ -1488,9 +1439,6 @@ public class Flex{
 		// the new form of the changed variable
 		String newTerm = new String("");
 		newTerm = changeRemainingString;
-		
-		// for checking
-		// System.out.println("newTerm: " + newTerm);
 				
 		// reads in the file, line by line
 		BufferedReader reader = null;
@@ -1527,6 +1475,7 @@ public class Flex{
 						
 			if(slashIndex1 <= 0){
 				System.out.println(INVALID_INPUT_MESSAGE);
+				System.out.println();
 				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 			}
 			tempDate = tempDate.substring(slashIndex1 + 1).trim();
@@ -1610,6 +1559,7 @@ public class Flex{
 		// invalid input case
 		else{
 			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
 			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 		}
 		
@@ -1628,11 +1578,7 @@ public class Flex{
 		
 		
 		// for valid input cases
-		
-		// for checking
-		// System.out.println("previousChangeTerm(changedTerm): " + changedTerm);
-		// System.out.println("previousAction is set to: " + lastAction);		
-		// System.out.println("previousTask(tempTask): " + tempTask.printTaskString());
+		System.out.println();
 		readAndExecuteCommand(filename, changedTerm, lastAction, tempTask);	
 		
 		

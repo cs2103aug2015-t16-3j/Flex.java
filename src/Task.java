@@ -59,135 +59,71 @@ public class Task {
 	}
 	
 	public Task(String taskInformation){
-		// for checking
-		// System.out.println("taskInformation for Task() constructor: " + taskInformation);
 		
 		String remainingString = new String("");
 		remainingString = taskInformation;
-		
-		// for checking
-		// System.out.println("remainingString for Task() constructor before trim(): " + remainingString);
-		
+
 		remainingString.trim();
-		
-		// for checking
-		//  System.out.println("remainingString for Task() constructor after trim(): " + remainingString);
 		
 		// extracts the date
 		int commaWhitespaceIndex1 = remainingString.indexOf(", ");
-		
-		// for checking
-		// System.out.println("commaWhitespaceIndex1: " + commaWhitespaceIndex1);
-		
+
 		this.taskVariables[0] = remainingString.substring(0, commaWhitespaceIndex1).trim();
 		remainingString = remainingString.substring(commaWhitespaceIndex1 + 2);
-		
-		// for checking:
-		// System.out.println("this.date: " + this.date);
-		
+
 		// extracts the starting time
 		int commaWhitespaceIndex2 = remainingString.indexOf(", ");
-		
-		// for checking
-		// System.out.println("commaWhitespaceIndex2: " + commaWhitespaceIndex2);
-		
+
 		this.taskVariables[1] = remainingString.substring(0, commaWhitespaceIndex2).trim();
 		remainingString = remainingString.substring(commaWhitespaceIndex2 + 2).trim();
-		
-		// for checking:
-		// System.out.println("this.startingTime: " + this.startingTime);
-		
+	
 		// extracts the ending time
 		int commaWhitespaceIndex3 = remainingString.indexOf(", ");
-		
-		// for checking
-		// System.out.println("commaWhitespaceIndex3: " + commaWhitespaceIndex3);
-		
+	
 		this.taskVariables[2] = remainingString.substring(0, commaWhitespaceIndex3).trim();
 		remainingString = remainingString.substring(commaWhitespaceIndex3 + 2).trim();
-		
-		// for checking:
-		// System.out.println("this.endingTime: " + this.endingTime);
-		
+	
 		// extracts the task title
 		int commaWhitespaceIndex4 = remainingString.indexOf(", ");
-		
-		// for checking
-		// System.out.println("commaWhitespaceIndex4: " + commaWhitespaceIndex4);
 		
 		this.taskVariables[3] = remainingString.substring(0, commaWhitespaceIndex4).trim();
 		remainingString = remainingString.substring(commaWhitespaceIndex4 + 2).trim();
 		
-		// for checking:
-		//  System.out.println("this.taskTitle : " + this.taskTitle);
-		
 		// extracts the task description
 		int commaWhitespaceIndex5 = remainingString.indexOf(", ");
 		
-		// for checking
-		// System.out.println("commaWhitespaceIndex5: " + commaWhitespaceIndex5);
-		
 		this.taskVariables[4] = remainingString.substring(0, commaWhitespaceIndex5).trim();
 		remainingString = remainingString.substring(commaWhitespaceIndex5 + 2).trim();
-		
-		// for checking:
-		// System.out.println("this.taskDescription : " + this.taskDescription);
 
 		// extracts the priority level, and the category of the task
 		int commaWhitespaceIndex6 = remainingString.indexOf(", ");
-		
-		// for checking
-		// System.out.println("commaWhitespaceIndex6: " + commaWhitespaceIndex6);
 		
 		this.taskVariables[5] = remainingString.substring(0, commaWhitespaceIndex6).trim();
 		remainingString = remainingString.substring(commaWhitespaceIndex6 + 2).trim();
 		this.taskVariables[6] = remainingString.trim();		
 		
-		// for checking:
-		// System.out.println("this.priorityLevel : " + this.priorityLevel);
-		
-		// for checking:
-		// System.out.println("this.category : " + this.category);
-		
 		// e.g. 7/9/2015
 		String tempDateString = this.taskVariables[0];
-		
-		// for checking
-		// System.out.println("tempDateString: " + ttempDateString);
 		
 		int slashIndex1 = tempDateString.indexOf("/");
 		int day = Integer.valueOf(tempDateString.substring(0, slashIndex1).trim());
 		
-		// for checking
-		// System.out.println("day: " + day);
-		
 		tempDateString = tempDateString.substring(slashIndex1 + 1);
-		
-		// for checking
-		// System.out.println("temp: " + temp);
 		
 		// e.g. 31/12/2014 with starting time 0859
 		int slashIndex2 = tempDateString.indexOf("/");
 		
 		// the month December (the 12th month of each year)
 		int month = Integer.valueOf(tempDateString.substring(0, slashIndex2).trim());
-		// for checking
-		// System.out.println("month: " + month);
 		
 		// The year 2014
 		int year = Integer.valueOf(tempDateString.substring(slashIndex2 + 1).trim());
-		// for checking
-		// System.out.println("year: " + year);
-		
+
 		// 8 hours
 		int startingTimeHours = Integer.valueOf(this.taskVariables[1].substring(0, 2).trim());
-		// for checking
-		// System.out.println("startingTimeHours: " + startingTimeHours);
 		
 		// 59 minutes
 		int startingTimeMinutes = Integer.valueOf(this.taskVariables[1].substring(2).trim());
-		// for checking
-		// System.out.println("startingTimeMinutes: " + startingTimeMinutes);
 				
 		// used for sorting all tasks by date and starting time (taking year 0, 0000 hours as reference)
 		// (2014 - 1) / 4 = 2013 / 4 = 503 (not considering the remainder)
@@ -208,9 +144,6 @@ public class Task {
 		
 		// e.g. this.comparisonValue = 503 * 366 + 1500 * 365 + (NOVEMBER_ACCUMULATED_DAYS + 0) * 24 * 60 + 8 * 60 + 59;
 		this.comparisonValue = numberOfPastLeapYears * LEAP_YEAR_DAYS + numberOfPastNonLeapyears * YEAR_DAYS * DAY_HOURS * HOUR_MINUTES + (numberOfAccumulatedPastDaysInCurrentYear + leapYearFebruaryDay) * DAY_HOURS * HOUR_MINUTES + numberOfPastHours * HOUR_MINUTES + numberOfPastMinutes;
-		
-		// for checking
-		// System.out.println("comparisonValue= " + comparisonValue);
 		
 	}
 	
@@ -338,11 +271,10 @@ public class Task {
 	// String form of the display on the screen for the task
 	public String printTaskString(){
 		return this.getDate() + ", " + this.getStartingTime() + ", " + this.getEndingTime() + ", " + this.getTaskTitle() + ", " + this.getTaskDescription() + ", " + this.getPriorityLevel() + ", " + this.getCategory();
-		// return "date: " + this.getDate() + ", " + this.getStartingTime() + " to " + this.getEndingTime() + ", task title: " + this.getTaskTitle() + ", task description: " + this.getTaskDescription() + ", priority level: " + this.getPriorityLevel() + ", category: " + this.getCategory();	
 	}
+	
 	// displays the task on the screen
 	public void printTask(){
 		System.out.println(this.getDate() + ", " + this.getStartingTime() + ", " + this.getEndingTime() + ", " + this.getTaskTitle() + ", " + this.getTaskDescription() + ", " + this.getPriorityLevel() + ", " + this.getCategory());
-		// System.out.println("date: " + this.getDate() + ", " + this.getStartingTime() + " to " + this.getEndingTime() + ", task title: " + this.getTaskTitle() + ", task description: " + this.getTaskDescription() + ", priority level: " + this.getPriorityLevel() + ", category: " + this.getCategory());	
 	}
 }
