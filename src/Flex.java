@@ -21,9 +21,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import javax.swing.JFrame;
+
 public class Flex{
-
-
+	
+	private static FlexWindow flexWindow;
 	private static Scanner sc;
 	private static String filename;
 	private static final String INVALID_INPUT_MESSAGE = "Invalid input. Please try again.";
@@ -35,9 +37,7 @@ public class Flex{
 	private static final String BLOCKED_MESSAGE = "Unable to add the new task, because the new task clashes with existing tasks (on the same date) which have not been marked as tasks which have been done.";
 	private static final String FILENAME_ACCEPTED_MESSAGE = "Filename is accepted.";
 	private static final String PROCEED_MESSAGE = "Please proceed with the user input commands.";
-	private static final String FILENAME_INPUT_MESSAGE = "Please enter the .txt file's filename, which should be in the same directory as Flex, on your computer.";
-	
-	
+	private static final String FILENAME_INPUT_MESSAGE = "Please enter the full path name of the .txt schedule file, including its name. For example: C:" + "\\" + "Users" + "\\" + "Owner" + "\\" + "Documents" + "\\" + "Flex" + "." + "java" + "\\" + "src" + "\\" + "FlexTest" + "." + "txt";
 	private static final int HOUR_MINUTES = 60;
 	
 	// number of days in each month 
@@ -56,28 +56,39 @@ public class Flex{
 	
 
 	// Note: The programs starts by typing "java Flex" in command line prompt.
+	
 	public static void main(String[]args) throws IOException{
-		System.out.println(FILENAME_INPUT_MESSAGE);
-		System.out.println();
+		flexWindow = new FlexWindow();
+		flexWindow.setTitle("Flex Display");
+		flexWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		flexWindow.setBounds(100, 100, 450, 300);
+		flexWindow.setVisible(true);
+		
+		flexWindow.getTextArea().setText(FILENAME_INPUT_MESSAGE);
+		flexWindow.getTextArea().append("\n");
 		filename = new String("");
 		sc = new Scanner(System.in);
 		filename = sc.nextLine();
 		filename.trim();
-		int dotIndex = filename.indexOf(".");
+
 		
-		while((dotIndex < 0)||(!filename.substring(dotIndex + 1).equalsIgnoreCase("txt"))){
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println(FILENAME_INPUT_MESSAGE);
-			System.out.println();
+		File tempFile = new File(filename);
+		
+		
+		if((!filename.substring(filename.length()-4, filename.length()).equalsIgnoreCase(".txt"))||(!tempFile.exists())){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append(FILENAME_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
 			filename = sc.nextLine();
-			dotIndex = filename.indexOf(".");
+			tempFile = new File(filename);
+			
 		}
 				
-		System.out.println();
-		System.out.println(FILENAME_ACCEPTED_MESSAGE);
-		System.out.println();
-		System.out.println(PROCEED_MESSAGE);
-		System.out.println();
+		flexWindow.getTextArea().append("\n");
+		flexWindow.getTextArea().append(FILENAME_ACCEPTED_MESSAGE);
+		flexWindow.getTextArea().append("\n");
+		flexWindow.getTextArea().append(PROCEED_MESSAGE);
+		flexWindow.getTextArea().append("\n");
 		
 		
 		// this method takes care of the manipulation to be done, as well as the operation for exiting the program	
@@ -114,8 +125,8 @@ public class Flex{
 			
 			// Case 1: The program Flex.java will exit itself in Command Line Prompt (cmd).
 			if(firstWord.equalsIgnoreCase("exit")){		
-				System.out.println(EXIT_MESSAGE);
-			   	return;
+				flexWindow.getTextArea().append(EXIT_MESSAGE);
+			   	System.exit(1);
 			}	
 			// Case 2: undo the last action
 			else if(firstWord.equalsIgnoreCase("undo")){
@@ -124,8 +135,8 @@ public class Flex{
 			}
 			// Case 3: invalid input
 			else{
-				System.out.println(INVALID_INPUT_MESSAGE);
-				System.out.println();
+				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+				flexWindow.getTextArea().append("\n");
 				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 			}
 		}
@@ -136,10 +147,10 @@ public class Flex{
 			firstWord.trim();
 			
 			// Case 4: invalid input
-			if(firstWord.substring(0, 1).equals("")){
+			if(firstWord.substring(0, 1).equalsIgnoreCase("")){
 				
-				System.out.println(INVALID_INPUT_MESSAGE);
-				System.out.println();								
+				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+				flexWindow.getTextArea().append("\n");								
 				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 			}
 			// Case 5: adding a task
@@ -148,10 +159,10 @@ public class Flex{
 				String remainingCommandString = command.substring(whitespaceIndex+1).trim();
 				remainingCommandString.trim();
 				
-				if(remainingCommandString.equals("")){
+				if(remainingCommandString.equalsIgnoreCase("")){
 	
-					System.out.println(INVALID_INPUT_MESSAGE);
-					System.out.println();
+					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+					flexWindow.getTextArea().append("\n");
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);						
 				}				
 				
@@ -162,48 +173,48 @@ public class Flex{
 				
 				int commaWhitespaceIndex1 = remainingCommandStringCheck.indexOf(", ");
 				if(commaWhitespaceIndex1 < 0){				
-					System.out.println(INVALID_INPUT_MESSAGE);		
-					System.out.println();
+					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);		
+					flexWindow.getTextArea().append("\n");
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);		
 				}
 				remainingCommandStringCheck = remainingCommandStringCheck.substring(commaWhitespaceIndex1 + 2).trim();
 				
 				int commaWhitespaceIndex2 = remainingCommandStringCheck.indexOf(", ");
 				if(commaWhitespaceIndex2 < 0){				
-					System.out.println(INVALID_INPUT_MESSAGE);	
-					System.out.println();
+					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);	
+					flexWindow.getTextArea().append("\n");
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);		
 				}
 				remainingCommandStringCheck = remainingCommandStringCheck.substring(commaWhitespaceIndex2 + 2).trim();
 				
 				int commaWhitespaceIndex3 = remainingCommandStringCheck.indexOf(", ");
 				if(commaWhitespaceIndex3 < 0){				
-					System.out.println(INVALID_INPUT_MESSAGE);	
-					System.out.println();
+					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);	
+					flexWindow.getTextArea().append("\n");
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);		
 				}
 				remainingCommandStringCheck = remainingCommandStringCheck.substring(commaWhitespaceIndex3 + 2).trim();
 				
 				int commaWhitespaceIndex4 = remainingCommandStringCheck.indexOf(", ");
 				if(commaWhitespaceIndex4 < 0){				
-					System.out.println(INVALID_INPUT_MESSAGE);	
-					System.out.println();
+					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);	
+					flexWindow.getTextArea().append("\n");
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);		
 				}
 				remainingCommandStringCheck = remainingCommandStringCheck.substring(commaWhitespaceIndex4 + 2).trim();
 				
 				int commaWhitespaceIndex5 = remainingCommandStringCheck.indexOf(", ");			
 				if(commaWhitespaceIndex5 < 0){				
-					System.out.println(INVALID_INPUT_MESSAGE);
-					System.out.println();
+					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);	
+					flexWindow.getTextArea().append("\n");
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);		
 				}
 				remainingCommandStringCheck = remainingCommandStringCheck.substring(commaWhitespaceIndex5 + 2).trim();	
 				
 				int commaWhitespaceIndex6 = remainingCommandStringCheck.indexOf(", ");
 				if(commaWhitespaceIndex6 < 0){				
-					System.out.println(INVALID_INPUT_MESSAGE);	
-					System.out.println();
+					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);	
+					flexWindow.getTextArea().append("\n");
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);		
 				}
 				remainingCommandStringCheck = remainingCommandStringCheck.substring(commaWhitespaceIndex6 + 2).trim();
@@ -219,10 +230,10 @@ public class Flex{
 				String remainingCommandString = command.substring(whitespaceIndex+1);
 				remainingCommandString.trim();
 				
-				if(remainingCommandString.equals("")){
+				if(remainingCommandString.equalsIgnoreCase("")){
 					
-					System.out.println(INVALID_INPUT_MESSAGE);
-					System.out.println();
+					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);	
+					flexWindow.getTextArea().append("\n");
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 					
 				}				
@@ -230,8 +241,8 @@ public class Flex{
 				int whitespaceIndex1 = remainingCommandString.indexOf(" ");
 				
 				if(whitespaceIndex1 < 0){
-					System.out.println(INVALID_INPUT_MESSAGE);
-					System.out.println();
+					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);	
+					flexWindow.getTextArea().append("\n");
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);						
 				}
 				
@@ -250,10 +261,10 @@ public class Flex{
 				String remainingString = command.substring(whitespaceIndex+1).trim();		
 				remainingString.trim();
 				
-				if(remainingString.equals("")){
+				if(remainingString.equalsIgnoreCase("")){
 					
-					System.out.println(INVALID_INPUT_MESSAGE);
-					System.out.println();
+					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);	
+					flexWindow.getTextArea().append("\n");
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 					
 				}			
@@ -270,10 +281,10 @@ public class Flex{
 				String remainingString = command.substring(whitespaceIndex+1).trim();		
 				remainingString.trim();
 				
-				if(remainingString.equals("")){
+				if(remainingString.equalsIgnoreCase("")){
 					
-					System.out.println(INVALID_INPUT_MESSAGE);
-					System.out.println();
+					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);	
+					flexWindow.getTextArea().append("\n");
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 					
 				}				
@@ -318,10 +329,10 @@ public class Flex{
 				}
 				// Case 6: shows tasks sorted by priority,
 				// or rather, tasks with the same priority will be grouped together
-				// and only the tasks with the same number priorityLevels will be in numberical order
+				// and only the tasks with the same number priorityLevels will be in numerical order
 				// from the smallest to the biggest number for their priorityLevels
 				else if(remainingString.equalsIgnoreCase("by priority")){
-				sortAndShowByPriority(filename, previousChangeTerm, previousAction, previousTask);				
+					sortAndShowByPriority(filename, previousChangeTerm, previousAction, previousTask);				
 				}
 				// Case 7: show tasks by category (in alphabetical order)
 				// Meaning in this order - "blocked", "done", "pending"
@@ -352,8 +363,8 @@ public class Flex{
 				}	
 				// Case 13: invalid input for user input command String starting with the word "show"
 				else{
-					System.out.println(INVALID_INPUT_MESSAGE);
-					System.out.println();
+					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);	
+					flexWindow.getTextArea().append("\n");
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 				}
 				// Case 13: show the week starting on the date given by the user
@@ -362,8 +373,8 @@ public class Flex{
 			}
 			// case 10: If the user's command is invalid
 			else{
-				System.out.println(INVALID_INPUT_MESSAGE);
-				System.out.println();
+				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);	
+				flexWindow.getTextArea().append("\n");
 				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 			}
 		}
@@ -391,7 +402,8 @@ public class Flex{
 			reader.close();
 		}				
 		
-		System.out.println("Please enter the starting date (format: dd/mm/yyyy): ");
+		flexWindow.getTextArea().append("Please enter the starting date (format: dd/mm/yyyy): " + "\n");
+		flexWindow.getTextArea().append("\n");
 		
 		// day 1
 		
@@ -403,7 +415,8 @@ public class Flex{
 		int slashIndex1 = tempDate.indexOf("/");
 		
 		if(slashIndex1 <= 0){
-			System.out.println(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);	
+			flexWindow.getTextArea().append("\n");
 			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 		}
 		tempDate = tempDate.substring(slashIndex1 + 1).trim();
@@ -411,7 +424,8 @@ public class Flex{
 		int slashIndex2 = tempDate.indexOf("/");	
 		
 		if(slashIndex2 <= 0){
-			System.out.println(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);	
+			flexWindow.getTextArea().append("\n");
 			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 		}
 		
@@ -463,7 +477,7 @@ public class Flex{
 		
 		searchAndShowTask(filename, "date " + date7, previousChangeTerm, previousAction, previousTask);
 		
-		System.out.println();		
+		flexWindow.getTextArea();		
 		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 	}
 
@@ -475,8 +489,8 @@ public class Flex{
 		int whitespaceIndex1 = remainingCommandString.indexOf(" ");
 			
 		if(whitespaceIndex1 < 0){
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();		
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");		
 			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 		}
 				
@@ -512,70 +526,78 @@ public class Flex{
 			int slashIndex1 = tempDate.indexOf("/");
 			
 			if(slashIndex1 <= 0){
-				System.out.println(INVALID_INPUT_MESSAGE);
-				System.out.println();
+				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+				flexWindow.getTextArea().append("\n");
 				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 			}
+			
 			tempDate = tempDate.substring(slashIndex1 + 1).trim();
 			
 			int slashIndex2 = tempDate.indexOf("/");	
 			
 			if(slashIndex2 <= 0){
-				System.out.println(INVALID_INPUT_MESSAGE);
+				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+				flexWindow.getTextArea().append("\n");
 				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 			}
 			
 			for(int i=0; i<allTasksList.size(); i++){
-				if(allTasksList.get(i).getDate().equals(searchTerm)){
-					allTasksList.get(i).printTask();
+				if(allTasksList.get(i).getDate().equalsIgnoreCase(searchTerm)){
+					flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString() + "\n");
 				}
 			}
 		}
 		else if(searchVariableType.equalsIgnoreCase("start")){
 			for(int i=0; i<allTasksList.size(); i++){
-				if(allTasksList.get(i).getStartingTime().equals(searchTerm)){
-					allTasksList.get(i).printTask();
+				if(allTasksList.get(i).getStartingTime().equalsIgnoreCase(searchTerm)){
+					flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString() + "\n");
 				}
 			}
 		}
 		else if(searchVariableType.equalsIgnoreCase("end")){		
 			for(int i=0; i<allTasksList.size(); i++){
-				if(allTasksList.get(i).getEndingTime().equals(searchTerm)){
-					allTasksList.get(i).printTask();
+				if(allTasksList.get(i).getEndingTime().equalsIgnoreCase(searchTerm)){
+					flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString() + "\n");
 				}
 			}
 		}
 		else if(searchVariableType.equalsIgnoreCase("title")){
 			for(int i=0; i<allTasksList.size(); i++){
-				if(allTasksList.get(i).getTaskTitle().equals(searchTerm)){
-					allTasksList.get(i).printTask();
+				String tempSearchTerm = searchTerm.toLowerCase();
+				String tempTaskTitle = allTasksList.get(i).getTaskTitle().toLowerCase();
+				if(tempTaskTitle.indexOf(tempSearchTerm) >= 0){
+					flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString() + "\n");
 				}
 			}
 		}
 		else if(searchVariableType.equalsIgnoreCase("description")){
 			for(int i=0; i<allTasksList.size(); i++){
-				if(allTasksList.get(i).getTaskDescription().equals(searchTerm)){
-					allTasksList.get(i).printTask();
+				String tempSearchTerm = searchTerm.toLowerCase();
+				String tempTaskDescription = allTasksList.get(i).getTaskDescription().toLowerCase();
+				if(tempTaskDescription.indexOf(tempSearchTerm) >= 0){
+					flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString() + "\n");
 				}
 			}
 		}
 		else if(searchVariableType.equalsIgnoreCase("priority")){
 			for(int i=0; i<allTasksList.size(); i++){
-				if(allTasksList.get(i).getPriorityLevel().equals(searchTerm)){
-					allTasksList.get(i).printTask();
+				if(allTasksList.get(i).getPriorityLevel().equalsIgnoreCase(searchTerm)){
+					flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString() + "\n");
 				}
 			}
 		}
 		else if(searchVariableType.equalsIgnoreCase("category")){
 			for(int i=0; i<allTasksList.size(); i++){
-				if(allTasksList.get(i).getCategory().equals(searchTerm)){
-					allTasksList.get(i).printTask();
+				if(allTasksList.get(i).getCategory().equalsIgnoreCase(searchTerm)){
+					flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString() + "\n");
 				}
 			}
 		}
 		// invalid input case
 		else{
-			System.out.println(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 		}			
 	}
 
@@ -747,10 +769,10 @@ public class Flex{
 		}
 		
 		for(int j=0; j<allTasksList.size(); j++){
-			System.out.println(allTasksList.get(j).printTaskString());
+			flexWindow.getTextArea().append(allTasksList.get(j).getPrintTaskString() + "\n");
 		}
 		
-		System.out.println();
+		flexWindow.getTextArea().append("\n");
 		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 	}
 	
@@ -796,10 +818,10 @@ public class Flex{
 		}
 		
 		for(int j=0; j<allTasksList.size(); j++){
-			System.out.println(allTasksList.get(j).printTaskString());
+			flexWindow.getTextArea().append(allTasksList.get(j).getPrintTaskString() + "\n");
 		}
 		
-		System.out.println();
+		flexWindow.getTextArea().append("\n");
 		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 	}
 	
@@ -845,10 +867,10 @@ public class Flex{
 		}
 		
 		for(int j=0; j<allTasksList.size(); j++){
-			System.out.println(allTasksList.get(j).printTaskString());
+			flexWindow.getTextArea().append(allTasksList.get(j).getPrintTaskString() + "\n");
 		}
 		
-		System.out.println();
+		flexWindow.getTextArea().append("\n");
 		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 	}
 
@@ -898,10 +920,10 @@ public class Flex{
 		}
 		
 		for(int j=0; j<allTasksList.size(); j++){
-			System.out.println(allTasksList.get(j).printTaskString());
+			flexWindow.getTextArea().append(allTasksList.get(j).getPrintTaskString() + "\n");
 		}
 		
-		System.out.println();
+		flexWindow.getTextArea().append("\n");
 		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 	}
 
@@ -951,10 +973,10 @@ public class Flex{
 		}
 		
 		for(int j=0; j<allTasksList.size(); j++){
-			System.out.println(allTasksList.get(j).printTaskString());
+			flexWindow.getTextArea().append(allTasksList.get(j).getPrintTaskString() +  "\n");
 		}
 		
-		System.out.println();
+		flexWindow.getTextArea().append("\n");
 		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 	}
 
@@ -990,10 +1012,10 @@ public class Flex{
 		
 		
 		for(int j=0; j<notDoneList.size(); j++){
-			System.out.println(notDoneList.get(j).printTaskString());
+			flexWindow.getTextArea().append(notDoneList.get(j).getPrintTaskString() + "\n");
 		}
 		
-		System.out.println();
+		flexWindow.getTextArea().append("\n");
 		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 	}
 	
@@ -1017,14 +1039,14 @@ public class Flex{
 			}while(currentLine!=null);			
 			
 			if(reader!=null){
-			reader.close();
+				reader.close();
 			}				
 		
 			for(int j=0; j<allTasksList.size(); j++){
-				System.out.println(allTasksList.get(j).printTaskString());
+				flexWindow.getTextArea().append(allTasksList.get(j).getPrintTaskString() + "\n");
 			}
 			
-			System.out.println();
+			flexWindow.getTextArea().append("\n");
 			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 	}
 
@@ -1070,10 +1092,10 @@ public class Flex{
 		}
 		
 		for(int j=0; j<allTasksList.size(); j++){
-			System.out.println(allTasksList.get(j).printTaskString());
+			flexWindow.getTextArea().append(allTasksList.get(j).getPrintTaskString() + "\n");
 		}
 	
-		System.out.println();
+		flexWindow.getTextArea().append("\n");
 		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 	}
 
@@ -1092,7 +1114,7 @@ public class Flex{
 			}
 			else if(previousAction.equalsIgnoreCase("delete")){
 
-				addTask(filename, previousTask.printTaskString(), previousChangeTerm, previousAction, previousTask);
+				addTask(filename, previousTask.getPrintTaskString(), previousChangeTerm, previousAction, previousTask);
 			}
 		}
 		else{
@@ -1121,7 +1143,7 @@ public class Flex{
 			currentLine = reader.readLine();
 			if(currentLine!=null){
 				// for checking
-				// System.out.println("task added for addTask()");
+				// flexWindow.getTextArea("task added for addTask()");
 					
 				allTasksList.add(new Task(currentLine));				
 			}
@@ -1156,10 +1178,10 @@ public class Flex{
 		tempEndingTime = remainingCommandString1StartingWithEndingTime.substring(0, commaWhitespaceIndex3);
 		
 		for (int i=0; i<allTasksList.size(); i++){
-			if((allTasksList.get(i).getDate().equals(tempDate))&&(!allTasksList.get(i).getCategory().equalsIgnoreCase("done"))&&(((Integer.valueOf(allTasksList.get(i).getStartingTime()) <= Integer.valueOf(tempStartingTime))&&(Integer.valueOf(allTasksList.get(i).getEndingTime()) >= Integer.valueOf(tempStartingTime)))||((Integer.valueOf(allTasksList.get(i).getStartingTime()) <= Integer.valueOf(tempEndingTime))&&(Integer.valueOf(allTasksList.get(i).getEndingTime()) >= Integer.valueOf(tempEndingTime))))){
+			if((allTasksList.get(i).getDate().equalsIgnoreCase(tempDate))&&(!allTasksList.get(i).getCategory().equalsIgnoreCase("done"))&&(((Integer.valueOf(allTasksList.get(i).getStartingTime()) <= Integer.valueOf(tempStartingTime))&&(Integer.valueOf(allTasksList.get(i).getEndingTime()) >= Integer.valueOf(tempStartingTime)))||((Integer.valueOf(allTasksList.get(i).getStartingTime()) <= Integer.valueOf(tempEndingTime))&&(Integer.valueOf(allTasksList.get(i).getEndingTime()) >= Integer.valueOf(tempEndingTime))))){
 				
-				System.out.println(BLOCKED_MESSAGE);	
-				System.out.println();
+				flexWindow.getTextArea().append(BLOCKED_MESSAGE);	
+				flexWindow.getTextArea().append("\n");
 				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);												
 			}
 		}
@@ -1178,13 +1200,13 @@ public class Flex{
 		BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
 		
 		for(int i=0; i<allTasksList.size(); i++){
-			writer.write(allTasksList.get(i).printTaskString());
+			writer.write(allTasksList.get(i).getPrintTaskString());
 			writer.newLine();
 		}
 									
 		writer.close();		
 		
-		System.out.println();
+		flexWindow.getTextArea().append("\n");
 		readAndExecuteCommand(filename, previousChangeTerm, "add", tempTask);	
 				
 	}	
@@ -1217,7 +1239,7 @@ public class Flex{
 		Task tempTask = new Task();
 		
 		for(int i=0; i<allTasksList.size(); i++){
-			if((allTasksList.get(i).getDate().equals(date))&&(allTasksList.get(i).getTaskTitle().equals(taskTitle))){
+			if((allTasksList.get(i).getDate().equalsIgnoreCase(date))&&(allTasksList.get(i).getTaskTitle().equalsIgnoreCase(taskTitle))){
 				tempTask = allTasksList.get(i);
 				allTasksList.remove(i);
 				taskExists = true;
@@ -1231,19 +1253,20 @@ public class Flex{
 		BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
 		
 		for(int i=0; i<allTasksList.size(); i++){
-			writer.write(allTasksList.get(i).printTaskString());
+			writer.write(allTasksList.get(i).getPrintTaskString());
+			flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString() + "\n");
 			writer.newLine();
 		}
 
 		if(taskExists == false){
-			System.out.println(TASK_DOES_NOT_EXIST_MESSAGE);
-			System.out.println();
+			flexWindow.getTextArea().append(TASK_DOES_NOT_EXIST_MESSAGE);
+			flexWindow.getTextArea().append("\n");
 			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 		}
 		
 		writer.close();
 
-		System.out.println();
+		flexWindow.getTextArea().append("\n");
 		readAndExecuteCommand(filename, previousChangeTerm, "delete", tempTask);	
 	}
 	
@@ -1255,8 +1278,8 @@ public class Flex{
 		int whitespaceIndex1 = remainingCommandString.indexOf(" ");
 		
 		if(whitespaceIndex1 < 0){
-			System.out.println(INVALID_INPUT_MESSAGE);
-			
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
 			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 		}
 		
@@ -1293,7 +1316,8 @@ public class Flex{
 			int slashIndex1 = tempDate.indexOf("/");
 						
 			if(slashIndex1 <= 0){
-				System.out.println(INVALID_INPUT_MESSAGE);
+				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+				flexWindow.getTextArea().append("\n");
 				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 			}
 			tempDate = tempDate.substring(slashIndex1 + 1).trim();
@@ -1301,81 +1325,86 @@ public class Flex{
 			int slashIndex2 = tempDate.indexOf("/");	
 						
 			if(slashIndex2 <= 0){
-				System.out.println(INVALID_INPUT_MESSAGE);
+				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+				flexWindow.getTextArea().append("\n");
 				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 			}
 						
 			for(int i=0; i<allTasksList.size(); i++){
-				if(allTasksList.get(i).getDate().equals(searchTerm)){
-					allTasksList.get(i).printTask();
+				if(allTasksList.get(i).getDate().equalsIgnoreCase(searchTerm)){
+					flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString());
 				}
 			}
 			
 			for(int i=0; i<allTasksList.size(); i++){
-				if(allTasksList.get(i).getDate().equals(searchTerm)){
-					allTasksList.get(i).printTask();
+				if(allTasksList.get(i).getDate().equalsIgnoreCase(searchTerm)){
+					flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString() + "\n");
 					hasResultWithValidInput = true;
 				}
 			}
 		}
 		else if(searchVariableType.equalsIgnoreCase("start")){
 			for(int i=0; i<allTasksList.size(); i++){
-				if(allTasksList.get(i).getStartingTime().equals(searchTerm)){
-					allTasksList.get(i).printTask();
+				if(allTasksList.get(i).getStartingTime().equalsIgnoreCase(searchTerm)){
+					flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString() + "\n");
 					hasResultWithValidInput = true;
 				}
 			}
 		}
 		else if(searchVariableType.equalsIgnoreCase("end")){		
 			for(int i=0; i<allTasksList.size(); i++){
-				if(allTasksList.get(i).getEndingTime().equals(searchTerm)){
-					allTasksList.get(i).printTask();
+				if(allTasksList.get(i).getEndingTime().equalsIgnoreCase(searchTerm)){
+					flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString() + "\n");
 					hasResultWithValidInput = true;
 				}
 			}
 		}
 		else if(searchVariableType.equalsIgnoreCase("title")){
 			for(int i=0; i<allTasksList.size(); i++){
-				if(allTasksList.get(i).getTaskTitle().equals(searchTerm)){
-					allTasksList.get(i).printTask();
+				String tempSearchTerm = searchTerm.toLowerCase();
+				String tempTaskTitle = allTasksList.get(i).getTaskTitle().toLowerCase();
+				if(tempTaskTitle.indexOf(tempSearchTerm) >= 0){
+					flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString() + "\n");
 					hasResultWithValidInput = true;
 				}
 			}
 		}
 		else if(searchVariableType.equalsIgnoreCase("description")){
 			for(int i=0; i<allTasksList.size(); i++){
-				if(allTasksList.get(i).getTaskDescription().equals(searchTerm)){
-					allTasksList.get(i).printTask();
+				String tempSearchTerm = searchTerm.toLowerCase();
+				String tempTaskDescription = allTasksList.get(i).getTaskDescription().toLowerCase();
+				if(tempTaskDescription.indexOf(tempSearchTerm) >= 0){
+					flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString() + "\n");
 					hasResultWithValidInput = true;
 				}
 			}
 		}
 		else if(searchVariableType.equalsIgnoreCase("priority")){
 			for(int i=0; i<allTasksList.size(); i++){
-				if(allTasksList.get(i).getPriorityLevel().equals(searchTerm)){
-					allTasksList.get(i).printTask();
+				if(allTasksList.get(i).getPriorityLevel().equalsIgnoreCase(searchTerm)){
+					flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString() + "\n");
 					hasResultWithValidInput = true;
 				}
 			}
 		}
 		else if(searchVariableType.equalsIgnoreCase("category")){
 			for(int i=0; i<allTasksList.size(); i++){
-				if(allTasksList.get(i).getCategory().equals(searchTerm)){
-					allTasksList.get(i).printTask();
+				if(allTasksList.get(i).getCategory().equalsIgnoreCase(searchTerm)){
+					flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString() + "\n");
 					hasResultWithValidInput = true;
 				}
 			}
 		}
 		// invalid input case
 		else{
-			System.out.println(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 		}		
 		
 		if(hasResultWithValidInput == false){
-			System.out.println(NO_SEARCH_RESULTS_MESSSAGE);
+			flexWindow.getTextArea().append(NO_SEARCH_RESULTS_MESSSAGE);
 		}
 		
-		System.out.println();
+		flexWindow.getTextArea().append("\n");
 		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 
 	}
@@ -1387,8 +1416,8 @@ public class Flex{
 		int whitespaceIndex1 = remainingCommandString.indexOf(" ");
 		
 		if(whitespaceIndex1 < 0){
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
 			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 		}
 		
@@ -1401,8 +1430,8 @@ public class Flex{
 		
 		int commaWhitespaceIndex1 = changeRemainingString.indexOf(", ");
 		if(commaWhitespaceIndex1 < 0){
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
 			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 		}
 		
@@ -1414,8 +1443,8 @@ public class Flex{
 		
 		int commaWhitespaceIndex2 = changeRemainingString.indexOf(", ");
 		if(commaWhitespaceIndex2 < 0){
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
 			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 		}
 		
@@ -1443,8 +1472,6 @@ public class Flex{
 		do{
 			currentLine = reader.readLine();
 			if(currentLine!=null){
-				// for checking
-				// System.out.println("task added for changeTaskVariable()");
 				
 				allTasksList.add(new Task(currentLine));
 			}
@@ -1467,8 +1494,8 @@ public class Flex{
 			int slashIndex1 = tempDate.indexOf("/");
 						
 			if(slashIndex1 <= 0){
-				System.out.println(INVALID_INPUT_MESSAGE);
-				System.out.println();
+				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+				flexWindow.getTextArea().append("\n");
 				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 			}
 			tempDate = tempDate.substring(slashIndex1 + 1).trim();
@@ -1476,12 +1503,13 @@ public class Flex{
 			int slashIndex2 = tempDate.indexOf("/");	
 						
 			if(slashIndex2 <= 0){
-				System.out.println(INVALID_INPUT_MESSAGE);
+				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+				flexWindow.getTextArea().append("\n");
 				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 			}	
 			
 			for(int i=0; i<allTasksList.size(); i++){
-				if((allTasksList.get(i).getDate().equals(currentDate))&&(allTasksList.get(i).getTaskTitle().equals(currentTaskTitle))){
+				if((allTasksList.get(i).getDate().equalsIgnoreCase(currentDate))&&(allTasksList.get(i).getTaskTitle().equalsIgnoreCase(currentTaskTitle))){
 					changedTerm = allTasksList.get(i).getDate();
 					allTasksList.get(i).setDate(newTerm);
 					tempTask = allTasksList.get(i);
@@ -1491,7 +1519,7 @@ public class Flex{
 		}
 		else if(changeVariableType.equalsIgnoreCase("start")){
 			for(int i=0; i<allTasksList.size(); i++){
-				if((allTasksList.get(i).getDate().equals(currentDate))&&(allTasksList.get(i).getTaskTitle().equals(currentTaskTitle))){
+				if((allTasksList.get(i).getDate().equalsIgnoreCase(currentDate))&&(allTasksList.get(i).getTaskTitle().equalsIgnoreCase(currentTaskTitle))){
 					changedTerm = allTasksList.get(i).getStartingTime();
 					allTasksList.get(i).setStartingTime(newTerm);
 					tempTask = allTasksList.get(i);
@@ -1501,7 +1529,7 @@ public class Flex{
 		}
 		else if(changeVariableType.equalsIgnoreCase("end")){
 			for(int i=0; i<allTasksList.size(); i++){
-				if((allTasksList.get(i).getDate().equals(currentDate))&&(allTasksList.get(i).getTaskTitle().equals(currentTaskTitle))){
+				if((allTasksList.get(i).getDate().equalsIgnoreCase(currentDate))&&(allTasksList.get(i).getTaskTitle().equalsIgnoreCase(currentTaskTitle))){
 					changedTerm = allTasksList.get(i).getEndingTime();
 					allTasksList.get(i).setEndingTime(newTerm);
 					tempTask = allTasksList.get(i);
@@ -1511,7 +1539,7 @@ public class Flex{
 		}
 		else if(changeVariableType.equalsIgnoreCase("title")){
 			for(int i=0; i<allTasksList.size(); i++){
-				if((allTasksList.get(i).getDate().equals(currentDate))&&(allTasksList.get(i).getTaskTitle().equals(currentTaskTitle))){
+				if((allTasksList.get(i).getDate().equalsIgnoreCase(currentDate))&&(allTasksList.get(i).getTaskTitle().equalsIgnoreCase(currentTaskTitle))){
 					changedTerm = allTasksList.get(i).getTaskTitle();
 					allTasksList.get(i).setTaskTitle(newTerm);
 					tempTask = allTasksList.get(i);
@@ -1521,7 +1549,7 @@ public class Flex{
 		}
 		else if(changeVariableType.equalsIgnoreCase("description")){
 			for(int i=0; i<allTasksList.size(); i++){
-				if((allTasksList.get(i).getDate().equals(currentDate))&&(allTasksList.get(i).getTaskTitle().equals(currentTaskTitle))){
+				if((allTasksList.get(i).getDate().equalsIgnoreCase(currentDate))&&(allTasksList.get(i).getTaskTitle().equalsIgnoreCase(currentTaskTitle))){
 					changedTerm = allTasksList.get(i).getTaskDescription();
 					allTasksList.get(i).setTaskDescription(newTerm);
 					tempTask = allTasksList.get(i);
@@ -1531,7 +1559,7 @@ public class Flex{
 		}
 		else if(changeVariableType.equalsIgnoreCase("priority")){
 			for(int i=0; i<allTasksList.size(); i++){
-				if((allTasksList.get(i).getDate().equals(currentDate))&&(allTasksList.get(i).getTaskTitle().equals(currentTaskTitle))){
+				if((allTasksList.get(i).getDate().equalsIgnoreCase(currentDate))&&(allTasksList.get(i).getTaskTitle().equalsIgnoreCase(currentTaskTitle))){
 					changedTerm = allTasksList.get(i).getPriorityLevel().toString();
 					allTasksList.get(i).setPriorityLevel(newTerm);
 					tempTask = allTasksList.get(i);
@@ -1541,7 +1569,7 @@ public class Flex{
 		}
 		else if(changeVariableType.equalsIgnoreCase("category")){
 			for(int i=0; i<allTasksList.size(); i++){
-				if((allTasksList.get(i).getDate().equals(currentDate))&&(allTasksList.get(i).getTaskTitle().equals(currentTaskTitle))){
+				if((allTasksList.get(i).getDate().equalsIgnoreCase(currentDate))&&(allTasksList.get(i).getTaskTitle().equalsIgnoreCase(currentTaskTitle))){
 					changedTerm = allTasksList.get(i).getCategory();
 					allTasksList.get(i).setCategory(newTerm);
 					tempTask = allTasksList.get(i);
@@ -1551,8 +1579,8 @@ public class Flex{
 		}
 		// invalid input case
 		else{
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
 			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 		}
 		
@@ -1563,15 +1591,16 @@ public class Flex{
 		BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
 		
 		for(int i=0; i<allTasksList.size(); i++){
-			writer.write(allTasksList.get(i).printTaskString());
+			writer.write(allTasksList.get(i).getPrintTaskString());
 			writer.newLine();
+			flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString() + "\n");
 		}
 									
 		writer.close();
 		
 		
 		// for valid input cases
-		System.out.println();
+		flexWindow.getTextArea().append("\n");
 		readAndExecuteCommand(filename, changedTerm, lastAction, tempTask);	
 		
 		

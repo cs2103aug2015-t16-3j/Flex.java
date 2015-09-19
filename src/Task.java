@@ -143,7 +143,7 @@ public class Task {
 		int numberOfPastMinutes = startingTimeMinutes;
 		
 		// e.g. this.comparisonValue = 503 * 366 + 1500 * 365 + (NOVEMBER_ACCUMULATED_DAYS + 0) * 24 * 60 + 8 * 60 + 59;
-		this.comparisonValue = numberOfPastLeapYears * LEAP_YEAR_DAYS + numberOfPastNonLeapyears * YEAR_DAYS * DAY_HOURS * HOUR_MINUTES + (numberOfAccumulatedPastDaysInCurrentYear + leapYearFebruaryDay) * DAY_HOURS * HOUR_MINUTES + numberOfPastHours * HOUR_MINUTES + numberOfPastMinutes;
+		this.comparisonValue = numberOfPastLeapYears * LEAP_YEAR_DAYS * DAY_HOURS * HOUR_MINUTES + numberOfPastNonLeapyears * YEAR_DAYS * DAY_HOURS * HOUR_MINUTES + (numberOfAccumulatedPastDaysInCurrentYear + leapYearFebruaryDay) * DAY_HOURS * HOUR_MINUTES + numberOfPastHours * HOUR_MINUTES + numberOfPastMinutes;
 		
 	}
 	
@@ -269,7 +269,7 @@ public class Task {
 	}	
 	
 	// String form of the display on the screen for the task
-	public String printTaskString(){
+	public String getPrintTaskString(){
 		return this.getDate() + ", " + this.getStartingTime() + ", " + this.getEndingTime() + ", " + this.getTaskTitle() + ", " + this.getTaskDescription() + ", " + this.getPriorityLevel() + ", " + this.getCategory();
 	}
 	
