@@ -5,11 +5,17 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.TextArea;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class FlexWindow extends JFrame {
+import javax.swing.JTextField;
 
+public class FlexWindow extends JFrame implements KeyListener {
+
+	private String[] inputString = new String[1];
 	private JPanel contentPane;
 	private TextArea textArea;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -43,10 +49,63 @@ public class FlexWindow extends JFrame {
 		textArea.setEditable(false);
 		contentPane.add(textArea, BorderLayout.CENTER);
 		
+		textField = new JTextField();
+		contentPane.add(textField, BorderLayout.SOUTH);
+		textField.setColumns(10);
+		textField.addKeyListener(this);
+	
+	
+		
 	}
 
 	public TextArea getTextArea(){
 		return textArea;
 	}
+
+	public JTextField getTextField(){
+		return this.textField;
+	}
 	
+	@Override
+	public void keyPressed(KeyEvent e) {
+	
+		int inputKeyCode = e.getKeyCode();
+		if(inputKeyCode == KeyEvent.VK_ENTER){
+			
+		
+			String tempInputString = new String("");
+			tempInputString = this.getTextField().getText();
+			this.setInputString(tempInputString);
+			
+			
+			this.getTextField().setText("");
+			this.getTextArea().append(tempInputString + "\n");
+				
+			
+		}
+					
+	}
+		
+	
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+	}
+	
+	public void setInputString(String tempString){
+		this.inputString[0] = tempString;
+	}
+	
+	public String getInputString(){
+		return this.inputString[0];
+	}
+
+
+
+
+
 }
