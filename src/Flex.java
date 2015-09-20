@@ -612,14 +612,18 @@ public class Flex implements KeyListener{
 		}
 		else if(searchVariableType.equalsIgnoreCase("priority")){
 			for(int i=0; i<allTasksList.size(); i++){
-				if(allTasksList.get(i).getPriorityLevel().equalsIgnoreCase(searchTerm)){
+				String tempSearchTerm = searchTerm.toLowerCase();
+				String tempPriority = allTasksList.get(i).getPriorityLevel().toLowerCase();
+				if(tempPriority.indexOf(tempSearchTerm) >= 0){
 					flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString() + "\n");
 				}
 			}
 		}
 		else if(searchVariableType.equalsIgnoreCase("category")){
 			for(int i=0; i<allTasksList.size(); i++){
-				if(allTasksList.get(i).getCategory().equalsIgnoreCase(searchTerm)){
+				String tempSearchTerm = searchTerm.toLowerCase();
+				String tempCategory = allTasksList.get(i).getCategory().toLowerCase();
+				if(tempCategory.indexOf(tempSearchTerm) >= 0){
 					flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString() + "\n");
 				}
 			}
