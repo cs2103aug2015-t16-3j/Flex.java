@@ -11,6 +11,8 @@
 1/2/2015, 0800, 0801, title four, description five, two, pending
 1/2/2015, 1000, 1150, title three, description three, 2, pending
 2/2/2015, 1000, 1100, title hundred, description million, 1, blocked
+1/3/2015, 1000, 1150, title three, description eleven, 2, non-default category
+1/4/2015, 0000, 0001, title one, description two, priority three, category four
 2/9/2015, 1000, 1159, title two, description two, 1, pending
 3/9/2015, 1000, 1159, title five, description five, 1, pending
 7/9/2015, 0800, 0959, title one, testingAgain, 1, pending
