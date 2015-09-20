@@ -83,6 +83,7 @@ public class Flex implements KeyListener{
 		
 		while((!tempFile.exists())||(filename.length()<=4)||(!filename.substring(filename.length()-4, filename.length()).equalsIgnoreCase(".txt"))){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
 			flexWindow.getTextArea().append(FILENAME_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
 			filename = sc.nextLine();

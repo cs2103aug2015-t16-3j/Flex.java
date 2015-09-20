@@ -53,7 +53,8 @@ public class FlexWindow extends JFrame implements KeyListener {
 		contentPane.add(textField, BorderLayout.SOUTH);
 		textField.setColumns(10);
 		textField.addKeyListener(this);
-	
+		
+		
 	
 		
 	}
@@ -83,6 +84,9 @@ public class FlexWindow extends JFrame implements KeyListener {
 				
 			
 		}
+		else{		
+			e.consume();
+		}
 					
 	}
 		
@@ -101,7 +105,7 @@ public class FlexWindow extends JFrame implements KeyListener {
 	}
 	
 	public String getInputString(){
-		return this.inputString[0];
+		return "" + this.textField.getText();
 	}
 
 
