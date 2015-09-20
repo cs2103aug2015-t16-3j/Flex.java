@@ -100,7 +100,10 @@ public class Flex{
 	
 	
 	static void readAndExecuteCommand(String filename, String lastChangeTerm, String lastAction, Task lastTask) throws IOException{
+		System.out.println();
+		
 		String previousChangeTerm = new String();
+		
 		previousChangeTerm = lastChangeTerm;
 		
 		String previousAction = new String("");
@@ -311,70 +314,67 @@ public class Flex{
 
 				// Note: The schedule file is already sorted by date and starting time 
 				
-				// Case 1: Show tasks by date, or show all tasks
+				// Case 9-[1]: Show tasks by date, or show all tasks
 				// By displaying all tasks in the schedule list
 				if((remainingString.equalsIgnoreCase("by date"))||(remainingString.equalsIgnoreCase("by day")||(remainingString.equalsIgnoreCase("all")))){					
 					readAndDisplayAll(filename, previousChangeTerm, previousAction, previousTask);
 				}
-				// Case 2: Show tasks by starting time (in order of minutes)
+				// Case 9-[2]: Show tasks by starting time (in order of minutes)
 				else if((remainingString.equalsIgnoreCase("by starting time"))||(remainingString.equalsIgnoreCase("by start"))||(remainingString.equalsIgnoreCase("by start time"))){
 					sortAndShowByStartingTime(filename, previousChangeTerm, previousAction, previousTask);
 				}
-				// Case 3: Show tasks by ending time (in order of minutes)
+				// Case 9-[3]: Show tasks by ending time (in order of minutes)
 				else if(remainingString.equalsIgnoreCase(("by ending time"))||(remainingString.equalsIgnoreCase("by end"))||(remainingString.equalsIgnoreCase("by end time"))){
 					sortAndShowByEndingTime(filename, previousChangeTerm, previousAction, previousTask);
 				}
-				// Case 4: Show tasks by title (in alphabetical order)
+				// Case 9-[4]: Show tasks by title (in alphabetical order)
 				else if((remainingString.equalsIgnoreCase("by title"))||(remainingString.equalsIgnoreCase("by task title"))){
 					sortAndShowByTaskTitle(filename, previousChangeTerm, previousAction, previousTask);
 				}
-				// Case 5: Show tasks by description (in alphabetical order)
+				// Case 9-[5]: Show tasks by description (in alphabetical order)
 				else if((remainingString.equalsIgnoreCase("by description"))||(remainingString.equalsIgnoreCase("by task description"))){
 					sortAndShowByTaskDescription(filename, previousChangeTerm, previousAction, previousTask);
 				}
-				// Case 6: shows tasks sorted by priority,
+				// Case 9-[6]: shows tasks sorted by priority,
 				// or rather, tasks with the same priority will be grouped together
 				// and only the tasks with the same number priorityLevels will be in numerical order
 				// from the smallest to the biggest number for their priorityLevels
 				else if(remainingString.equalsIgnoreCase("by priority")){
 					sortAndShowByPriority(filename, previousChangeTerm, previousAction, previousTask);				
 				}
-				// Case 7: show tasks by category (in alphabetical order)
+				// Case 9-[7]: show tasks by category (in alphabetical order)
 				// Meaning in this order - "blocked", "done", "pending"
 				else if(remainingString.equalsIgnoreCase("by category")){
 					sortAndShowByCategory(filename, previousChangeTerm, previousAction, previousTask);
 				}
-				// Case 8: show tasks which are done
+				// Case 9-[8]: show tasks which are done
 				else if(remainingString.equalsIgnoreCase("done")){
 					searchTask(filename, "category" + " " + "done", previousChangeTerm, previousAction, previousTask);
 				}
-				// Case 9: show tasks which are still pending
+				// Case 9-[9]: show tasks which are still pending
 				else if(remainingString.equalsIgnoreCase("pending")){
 					searchTask(filename, "category" + " " + "pending", previousChangeTerm, previousAction, previousTask);
 				}
-				// Case 10: show tasks which are still blocked
+				// Case 9-[10]: show tasks which are still blocked
 				else if(remainingString.equalsIgnoreCase("blocked")){
 					searchTask(filename, "category" + " " + "blocked", previousChangeTerm, previousAction, previousTask);
 				}				
-				// Case 11: show tasks which are still pending or still blocked
+				// Case 9-[11]: show tasks which are still pending or still blocked
 				// that is, tasks which are not marked as done yet
 				else if((remainingString.equalsIgnoreCase("blocked and pending"))||(remainingString.equalsIgnoreCase("blocked & pending"))||(remainingString.equalsIgnoreCase("pending and blocked"))||(remainingString.equalsIgnoreCase("pending & blocked"))||(remainingString.equalsIgnoreCase("not done"))){
 					sortAndShowByNotDoneTasks(filename, previousChangeTerm, previousAction, previousTask);
 				}		
-				// Case 12: show the week starting on the date given by the user
+				// Case 9-[12]: show the week starting on the date given by the user
 				// the week includes the starting date of the week as one of the seven days in it
 				else if(remainingString.equalsIgnoreCase("week")){
 					showWeek(filename, previousChangeTerm, previousAction, previousTask);
 				}	
-				// Case 13: invalid input for user input command String starting with the word "show"
+				// Case 9-[13]: invalid input for user input command String starting with the word "show"
 				else{
 					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);	
 					flexWindow.getTextArea().append("\n");
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
-				}
-				// Case 13: show the week starting on the date given by the user
-				// the week includes the starting date of the week as one of the seven days in it
-				
+				}			
 			}
 			// case 10: If the user's command is invalid
 			else{
@@ -549,6 +549,7 @@ public class Flex{
 			for(int i=0; i<allTasksList.size(); i++){
 				if(allTasksList.get(i).getDate().equalsIgnoreCase(searchTerm)){
 					flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString() + "\n");
+					flexWindow.getTextArea().append("\n");
 				}
 			}
 		}
@@ -556,6 +557,7 @@ public class Flex{
 			for(int i=0; i<allTasksList.size(); i++){
 				if(allTasksList.get(i).getStartingTime().equalsIgnoreCase(searchTerm)){
 					flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString() + "\n");
+					flexWindow.getTextArea().append("\n");
 				}
 			}
 		}
@@ -563,6 +565,7 @@ public class Flex{
 			for(int i=0; i<allTasksList.size(); i++){
 				if(allTasksList.get(i).getEndingTime().equalsIgnoreCase(searchTerm)){
 					flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString() + "\n");
+					flexWindow.getTextArea().append("\n");
 				}
 			}
 		}
@@ -572,6 +575,7 @@ public class Flex{
 				String tempTaskTitle = allTasksList.get(i).getTaskTitle().toLowerCase();
 				if(tempTaskTitle.indexOf(tempSearchTerm) >= 0){
 					flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString() + "\n");
+					flexWindow.getTextArea().append("\n");
 				}
 			}
 		}
@@ -581,6 +585,7 @@ public class Flex{
 				String tempTaskDescription = allTasksList.get(i).getTaskDescription().toLowerCase();
 				if(tempTaskDescription.indexOf(tempSearchTerm) >= 0){
 					flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString() + "\n");
+					flexWindow.getTextArea().append("\n");
 				}
 			}
 		}
@@ -590,6 +595,7 @@ public class Flex{
 				String tempPriority = allTasksList.get(i).getPriorityLevel().toLowerCase();
 				if(tempPriority.indexOf(tempSearchTerm) >= 0){
 					flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString() + "\n");
+					flexWindow.getTextArea().append("\n");
 				}
 			}
 		}
@@ -599,6 +605,7 @@ public class Flex{
 				String tempCategory = allTasksList.get(i).getCategory().toLowerCase();
 				if(tempCategory.indexOf(tempSearchTerm) >= 0){
 					flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString() + "\n");
+					flexWindow.getTextArea().append("\n");
 				}
 			}
 		}
@@ -779,6 +786,7 @@ public class Flex{
 		
 		for(int j=0; j<allTasksList.size(); j++){
 			flexWindow.getTextArea().append(allTasksList.get(j).getPrintTaskString() + "\n");
+			flexWindow.getTextArea().append("\n");
 		}
 		
 		flexWindow.getTextArea().append("\n");
@@ -828,6 +836,7 @@ public class Flex{
 		
 		for(int j=0; j<allTasksList.size(); j++){
 			flexWindow.getTextArea().append(allTasksList.get(j).getPrintTaskString() + "\n");
+			flexWindow.getTextArea().append("\n");
 		}
 		
 		flexWindow.getTextArea().append("\n");
@@ -877,6 +886,7 @@ public class Flex{
 		
 		for(int j=0; j<allTasksList.size(); j++){
 			flexWindow.getTextArea().append(allTasksList.get(j).getPrintTaskString() + "\n");
+			flexWindow.getTextArea().append("\n");
 		}
 		
 		flexWindow.getTextArea().append("\n");
@@ -930,6 +940,7 @@ public class Flex{
 		
 		for(int j=0; j<allTasksList.size(); j++){
 			flexWindow.getTextArea().append(allTasksList.get(j).getPrintTaskString() + "\n");
+			flexWindow.getTextArea().append("\n");
 		}
 		
 		flexWindow.getTextArea().append("\n");
@@ -983,6 +994,7 @@ public class Flex{
 		
 		for(int j=0; j<allTasksList.size(); j++){
 			flexWindow.getTextArea().append(allTasksList.get(j).getPrintTaskString() + "\n");
+			flexWindow.getTextArea().append("\n");
 		}
 		
 		flexWindow.getTextArea().append("\n");
@@ -1022,6 +1034,7 @@ public class Flex{
 		
 		for(int j=0; j<notDoneList.size(); j++){
 			flexWindow.getTextArea().append(notDoneList.get(j).getPrintTaskString() + "\n");
+			flexWindow.getTextArea().append("\n");
 		}
 		
 		flexWindow.getTextArea().append("\n");
@@ -1053,6 +1066,7 @@ public class Flex{
 		
 			for(int j=0; j<allTasksList.size(); j++){
 				flexWindow.getTextArea().append(allTasksList.get(j).getPrintTaskString() + "\n");
+				flexWindow.getTextArea().append("\n");
 			}
 			
 			flexWindow.getTextArea().append("\n");
@@ -1102,6 +1116,7 @@ public class Flex{
 		
 		for(int j=0; j<allTasksList.size(); j++){
 			flexWindow.getTextArea().append(allTasksList.get(j).getPrintTaskString() + "\n");
+			flexWindow.getTextArea().append("\n");
 		}
 	
 		flexWindow.getTextArea().append("\n");
@@ -1264,6 +1279,7 @@ public class Flex{
 		for(int i=0; i<allTasksList.size(); i++){
 			writer.write(allTasksList.get(i).getPrintTaskString());
 			flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString() + "\n");
+			flexWindow.getTextArea().append("\n");
 			writer.newLine();
 		}
 
@@ -1342,6 +1358,7 @@ public class Flex{
 			for(int i=0; i<allTasksList.size(); i++){
 				if(allTasksList.get(i).getDate().equalsIgnoreCase(searchTerm)){
 					flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString() + "\n");
+					flexWindow.getTextArea().append("\n");
 					hasResultWithValidInput = true;
 				}
 			}
@@ -1350,6 +1367,7 @@ public class Flex{
 			for(int i=0; i<allTasksList.size(); i++){
 				if(allTasksList.get(i).getStartingTime().equalsIgnoreCase(searchTerm)){
 					flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString() + "\n");
+					flexWindow.getTextArea().append("\n");
 					hasResultWithValidInput = true;
 				}
 			}
@@ -1358,6 +1376,7 @@ public class Flex{
 			for(int i=0; i<allTasksList.size(); i++){
 				if(allTasksList.get(i).getEndingTime().equalsIgnoreCase(searchTerm)){
 					flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString() + "\n");
+					flexWindow.getTextArea().append("\n");
 					hasResultWithValidInput = true;
 				}
 			}
@@ -1368,6 +1387,7 @@ public class Flex{
 				String tempTaskTitle = allTasksList.get(i).getTaskTitle().toLowerCase();
 				if(tempTaskTitle.indexOf(tempSearchTerm) >= 0){
 					flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString() + "\n");
+					flexWindow.getTextArea().append("\n");
 					hasResultWithValidInput = true;
 				}
 			}
@@ -1378,6 +1398,7 @@ public class Flex{
 				String tempTaskDescription = allTasksList.get(i).getTaskDescription().toLowerCase();
 				if(tempTaskDescription.indexOf(tempSearchTerm) >= 0){
 					flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString() + "\n");
+					flexWindow.getTextArea().append("\n");
 					hasResultWithValidInput = true;
 				}
 			}
@@ -1388,6 +1409,7 @@ public class Flex{
 				String tempPriorityLevel = allTasksList.get(i).getPriorityLevel().toLowerCase();
 				if(tempPriorityLevel.indexOf(tempSearchTerm) >= 0){
 					flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString() + "\n");
+					flexWindow.getTextArea().append("\n");
 					hasResultWithValidInput = true;
 				}
 			}
@@ -1398,6 +1420,7 @@ public class Flex{
 				String tempCategory = allTasksList.get(i).getCategory().toLowerCase();
 				if(tempCategory.indexOf(tempSearchTerm) >= 0){
 					flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString() + "\n");
+					flexWindow.getTextArea().append("\n");
 					hasResultWithValidInput = true;
 				}
 			}
@@ -1601,6 +1624,7 @@ public class Flex{
 			writer.write(allTasksList.get(i).getPrintTaskString());
 			writer.newLine();
 			flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString() + "\n");
+			flexWindow.getTextArea().append("\n");
 		}
 									
 		writer.close();
