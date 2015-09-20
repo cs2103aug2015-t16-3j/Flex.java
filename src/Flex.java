@@ -14,26 +14,19 @@
 // 8. Able to show tasks which has priority levels not being numbers (not all characters in the priority level string are numerical digits)
 
 import java.util.*;
-import java.awt.BorderLayout;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import javax.swing.JFrame;
-import javax.swing.JTextField;
-import javax.swing.event.DocumentListener;
 
-public class Flex implements KeyListener{
+public class Flex{
 	
 	private static FlexWindow flexWindow;
 	private static Scanner sc;
 	private static String filename = new String("");
-	private static KeyListener l;
 	private static final String INVALID_INPUT_MESSAGE = "Invalid input. Please try again.";
 	// that is, it is valid only if its starting time, or ending time, are NOT between the starting
 	// and ending times of existing tasks which are NOT DONE YET
@@ -72,7 +65,8 @@ public class Flex implements KeyListener{
 		
 		flexWindow.getTextArea().setText(FILENAME_INPUT_MESSAGE);
 		flexWindow.getTextArea().append("\n");
-		filename = new String("");
+		
+		filename = new String("");				
 		sc = new Scanner(System.in);
 		filename = sc.nextLine();
 		filename.trim();
@@ -82,7 +76,9 @@ public class Flex implements KeyListener{
 		
 		
 		while((!tempFile.exists())||(filename.length()<=4)||(!filename.substring(filename.length()-4, filename.length()).equalsIgnoreCase(".txt"))){
+			flexWindow.getTextArea().append("\n");
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
 			flexWindow.getTextArea().append("\n");
 			flexWindow.getTextArea().append(FILENAME_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
@@ -96,34 +92,12 @@ public class Flex implements KeyListener{
 		flexWindow.getTextArea().append("\n");
 		flexWindow.getTextArea().append(PROCEED_MESSAGE);
 		flexWindow.getTextArea().append("\n");
-		
+
 		
 		// this method takes care of the manipulation to be done, as well as the operation for exiting the program	
 		readAndExecuteCommand(filename, null, null, null);
 	}
 	
-	@Override
-	public void keyPressed(KeyEvent e) {	
-		int inputKeyCode = e.getKeyCode();
-		if(inputKeyCode == KeyEvent.VK_ENTER){
-			String tempInputString = new String("");
-			tempInputString = flexWindow.getTextField().getText();
-			flexWindow.setInputString(tempInputString);
-			
-			flexWindow.getTextField().setText("");
-			flexWindow.getTextArea().append(tempInputString + "\n");
-
-		}
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {	
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {		
-		
-	}
 	
 	static void readAndExecuteCommand(String filename, String lastChangeTerm, String lastAction, Task lastTask) throws IOException{
 		String previousChangeTerm = new String();
@@ -134,7 +108,6 @@ public class Flex implements KeyListener{
 		
 		Task previousTask = new Task();
 		previousTask = lastTask;
-
 		
 		sc = new Scanner(System.in);
 		
