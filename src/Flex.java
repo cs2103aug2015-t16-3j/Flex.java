@@ -43,16 +43,19 @@ public class Flex{
 	private static String DAY_IN_DATE_NOT_A_NUMBER_MESSAGE = "The day in the date is not a number.";
 	private static String DAY_IN_DATE_MORE_THAN_TWO_DIGITS_MESSAGE = "The day in the date should not have more than two digits.";
 	private static String DAY_IN_DATE_MORE_THAN_THIRTY_ONE_MESSAGE = "The day in the date is more than 31.";
+	private static String DAY_IN_DATE_IS_ZERO_OR_LESS_THAN_ZERO_MESSAGE = "The day in the date is 0 or less than zero.";
 	
 	private static String DASH_IN_MONTH_OF_DATE_MESSAGE = "At least one dash is in the date's month. Do take note that negative numbers are not allowed as well.";
 	private static String MONTH_IN_DATE_MISSING_MESSAGE = "The month in the date is missing.";
 	private static String MONTH_IN_DATE_NOT_A_NUMBER_MESSAGE = "The month in the date is not a number.";
 	private static String MONTH_IN_DATE_MORE_THAN_TWO_DIGITS_MESSAGE = "The month in the date should not have more than two digits.";
 	private static String MONTH_IN_DATE_MORE_THAN_TWELVE_MESSAGE = "The day in the date is more than 12.";
+	private static String MONTH_IN_DATE_IS_ZERO_OR_LESS_THAN_ZERO_MESSAGE = "The month in the date is 0 or less than zero.";
 	
 	private static String DASH_IN_YEAR_OF_DATE_MESSAGE = "At least one dash is in the date's year. Do take note that negative numbers are not allowed as well.";
 	private static String YEAR_IN_DATE_MISSING_MESSAGE = "The year in the date is missing.";
 	private static String YEAR_IN_DATE_NOT_A_NUMBER_MESSAGE = "The year in the date is not a number.";
+	private static String YEAR_IN_DATE_IS_ZERO_OR_LESS_THAN_ZERO_MESSAGE = "The year in the date is 0 or less than zero.";
 	
 	private static String STARTING_TIME_MISSING_MESSAGE = "The starting time is missing. Do take note that the starting time follows the 4-digit twenty-four-hour format.";
 	private static String DASH_IN_STARTING_TIME_MESSAGE = "At least one dash is in the starting time. Do take note that negative numbers are not allowed as well. Also, do take note that the starting time follows the 4-digit twenty-four-hour format.";		
@@ -66,9 +69,9 @@ public class Flex{
 	private static String ENDING_TIME_IS_A_NUMBER_BUT_NOT_A_4_DIGIT_NUMBER_MESSAGE = "The ending time is not a 4-digit number. Do take note that the ending time follows the 4-digit twenty-four-hour format.";
 	private static String ENDING_TIME_IS_A_NUMBER_GREATER_THAN_TWO_THREE_FIVE_NINE_MESSAGE = "The ending time is a number which is greater than 2359 (11:59pm).";
 	
+	private static String NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE = "The number of days, according to the month and year in this date, more than expected.";	
+	
 	private static String NOTHING_TO_UNDO_MESSAGE = "Nothing to undo as no valid 1) adding of a task, 2) deleting of a task, OR 3) Changing a task variable, has been carried out by the user during this program run.";
-	
-	
 	private static final String INVALID_INPUT_MESSAGE = "Invalid input. Please try again.";
 	// that is, it is valid only if its starting time, or ending time, are NOT between the starting
 	// and ending times of existing tasks which are NOT DONE YET
@@ -1369,6 +1372,17 @@ public class Flex{
 			return false;				
 		}
 		
+		// checks whether the day in the date is 0, or less than zero
+		if(Integer.valueOf(tempDateString.substring(0, slashIndex1).trim())<=0){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(DAY_IN_DATE_IS_ZERO_OR_LESS_THAN_ZERO_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			return false;				
+		}
+		
+		int day = Integer.valueOf(tempDateString.substring(0, slashIndex1).trim());
+		
 		// e.g. tempDateString is "9/2015"
 		
 		tempDateString = tempDateString.substring(slashIndex1 + 1);		
@@ -1438,6 +1452,16 @@ public class Flex{
 			return false;				
 		}
 		
+		// checks if the month is 0, or less than 0
+		if(Integer.valueOf(tempDateString.substring(0, slashIndex2))<=0){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(MONTH_IN_DATE_IS_ZERO_OR_LESS_THAN_ZERO_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			return false;				
+		}
+		
+		int month = Integer.valueOf(tempDateString.substring(0, slashIndex2));
 				
 		// YEAR IN DATE
 		
@@ -1473,7 +1497,115 @@ public class Flex{
 				return false;				
 			}
 		}							
-				
+						
+		// checks if the year is 0, or less than 0
+		if(Integer.valueOf(tempDateString.substring(slashIndex2 + 1))<=0){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(YEAR_IN_DATE_IS_ZERO_OR_LESS_THAN_ZERO_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			return false;				
+		}
+		
+		int year = Integer.valueOf(tempDateString.substring(slashIndex2 + 1));
+		
+		if((month==1)&&(day>JANUARY_DAYS)){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			return false;
+		}
+		else if(month==2){
+			boolean isLeapYear = (year%4==0);
+			
+			if((!isLeapYear)&&(day>FEBRUARY_DAYS)){
+				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+				flexWindow.getTextArea().append("\n");
+				flexWindow.getTextArea().append(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
+				flexWindow.getTextArea().append("\n");
+				return false;				
+			}
+			else if((isLeapYear)&&(day>(FEBRUARY_DAYS + 1))){
+				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+				flexWindow.getTextArea().append("\n");
+				flexWindow.getTextArea().append(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
+				flexWindow.getTextArea().append("\n");
+				return false;
+			}
+		}
+		else if((month==3)&&(day>MARCH_DAYS)){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			return false;			
+		}
+		else if((month==4)&&(day>APRIL_DAYS)){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			return false;			
+		}
+		else if((month==5)&&(day>MAY_DAYS)){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			return false;
+		}
+		else if((month==6)&&(day>JUNE_DAYS)){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			return false;
+		}
+		else if((month==7)&&(day>JULY_DAYS)){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			return false;
+		}
+		else if((month==8)&&(day>AUGUST_DAYS)){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			return false;
+		}
+		else if((month==9)&&(day>SEPTEMBER_DAYS)){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			return false;
+		}
+		else if((month==10)&&(day>OCTOBER_DAYS)){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			return false;
+		}
+		else if((month==11)&&(day>NOVEMBER_DAYS)){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			return false;
+		}
+		else if((month==12)&&(day>DECEMBER_DAYS)){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			return false;
+		}
+		
+		
 		return true;
 	}
 	
@@ -2013,7 +2145,7 @@ public class Flex{
 			// check if this input by the user is valid
 			String newDate = newTerm;
 						
-			if(!checkDate(tempDateString)){			
+			if(!checkDate(newDate)){			
 				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 				flexWindow.getTextArea().append("\n");	
 				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
