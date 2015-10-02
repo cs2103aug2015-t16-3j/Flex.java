@@ -1297,6 +1297,9 @@ public class Flex{
 				
 	}	
 	
+	/// checks the validity of the date,
+	// not perfectly for the day,
+	// but perfectly for the month and the year
 	private static boolean checkDate(String dateString){
 		String tempDateString = dateString;
 		
