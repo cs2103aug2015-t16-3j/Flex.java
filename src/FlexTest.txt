@@ -6,7 +6,7 @@
 31/11/2014, 1000, 1100, title hundred, description hundred, 1, blocked
 10/12/2014, 1000, 1100, title hundred, description infinite, 1, blocked
 11/12/2014, 1000, 1100, title hundred, description1 234, 1, blocked
-31/12/2014, 1000, 1100, title hundred, description hundred, 1, blocked
+30/12/2014, 1000, 1100, title hundred, description hundred, 1, blocked
 1/1/2015, 1000, 1150, title three, description three, 2, pending
 1/2/2015, 0800, 0801, title four, description five, two, pending
 1/2/2015, 1000, 1150, title three, description three, 2, pending
@@ -22,4 +22,4 @@
 13/9/2015, 1000, 1129, ti, de, pri, ca
 22/9/2015, 1000, 1129, titl, de, prio, ca
 31/12/2016, 0001, 0003, title, desc, pri, ca
-31/9/2017, 0001, 0002, t, d, p, c
+30/9/2017, 0001, 0002, t, d, p, c
