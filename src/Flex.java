@@ -27,6 +27,48 @@ public class Flex{
 	private static FlexWindow flexWindow;
 	private static Scanner sc;
 	private static String filename = new String("");
+	
+	private static String FIRST_COMMA_SPACE_MISSING_MESSAGE = "First comma and space are missing.";
+	private static String SECOND_COMMA_SPACE_MISSING_MESSAGE = "Second comma and space are missing.";
+	private static String THIRD_COMMA_SPACE_MISSING_MESSAGE = "Third comma and space are missing.";
+	private static String FOURTH_COMMA_SPACE_MISSING_MESSAGE = "Fourth comma and space are missing.";
+	private static String FIFTH_COMMA_SPACE_MISSING_MESSAGE = "Fifth comma and space are missing.";
+	private static String SIXTH_COMMA_SPACE_MISSING_MESSAGE = "Sixth comma and space are missing.";
+	
+	private static String DATE_FIRST_SLASH_MISSING_MESSAGE = "First slash of date is missing.";
+	private static String DATE_SECOND_SLASH_MISSING_MESSAGE = "Second slash of date is missing.";
+	
+	private static String DASH_IN_DAY_OF_DATE_MESSAGE = "At least one dash is in the date's day. Do take note that negative numbers are not allowed as well.";
+	private static String DAY_IN_DATE_MISSING_MESSAGE = "The day in the date is missing.";
+	private static String DAY_IN_DATE_NOT_A_NUMBER_MESSAGE = "The day in the date is not a number.";
+	private static String DAY_IN_DATE_MORE_THAN_TWO_DIGITS_MESSAGE = "The day in the date should not have more than two digits.";
+	private static String DAY_IN_DATE_MORE_THAN_THIRTY_ONE_MESSAGE = "The day in the date is more than 31.";
+	
+	private static String DASH_IN_MONTH_OF_DATE_MESSAGE = "At least one dash is in the date's month. Do take note that negative numbers are not allowed as well.";
+	private static String MONTH_IN_DATE_MISSING_MESSAGE = "The month in the date is missing.";
+	private static String MONTH_IN_DATE_NOT_A_NUMBER_MESSAGE = "The month in the date is not a number.";
+	private static String MONTH_IN_DATE_MORE_THAN_TWO_DIGITS_MESSAGE = "The month in the date should not have more than two digits.";
+	private static String MONTH_IN_DATE_MORE_THAN_TWELVE_MESSAGE = "The day in the date is more than 12.";
+	
+	private static String DASH_IN_YEAR_OF_DATE_MESSAGE = "At least one dash is in the date's year. Do take note that negative numbers are not allowed as well.";
+	private static String YEAR_IN_DATE_MISSING_MESSAGE = "The year in the date is missing.";
+	private static String YEAR_IN_DATE_NOT_A_NUMBER_MESSAGE = "The year in the date is not a number.";
+	
+	private static String STARTING_TIME_MISSING_MESSAGE = "The starting time is missing. Do take note that the starting time follows the 4-digit twenty-four-hour format.";
+	private static String DASH_IN_STARTING_TIME_MESSAGE = "At least one dash is in the starting time. Do take note that negative numbers are not allowed as well. Also, do take note that the starting time follows the 4-digit twenty-four-hour format.";		
+	private static String STARTING_TIME_NOT_A_NUMBER_MESSAGE = "The starting time is not a number.";
+	private static String STARTING_TIME_IS_A_NUMBER_BUT_NOT_A_4_DIGIT_NUMBER_MESSAGE = "The starting time is not a 4-digit number. Do take note that the starting time follows the 4-digit twenty-four-hour format.";
+	private static String STARTING_TIME_IS_A_NUMBER_GREATER_THAN_TWO_THREE_FIVE_NINE_MESSAGE = "The starting time is a number which is greater than 2359 (11:59pm).";
+	
+	private static String ENDING_TIME_MISSING_MESSAGE = "The ending time is missing. Do take note that the ending time follows the 4-digit twenty-four-hour format.";
+	private static String DASH_IN_ENDING_TIME_MESSAGE = "At least one dash is in the ending time. Do take note that negative numbers are not allowed as well. Also, do take note that the ending time follows the 4-digit twenty-four-hour format.";	
+	private static String ENDING_TIME_NOT_A_NUMBER_MESSAGE = "The ending time is not a number.";
+	private static String ENDING_TIME_IS_A_NUMBER_BUT_NOT_A_4_DIGIT_NUMBER_MESSAGE = "The ending time is not a 4-digit number. Do take note that the ending time follows the 4-digit twenty-four-hour format.";
+	private static String ENDING_TIME_IS_A_NUMBER_GREATER_THAN_TWO_THREE_FIVE_NINE_MESSAGE = "The ending time is a number which is greater than 2359 (11:59pm).";
+	
+	private static String NOTHING_TO_UNDO_MESSAGE = "Nothing to undo as no valid 1) adding of a task, 2) deleting of a task, OR 3) Changing a task variable, has been carried out by the user during this program run.";
+	
+	
 	private static final String INVALID_INPUT_MESSAGE = "Invalid input. Please try again.";
 	// that is, it is valid only if its starting time, or ending time, are NOT between the starting
 	// and ending times of existing tasks which are NOT DONE YET
@@ -242,8 +284,7 @@ public class Flex{
 					
 					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);	
 					flexWindow.getTextArea().append("\n");
-					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
-					
+					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);						
 				}				
 								
 				int whitespaceIndex1 = remainingCommandString.indexOf(" ");
@@ -254,9 +295,18 @@ public class Flex{
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);						
 				}
 				
+				
 				// extract the date and task title, of the task to be deleted
 				String date = new String("");
+				
 				date = remainingCommandString.substring(0, whitespaceIndex1).trim();
+				
+				if(!checkDate(date)){			
+					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+					flexWindow.getTextArea().append("\n");	
+					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
+				}	
+				
 				String taskTitle = new String("");
 				taskTitle = remainingCommandString.substring(whitespaceIndex1+1).trim();
 				
@@ -528,19 +578,7 @@ public class Flex{
 			// check if this input by the user is valid
 			String tempDate = searchTerm;
 			
-			int slashIndex1 = tempDate.indexOf("/");
-			
-			if(slashIndex1 <= 0){
-				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
-				flexWindow.getTextArea().append("\n");
-				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
-			}
-			
-			tempDate = tempDate.substring(slashIndex1 + 1).trim();
-			
-			int slashIndex2 = tempDate.indexOf("/");	
-			
-			if(slashIndex2 <= 0){
+			if(!checkDate(tempDate)){
 				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 				flexWindow.getTextArea().append("\n");
 				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
@@ -1127,8 +1165,17 @@ public class Flex{
 	// deleting a task, 
 	// or changing a task's variable
 	// This is because there is no need to undo a search task
-	private static void undo(String filename, String previousChangeTerm, String previousAction, Task previousTask) throws IOException {
+	private static void undo(String filename, String previousChangeTerm, String previousAction, Task previousTask) throws IOException, NullPointerException {
+		
+		if(previousAction==null || previousTask ==null){
+			flexWindow.getTextArea().append(NOTHING_TO_UNDO_MESSAGE);
+			flexWindow.getTextArea().append("\n");	
+			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
+		}
+		
 		int whitespaceIndex1 = previousAction.trim().indexOf(" ");
+		
+
 		
 		if(whitespaceIndex1 < 0 ){
 		
@@ -1155,6 +1202,8 @@ public class Flex{
 	private static void addTask(String filename, String remainingCommandString, String previousChangeTerm, String previousAction, Task previousTask) throws IOException {
 		String remainingCommandString1 = remainingCommandString.trim();
 		
+		boolean isTaskValid = true;
+		
 		// reads in the file, line by line
 		BufferedReader reader = null;
 		
@@ -1166,8 +1215,6 @@ public class Flex{
 		do{
 			currentLine = reader.readLine();
 			if(currentLine!=null){
-				// for checking
-				// flexWindow.getTextArea("task added for addTask()");
 					
 				allTasksList.add(new Task(currentLine));				
 			}
@@ -1176,7 +1223,20 @@ public class Flex{
 		if(reader!=null){
 			reader.close();
 		}				
-			
+		
+		// check for the validity of the potential Task's variables,
+		// and print out error messages for only the first mistake made by the user,
+		// for the Task String
+		isTaskValid = checkTask(remainingCommandString1);
+		
+		// if the task is not valid, do not continue the process of adding a task
+		if(!isTaskValid){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");	
+			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
+		}
+		
+		
 		// for example
 		// 14/9/2015, 1000, 1159, title two, description two, 1, blocked
 
@@ -1222,9 +1282,11 @@ public class Flex{
 		
 		// overwrites to the file, line by line
 		BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
-		
+				
 		for(int i=0; i<allTasksList.size(); i++){
 			writer.write(allTasksList.get(i).getPrintTaskString());
+			flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString() + "\n");
+			flexWindow.getTextArea().append("\n");
 			writer.newLine();
 		}
 									
@@ -1235,7 +1297,432 @@ public class Flex{
 				
 	}	
 	
+	private static boolean checkDate(String dateString){
+		String tempDateString = dateString;
 		
+		int slashIndex1 = tempDateString.indexOf("/");
+		
+		// DAY IN DATE
+		
+		// e.g. 27
+		
+		// checks for the first slash in the date
+		if(slashIndex1 < 0){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(DATE_FIRST_SLASH_MISSING_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			return false;
+		}
+		
+		// e.g. tempDateString.substring(0, slashIndex1) is "27"
+		
+		// checks for any missing of the day in the date	
+		if(tempDateString.substring(0, slashIndex1).trim().length()==0){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(DAY_IN_DATE_MISSING_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			return false;			
+		}
+		
+		// checks for any "-" (dash) in the day of the date
+		if(tempDateString.substring(0, slashIndex1).trim().indexOf("-")>=0){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(DASH_IN_DAY_OF_DATE_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			return false;
+		}
+
+		// checks if the day in the date is a number
+		char[] tempCharArray1 = new char[tempDateString.substring(0, slashIndex1).trim().length()];
+		tempDateString.substring(0, slashIndex1).getChars(0, tempDateString.substring(0, slashIndex1).trim().length(), tempCharArray1, 0);
+		for(int i=0; i<tempDateString.substring(0, slashIndex1).trim().length(); i++){
+			if(!Character.isDigit(tempCharArray1[i])){
+				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+				flexWindow.getTextArea().append("\n");
+				flexWindow.getTextArea().append(DAY_IN_DATE_NOT_A_NUMBER_MESSAGE);
+				flexWindow.getTextArea().append("\n");
+				return false;				
+			}
+		}
+		
+		// checks if the day has more than two digits
+		if(tempDateString.substring(0, slashIndex1).trim().length()>2){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(DAY_IN_DATE_MORE_THAN_TWO_DIGITS_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			return false;				
+		}
+		
+		// checks whether the day in the date is more than 31
+		if(Integer.valueOf(tempDateString.substring(0, slashIndex1).trim())>31){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(DAY_IN_DATE_MORE_THAN_THIRTY_ONE_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			return false;				
+		}
+		
+		// e.g. tempDateString is "9/2015"
+		
+		tempDateString = tempDateString.substring(slashIndex1 + 1);		
+						
+		int slashIndex2 = tempDateString.indexOf("/");
+		
+		// checks for the second slash in the date
+		if(slashIndex2 < 0){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(DATE_SECOND_SLASH_MISSING_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			return false;
+		}
+							
+		
+		// MONTH IN DATE
+		
+		// e.g. tempDateString.substring(0, slashIndex2) is "9"		
+		
+		// checks for any missing of the month in the date	
+		if(tempDateString.substring(0, slashIndex2).trim().length()==0){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(MONTH_IN_DATE_MISSING_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			return false;			
+		}
+		
+		// checks for any "-" (dash) in the month of the date
+		if(tempDateString.substring(0, slashIndex2).trim().indexOf("-")>=0){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(DASH_IN_MONTH_OF_DATE_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			return false;
+		}
+
+		// checks if the month in the date is a number
+		char[] tempCharArray2 = new char[tempDateString.substring(0, slashIndex2).trim().length()];
+		tempDateString.substring(0, slashIndex2).getChars(0, tempDateString.substring(0, slashIndex2).trim().length(), tempCharArray2, 0);
+		for(int j=0; j<tempDateString.substring(0, slashIndex2).trim().length(); j++){
+			if(!Character.isDigit(tempCharArray2[j])){
+				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+				flexWindow.getTextArea().append("\n");
+				flexWindow.getTextArea().append(MONTH_IN_DATE_NOT_A_NUMBER_MESSAGE);
+				flexWindow.getTextArea().append("\n");
+				return false;				
+			}
+		}
+		
+		// checks if the month has more than two digits
+		if(tempDateString.substring(0, slashIndex2).trim().length()>2){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(MONTH_IN_DATE_MORE_THAN_TWO_DIGITS_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			return false;				
+		}
+		
+		// checks if the month is more than 12
+		if(Integer.valueOf(tempDateString.substring(0, slashIndex2))>12){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(MONTH_IN_DATE_MORE_THAN_TWELVE_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			return false;				
+		}
+		
+				
+		// YEAR IN DATE
+		
+		// e.g. tempDateString.substring(slashIndex2 + 1) is "2015"
+		
+		// checks for any missing of the month in the date			
+		if(tempDateString.substring(slashIndex2 + 1).trim().length()==0){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(YEAR_IN_DATE_MISSING_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			return false;			
+		}
+		
+		// checks for any "-" (dash) in the month of the date
+		if(tempDateString.substring(slashIndex2 + 1).trim().indexOf("-")>=0){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(DASH_IN_YEAR_OF_DATE_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			return false;
+		}
+
+		// checks if the year in the date is a number
+		char[] tempCharArray3 = new char[tempDateString.substring(slashIndex2 + 1).trim().length()];
+		tempDateString.substring(slashIndex2 + 1).getChars(0, tempDateString.substring(slashIndex2 + 1).trim().length(), tempCharArray3, 0);
+		for(int k=0; k<tempDateString.substring(slashIndex2 + 1).trim().length(); k++){
+			if(!Character.isDigit(tempCharArray3[k])){
+				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+				flexWindow.getTextArea().append("\n");
+				flexWindow.getTextArea().append(YEAR_IN_DATE_NOT_A_NUMBER_MESSAGE);
+				flexWindow.getTextArea().append("\n");
+				return false;				
+			}
+		}							
+				
+		return true;
+	}
+	
+	// checks the validity of the potential Task String	
+	// and prints out error messages for only the first mistake made by the user, 
+	// for the Task String
+	private static boolean checkTask(String taskString) {
+		
+		String tempString = new String("");
+		tempString = taskString.trim();
+		
+		String[] tempTaskVariables = new String[7];
+
+		// for example
+		// 27/9/2015, 0011, 1100, title title1, description description2, priorityLevel 1, category unknown
+		// in the format
+		// date, startingTime, endingTime, taskTitle, taskDescription, priorityLevel, category
+		
+		// 1) taskTitle, taskDescription, priorityLevel and category have any number of "words", and can have alphabets or digits
+		
+		// 2) date must have 2 slashes, and at least 1 digit for the day, month and year. Date is a String variable.
+		
+		// 3) the startingTime and endingTime must follow the 4-digit "24-hour" format. Both are String variables.
+		
+		// extracts the date
+		int commaWhitespaceIndex1 = tempString.indexOf(", ");
+		
+		if(commaWhitespaceIndex1 < 0){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(FIRST_COMMA_SPACE_MISSING_MESSAGE );
+			flexWindow.getTextArea().append("\n");
+			return false;
+		}
+		
+	
+		// tempTaskVariables[6] is the extracted date
+		tempTaskVariables[0] = tempString.substring(0, commaWhitespaceIndex1).trim();
+		
+		// e.g. tempDateString is "27/9/2015"
+		
+		String tempDateString = tempTaskVariables[0];
+		
+		if(!checkDate(tempDateString)){
+			return false;
+		}
+								
+		// tempString.substring(commaWhitespaceIndex1 + 2) is 0011, 1100, title title1, description description2, priorityLevel 1, category unknown		
+		
+		tempString = tempString.substring(commaWhitespaceIndex1 + 2);
+
+		// extracts the starting time
+		int commaWhitespaceIndex2 = tempString.indexOf(", ");
+						
+		if(commaWhitespaceIndex2 < 0){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(SECOND_COMMA_SPACE_MISSING_MESSAGE );
+			flexWindow.getTextArea().append("\n");
+			return false;
+		}
+
+		// tempTaskVariables[1] is the extracted starting time
+		tempTaskVariables[1] = tempString.substring(0, commaWhitespaceIndex2).trim();
+		
+		// STARTING TIME
+		
+		// e.g. 0011
+		
+		// checks if the starting time is missing
+		if(tempTaskVariables[1].length()==0){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(STARTING_TIME_MISSING_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			return false;				
+		}
+		
+		// checks if there is a dash in the starting time
+		if(tempTaskVariables[1].indexOf("-")>=0){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(DASH_IN_STARTING_TIME_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			return false;							
+		}
+		
+		// checks if the starting time is a number
+		char[] tempCharArray4 = new char[tempTaskVariables[1].trim().length()];
+		tempTaskVariables[1].trim().getChars(0, tempTaskVariables[1].trim().length(), tempCharArray4, 0);
+		for(int l=0; l<tempTaskVariables[1].trim().length(); l++){
+			if(!Character.isDigit(tempCharArray4[l])){
+				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+				flexWindow.getTextArea().append("\n");
+				flexWindow.getTextArea().append(STARTING_TIME_NOT_A_NUMBER_MESSAGE);
+				flexWindow.getTextArea().append("\n");
+				return false;				
+			}
+		}				
+		
+		// checks if the starting time has four digits
+		if(tempTaskVariables[1].length()!=4){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(STARTING_TIME_IS_A_NUMBER_BUT_NOT_A_4_DIGIT_NUMBER_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			return false;					
+		}
+		
+		// checks if the starting time is a number greater than 2349 (11:59pm)
+		if(Integer.valueOf(tempTaskVariables[1])>2359){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(STARTING_TIME_IS_A_NUMBER_GREATER_THAN_TWO_THREE_FIVE_NINE_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			return false;	
+		}
+		
+		// tempString.substring(commaWhitespaceIndex2 + 2) is 1100, title title1, description description2, priorityLevel 1, category unknown
+		
+		tempString = tempString.substring(commaWhitespaceIndex2 + 2).trim();
+	
+		// extracts the ending time
+		int commaWhitespaceIndex3 = tempString.indexOf(", ");
+		
+		if(commaWhitespaceIndex3 < 0){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(THIRD_COMMA_SPACE_MISSING_MESSAGE );
+			flexWindow.getTextArea().append("\n");
+			return false;
+		}
+		
+		// tempTaskVariables[2] is the ending time
+		tempTaskVariables[2] = tempString.substring(0, commaWhitespaceIndex3).trim();	
+		
+		// ENDING TIME
+		
+		// e.g. 1100
+		
+		// checks if the ending time is missing
+		if(tempTaskVariables[2].length()==0){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(ENDING_TIME_MISSING_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			return false;				
+		}
+		
+		// checks if there is a dash in the ending time
+		if(tempTaskVariables[2].indexOf("-")>=0){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(DASH_IN_ENDING_TIME_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			return false;							
+		}
+		
+		// checks if the starting time is a number
+		char[] tempCharArray5 = new char[tempTaskVariables[2].trim().length()];
+		tempTaskVariables[2].trim().getChars(0, tempTaskVariables[2].trim().length(), tempCharArray5, 0);
+		for(int m=0; m<tempTaskVariables[2].trim().length(); m++){
+			if(!Character.isDigit(tempCharArray5[m])){
+				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+				flexWindow.getTextArea().append("\n");
+				flexWindow.getTextArea().append(ENDING_TIME_NOT_A_NUMBER_MESSAGE);
+				flexWindow.getTextArea().append("\n");
+				return false;				
+			}
+		}				
+		
+		// checks if the ending time has four digits
+		if(tempTaskVariables[2].length()!=4){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(ENDING_TIME_IS_A_NUMBER_BUT_NOT_A_4_DIGIT_NUMBER_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			return false;					
+		}
+		
+		// checks if the ending time is a number greater than 2349 (11:59pm)
+		if(Integer.valueOf(tempTaskVariables[2])>2359){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(ENDING_TIME_IS_A_NUMBER_GREATER_THAN_TWO_THREE_FIVE_NINE_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			return false;	
+		}
+						
+		// tempString.substring(commaWhitespaceIndex3 + 2) is title title1, description description2, priorityLevel 1, category unknown
+		tempString = tempString.substring(commaWhitespaceIndex3 + 2).trim();
+	
+		// extracts the task title
+		int commaWhitespaceIndex4 = tempString.indexOf(", ");
+		
+		if(commaWhitespaceIndex4 < 0){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(FOURTH_COMMA_SPACE_MISSING_MESSAGE );
+			flexWindow.getTextArea().append("\n");
+			return false;
+		}
+		
+		// tempTaskVariables[3] is the task title
+		tempTaskVariables[3] = tempString.substring(0, commaWhitespaceIndex4).trim();
+		
+		// tempString.substring(commaWhitespaceIndex4 + 2) is description description2, priorityLevel 1, category unknown
+
+		tempString = tempString.substring(commaWhitespaceIndex4 + 2).trim();
+		
+		// extracts the task description
+		int commaWhitespaceIndex5 = tempString.indexOf(", ");
+		
+		if(commaWhitespaceIndex5 < 0){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(FIFTH_COMMA_SPACE_MISSING_MESSAGE );
+			flexWindow.getTextArea().append("\n");
+			return false;
+		}
+		
+		// tempTaskVariables[4] is the extracted task description
+		tempTaskVariables[4] = tempString.substring(0, commaWhitespaceIndex5).trim();	
+		
+		// tempString.substring(commaWhitespaceIndex5 + 2) is priorityLevel 1, category unknown
+
+		// extracts the priority level, and the category of the task
+		int commaWhitespaceIndex6 = tempString.indexOf(", ");
+		
+		if(commaWhitespaceIndex6 < 0){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			flexWindow.getTextArea().append(SIXTH_COMMA_SPACE_MISSING_MESSAGE );
+			flexWindow.getTextArea().append("\n");
+			return false;
+		}
+		
+		// tempTaskVariables[5] is the extracted priority level
+		tempTaskVariables[5] = tempString.substring(0, commaWhitespaceIndex6).trim();
+		
+		// tempString.substring(commaWhitespaceIndex6 + 2) category unknown
+		tempString = tempString.substring(commaWhitespaceIndex6 + 2).trim();
+		
+	
+		
+		// tempTaskVariables[6] is the extracted category
+		tempTaskVariables[6] = tempString.trim();	
+				
+		return true;
+	}
+
+
 	// deletes a task
 	private static void deleteTask(String filename, String date, String taskTitle, String previousChangeTerm, String previousAction, Task previousTask) throws IOException {
 		// reads in the file, line by line
@@ -1270,6 +1757,12 @@ public class Flex{
 			}
 		}
 		
+		if(taskExists == false){
+			flexWindow.getTextArea().append(TASK_DOES_NOT_EXIST_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
+		}
+		
 		// sort all tasks by date and starting time
 		sortAllTasksByDateAndStartingTime(allTasksList);
 		
@@ -1281,12 +1774,6 @@ public class Flex{
 			flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString() + "\n");
 			flexWindow.getTextArea().append("\n");
 			writer.newLine();
-		}
-
-		if(taskExists == false){
-			flexWindow.getTextArea().append(TASK_DOES_NOT_EXIST_MESSAGE);
-			flexWindow.getTextArea().append("\n");
-			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 		}
 		
 		writer.close();
@@ -1338,18 +1825,7 @@ public class Flex{
 			// check if this input by the user is valid
 			String tempDate = searchTerm;
 						
-			int slashIndex1 = tempDate.indexOf("/");
-						
-			if(slashIndex1 <= 0){
-				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
-				flexWindow.getTextArea().append("\n");
-				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
-			}
-			tempDate = tempDate.substring(slashIndex1 + 1).trim();
-						
-			int slashIndex2 = tempDate.indexOf("/");	
-						
-			if(slashIndex2 <= 0){
+			if(!checkDate(tempDate)){
 				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 				flexWindow.getTextArea().append("\n");
 				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
@@ -1459,19 +1935,32 @@ public class Flex{
 		changeRemainingString.trim();
 		
 		int commaWhitespaceIndex1 = changeRemainingString.indexOf(", ");
+		
 		if(commaWhitespaceIndex1 < 0){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
 			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 		}
 		
+		String tempDateString = new String("");
+	
 		String currentDate = new String("");
-		currentDate = changeRemainingString.substring(0, commaWhitespaceIndex1);
 		
+		currentDate = changeRemainingString.substring(0, commaWhitespaceIndex1);
+				
+		tempDateString = changeRemainingString.substring(0, commaWhitespaceIndex1);
+		
+		if(!checkDate(tempDateString)){			
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");	
+			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
+		}				
+						
 		changeRemainingString = changeRemainingString.substring(commaWhitespaceIndex1 + 2).trim();
 		changeRemainingString.trim();
 		
 		int commaWhitespaceIndex2 = changeRemainingString.indexOf(", ");
+		
 		if(commaWhitespaceIndex2 < 0){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
@@ -1519,29 +2008,26 @@ public class Flex{
 		if(changeVariableType.equalsIgnoreCase("date")){
 			
 			// check if this input by the user is valid
-			String tempDate = newTerm;
+			String newDate = newTerm;
 						
-			int slashIndex1 = tempDate.indexOf("/");
-						
-			if(slashIndex1 <= 0){
+			if(!checkDate(tempDateString)){			
 				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
-				flexWindow.getTextArea().append("\n");
-				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
-			}
-			tempDate = tempDate.substring(slashIndex1 + 1).trim();
-						
-			int slashIndex2 = tempDate.indexOf("/");	
-						
-			if(slashIndex2 <= 0){
-				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
-				flexWindow.getTextArea().append("\n");
-				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
+				flexWindow.getTextArea().append("\n");	
+				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 			}	
 			
 			for(int i=0; i<allTasksList.size(); i++){
 				if((allTasksList.get(i).getDate().equalsIgnoreCase(currentDate))&&(allTasksList.get(i).getTaskTitle().equalsIgnoreCase(currentTaskTitle))){
 					changedTerm = allTasksList.get(i).getDate();
 					allTasksList.get(i).setDate(newTerm);
+					
+					// if the new change term(date) is invalid, reverse the change, and stop going through the 
+					// rest of the changeTaskVariable() method
+					if(!checkTask(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setDate(changedTerm);
+						readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
+					}
+					
 					tempTask = allTasksList.get(i);
 					lastAction = "change date";
 				}
@@ -1552,6 +2038,14 @@ public class Flex{
 				if((allTasksList.get(i).getDate().equalsIgnoreCase(currentDate))&&(allTasksList.get(i).getTaskTitle().equalsIgnoreCase(currentTaskTitle))){
 					changedTerm = allTasksList.get(i).getStartingTime();
 					allTasksList.get(i).setStartingTime(newTerm);
+					
+					// if the new change term(starting time) is invalid, reverse the change, and stop going through the 
+					// rest of the changeTaskVariable() method
+					if(!checkTask(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setStartingTime(changedTerm);
+						readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
+					}
+					
 					tempTask = allTasksList.get(i);
 					lastAction = "change start";
 				}
@@ -1562,6 +2056,14 @@ public class Flex{
 				if((allTasksList.get(i).getDate().equalsIgnoreCase(currentDate))&&(allTasksList.get(i).getTaskTitle().equalsIgnoreCase(currentTaskTitle))){
 					changedTerm = allTasksList.get(i).getEndingTime();
 					allTasksList.get(i).setEndingTime(newTerm);
+					
+					// if the new change term(ending time) is invalid, reverse the change, and stop going through the 
+					// rest of the changeTaskVariable() method
+					if(!checkTask(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setEndingTime(changedTerm);
+						readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
+					}
+					
 					tempTask = allTasksList.get(i);
 					lastAction = "change end";
 				}
@@ -1572,6 +2074,14 @@ public class Flex{
 				if((allTasksList.get(i).getDate().equalsIgnoreCase(currentDate))&&(allTasksList.get(i).getTaskTitle().equalsIgnoreCase(currentTaskTitle))){
 					changedTerm = allTasksList.get(i).getTaskTitle();
 					allTasksList.get(i).setTaskTitle(newTerm);
+					
+					// if the new change term(task title) is invalid, reverse the change, and stop going through the 
+					// rest of the changeTaskVariable() method
+					if(!checkTask(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setTaskTitle(changedTerm);
+						readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
+					}
+					
 					tempTask = allTasksList.get(i);
 					lastAction = "change title";
 				}
@@ -1582,6 +2092,14 @@ public class Flex{
 				if((allTasksList.get(i).getDate().equalsIgnoreCase(currentDate))&&(allTasksList.get(i).getTaskTitle().equalsIgnoreCase(currentTaskTitle))){
 					changedTerm = allTasksList.get(i).getTaskDescription();
 					allTasksList.get(i).setTaskDescription(newTerm);
+					
+					// if the new change term(task description) is invalid, reverse the change, and stop going through the 
+					// rest of the changeTaskVariable() method
+					if(!checkTask(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setTaskDescription(changedTerm);
+						readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
+					}
+					
 					tempTask = allTasksList.get(i);
 					lastAction = "change description";
 				}
@@ -1592,6 +2110,14 @@ public class Flex{
 				if((allTasksList.get(i).getDate().equalsIgnoreCase(currentDate))&&(allTasksList.get(i).getTaskTitle().equalsIgnoreCase(currentTaskTitle))){
 					changedTerm = allTasksList.get(i).getPriorityLevel().toString();
 					allTasksList.get(i).setPriorityLevel(newTerm);
+					
+					// if the new change term(priority level) is invalid, reverse the change, and stop going through the 
+					// rest of the changeTaskVariable() method
+					if(!checkTask(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setPriorityLevel(changedTerm);
+						readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
+					}
+									
 					tempTask = allTasksList.get(i);
 					lastAction = "change priority";
 				}
@@ -1602,6 +2128,14 @@ public class Flex{
 				if((allTasksList.get(i).getDate().equalsIgnoreCase(currentDate))&&(allTasksList.get(i).getTaskTitle().equalsIgnoreCase(currentTaskTitle))){
 					changedTerm = allTasksList.get(i).getCategory();
 					allTasksList.get(i).setCategory(newTerm);
+					
+					// if the new change term(category) is invalid, reverse the change, and stop going through the 
+					// rest of the changeTaskVariable() method
+					if(!checkTask(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setCategory(changedTerm);
+						readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
+					}
+					
 					tempTask = allTasksList.get(i);
 					lastAction = "change category";
 				}
