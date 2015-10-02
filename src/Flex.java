@@ -469,19 +469,8 @@ public class Flex{
 		
 		// check if this input by the user is valid
 		String tempDate = date1;
-		
-		int slashIndex1 = tempDate.indexOf("/");
-		
-		if(slashIndex1 <= 0){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);	
-			flexWindow.getTextArea().append("\n");
-			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
-		}
-		tempDate = tempDate.substring(slashIndex1 + 1).trim();
-		
-		int slashIndex2 = tempDate.indexOf("/");	
-		
-		if(slashIndex2 <= 0){
+				
+		if(!checkDate(tempDate)){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);	
 			flexWindow.getTextArea().append("\n");
 			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
