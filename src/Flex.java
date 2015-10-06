@@ -85,6 +85,9 @@ public class Flex{
 	private static final String DELETED_MESSAGE = "The specified task has been deleted.";
 	private static String ADDED_MESSAGE = "The task has been successfully added.";
 
+	private static final String STARTING_TIME_LATER_THAN_ENDING_TIME_MESSAGE = "The new starting time is later than the current ending time.";
+	private static final String ENDING_TIME_EARLIER_THAN_STARTING_TIME_MESSAGE = "The new ending time is earlier than the curent starting time.";
+
 	private static final String STARTING_DATE_REQUEST_MESSAGE = "Please enter the starting date (format: dd/mm/yyyy): " + "\n";
 
 	private static final String DONE_TASKS_DISPLAYED_MESSAGE = "The tasks in the schedule, which are done, are displayed.";
@@ -3097,6 +3100,7 @@ public class Flex{
 			for(int i=0; i<allTasksList.size(); i++){
 				if((allTasksList.get(i).getDate().equalsIgnoreCase(currentDate))&&(allTasksList.get(i).getTaskTitle().equalsIgnoreCase(currentTaskTitle))){
 					changedTerm = allTasksList.get(i).getStartingTime();
+					
 					allTasksList.get(i).setStartingTime(newTerm);
 					
 					// if the new change term(starting time) is invalid, reverse the change, and stop going through the 
@@ -3107,6 +3111,18 @@ public class Flex{
 					}
 					
 					assert(checkTask(allTasksList.get(i).getPrintTaskString()));
+					
+					if( ( Integer.valueOf(allTasksList.get(i).getStartingTime().substring(0, 2)) * HOUR_MINUTES + Integer.valueOf(allTasksList.get(i).getStartingTime().substring(2, 4)) ) > ( Integer.valueOf(allTasksList.get(i).getEndingTime().substring(0, 2)) * HOUR_MINUTES + Integer.valueOf(allTasksList.get(i).getEndingTime().substring(2, 4)) ) ){
+						allTasksList.get(i).setStartingTime(changedTerm);
+						System.out.println();
+						System.out.println(INVALID_INPUT_MESSAGE);
+						logger.finest(INVALID_INPUT_MESSAGE);
+						System.out.print(STARTING_TIME_LATER_THAN_ENDING_TIME_MESSAGE);
+						logger.finest(STARTING_TIME_LATER_THAN_ENDING_TIME_MESSAGE);
+						System.out.println();
+						readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
+					}
+					
 					
 					tempTask = allTasksList.get(i);
 					lastAction = "change start";
@@ -3128,6 +3144,17 @@ public class Flex{
 					
 					assert(checkTask(allTasksList.get(i).getPrintTaskString()));
 					
+					if( ( Integer.valueOf(allTasksList.get(i).getStartingTime().substring(0, 2)) * HOUR_MINUTES + Integer.valueOf(allTasksList.get(i).getStartingTime().substring(2, 4)) ) > ( Integer.valueOf(allTasksList.get(i).getEndingTime().substring(0, 2)) * HOUR_MINUTES + Integer.valueOf(allTasksList.get(i).getEndingTime().substring(2, 4)) ) ){
+						allTasksList.get(i).setEndingTime(changedTerm);
+						System.out.println();
+						System.out.println(INVALID_INPUT_MESSAGE);
+						logger.finest(INVALID_INPUT_MESSAGE);
+						System.out.print(ENDING_TIME_EARLIER_THAN_STARTING_TIME_MESSAGE);
+						logger.finest(ENDING_TIME_EARLIER_THAN_STARTING_TIME_MESSAGE);
+						System.out.println();
+						readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
+					}
+					
 					tempTask = allTasksList.get(i);
 					lastAction = "change end";
 				}
@@ -3143,6 +3170,10 @@ public class Flex{
 					// rest of the changeTaskVariable() method
 					if(!checkTask(allTasksList.get(i).getPrintTaskString())){
 						allTasksList.get(i).setTaskTitle(changedTerm);
+						System.out.println();
+						System.out.println(INVALID_INPUT_MESSAGE);
+						logger.finest(INVALID_INPUT_MESSAGE);
+						System.out.println();
 						readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 					}
 					
@@ -3163,6 +3194,10 @@ public class Flex{
 					// rest of the changeTaskVariable() method
 					if(!checkTask(allTasksList.get(i).getPrintTaskString())){
 						allTasksList.get(i).setTaskDescription(changedTerm);
+						System.out.println();
+						System.out.println(INVALID_INPUT_MESSAGE);
+						logger.finest(INVALID_INPUT_MESSAGE);
+						System.out.println();
 						readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 					}
 					
@@ -3183,6 +3218,10 @@ public class Flex{
 					// rest of the changeTaskVariable() method
 					if(!checkTask(allTasksList.get(i).getPrintTaskString())){
 						allTasksList.get(i).setPriorityLevel(changedTerm);
+						System.out.println();
+						System.out.println(INVALID_INPUT_MESSAGE);
+						logger.finest(INVALID_INPUT_MESSAGE);
+						System.out.println();
 						readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 					}
 					
@@ -3203,6 +3242,10 @@ public class Flex{
 					// rest of the changeTaskVariable() method
 					if(!checkTask(allTasksList.get(i).getPrintTaskString())){
 						allTasksList.get(i).setCategory(changedTerm);
+						System.out.println();
+						System.out.println(INVALID_INPUT_MESSAGE);
+						logger.finest(INVALID_INPUT_MESSAGE);
+						System.out.println();
 						readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 					}
 					
