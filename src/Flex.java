@@ -21,9 +21,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.JFrame;
+import java.util.logging.*;
 
 public class Flex{
 	
+	private static final Logger logger = Logger.getLogger(Flex.class.getName());
+		
 	private static FlexWindow flexWindow;
 	private static Scanner sc;
 	private static String filename = new String("");
@@ -131,6 +134,8 @@ public class Flex{
 			tempFile = new File(filename);
 			
 		}
+		
+		logger.finest("The filename is accepted.");
 				
 		flexWindow.getTextArea().append("\n");
 		flexWindow.getTextArea().append(FILENAME_ACCEPTED_MESSAGE);
@@ -310,6 +315,8 @@ public class Flex{
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 				}	
 				
+				assert(checkDate(date));
+				
 				String taskTitle = new String("");
 				taskTitle = remainingCommandString.substring(whitespaceIndex1+1).trim();
 				
@@ -476,6 +483,8 @@ public class Flex{
 			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 		}
 		
+		assert(checkDate(tempDate));
+		
 		date1.trim();
 		
 		searchAndShowTask(filename, "date " + date1, previousChangeTerm, previousAction, previousTask);
@@ -524,7 +533,8 @@ public class Flex{
 		
 		searchAndShowTask(filename, "date " + date7, previousChangeTerm, previousAction, previousTask);
 		
-		flexWindow.getTextArea();		
+		logger.finest("The tasks for the whole week starting on " + date1 + " is displayed.");
+		
 		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 	}
 
@@ -575,6 +585,8 @@ public class Flex{
 				flexWindow.getTextArea().append("\n");
 				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 			}
+			
+			assert(checkDate(tempDate));
 			
 			for(int i=0; i<allTasksList.size(); i++){
 				if(allTasksList.get(i).getDate().equalsIgnoreCase(searchTerm)){
@@ -650,6 +662,8 @@ public class Flex{
 	// generates the next date, given the day, month and year of a date
 	// assumed to be in the format dd/mm/yyyy
 	private static String generateNextDate(String date) {
+		
+		assert(checkDate(date));
 		
 		String tempDate = date;
 		
@@ -819,6 +833,8 @@ public class Flex{
 			flexWindow.getTextArea().append("\n");
 		}
 		
+		logger.finest("The tasks, sorted in alphabetical order by category, is displayed.");
+		
 		flexWindow.getTextArea().append("\n");
 		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 	}
@@ -869,6 +885,8 @@ public class Flex{
 			flexWindow.getTextArea().append("\n");
 		}
 		
+		logger.finest("The tasks, sorted in alphabetical order by task description, is displayed.");
+		
 		flexWindow.getTextArea().append("\n");
 		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 	}
@@ -918,6 +936,8 @@ public class Flex{
 			flexWindow.getTextArea().append(allTasksList.get(j).getPrintTaskString() + "\n");
 			flexWindow.getTextArea().append("\n");
 		}
+		
+		logger.finest("The tasks, sorted in alphabetical order by title, is displayed.");
 		
 		flexWindow.getTextArea().append("\n");
 		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
@@ -973,6 +993,8 @@ public class Flex{
 			flexWindow.getTextArea().append("\n");
 		}
 		
+		logger.finest("The tasks, sorted by ending time, is displayed.");
+		
 		flexWindow.getTextArea().append("\n");
 		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 	}
@@ -1027,6 +1049,8 @@ public class Flex{
 			flexWindow.getTextArea().append("\n");
 		}
 		
+		logger.finest("The tasks, sorted by starting time, is displayed.");
+		
 		flexWindow.getTextArea().append("\n");
 		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 	}
@@ -1066,6 +1090,8 @@ public class Flex{
 			flexWindow.getTextArea().append(notDoneList.get(j).getPrintTaskString() + "\n");
 			flexWindow.getTextArea().append("\n");
 		}
+		
+		logger.finest("The tasks which have not been marked as done are displayed.");
 		
 		flexWindow.getTextArea().append("\n");
 		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
@@ -1148,6 +1174,8 @@ public class Flex{
 			flexWindow.getTextArea().append(allTasksList.get(j).getPrintTaskString() + "\n");
 			flexWindow.getTextArea().append("\n");
 		}
+		
+		logger.finest("The tasks, sorted in alphabetical order by priority level, is displayed.");
 	
 		flexWindow.getTextArea().append("\n");
 		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
@@ -1174,10 +1202,12 @@ public class Flex{
 			if(previousAction.equalsIgnoreCase("add")){
 
 				deleteTask(filename, previousTask.getDate(), previousTask.getTaskTitle(), previousChangeTerm, previousAction, previousTask);
+				logger.finest("The last valid add action has been undone.");
 			}
 			else if(previousAction.equalsIgnoreCase("delete")){
 
 				addTask(filename, previousTask.getPrintTaskString(), previousChangeTerm, previousAction, previousTask);
+				logger.finest("The last valid delete action has been undone.");
 			}
 		}
 		else{
@@ -1186,6 +1216,7 @@ public class Flex{
 
 				int whitespaceIndex2 = previousAction.indexOf(" ");			
 				changeTaskVariable(filename, previousAction.substring(whitespaceIndex2 + 1).trim() + " " + previousTask.getDate() + ", " + previousTask.getTaskTitle() + ", " + previousChangeTerm, previousChangeTerm, previousAction, previousTask);
+				logger.finest("The last valid change action has been undone.");
 			}
 		}
 	}
@@ -1283,6 +1314,8 @@ public class Flex{
 		}
 									
 		writer.close();		
+		
+		logger.finest("The tasks has been successfully added.");
 		
 		flexWindow.getTextArea().append("\n");
 		readAndExecuteCommand(filename, previousChangeTerm, "add", tempTask);	
@@ -1641,6 +1674,8 @@ public class Flex{
 		if(!checkDate(tempDateString)){
 			return false;
 		}
+		
+		assert(checkDate(tempDateString));
 								
 		// tempString.substring(commaWhitespaceIndex1 + 2) is 0011, 1100, title title1, description description2, priorityLevel 1, category unknown		
 		
@@ -1901,6 +1936,8 @@ public class Flex{
 		}
 		
 		writer.close();
+		
+		logger.finest("The specified task has been deleted.");
 
 		flexWindow.getTextArea().append("\n");
 		readAndExecuteCommand(filename, previousChangeTerm, "delete", tempTask);	
@@ -1954,6 +1991,8 @@ public class Flex{
 				flexWindow.getTextArea().append("\n");
 				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 			}
+			
+			assert(checkDate(tempDate));
 								
 			for(int i=0; i<allTasksList.size(); i++){
 				if(allTasksList.get(i).getDate().equalsIgnoreCase(searchTerm)){
@@ -2078,7 +2117,9 @@ public class Flex{
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");	
 			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
-		}				
+		}		
+		
+		assert(checkDate(tempDateString));
 						
 		changeRemainingString = changeRemainingString.substring(commaWhitespaceIndex1 + 2).trim();
 		changeRemainingString.trim();
@@ -2140,6 +2181,8 @@ public class Flex{
 				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 			}	
 			
+			assert(checkDate(newDate));
+			
 			for(int i=0; i<allTasksList.size(); i++){
 				if((allTasksList.get(i).getDate().equalsIgnoreCase(currentDate))&&(allTasksList.get(i).getTaskTitle().equalsIgnoreCase(currentTaskTitle))){
 					changedTerm = allTasksList.get(i).getDate();
@@ -2151,6 +2194,8 @@ public class Flex{
 						allTasksList.get(i).setDate(changedTerm);
 						readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 					}
+					
+					assert(checkTask(allTasksList.get(i).getPrintTaskString()));
 					
 					tempTask = allTasksList.get(i);
 					lastAction = "change date";
@@ -2170,6 +2215,8 @@ public class Flex{
 						readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 					}
 					
+					assert(checkTask(allTasksList.get(i).getPrintTaskString()));
+					
 					tempTask = allTasksList.get(i);
 					lastAction = "change start";
 				}
@@ -2187,6 +2234,8 @@ public class Flex{
 						allTasksList.get(i).setEndingTime(changedTerm);
 						readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 					}
+					
+					assert(checkTask(allTasksList.get(i).getPrintTaskString()));
 					
 					tempTask = allTasksList.get(i);
 					lastAction = "change end";
@@ -2206,6 +2255,8 @@ public class Flex{
 						readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 					}
 					
+					assert(checkTask(allTasksList.get(i).getPrintTaskString()));
+					
 					tempTask = allTasksList.get(i);
 					lastAction = "change title";
 				}
@@ -2224,6 +2275,8 @@ public class Flex{
 						readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 					}
 					
+					assert(checkTask(allTasksList.get(i).getPrintTaskString()));
+					
 					tempTask = allTasksList.get(i);
 					lastAction = "change description";
 				}
@@ -2241,6 +2294,8 @@ public class Flex{
 						allTasksList.get(i).setPriorityLevel(changedTerm);
 						readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 					}
+					
+					assert(checkTask(allTasksList.get(i).getPrintTaskString()));
 									
 					tempTask = allTasksList.get(i);
 					lastAction = "change priority";
@@ -2259,6 +2314,8 @@ public class Flex{
 						allTasksList.get(i).setCategory(changedTerm);
 						readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 					}
+					
+					assert(checkTask(allTasksList.get(i).getPrintTaskString()));
 					
 					tempTask = allTasksList.get(i);
 					lastAction = "change category";
@@ -2287,6 +2344,7 @@ public class Flex{
 									
 		writer.close();
 		
+		logger.finest("The change to the task information is valid and processed.");
 		
 		// for valid input cases
 		flexWindow.getTextArea().append("\n");
