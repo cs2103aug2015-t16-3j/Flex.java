@@ -31,22 +31,22 @@ public class Flex{
 	private static Scanner sc;
 	private static String filename = new String("");
 	
-	private static String FIRST_COMMA_SPACE_MISSING_MESSAGE = "First comma and space are missing.";
-	private static String SECOND_COMMA_SPACE_MISSING_MESSAGE = "Second comma and space are missing.";
-	private static String THIRD_COMMA_SPACE_MISSING_MESSAGE = "Third comma and space are missing.";
-	private static String FOURTH_COMMA_SPACE_MISSING_MESSAGE = "Fourth comma and space are missing.";
-	private static String FIFTH_COMMA_SPACE_MISSING_MESSAGE = "Fifth comma and space are missing.";
-	private static String SIXTH_COMMA_SPACE_MISSING_MESSAGE = "Sixth comma and space are missing.";
+	private static final String FIRST_COMMA_SPACE_MISSING_MESSAGE = "First comma and space are missing.";
+	private static final String SECOND_COMMA_SPACE_MISSING_MESSAGE = "Second comma and space are missing.";
+	private static final String THIRD_COMMA_SPACE_MISSING_MESSAGE = "Third comma and space are missing.";
+	private static final String FOURTH_COMMA_SPACE_MISSING_MESSAGE = "Fourth comma and space are missing.";
+	private static final String FIFTH_COMMA_SPACE_MISSING_MESSAGE = "Fifth comma and space are missing.";
+	private static final String SIXTH_COMMA_SPACE_MISSING_MESSAGE = "Sixth comma and space are missing.";
 	
-	private static String DATE_FIRST_SLASH_MISSING_MESSAGE = "First slash of date is missing.";
-	private static String DATE_SECOND_SLASH_MISSING_MESSAGE = "Second slash of date is missing.";
+	private static final String DATE_FIRST_SLASH_MISSING_MESSAGE = "First slash of date is missing.";
+	private static final String DATE_SECOND_SLASH_MISSING_MESSAGE = "Second slash of date is missing.";
 	
-	private static String DASH_IN_DAY_OF_DATE_MESSAGE = "At least one dash is in the date's day. Do take note that negative numbers are not allowed as well.";
-	private static String DAY_IN_DATE_MISSING_MESSAGE = "The day in the date is missing.";
-	private static String DAY_IN_DATE_NOT_A_NUMBER_MESSAGE = "The day in the date is not a number.";
-	private static String DAY_IN_DATE_MORE_THAN_TWO_DIGITS_MESSAGE = "The day in the date should not have more than two digits.";
-	private static String DAY_IN_DATE_MORE_THAN_THIRTY_ONE_MESSAGE = "The day in the date is more than 31.";
-	private static String DAY_IN_DATE_IS_ZERO_OR_LESS_THAN_ZERO_MESSAGE = "The day in the date is 0 or less than zero.";
+	private static final String DASH_IN_DAY_OF_DATE_MESSAGE = "At least one dash is in the date's day. Do take note that negative numbers are not allowed as well.";
+	private static final String DAY_IN_DATE_MISSING_MESSAGE = "The day in the date is missing.";
+	private static final String DAY_IN_DATE_NOT_A_NUMBER_MESSAGE = "The day in the date is not a number.";
+	private static final String DAY_IN_DATE_MORE_THAN_TWO_DIGITS_MESSAGE = "The day in the date should not have more than two digits.";
+	private static final String DAY_IN_DATE_MORE_THAN_THIRTY_ONE_MESSAGE = "The day in the date is more than 31.";
+	private static final String DAY_IN_DATE_IS_ZERO_OR_LESS_THAN_ZERO_MESSAGE = "The day in the date is 0 or less than zero.";
 	
 	private static String DASH_IN_MONTH_OF_DATE_MESSAGE = "At least one dash is in the date's month. Do take note that negative numbers are not allowed as well.";
 	private static String MONTH_IN_DATE_MISSING_MESSAGE = "The month in the date is missing.";
@@ -55,26 +55,49 @@ public class Flex{
 	private static String MONTH_IN_DATE_MORE_THAN_TWELVE_MESSAGE = "The day in the date is more than 12.";
 	private static String MONTH_IN_DATE_IS_ZERO_OR_LESS_THAN_ZERO_MESSAGE = "The month in the date is 0 or less than zero.";
 	
-	private static String DASH_IN_YEAR_OF_DATE_MESSAGE = "At least one dash is in the date's year. Do take note that negative numbers are not allowed as well.";
-	private static String YEAR_IN_DATE_MISSING_MESSAGE = "The year in the date is missing.";
-	private static String YEAR_IN_DATE_NOT_A_NUMBER_MESSAGE = "The year in the date is not a number.";
-	private static String YEAR_IN_DATE_IS_ZERO_OR_LESS_THAN_ZERO_MESSAGE = "The year in the date is 0 or less than zero.";
+	private static final String DASH_IN_YEAR_OF_DATE_MESSAGE = "At least one dash is in the date's year. Do take note that negative numbers are not allowed as well.";
+	private static final String YEAR_IN_DATE_MISSING_MESSAGE = "The year in the date is missing.";
+	private static final String YEAR_IN_DATE_NOT_A_NUMBER_MESSAGE = "The year in the date is not a number.";
+	private static final String YEAR_IN_DATE_IS_ZERO_OR_LESS_THAN_ZERO_MESSAGE = "The year in the date is 0 or less than zero.";
 	
-	private static String STARTING_TIME_MISSING_MESSAGE = "The starting time is missing. Do take note that the starting time follows the 4-digit twenty-four-hour format.";
-	private static String DASH_IN_STARTING_TIME_MESSAGE = "At least one dash is in the starting time. Do take note that negative numbers are not allowed as well. Also, do take note that the starting time follows the 4-digit twenty-four-hour format.";		
-	private static String STARTING_TIME_NOT_A_NUMBER_MESSAGE = "The starting time is not a number.";
-	private static String STARTING_TIME_IS_A_NUMBER_BUT_NOT_A_4_DIGIT_NUMBER_MESSAGE = "The starting time is not a 4-digit number. Do take note that the starting time follows the 4-digit twenty-four-hour format.";
-	private static String STARTING_TIME_IS_A_NUMBER_GREATER_THAN_TWO_THREE_FIVE_NINE_MESSAGE = "The starting time is a number which is greater than 2359 (11:59pm).";
+	private static final String STARTING_TIME_MISSING_MESSAGE = "The starting time is missing. Do take note that the starting time follows the 4-digit twenty-four-hour format.";
+	private static final String DASH_IN_STARTING_TIME_MESSAGE = "At least one dash is in the starting time. Do take note that negative numbers are not allowed as well. Also, do take note that the starting time follows the 4-digit twenty-four-hour format.";		
+	private static final String STARTING_TIME_NOT_A_NUMBER_MESSAGE = "The starting time is not a number.";
+	private static final String STARTING_TIME_IS_A_NUMBER_BUT_NOT_A_4_DIGIT_NUMBER_MESSAGE = "The starting time is not a 4-digit number. Do take note that the starting time follows the 4-digit twenty-four-hour format.";
+	private static final String STARTING_TIME_IS_A_NUMBER_GREATER_THAN_TWO_THREE_FIVE_NINE_MESSAGE = "The starting time is a number which is greater than 2359 (11:59pm).";
 	
-	private static String ENDING_TIME_MISSING_MESSAGE = "The ending time is missing. Do take note that the ending time follows the 4-digit twenty-four-hour format.";
-	private static String DASH_IN_ENDING_TIME_MESSAGE = "At least one dash is in the ending time. Do take note that negative numbers are not allowed as well. Also, do take note that the ending time follows the 4-digit twenty-four-hour format.";	
-	private static String ENDING_TIME_NOT_A_NUMBER_MESSAGE = "The ending time is not a number.";
-	private static String ENDING_TIME_IS_A_NUMBER_BUT_NOT_A_4_DIGIT_NUMBER_MESSAGE = "The ending time is not a 4-digit number. Do take note that the ending time follows the 4-digit twenty-four-hour format.";
-	private static String ENDING_TIME_IS_A_NUMBER_GREATER_THAN_TWO_THREE_FIVE_NINE_MESSAGE = "The ending time is a number which is greater than 2359 (11:59pm).";
+	private static final String ENDING_TIME_MISSING_MESSAGE = "The ending time is missing. Do take note that the ending time follows the 4-digit twenty-four-hour format.";
+	private static final String DASH_IN_ENDING_TIME_MESSAGE = "At least one dash is in the ending time. Do take note that negative numbers are not allowed as well. Also, do take note that the ending time follows the 4-digit twenty-four-hour format.";	
+	private static final String ENDING_TIME_NOT_A_NUMBER_MESSAGE = "The ending time is not a number.";
+	private static final String ENDING_TIME_IS_A_NUMBER_BUT_NOT_A_4_DIGIT_NUMBER_MESSAGE = "The ending time is not a 4-digit number. Do take note that the ending time follows the 4-digit twenty-four-hour format.";
+	private static final String ENDING_TIME_IS_A_NUMBER_GREATER_THAN_TWO_THREE_FIVE_NINE_MESSAGE = "The ending time is a number which is greater than 2359 (11:59pm).";
 	
-	private static String NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE = "The number of days, according to the month and year in this date, more than expected.";	
+	private static final String NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE = "The number of days, according to the month and year in this date, more than expected.";	
 	
-	private static String NOTHING_TO_UNDO_MESSAGE = "Nothing to undo as no valid 1) adding of a task, 2) deleting of a task, OR 3) Changing a task variable, has been carried out by the user during this program run.";
+	private static final String DISPLAY_SORTED_BY_STARTING_TIMES_MESSAGE = "The tasks, sorted by starting time, are displayed.";
+	private static final String DISPLAY_SORTED_BY_ENDING_TIMES_MESSAGE = "The tasks, sorted by ending time, are displayed.";
+	private static final String DISPLAY_SORTED_BY_TITLES_MESSAGE = "The tasks, sorted in alphabetical order by title, are displayed.";
+	private static final String DISPLAY_SORTED_BY_DESCRIPTIONS_MESSAGE = "The tasks, sorted in alphabetical order by task description, are displayed.";
+	private static final String DISPLAY_SORTED_BY_PRIORITY_LEVELS_MESSAGE = "The tasks, sorted in alphabetical order by priority level, is displayed.";
+	private static final String DISPLAY_SORTED_BY_CATEGORIES_MESSAGE = "The tasks, sorted in alphabetical order by category, are displayed.";
+	
+	private static final String NOTHING_TO_UNDO_MESSAGE = "Nothing to undo as no valid 1) adding of a task, 2) deleting of a task, OR 3) Changing a task variable, has been carried out by the user during this program run.";
+	private static final String DELETED_MESSAGE = "The specified task has been deleted.";
+	private static String ADDED_MESSAGE = "The task has been successfully added.";
+
+	private static final String DONE_TASKS_DISPLAYED_MESSAGE = "The tasks in the schedule, which are done, are displayed.";
+	private static final String PENDING_TASKS_DISPLAYED_MESSAGE = "The tasks in the schedule, which are pending, are displayed.";
+	private static final String BLOCKED_TASKS_DISPLAYED_MESSAGE = "The tasks in the schedule, which are blocked, are displayed.";
+	private static final String TASKS_NOT_DONE_DISPLAYED_MESSAGE = "The tasks which have not been marked as done are displayed.";
+	private static final String ALL_TASKS_DISPLAYED_MESSAGE = "All the tasks in the schedule are displayed.";
+	private static final String TASKS_FOR_WEEK_DISPLAYED_FRONT_MESSAGE = "The tasks for the whole week starting on ";
+	private static final String TASKS_FOR_WEEK_DISLAYED_BACK_MESSAGE = " are displayed.";
+	
+	private static final String DATE_GENERATED_MESSAGE = "The starting date provided by the user for displaying the specified week's tasks is valid. The next valid date generated is ";
+	private static final String CHANGED_MESSAGE = "The change to the task information is valid and processed.";
+	private static final String CHANGE_UNDONE_MESSAGE= "The last valid change action has been undone.";	
+	private static final String DELETE_UNDONE_MESSAGE = "The last valid delete action has been undone.";
+	private static final String ADD_UNDONE_MESSAGE = "The last valid add action has been undone.";
 	private static final String INVALID_INPUT_MESSAGE = "Invalid input. Please try again.";
 	// that is, it is valid only if its starting time, or ending time, are NOT between the starting
 	// and ending times of existing tasks which are NOT DONE YET
@@ -82,7 +105,7 @@ public class Flex{
 	private static final String TASK_DOES_NOT_EXIST_MESSAGE = "Task does not exist, so no such task can be deleted.";
 	private static final String EXIT_MESSAGE = "Exiting the program.";
 	private static final String BLOCKED_MESSAGE = "Unable to add the new task, because the new task clashes with existing tasks (on the same date) which have not been marked as tasks which have been done.";
-	private static final String FILENAME_ACCEPTED_MESSAGE = "Filename is accepted.";
+	private static final String FILENAME_ACCEPTED_MESSAGE = "The filename is accepted.";
 	private static final String PROCEED_MESSAGE = "Please proceed with the user input commands.";
 	private static final String FILENAME_INPUT_MESSAGE = "Please enter the full path name of the .txt schedule file, including its name. For example: C:" + "\\" + "Users" + "\\" + "Owner" + "\\" + "Documents" + "\\" + "Flex" + "." + "java" + "\\" + "src" + "\\" + "FlexTest" + "." + "txt";
 	private static final int HOUR_MINUTES = 60;
@@ -111,9 +134,13 @@ public class Flex{
 		flexWindow.setBounds(100, 100, 450, 300);
 		flexWindow.setVisible(true);
 		
+		logger.finest(FILENAME_INPUT_MESSAGE);
+		System.out.println(FILENAME_INPUT_MESSAGE);
+		System.out.println();
+		
 		flexWindow.getTextArea().setText(FILENAME_INPUT_MESSAGE);
 		flexWindow.getTextArea().append("\n");
-		
+			
 		filename = new String("");				
 		sc = new Scanner(System.in);
 		filename = sc.nextLine();
@@ -135,13 +162,24 @@ public class Flex{
 			
 		}
 		
-		logger.finest("The filename is accepted.");
-				
+		System.out.println();
+		logger.finest(FILENAME_ACCEPTED_MESSAGE);
+		System.out.println(FILENAME_ACCEPTED_MESSAGE);
+		System.out.println();
+		
 		flexWindow.getTextArea().append("\n");
 		flexWindow.getTextArea().append(FILENAME_ACCEPTED_MESSAGE);
 		flexWindow.getTextArea().append("\n");
+	
+		System.out.println();
+		logger.finest(PROCEED_MESSAGE);
+		System.out.println(PROCEED_MESSAGE);
+		System.out.println();
+
 		flexWindow.getTextArea().append(PROCEED_MESSAGE);
 		flexWindow.getTextArea().append("\n");
+		
+		
 
 		
 		// this method takes care of the manipulation to be done, as well as the operation for exiting the program	
@@ -184,7 +222,13 @@ public class Flex{
 			// Case 1: The program Flex.java will exit itself in Command Line Prompt (cmd).
 			if(firstWord.equalsIgnoreCase("exit")){		
 				flexWindow.getTextArea().append(EXIT_MESSAGE);
-			   	System.exit(1);
+				
+				System.out.println();
+				logger.finest(EXIT_MESSAGE);
+				System.out.println(EXIT_MESSAGE);
+				System.out.println();
+				
+				System.exit(1);
 			}	
 			// Case 2: undo the last action
 			else if(firstWord.equalsIgnoreCase("undo")){
@@ -195,6 +239,12 @@ public class Flex{
 			else{
 				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 				flexWindow.getTextArea().append("\n");
+				
+				System.out.println();
+				logger.finest(INVALID_INPUT_MESSAGE);
+				System.out.println(INVALID_INPUT_MESSAGE);
+				System.out.println();
+				
 				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 			}
 		}
@@ -208,7 +258,13 @@ public class Flex{
 			if(firstWord.substring(0, 1).equalsIgnoreCase("")){
 				
 				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
-				flexWindow.getTextArea().append("\n");								
+				flexWindow.getTextArea().append("\n");		
+				
+				System.out.println();
+				logger.finest(INVALID_INPUT_MESSAGE);
+				System.out.println(INVALID_INPUT_MESSAGE);
+				System.out.println();
+				
 				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 			}
 			// Case 5: adding a task
@@ -221,6 +277,12 @@ public class Flex{
 	
 					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 					flexWindow.getTextArea().append("\n");
+					
+					System.out.println();
+					logger.finest(INVALID_INPUT_MESSAGE);
+					System.out.println(INVALID_INPUT_MESSAGE);
+					System.out.println();
+					
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);						
 				}				
 				
@@ -233,6 +295,12 @@ public class Flex{
 				if(commaWhitespaceIndex1 < 0){				
 					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);		
 					flexWindow.getTextArea().append("\n");
+					
+					System.out.println();
+					logger.finest(INVALID_INPUT_MESSAGE);
+					System.out.println(INVALID_INPUT_MESSAGE);
+					System.out.println();
+					
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);		
 				}
 				remainingCommandStringCheck = remainingCommandStringCheck.substring(commaWhitespaceIndex1 + 2).trim();
@@ -241,6 +309,12 @@ public class Flex{
 				if(commaWhitespaceIndex2 < 0){				
 					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);	
 					flexWindow.getTextArea().append("\n");
+					
+					System.out.println();
+					logger.finest(INVALID_INPUT_MESSAGE);
+					System.out.println(INVALID_INPUT_MESSAGE);
+					System.out.println();
+					
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);		
 				}
 				remainingCommandStringCheck = remainingCommandStringCheck.substring(commaWhitespaceIndex2 + 2).trim();
@@ -249,6 +323,12 @@ public class Flex{
 				if(commaWhitespaceIndex3 < 0){				
 					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);	
 					flexWindow.getTextArea().append("\n");
+					
+					System.out.println();
+					logger.finest(INVALID_INPUT_MESSAGE);
+					System.out.println(INVALID_INPUT_MESSAGE);
+					System.out.println();
+					
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);		
 				}
 				remainingCommandStringCheck = remainingCommandStringCheck.substring(commaWhitespaceIndex3 + 2).trim();
@@ -257,6 +337,12 @@ public class Flex{
 				if(commaWhitespaceIndex4 < 0){				
 					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);	
 					flexWindow.getTextArea().append("\n");
+					
+					System.out.println();
+					logger.finest(INVALID_INPUT_MESSAGE);
+					System.out.println(INVALID_INPUT_MESSAGE);
+					System.out.println();
+					
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);		
 				}
 				remainingCommandStringCheck = remainingCommandStringCheck.substring(commaWhitespaceIndex4 + 2).trim();
@@ -265,6 +351,12 @@ public class Flex{
 				if(commaWhitespaceIndex5 < 0){				
 					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);	
 					flexWindow.getTextArea().append("\n");
+					
+					System.out.println();
+					logger.finest(INVALID_INPUT_MESSAGE);
+					System.out.println(INVALID_INPUT_MESSAGE);
+					System.out.println();
+					
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);		
 				}
 				remainingCommandStringCheck = remainingCommandStringCheck.substring(commaWhitespaceIndex5 + 2).trim();	
@@ -273,6 +365,12 @@ public class Flex{
 				if(commaWhitespaceIndex6 < 0){				
 					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);	
 					flexWindow.getTextArea().append("\n");
+					
+					System.out.println();
+					logger.finest(INVALID_INPUT_MESSAGE);
+					System.out.println(INVALID_INPUT_MESSAGE);
+					System.out.println();
+					
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);		
 				}
 				remainingCommandStringCheck = remainingCommandStringCheck.substring(commaWhitespaceIndex6 + 2).trim();
@@ -292,6 +390,12 @@ public class Flex{
 					
 					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);	
 					flexWindow.getTextArea().append("\n");
+					
+					System.out.println();
+					logger.finest(INVALID_INPUT_MESSAGE);
+					System.out.println(INVALID_INPUT_MESSAGE);
+					System.out.println();
+					
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);						
 				}				
 								
@@ -300,6 +404,12 @@ public class Flex{
 				if(whitespaceIndex1 < 0){
 					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);	
 					flexWindow.getTextArea().append("\n");
+					
+					System.out.println();
+					logger.finest(INVALID_INPUT_MESSAGE);
+					System.out.println(INVALID_INPUT_MESSAGE);
+					System.out.println();
+					
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);						
 				}
 				
@@ -312,6 +422,12 @@ public class Flex{
 				if(!checkDate(date)){			
 					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 					flexWindow.getTextArea().append("\n");	
+					
+					System.out.println();
+					logger.finest(INVALID_INPUT_MESSAGE);
+					System.out.println(INVALID_INPUT_MESSAGE);
+					System.out.println();
+					
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 				}	
 				
@@ -333,6 +449,12 @@ public class Flex{
 					
 					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);	
 					flexWindow.getTextArea().append("\n");
+					
+					System.out.println();
+					logger.finest(INVALID_INPUT_MESSAGE);
+					System.out.println(INVALID_INPUT_MESSAGE);
+					System.out.println();
+					
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 					
 				}			
@@ -353,6 +475,12 @@ public class Flex{
 					
 					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);	
 					flexWindow.getTextArea().append("\n");
+					
+					System.out.println();
+					logger.finest(INVALID_INPUT_MESSAGE);
+					System.out.println(INVALID_INPUT_MESSAGE);
+					System.out.println();
+					
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 					
 				}				
@@ -410,14 +538,32 @@ public class Flex{
 				// Case 9-[8]: show tasks which are done
 				else if(remainingString.equalsIgnoreCase("done")){
 					searchTask(filename, "category" + " " + "done", previousChangeTerm, previousAction, previousTask);
+					
+					logger.finest(DONE_TASKS_DISPLAYED_MESSAGE);
+					
+					System.out.println();
+					System.out.println(DONE_TASKS_DISPLAYED_MESSAGE);
+					System.out.println();
 				}
 				// Case 9-[9]: show tasks which are still pending
 				else if(remainingString.equalsIgnoreCase("pending")){
 					searchTask(filename, "category" + " " + "pending", previousChangeTerm, previousAction, previousTask);
+				
+					logger.finest(PENDING_TASKS_DISPLAYED_MESSAGE);
+					
+					System.out.println();
+					System.out.println(PENDING_TASKS_DISPLAYED_MESSAGE);
+					System.out.println();
 				}
 				// Case 9-[10]: show tasks which are still blocked
 				else if(remainingString.equalsIgnoreCase("blocked")){
 					searchTask(filename, "category" + " " + "blocked", previousChangeTerm, previousAction, previousTask);
+
+					logger.finest(BLOCKED_TASKS_DISPLAYED_MESSAGE);
+					
+					System.out.println();
+					System.out.println(BLOCKED_TASKS_DISPLAYED_MESSAGE);
+					System.out.println();			
 				}				
 				// Case 9-[11]: show tasks which are still pending or still blocked
 				// that is, tasks which are not marked as done yet
@@ -433,6 +579,12 @@ public class Flex{
 				else{
 					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);	
 					flexWindow.getTextArea().append("\n");
+					
+					System.out.println();
+					logger.finest(INVALID_INPUT_MESSAGE);
+					System.out.println(INVALID_INPUT_MESSAGE);
+					System.out.println();
+					
 					readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 				}			
 			}
@@ -440,6 +592,12 @@ public class Flex{
 			else{
 				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);	
 				flexWindow.getTextArea().append("\n");
+				
+				System.out.println();
+				logger.finest(INVALID_INPUT_MESSAGE);
+				System.out.println(INVALID_INPUT_MESSAGE);
+				System.out.println();
+				
 				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 			}
 		}
@@ -476,10 +634,18 @@ public class Flex{
 		
 		// check if this input by the user is valid
 		String tempDate = date1;
+		
+		flexWindow.getTextArea().setText("");
 				
 		if(!checkDate(tempDate)){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);	
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 		}
 		
@@ -533,7 +699,10 @@ public class Flex{
 		
 		searchAndShowTask(filename, "date " + date7, previousChangeTerm, previousAction, previousTask);
 		
-		logger.finest("The tasks for the whole week starting on " + date1 + " is displayed.");
+		System.out.println();
+		logger.finest(TASKS_FOR_WEEK_DISPLAYED_FRONT_MESSAGE + date1 + TASKS_FOR_WEEK_DISLAYED_BACK_MESSAGE);
+		System.out.println(TASKS_FOR_WEEK_DISPLAYED_FRONT_MESSAGE + date1 + TASKS_FOR_WEEK_DISLAYED_BACK_MESSAGE);
+		System.out.println();
 		
 		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 	}
@@ -548,6 +717,12 @@ public class Flex{
 		if(whitespaceIndex1 < 0){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");		
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 		}
 				
@@ -583,6 +758,12 @@ public class Flex{
 			if(!checkDate(tempDate)){
 				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 				flexWindow.getTextArea().append("\n");
+				
+				System.out.println();
+				logger.finest(INVALID_INPUT_MESSAGE);
+				System.out.println(INVALID_INPUT_MESSAGE);
+				System.out.println();
+				
 				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 			}
 			
@@ -655,13 +836,19 @@ public class Flex{
 		else{
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 		}			
 	}
 
 	// generates the next date, given the day, month and year of a date
 	// assumed to be in the format dd/mm/yyyy
-	private static String generateNextDate(String date) {
+	static String generateNextDate(String date) {
 		
 		assert(checkDate(date));
 		
@@ -783,6 +970,11 @@ public class Flex{
 			newYear = currentYear;
 		}
 		
+		
+		System.out.println();
+		logger.finest(DATE_GENERATED_MESSAGE + newDay +  "/" + newMonth + "/" + newYear);
+		System.out.println();
+		
 		return newDay +  "/" + newMonth + "/" + newYear;
 		
 	}
@@ -833,7 +1025,10 @@ public class Flex{
 			flexWindow.getTextArea().append("\n");
 		}
 		
-		logger.finest("The tasks, sorted in alphabetical order by category, is displayed.");
+		System.out.println();
+		logger.finest(DISPLAY_SORTED_BY_CATEGORIES_MESSAGE);
+		System.out.println(DISPLAY_SORTED_BY_CATEGORIES_MESSAGE);
+		System.out.println();
 		
 		flexWindow.getTextArea().append("\n");
 		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
@@ -885,7 +1080,10 @@ public class Flex{
 			flexWindow.getTextArea().append("\n");
 		}
 		
-		logger.finest("The tasks, sorted in alphabetical order by task description, is displayed.");
+		System.out.println();
+		logger.finest(DISPLAY_SORTED_BY_DESCRIPTIONS_MESSAGE);
+		System.out.println(DISPLAY_SORTED_BY_DESCRIPTIONS_MESSAGE);
+		System.out.println();
 		
 		flexWindow.getTextArea().append("\n");
 		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
@@ -937,7 +1135,10 @@ public class Flex{
 			flexWindow.getTextArea().append("\n");
 		}
 		
-		logger.finest("The tasks, sorted in alphabetical order by title, is displayed.");
+		System.out.println();
+		logger.finest(DISPLAY_SORTED_BY_TITLES_MESSAGE);
+		System.out.println(DISPLAY_SORTED_BY_TITLES_MESSAGE);
+		System.out.println();
 		
 		flexWindow.getTextArea().append("\n");
 		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
@@ -993,7 +1194,10 @@ public class Flex{
 			flexWindow.getTextArea().append("\n");
 		}
 		
-		logger.finest("The tasks, sorted by ending time, is displayed.");
+		System.out.println();
+		logger.finest(DISPLAY_SORTED_BY_ENDING_TIMES_MESSAGE);
+		System.out.println(DISPLAY_SORTED_BY_ENDING_TIMES_MESSAGE);
+		System.out.println();
 		
 		flexWindow.getTextArea().append("\n");
 		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
@@ -1049,7 +1253,10 @@ public class Flex{
 			flexWindow.getTextArea().append("\n");
 		}
 		
-		logger.finest("The tasks, sorted by starting time, is displayed.");
+		System.out.println();
+		logger.finest(DISPLAY_SORTED_BY_STARTING_TIMES_MESSAGE);
+		System.out.println(DISPLAY_SORTED_BY_STARTING_TIMES_MESSAGE);
+		System.out.println();
 		
 		flexWindow.getTextArea().append("\n");
 		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
@@ -1091,7 +1298,10 @@ public class Flex{
 			flexWindow.getTextArea().append("\n");
 		}
 		
-		logger.finest("The tasks which have not been marked as done are displayed.");
+		System.out.println();
+		logger.finest(TASKS_NOT_DONE_DISPLAYED_MESSAGE);
+		System.out.println(TASKS_NOT_DONE_DISPLAYED_MESSAGE);
+		System.out.println();
 		
 		flexWindow.getTextArea().append("\n");
 		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
@@ -1124,6 +1334,11 @@ public class Flex{
 				flexWindow.getTextArea().append(allTasksList.get(j).getPrintTaskString() + "\n");
 				flexWindow.getTextArea().append("\n");
 			}
+			
+			System.out.println();
+			logger.finest(ALL_TASKS_DISPLAYED_MESSAGE);
+			System.out.println(ALL_TASKS_DISPLAYED_MESSAGE);
+			System.out.println();
 			
 			flexWindow.getTextArea().append("\n");
 			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
@@ -1175,8 +1390,11 @@ public class Flex{
 			flexWindow.getTextArea().append("\n");
 		}
 		
-		logger.finest("The tasks, sorted in alphabetical order by priority level, is displayed.");
-	
+		System.out.println();
+		logger.finest(DISPLAY_SORTED_BY_PRIORITY_LEVELS_MESSAGE);
+		System.out.println(DISPLAY_SORTED_BY_PRIORITY_LEVELS_MESSAGE);
+		System.out.println();
+		
 		flexWindow.getTextArea().append("\n");
 		readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 	}
@@ -1190,6 +1408,12 @@ public class Flex{
 		if(previousAction==null || previousTask ==null){
 			flexWindow.getTextArea().append(NOTHING_TO_UNDO_MESSAGE);
 			flexWindow.getTextArea().append("\n");	
+			
+			System.out.println();
+			logger.finest(NOTHING_TO_UNDO_MESSAGE);
+			System.out.println(NOTHING_TO_UNDO_MESSAGE);
+			System.out.println();
+			
 			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 		}
 		
@@ -1201,22 +1425,37 @@ public class Flex{
 		
 			if(previousAction.equalsIgnoreCase("add")){
 
+				System.out.println();
+				logger.finest(ADD_UNDONE_MESSAGE);
+				System.out.println(ADD_UNDONE_MESSAGE);
+				System.out.println();
+				
 				deleteTask(filename, previousTask.getDate(), previousTask.getTaskTitle(), previousChangeTerm, previousAction, previousTask);
-				logger.finest("The last valid add action has been undone.");
+				
 			}
 			else if(previousAction.equalsIgnoreCase("delete")){
 
+				System.out.println();
+				logger.finest(DELETE_UNDONE_MESSAGE);
+				System.out.println(DELETE_UNDONE_MESSAGE);
+				System.out.println();
+				
 				addTask(filename, previousTask.getPrintTaskString(), previousChangeTerm, previousAction, previousTask);
-				logger.finest("The last valid delete action has been undone.");
+				
 			}
 		}
 		else{
 			
 			if(previousAction.substring(0, whitespaceIndex1).trim().equalsIgnoreCase("change")){
-
+				
+				System.out.println();
+				logger.finest(CHANGE_UNDONE_MESSAGE);
+				System.out.println(CHANGE_UNDONE_MESSAGE);
+				System.out.println();
+				
 				int whitespaceIndex2 = previousAction.indexOf(" ");			
 				changeTaskVariable(filename, previousAction.substring(whitespaceIndex2 + 1).trim() + " " + previousTask.getDate() + ", " + previousTask.getTaskTitle() + ", " + previousChangeTerm, previousChangeTerm, previousAction, previousTask);
-				logger.finest("The last valid change action has been undone.");
+
 			}
 		}
 	}
@@ -1256,6 +1495,12 @@ public class Flex{
 		if(!isTaskValid){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");	
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 		}
 		
@@ -1289,6 +1534,11 @@ public class Flex{
 				
 				flexWindow.getTextArea().append(BLOCKED_MESSAGE);	
 				flexWindow.getTextArea().append("\n");
+				
+				System.out.println();
+				logger.finest(BLOCKED_MESSAGE);
+				System.out.println();
+				
 				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);												
 			}
 		}
@@ -1315,7 +1565,10 @@ public class Flex{
 									
 		writer.close();		
 		
-		logger.finest("The tasks has been successfully added.");
+		System.out.println();
+		logger.finest(ADDED_MESSAGE);
+		System.out.println(ADDED_MESSAGE);
+		System.out.println();
 		
 		flexWindow.getTextArea().append("\n");
 		readAndExecuteCommand(filename, previousChangeTerm, "add", tempTask);	
@@ -1325,7 +1578,7 @@ public class Flex{
 	/// checks the validity of the date,
 	// not perfectly for the day,
 	// but perfectly for the month and the year
-	private static boolean checkDate(String dateString){
+	static boolean checkDate(String dateString){
 		String tempDateString = dateString;
 		
 		int slashIndex1 = tempDateString.indexOf("/");
@@ -1338,8 +1591,20 @@ public class Flex{
 		if(slashIndex1 < 0){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			flexWindow.getTextArea().append(DATE_FIRST_SLASH_MISSING_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(DATE_FIRST_SLASH_MISSING_MESSAGE);
+			System.out.println(DATE_FIRST_SLASH_MISSING_MESSAGE);
+			System.out.println();
+			
 			return false;
 		}
 		
@@ -1349,8 +1614,20 @@ public class Flex{
 		if(tempDateString.substring(0, slashIndex1).trim().length()==0){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			flexWindow.getTextArea().append(DAY_IN_DATE_MISSING_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(DAY_IN_DATE_MISSING_MESSAGE);
+			System.out.println(DAY_IN_DATE_MISSING_MESSAGE);
+			System.out.println();
+			
 			return false;			
 		}
 		
@@ -1358,8 +1635,20 @@ public class Flex{
 		if(tempDateString.substring(0, slashIndex1).trim().indexOf("-")>=0){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			flexWindow.getTextArea().append(DASH_IN_DAY_OF_DATE_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(DASH_IN_DAY_OF_DATE_MESSAGE);
+			System.out.println(DASH_IN_DAY_OF_DATE_MESSAGE);
+			System.out.println();
+			
 			return false;
 		}
 
@@ -1370,8 +1659,20 @@ public class Flex{
 			if(!Character.isDigit(tempCharArray1[i])){
 				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 				flexWindow.getTextArea().append("\n");
+				
+				System.out.println();
+				logger.finest(INVALID_INPUT_MESSAGE);
+				System.out.println(INVALID_INPUT_MESSAGE);
+				System.out.println();
+				
 				flexWindow.getTextArea().append(DAY_IN_DATE_NOT_A_NUMBER_MESSAGE);
 				flexWindow.getTextArea().append("\n");
+				
+				System.out.println();
+				logger.finest(DAY_IN_DATE_NOT_A_NUMBER_MESSAGE);
+				System.out.println(DAY_IN_DATE_NOT_A_NUMBER_MESSAGE);
+				System.out.println();
+				
 				return false;				
 			}
 		}
@@ -1380,8 +1681,20 @@ public class Flex{
 		if(tempDateString.substring(0, slashIndex1).trim().length()>2){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			flexWindow.getTextArea().append(DAY_IN_DATE_MORE_THAN_TWO_DIGITS_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(DAY_IN_DATE_MORE_THAN_TWO_DIGITS_MESSAGE);
+			System.out.println(DAY_IN_DATE_MORE_THAN_TWO_DIGITS_MESSAGE);
+			System.out.println();
+			
 			return false;				
 		}
 		
@@ -1389,8 +1702,20 @@ public class Flex{
 		if(Integer.valueOf(tempDateString.substring(0, slashIndex1).trim())>31){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			flexWindow.getTextArea().append(DAY_IN_DATE_MORE_THAN_THIRTY_ONE_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(DAY_IN_DATE_MORE_THAN_THIRTY_ONE_MESSAGE);
+			System.out.println(DAY_IN_DATE_MORE_THAN_THIRTY_ONE_MESSAGE);
+			System.out.println();
+			
 			return false;				
 		}
 		
@@ -1398,8 +1723,20 @@ public class Flex{
 		if(Integer.valueOf(tempDateString.substring(0, slashIndex1).trim())<=0){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			flexWindow.getTextArea().append(DAY_IN_DATE_IS_ZERO_OR_LESS_THAN_ZERO_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(DAY_IN_DATE_IS_ZERO_OR_LESS_THAN_ZERO_MESSAGE);
+			System.out.println(DAY_IN_DATE_IS_ZERO_OR_LESS_THAN_ZERO_MESSAGE);
+			System.out.println();
+			
 			return false;				
 		}
 		
@@ -1415,8 +1752,20 @@ public class Flex{
 		if(slashIndex2 < 0){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			flexWindow.getTextArea().append(DATE_SECOND_SLASH_MISSING_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(DATE_SECOND_SLASH_MISSING_MESSAGE);
+			System.out.println(DATE_SECOND_SLASH_MISSING_MESSAGE);
+			System.out.println();
+			
 			return false;
 		}
 							
@@ -1429,8 +1778,20 @@ public class Flex{
 		if(tempDateString.substring(0, slashIndex2).trim().length()==0){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			flexWindow.getTextArea().append(MONTH_IN_DATE_MISSING_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(MONTH_IN_DATE_MISSING_MESSAGE);
+			System.out.println(MONTH_IN_DATE_MISSING_MESSAGE);
+			System.out.println();
+			
 			return false;			
 		}
 		
@@ -1438,8 +1799,20 @@ public class Flex{
 		if(tempDateString.substring(0, slashIndex2).trim().indexOf("-")>=0){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			flexWindow.getTextArea().append(DASH_IN_MONTH_OF_DATE_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(DASH_IN_MONTH_OF_DATE_MESSAGE);
+			System.out.println(DASH_IN_MONTH_OF_DATE_MESSAGE);
+			System.out.println();
+			
 			return false;
 		}
 
@@ -1450,8 +1823,20 @@ public class Flex{
 			if(!Character.isDigit(tempCharArray2[j])){
 				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 				flexWindow.getTextArea().append("\n");
+				
+				System.out.println();
+				logger.finest(INVALID_INPUT_MESSAGE);
+				System.out.println(INVALID_INPUT_MESSAGE);
+				System.out.println();
+				
 				flexWindow.getTextArea().append(MONTH_IN_DATE_NOT_A_NUMBER_MESSAGE);
 				flexWindow.getTextArea().append("\n");
+				
+				System.out.println();
+				logger.finest(MONTH_IN_DATE_NOT_A_NUMBER_MESSAGE);
+				System.out.println(MONTH_IN_DATE_NOT_A_NUMBER_MESSAGE);
+				System.out.println();
+				
 				return false;				
 			}
 		}
@@ -1460,8 +1845,20 @@ public class Flex{
 		if(tempDateString.substring(0, slashIndex2).trim().length()>2){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			flexWindow.getTextArea().append(MONTH_IN_DATE_MORE_THAN_TWO_DIGITS_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(MONTH_IN_DATE_MORE_THAN_TWO_DIGITS_MESSAGE);
+			System.out.println(MONTH_IN_DATE_MORE_THAN_TWO_DIGITS_MESSAGE);
+			System.out.println();
+			
 			return false;				
 		}
 		
@@ -1469,8 +1866,20 @@ public class Flex{
 		if(Integer.valueOf(tempDateString.substring(0, slashIndex2))>12){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			flexWindow.getTextArea().append(MONTH_IN_DATE_MORE_THAN_TWELVE_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(MONTH_IN_DATE_MORE_THAN_TWELVE_MESSAGE);
+			System.out.println(MONTH_IN_DATE_MORE_THAN_TWELVE_MESSAGE);
+			System.out.println();
+			
 			return false;				
 		}
 		
@@ -1478,8 +1887,20 @@ public class Flex{
 		if(Integer.valueOf(tempDateString.substring(0, slashIndex2))<=0){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			flexWindow.getTextArea().append(MONTH_IN_DATE_IS_ZERO_OR_LESS_THAN_ZERO_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(MONTH_IN_DATE_IS_ZERO_OR_LESS_THAN_ZERO_MESSAGE);
+			System.out.println(MONTH_IN_DATE_IS_ZERO_OR_LESS_THAN_ZERO_MESSAGE);
+			System.out.println();
+			
 			return false;				
 		}
 		
@@ -1493,8 +1914,20 @@ public class Flex{
 		if(tempDateString.substring(slashIndex2 + 1).trim().length()==0){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			flexWindow.getTextArea().append(YEAR_IN_DATE_MISSING_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(YEAR_IN_DATE_MISSING_MESSAGE);
+			System.out.println(YEAR_IN_DATE_MISSING_MESSAGE);
+			System.out.println();
+			
 			return false;			
 		}
 		
@@ -1502,8 +1935,20 @@ public class Flex{
 		if(tempDateString.substring(slashIndex2 + 1).trim().indexOf("-")>=0){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			flexWindow.getTextArea().append(DASH_IN_YEAR_OF_DATE_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(DASH_IN_YEAR_OF_DATE_MESSAGE);
+			System.out.println(DASH_IN_YEAR_OF_DATE_MESSAGE);
+			System.out.println();
+			
 			return false;
 		}
 
@@ -1514,8 +1959,20 @@ public class Flex{
 			if(!Character.isDigit(tempCharArray3[k])){
 				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 				flexWindow.getTextArea().append("\n");
+				
+				System.out.println();
+				logger.finest(INVALID_INPUT_MESSAGE);
+				System.out.println(INVALID_INPUT_MESSAGE);
+				System.out.println();
+				
 				flexWindow.getTextArea().append(YEAR_IN_DATE_NOT_A_NUMBER_MESSAGE);
 				flexWindow.getTextArea().append("\n");
+				
+				System.out.println();
+				logger.finest(YEAR_IN_DATE_NOT_A_NUMBER_MESSAGE);
+				System.out.println(YEAR_IN_DATE_NOT_A_NUMBER_MESSAGE);
+				System.out.println();
+				
 				return false;				
 			}
 		}							
@@ -1524,8 +1981,20 @@ public class Flex{
 		if(Integer.valueOf(tempDateString.substring(slashIndex2 + 1))<=0){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			flexWindow.getTextArea().append(YEAR_IN_DATE_IS_ZERO_OR_LESS_THAN_ZERO_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(YEAR_IN_DATE_IS_ZERO_OR_LESS_THAN_ZERO_MESSAGE);
+			System.out.println(YEAR_IN_DATE_IS_ZERO_OR_LESS_THAN_ZERO_MESSAGE);
+			System.out.println();
+			
 			return false;				
 		}
 		
@@ -1534,8 +2003,20 @@ public class Flex{
 		if((month==1)&&(day>JANUARY_DAYS)){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			flexWindow.getTextArea().append(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
+			System.out.println(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
+			System.out.println();
+			
 			return false;
 		}
 		else if(month==2){
@@ -1544,86 +2025,230 @@ public class Flex{
 			if((!isLeapYear)&&(day>FEBRUARY_DAYS)){
 				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 				flexWindow.getTextArea().append("\n");
+				
+				System.out.println();
+				logger.finest(INVALID_INPUT_MESSAGE);
+				System.out.println(INVALID_INPUT_MESSAGE);
+				System.out.println();
+				
 				flexWindow.getTextArea().append(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
 				flexWindow.getTextArea().append("\n");
+				
+				System.out.println();
+				logger.finest(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
+				System.out.println(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
+				System.out.println();
+				
 				return false;				
 			}
 			else if((isLeapYear)&&(day>(FEBRUARY_DAYS + 1))){
 				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 				flexWindow.getTextArea().append("\n");
+				
+				System.out.println();
+				logger.finest(INVALID_INPUT_MESSAGE);
+				System.out.println(INVALID_INPUT_MESSAGE);
+				System.out.println();
+				
 				flexWindow.getTextArea().append(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
 				flexWindow.getTextArea().append("\n");
+				
+				System.out.println();
+				logger.finest(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
+				System.out.println(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
+				System.out.println();
+				
 				return false;
 			}
 		}
 		else if((month==3)&&(day>MARCH_DAYS)){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			flexWindow.getTextArea().append(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
+			System.out.println(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
+			System.out.println();
+			
 			return false;			
 		}
 		else if((month==4)&&(day>APRIL_DAYS)){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			flexWindow.getTextArea().append(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
+			System.out.println(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
+			System.out.println();
+			
 			return false;			
 		}
 		else if((month==5)&&(day>MAY_DAYS)){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			flexWindow.getTextArea().append(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
+			System.out.println(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
+			System.out.println();
+			
 			return false;
 		}
 		else if((month==6)&&(day>JUNE_DAYS)){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			flexWindow.getTextArea().append(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
+			System.out.println(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
+			System.out.println();
+			
 			return false;
 		}
 		else if((month==7)&&(day>JULY_DAYS)){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			flexWindow.getTextArea().append(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
+			System.out.println(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
+			System.out.println();
+			
 			return false;
 		}
 		else if((month==8)&&(day>AUGUST_DAYS)){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			flexWindow.getTextArea().append(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
+			System.out.println(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
+			System.out.println();
+			
 			return false;
 		}
 		else if((month==9)&&(day>SEPTEMBER_DAYS)){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			flexWindow.getTextArea().append(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
+			System.out.println(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
+			System.out.println();
+			
 			return false;
 		}
 		else if((month==10)&&(day>OCTOBER_DAYS)){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			flexWindow.getTextArea().append(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
+			System.out.println(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
+			System.out.println();
+			
 			return false;
 		}
 		else if((month==11)&&(day>NOVEMBER_DAYS)){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			flexWindow.getTextArea().append(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
+			System.out.println(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
+			System.out.println();
+			
 			return false;
 		}
 		else if((month==12)&&(day>DECEMBER_DAYS)){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			flexWindow.getTextArea().append(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
+			System.out.println(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
+			System.out.println();
+			
 			return false;
 		}
 		
@@ -1634,7 +2259,7 @@ public class Flex{
 	// checks the validity of the potential Task String	
 	// and prints out error messages for only the first mistake made by the user, 
 	// for the Task String
-	private static boolean checkTask(String taskString) {
+	static boolean checkTask(String taskString) {
 		
 		String tempString = new String("");
 		tempString = taskString.trim();
@@ -1658,8 +2283,20 @@ public class Flex{
 		if(commaWhitespaceIndex1 < 0){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
-			flexWindow.getTextArea().append(FIRST_COMMA_SPACE_MISSING_MESSAGE );
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
+			flexWindow.getTextArea().append(FIRST_COMMA_SPACE_MISSING_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(FIRST_COMMA_SPACE_MISSING_MESSAGE);
+			System.out.println(FIRST_COMMA_SPACE_MISSING_MESSAGE);
+			System.out.println();
+			
 			return false;
 		}
 		
@@ -1687,8 +2324,20 @@ public class Flex{
 		if(commaWhitespaceIndex2 < 0){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
-			flexWindow.getTextArea().append(SECOND_COMMA_SPACE_MISSING_MESSAGE );
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
+			flexWindow.getTextArea().append(SECOND_COMMA_SPACE_MISSING_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(SECOND_COMMA_SPACE_MISSING_MESSAGE);
+			System.out.println(SECOND_COMMA_SPACE_MISSING_MESSAGE);
+			System.out.println();
+			
 			return false;
 		}
 
@@ -1703,8 +2352,20 @@ public class Flex{
 		if(tempTaskVariables[1].length()==0){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			flexWindow.getTextArea().append(STARTING_TIME_MISSING_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(STARTING_TIME_MISSING_MESSAGE);
+			System.out.println(STARTING_TIME_MISSING_MESSAGE);
+			System.out.println();
+			
 			return false;				
 		}
 		
@@ -1712,8 +2373,20 @@ public class Flex{
 		if(tempTaskVariables[1].indexOf("-")>=0){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			flexWindow.getTextArea().append(DASH_IN_STARTING_TIME_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(DASH_IN_STARTING_TIME_MESSAGE);
+			System.out.println(DASH_IN_STARTING_TIME_MESSAGE);
+			System.out.println();
+			
 			return false;							
 		}
 		
@@ -1724,8 +2397,20 @@ public class Flex{
 			if(!Character.isDigit(tempCharArray4[l])){
 				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 				flexWindow.getTextArea().append("\n");
+				
+				System.out.println();
+				logger.finest(INVALID_INPUT_MESSAGE);
+				System.out.println(INVALID_INPUT_MESSAGE);
+				System.out.println();
+				
 				flexWindow.getTextArea().append(STARTING_TIME_NOT_A_NUMBER_MESSAGE);
 				flexWindow.getTextArea().append("\n");
+				
+				System.out.println();
+				logger.finest(STARTING_TIME_NOT_A_NUMBER_MESSAGE);
+				System.out.println(STARTING_TIME_NOT_A_NUMBER_MESSAGE);
+				System.out.println();
+				
 				return false;				
 			}
 		}				
@@ -1734,8 +2419,20 @@ public class Flex{
 		if(tempTaskVariables[1].length()!=4){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			flexWindow.getTextArea().append(STARTING_TIME_IS_A_NUMBER_BUT_NOT_A_4_DIGIT_NUMBER_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(STARTING_TIME_IS_A_NUMBER_BUT_NOT_A_4_DIGIT_NUMBER_MESSAGE);
+			System.out.println(STARTING_TIME_IS_A_NUMBER_BUT_NOT_A_4_DIGIT_NUMBER_MESSAGE);
+			System.out.println();
+			
 			return false;					
 		}
 		
@@ -1743,8 +2440,20 @@ public class Flex{
 		if(Integer.valueOf(tempTaskVariables[1])>2359){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			flexWindow.getTextArea().append(STARTING_TIME_IS_A_NUMBER_GREATER_THAN_TWO_THREE_FIVE_NINE_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(STARTING_TIME_IS_A_NUMBER_GREATER_THAN_TWO_THREE_FIVE_NINE_MESSAGE);
+			System.out.println(STARTING_TIME_IS_A_NUMBER_GREATER_THAN_TWO_THREE_FIVE_NINE_MESSAGE);
+			System.out.println();
+			
 			return false;	
 		}
 		
@@ -1758,8 +2467,20 @@ public class Flex{
 		if(commaWhitespaceIndex3 < 0){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
-			flexWindow.getTextArea().append(THIRD_COMMA_SPACE_MISSING_MESSAGE );
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
+			flexWindow.getTextArea().append(THIRD_COMMA_SPACE_MISSING_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(THIRD_COMMA_SPACE_MISSING_MESSAGE);
+			System.out.println(THIRD_COMMA_SPACE_MISSING_MESSAGE);
+			System.out.println();
+			
 			return false;
 		}
 		
@@ -1774,8 +2495,20 @@ public class Flex{
 		if(tempTaskVariables[2].length()==0){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			flexWindow.getTextArea().append(ENDING_TIME_MISSING_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(ENDING_TIME_MISSING_MESSAGE);
+			System.out.println(ENDING_TIME_MISSING_MESSAGE);
+			System.out.println();
+			
 			return false;				
 		}
 		
@@ -1783,8 +2516,20 @@ public class Flex{
 		if(tempTaskVariables[2].indexOf("-")>=0){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			flexWindow.getTextArea().append(DASH_IN_ENDING_TIME_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(DASH_IN_ENDING_TIME_MESSAGE);
+			System.out.println(DASH_IN_ENDING_TIME_MESSAGE);
+			System.out.println();
+			
 			return false;							
 		}
 		
@@ -1795,8 +2540,20 @@ public class Flex{
 			if(!Character.isDigit(tempCharArray5[m])){
 				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 				flexWindow.getTextArea().append("\n");
+				
+				System.out.println();
+				logger.finest(INVALID_INPUT_MESSAGE);
+				System.out.println(INVALID_INPUT_MESSAGE);
+				System.out.println();
+				
 				flexWindow.getTextArea().append(ENDING_TIME_NOT_A_NUMBER_MESSAGE);
 				flexWindow.getTextArea().append("\n");
+				
+				System.out.println();
+				logger.finest(ENDING_TIME_NOT_A_NUMBER_MESSAGE);
+				System.out.println(ENDING_TIME_NOT_A_NUMBER_MESSAGE);
+				System.out.println();
+				
 				return false;				
 			}
 		}				
@@ -1805,8 +2562,20 @@ public class Flex{
 		if(tempTaskVariables[2].length()!=4){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			flexWindow.getTextArea().append(ENDING_TIME_IS_A_NUMBER_BUT_NOT_A_4_DIGIT_NUMBER_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(ENDING_TIME_IS_A_NUMBER_BUT_NOT_A_4_DIGIT_NUMBER_MESSAGE);
+			System.out.println(ENDING_TIME_IS_A_NUMBER_BUT_NOT_A_4_DIGIT_NUMBER_MESSAGE);
+			System.out.println();
+			
 			return false;					
 		}
 		
@@ -1814,8 +2583,20 @@ public class Flex{
 		if(Integer.valueOf(tempTaskVariables[2])>2359){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			flexWindow.getTextArea().append(ENDING_TIME_IS_A_NUMBER_GREATER_THAN_TWO_THREE_FIVE_NINE_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(ENDING_TIME_IS_A_NUMBER_GREATER_THAN_TWO_THREE_FIVE_NINE_MESSAGE);
+			System.out.println(ENDING_TIME_IS_A_NUMBER_GREATER_THAN_TWO_THREE_FIVE_NINE_MESSAGE);
+			System.out.println();
+			
 			return false;	
 		}
 						
@@ -1828,8 +2609,20 @@ public class Flex{
 		if(commaWhitespaceIndex4 < 0){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
-			flexWindow.getTextArea().append(FOURTH_COMMA_SPACE_MISSING_MESSAGE );
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
+			flexWindow.getTextArea().append(FOURTH_COMMA_SPACE_MISSING_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(FOURTH_COMMA_SPACE_MISSING_MESSAGE);
+			System.out.println(FOURTH_COMMA_SPACE_MISSING_MESSAGE);
+			System.out.println();
+			
 			return false;
 		}
 		
@@ -1846,8 +2639,20 @@ public class Flex{
 		if(commaWhitespaceIndex5 < 0){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
-			flexWindow.getTextArea().append(FIFTH_COMMA_SPACE_MISSING_MESSAGE );
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
+			flexWindow.getTextArea().append(FIFTH_COMMA_SPACE_MISSING_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(FIFTH_COMMA_SPACE_MISSING_MESSAGE);
+			System.out.println(FIFTH_COMMA_SPACE_MISSING_MESSAGE);
+			System.out.println();
+			
 			return false;
 		}
 		
@@ -1862,8 +2667,20 @@ public class Flex{
 		if(commaWhitespaceIndex6 < 0){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
-			flexWindow.getTextArea().append(SIXTH_COMMA_SPACE_MISSING_MESSAGE );
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
+			flexWindow.getTextArea().append(SIXTH_COMMA_SPACE_MISSING_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(SIXTH_COMMA_SPACE_MISSING_MESSAGE);
+			System.out.println(SIXTH_COMMA_SPACE_MISSING_MESSAGE);
+			System.out.println();
+			
 			return false;
 		}
 		
@@ -1919,6 +2736,12 @@ public class Flex{
 		if(taskExists == false){
 			flexWindow.getTextArea().append(TASK_DOES_NOT_EXIST_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(TASK_DOES_NOT_EXIST_MESSAGE);
+			System.out.println(TASK_DOES_NOT_EXIST_MESSAGE);
+			System.out.println();
+			
 			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 		}
 		
@@ -1937,8 +2760,11 @@ public class Flex{
 		
 		writer.close();
 		
-		logger.finest("The specified task has been deleted.");
-
+		System.out.println();
+		logger.finest(DELETED_MESSAGE);
+		System.out.println(DELETED_MESSAGE);
+		System.out.println();
+		
 		flexWindow.getTextArea().append("\n");
 		readAndExecuteCommand(filename, previousChangeTerm, "delete", tempTask);	
 	}
@@ -1953,6 +2779,12 @@ public class Flex{
 		if(whitespaceIndex1 < 0){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 		}
 		
@@ -2067,10 +2899,20 @@ public class Flex{
 		// invalid input case
 		else{
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
 		}		
 		
 		if(hasResultWithValidInput == false){
 			flexWindow.getTextArea().append(NO_SEARCH_RESULTS_MESSSAGE);
+			
+			System.out.println();
+			logger.finest(NO_SEARCH_RESULTS_MESSSAGE);
+			System.out.println(NO_SEARCH_RESULTS_MESSSAGE);
+			System.out.println();
 		}
 		
 		flexWindow.getTextArea().append("\n");
@@ -2087,6 +2929,12 @@ public class Flex{
 		if(whitespaceIndex1 < 0){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 		}
 		
@@ -2102,6 +2950,12 @@ public class Flex{
 		if(commaWhitespaceIndex1 < 0){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 		}
 		
@@ -2116,6 +2970,12 @@ public class Flex{
 		if(!checkDate(tempDateString)){			
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");	
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 		}		
 		
@@ -2129,6 +2989,12 @@ public class Flex{
 		if(commaWhitespaceIndex2 < 0){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 		}
 		
@@ -2178,6 +3044,12 @@ public class Flex{
 			if(!checkDate(newDate)){			
 				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 				flexWindow.getTextArea().append("\n");	
+				
+				System.out.println();
+				logger.finest(INVALID_INPUT_MESSAGE);
+				System.out.println(INVALID_INPUT_MESSAGE);
+				System.out.println();
+				
 				readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 			}	
 			
@@ -2326,6 +3198,12 @@ public class Flex{
 		else{
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
 		}
 		
@@ -2344,7 +3222,10 @@ public class Flex{
 									
 		writer.close();
 		
-		logger.finest("The change to the task information is valid and processed.");
+		System.out.println();
+		logger.finest(CHANGED_MESSAGE);
+		System.out.println(CHANGED_MESSAGE);
+		System.out.println();
 		
 		// for valid input cases
 		flexWindow.getTextArea().append("\n");
