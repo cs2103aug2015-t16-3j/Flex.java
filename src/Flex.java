@@ -65,12 +65,19 @@ public class Flex{
 	private static final String STARTING_TIME_NOT_A_NUMBER_MESSAGE = "The starting time is not a number.";
 	private static final String STARTING_TIME_IS_A_NUMBER_BUT_NOT_A_4_DIGIT_NUMBER_MESSAGE = "The starting time is not a 4-digit number. Do take note that the starting time follows the 4-digit twenty-four-hour format.";
 	private static final String STARTING_TIME_IS_A_NUMBER_GREATER_THAN_TWO_THREE_FIVE_NINE_MESSAGE = "The starting time is a number which is greater than 2359 (11:59pm).";
+	private static final String STARTING_TIME_HOURS_GREATER_THAN_TWENTY_THREE_MESSAGE = "The hours of the starting time is greater than 23.";
+	private static final String STARTING_TIME_MINUTES_GREATER_THAN_FIFTY_NINE_MESSAGE = "The minutes of the starting time is greater than 59.";
+	private static final String STARTING_TIME_LATER_THAN_ENDING_TIME_MESSAGE = "The new starting time is later than the current ending time.";
 	
 	private static final String ENDING_TIME_MISSING_MESSAGE = "The ending time is missing. Do take note that the ending time follows the 4-digit twenty-four-hour format.";
 	private static final String DASH_IN_ENDING_TIME_MESSAGE = "At least one dash is in the ending time. Do take note that negative numbers are not allowed as well. Also, do take note that the ending time follows the 4-digit twenty-four-hour format.";	
 	private static final String ENDING_TIME_NOT_A_NUMBER_MESSAGE = "The ending time is not a number.";
 	private static final String ENDING_TIME_IS_A_NUMBER_BUT_NOT_A_4_DIGIT_NUMBER_MESSAGE = "The ending time is not a 4-digit number. Do take note that the ending time follows the 4-digit twenty-four-hour format.";
 	private static final String ENDING_TIME_IS_A_NUMBER_GREATER_THAN_TWO_THREE_FIVE_NINE_MESSAGE = "The ending time is a number which is greater than 2359 (11:59pm).";
+	private static final String ENDING_TIME_HOURS_GREATER_THAN_TWENTY_THREE_MESSAGE = "The hours of the ending time is greater than 23.";
+	private static final String ENDING_TIME_MINUTES_GREATER_THAN_FIFTY_NINE_MESSAGE = "The minutes of the ending time is greater than 59.";
+	private static final String ENDING_TIME_EARLIER_THAN_STARTING_TIME_MESSAGE = "The new ending time is earlier than the curent starting time.";
+	
 	
 	private static final String NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE = "The number of days, according to the month and year in this date, more than expected.";	
 	
@@ -84,9 +91,6 @@ public class Flex{
 	private static final String NOTHING_TO_UNDO_MESSAGE = "Nothing to undo as no valid 1) adding of a task, 2) deleting of a task, OR 3) Changing a task variable, has been carried out by the user during this program run.";
 	private static final String DELETED_MESSAGE = "The specified task has been deleted.";
 	private static String ADDED_MESSAGE = "The task has been successfully added.";
-
-	private static final String STARTING_TIME_LATER_THAN_ENDING_TIME_MESSAGE = "The new starting time is later than the current ending time.";
-	private static final String ENDING_TIME_EARLIER_THAN_STARTING_TIME_MESSAGE = "The new ending time is earlier than the curent starting time.";
 
 	private static final String STARTING_DATE_REQUEST_MESSAGE = "Please enter the starting date (format: dd/mm/yyyy): " + "\n";
 
@@ -2458,7 +2462,50 @@ public class Flex{
 			return false;					
 		}
 		
-		// checks if the starting time is a number greater than 2349 (11:59pm)
+		// checks if the hours for the starting time, is more than 23
+		if(Integer.valueOf(tempTaskVariables[1].substring(0, 2))>23){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
+			flexWindow.getTextArea().append(STARTING_TIME_HOURS_GREATER_THAN_TWENTY_THREE_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(STARTING_TIME_HOURS_GREATER_THAN_TWENTY_THREE_MESSAGE);
+			System.out.println(STARTING_TIME_HOURS_GREATER_THAN_TWENTY_THREE_MESSAGE);
+			System.out.println();
+			
+			return false;	
+		}
+		
+		// checks if the minutes for the starting time, is more than 59
+		if(Integer.valueOf(tempTaskVariables[1].substring(2, 4))>59){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
+			flexWindow.getTextArea().append(STARTING_TIME_MINUTES_GREATER_THAN_FIFTY_NINE_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(STARTING_TIME_MINUTES_GREATER_THAN_FIFTY_NINE_MESSAGE);
+			System.out.println(STARTING_TIME_MINUTES_GREATER_THAN_FIFTY_NINE_MESSAGE);
+			System.out.println();
+			
+			return false;	
+		}
+		
+		
+		// checks if the starting time is a number greater than 2359 (11:59pm)
 		if(Integer.valueOf(tempTaskVariables[1])>2359){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
@@ -2600,8 +2647,50 @@ public class Flex{
 			
 			return false;					
 		}
+
+		// checks if the hours for the ending time, is more than 23
+		if(Integer.valueOf(tempTaskVariables[2].substring(0, 2))>23){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
+			flexWindow.getTextArea().append(ENDING_TIME_HOURS_GREATER_THAN_TWENTY_THREE_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(ENDING_TIME_HOURS_GREATER_THAN_TWENTY_THREE_MESSAGE);
+			System.out.println(ENDING_TIME_HOURS_GREATER_THAN_TWENTY_THREE_MESSAGE);
+			System.out.println();
+			
+			return false;	
+		}
 		
-		// checks if the ending time is a number greater than 2349 (11:59pm)
+		// checks if the minutes for the ending time, is more than 59
+		if(Integer.valueOf(tempTaskVariables[2].substring(2, 4))>59){
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
+			flexWindow.getTextArea().append(ENDING_TIME_MINUTES_GREATER_THAN_FIFTY_NINE_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(ENDING_TIME_MINUTES_GREATER_THAN_FIFTY_NINE_MESSAGE);
+			System.out.println(ENDING_TIME_MINUTES_GREATER_THAN_FIFTY_NINE_MESSAGE);
+			System.out.println();
+			
+			return false;	
+		}
+		
+		// checks if the ending time is a number greater than 2359 (11:59pm)
 		if(Integer.valueOf(tempTaskVariables[2])>2359){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
