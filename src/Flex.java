@@ -2945,7 +2945,7 @@ public class Flex{
 	// changes one of the variables in a task, EXCEPT for the comparison value
 	// for sorting all tasks by date and starting time
 	private static void changeTaskVariable(String filename, String remainingCommandString, String previousChangeTerm, String previousAction, Task previousTask) throws IOException {		
-		
+		boolean atLeastOneTaskChanged = false;
 		int whitespaceIndex1 = remainingCommandString.indexOf(" ");
 		
 		if(whitespaceIndex1 < 0){
@@ -3091,6 +3091,8 @@ public class Flex{
 					
 					assert(checkTask(allTasksList.get(i).getPrintTaskString()));
 					
+					atLeastOneTaskChanged = true;
+					
 					tempTask = allTasksList.get(i);
 					lastAction = "change date";
 				}
@@ -3115,14 +3117,22 @@ public class Flex{
 					if( ( Integer.valueOf(allTasksList.get(i).getStartingTime().substring(0, 2)) * HOUR_MINUTES + Integer.valueOf(allTasksList.get(i).getStartingTime().substring(2, 4)) ) > ( Integer.valueOf(allTasksList.get(i).getEndingTime().substring(0, 2)) * HOUR_MINUTES + Integer.valueOf(allTasksList.get(i).getEndingTime().substring(2, 4)) ) ){
 						allTasksList.get(i).setStartingTime(changedTerm);
 						System.out.println();
+						
+						flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+						flexWindow.getTextArea().append("\n");	
 						System.out.println(INVALID_INPUT_MESSAGE);
 						logger.finest(INVALID_INPUT_MESSAGE);
+						
+						flexWindow.getTextArea().append(STARTING_TIME_LATER_THAN_ENDING_TIME_MESSAGE);
+						flexWindow.getTextArea().append("\n");	
 						System.out.print(STARTING_TIME_LATER_THAN_ENDING_TIME_MESSAGE);
 						logger.finest(STARTING_TIME_LATER_THAN_ENDING_TIME_MESSAGE);
+						
 						System.out.println();
 						readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 					}
 					
+					atLeastOneTaskChanged = true;
 					
 					tempTask = allTasksList.get(i);
 					lastAction = "change start";
@@ -3147,13 +3157,22 @@ public class Flex{
 					if( ( Integer.valueOf(allTasksList.get(i).getStartingTime().substring(0, 2)) * HOUR_MINUTES + Integer.valueOf(allTasksList.get(i).getStartingTime().substring(2, 4)) ) > ( Integer.valueOf(allTasksList.get(i).getEndingTime().substring(0, 2)) * HOUR_MINUTES + Integer.valueOf(allTasksList.get(i).getEndingTime().substring(2, 4)) ) ){
 						allTasksList.get(i).setEndingTime(changedTerm);
 						System.out.println();
+						
+						flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+						flexWindow.getTextArea().append("\n");
 						System.out.println(INVALID_INPUT_MESSAGE);
 						logger.finest(INVALID_INPUT_MESSAGE);
+						
+						flexWindow.getTextArea().append(ENDING_TIME_EARLIER_THAN_STARTING_TIME_MESSAGE);
+						flexWindow.getTextArea().append("\n");
 						System.out.print(ENDING_TIME_EARLIER_THAN_STARTING_TIME_MESSAGE);
 						logger.finest(ENDING_TIME_EARLIER_THAN_STARTING_TIME_MESSAGE);
+						
 						System.out.println();
 						readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);
 					}
+					
+					atLeastOneTaskChanged = true;
 					
 					tempTask = allTasksList.get(i);
 					lastAction = "change end";
@@ -3170,6 +3189,10 @@ public class Flex{
 					// rest of the changeTaskVariable() method
 					if(!checkTask(allTasksList.get(i).getPrintTaskString())){
 						allTasksList.get(i).setTaskTitle(changedTerm);
+						
+						flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+						flexWindow.getTextArea().append("\n");
+						
 						System.out.println();
 						System.out.println(INVALID_INPUT_MESSAGE);
 						logger.finest(INVALID_INPUT_MESSAGE);
@@ -3178,6 +3201,8 @@ public class Flex{
 					}
 					
 					assert(checkTask(allTasksList.get(i).getPrintTaskString()));
+					
+					atLeastOneTaskChanged = true;
 					
 					tempTask = allTasksList.get(i);
 					lastAction = "change title";
@@ -3194,6 +3219,10 @@ public class Flex{
 					// rest of the changeTaskVariable() method
 					if(!checkTask(allTasksList.get(i).getPrintTaskString())){
 						allTasksList.get(i).setTaskDescription(changedTerm);
+						
+						flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+						flexWindow.getTextArea().append("\n");
+						
 						System.out.println();
 						System.out.println(INVALID_INPUT_MESSAGE);
 						logger.finest(INVALID_INPUT_MESSAGE);
@@ -3202,6 +3231,8 @@ public class Flex{
 					}
 					
 					assert(checkTask(allTasksList.get(i).getPrintTaskString()));
+					
+					atLeastOneTaskChanged = true;
 					
 					tempTask = allTasksList.get(i);
 					lastAction = "change description";
@@ -3218,6 +3249,10 @@ public class Flex{
 					// rest of the changeTaskVariable() method
 					if(!checkTask(allTasksList.get(i).getPrintTaskString())){
 						allTasksList.get(i).setPriorityLevel(changedTerm);
+						
+						flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+						flexWindow.getTextArea().append("\n");
+						
 						System.out.println();
 						System.out.println(INVALID_INPUT_MESSAGE);
 						logger.finest(INVALID_INPUT_MESSAGE);
@@ -3226,7 +3261,9 @@ public class Flex{
 					}
 					
 					assert(checkTask(allTasksList.get(i).getPrintTaskString()));
-									
+								
+					atLeastOneTaskChanged = true;
+					
 					tempTask = allTasksList.get(i);
 					lastAction = "change priority";
 				}
@@ -3242,6 +3279,10 @@ public class Flex{
 					// rest of the changeTaskVariable() method
 					if(!checkTask(allTasksList.get(i).getPrintTaskString())){
 						allTasksList.get(i).setCategory(changedTerm);
+						
+						flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+						flexWindow.getTextArea().append("\n");
+						
 						System.out.println();
 						System.out.println(INVALID_INPUT_MESSAGE);
 						logger.finest(INVALID_INPUT_MESSAGE);
@@ -3251,6 +3292,8 @@ public class Flex{
 					
 					assert(checkTask(allTasksList.get(i).getPrintTaskString()));
 					
+					atLeastOneTaskChanged = true;
+					
 					tempTask = allTasksList.get(i);
 					lastAction = "change category";
 				}
@@ -3258,6 +3301,18 @@ public class Flex{
 		}
 		// invalid input case
 		else{
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
+			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
+		}
+		
+		if(!atLeastOneTaskChanged){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
 			
