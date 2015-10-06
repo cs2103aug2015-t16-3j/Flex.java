@@ -85,6 +85,8 @@ public class Flex{
 	private static final String DELETED_MESSAGE = "The specified task has been deleted.";
 	private static String ADDED_MESSAGE = "The task has been successfully added.";
 
+	private static final String STARTING_DATE_REQUEST_MESSAGE = "Please enter the starting date (format: dd/mm/yyyy): " + "\n";
+
 	private static final String DONE_TASKS_DISPLAYED_MESSAGE = "The tasks in the schedule, which are done, are displayed.";
 	private static final String PENDING_TASKS_DISPLAYED_MESSAGE = "The tasks in the schedule, which are pending, are displayed.";
 	private static final String BLOCKED_TASKS_DISPLAYED_MESSAGE = "The tasks in the schedule, which are blocked, are displayed.";
@@ -154,9 +156,21 @@ public class Flex{
 			flexWindow.getTextArea().append("\n");
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
 			flexWindow.getTextArea().append("\n");
 			flexWindow.getTextArea().append(FILENAME_INPUT_MESSAGE);
 			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(FILENAME_INPUT_MESSAGE);
+			System.out.println(FILENAME_INPUT_MESSAGE);
+			System.out.println();
+			
 			filename = sc.nextLine();
 			tempFile = new File(filename);
 			
@@ -625,8 +639,13 @@ public class Flex{
 			reader.close();
 		}				
 		
-		flexWindow.getTextArea().append("Please enter the starting date (format: dd/mm/yyyy): " + "\n");
+		flexWindow.getTextArea().append(STARTING_DATE_REQUEST_MESSAGE);
 		flexWindow.getTextArea().append("\n");
+		
+		System.out.println();
+		logger.finest(STARTING_DATE_REQUEST_MESSAGE);
+		System.out.println(STARTING_DATE_REQUEST_MESSAGE);
+		System.out.println();
 		
 		// day 1
 		
@@ -971,9 +990,9 @@ public class Flex{
 		}
 		
 		
-		System.out.println();
+	
 		logger.finest(DATE_GENERATED_MESSAGE + newDay +  "/" + newMonth + "/" + newYear);
-		System.out.println();
+	
 		
 		return newDay +  "/" + newMonth + "/" + newYear;
 		
