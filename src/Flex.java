@@ -92,6 +92,8 @@ public class Flex{
 	private static final String DELETED_MESSAGE = "The specified task has been deleted.";
 	private static String ADDED_MESSAGE = "The task has been successfully added.";
 
+	private static final String VALID_INPUT_WITHOUT_MATCHING_TASKS_TO_HAVE_INFORMATION_CHANGED_MESSAGE = "Valid input provided, but there are no matching tasks to have their information changed.";
+
 	private static final String STARTING_DATE_REQUEST_MESSAGE = "Please enter the starting date (format: dd/mm/yyyy): " + "\n";
 
 	private static final String DONE_TASKS_DISPLAYED_MESSAGE = "The tasks in the schedule, which are done, are displayed.";
@@ -119,7 +121,7 @@ public class Flex{
 	private static final String FILENAME_INPUT_MESSAGE = "Please enter the full path name of the .txt schedule file, including its name. For example: C:" + "\\" + "Users" + "\\" + "Owner" + "\\" + "Documents" + "\\" + "Flex" + "." + "java" + "\\" + "src" + "\\" + "FlexTest" + "." + "txt";
 	private static final int HOUR_MINUTES = 60;
 	
-	// number of days in each month 
+	// number of days in each month for non-leap years
 	private static final int JANUARY_DAYS = 31;
 	private static final int FEBRUARY_DAYS = 28;
 	private static final int MARCH_DAYS = 31;
@@ -3408,6 +3410,14 @@ public class Flex{
 			System.out.println();
 			logger.finest(INVALID_INPUT_MESSAGE);
 			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+			
+			flexWindow.getTextArea().append(VALID_INPUT_WITHOUT_MATCHING_TASKS_TO_HAVE_INFORMATION_CHANGED_MESSAGE);
+			flexWindow.getTextArea().append("\n");
+			
+			System.out.println();
+			logger.finest(VALID_INPUT_WITHOUT_MATCHING_TASKS_TO_HAVE_INFORMATION_CHANGED_MESSAGE);
+			System.out.println(VALID_INPUT_WITHOUT_MATCHING_TASKS_TO_HAVE_INFORMATION_CHANGED_MESSAGE);
 			System.out.println();
 			
 			readAndExecuteCommand(filename, previousChangeTerm, previousAction, previousTask);	
