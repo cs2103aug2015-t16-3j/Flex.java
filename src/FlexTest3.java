@@ -34,7 +34,7 @@ public class FlexTest3{
 	
 	@Test
 	public void testOutput() throws IOException{
-		Flex tester = new Flex();
+		ShowDays tester = new ShowDays();
 		
 		assertEquals("generating the next date from 27/1/2014", "28/1/2014", tester.generateNextDate("27/1/2014"));
 		
