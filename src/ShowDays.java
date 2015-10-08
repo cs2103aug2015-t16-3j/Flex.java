@@ -18,8 +18,6 @@ public class ShowDays {
 
 	private static final String DATE_GENERATED_MESSAGE = "The starting date provided by the user for displaying the specified week's tasks is valid. The next valid date generated is ";
 	private static final String INVALID_INPUT_MESSAGE = "Invalid input. Please try again.";
-	// that is, it is valid only if its starting time, or ending time, are NOT between the starting
-	// and ending times of existing tasks which are NOT DONE YET
 
 	// number of days in each month for non-leap years
 	private static final int JANUARY_DAYS = 31;

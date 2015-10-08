@@ -50,8 +50,7 @@ public class Flex{
 	private static final String DELETE_UNDONE_MESSAGE = "The last valid delete action has been undone.";
 	private static final String ADD_UNDONE_MESSAGE = "The last valid add action has been undone.";
 	private static final String INVALID_INPUT_MESSAGE = "Invalid input. Please try again.";
-	// that is, it is valid only if its starting time, or ending time, are NOT between the starting
-	// and ending times of existing tasks which are NOT DONE YET
+	
 	private static final String TASK_DOES_NOT_EXIST_MESSAGE = "Task does not exist, so no such task can be deleted.";
 	private static final String EXIT_MESSAGE = "Exiting the program.";
 	private static final String BLOCKED_MESSAGE = "Unable to add the new task, because the new task clashes with existing tasks (on the same date) which have not been marked as tasks which have been done.";
@@ -707,7 +706,7 @@ public class Flex{
 	}	
 
 	// deletes a task
-	private static void deleteTask(String filename, String date, String taskTitle, LastAction lastAction) throws IOException {
+	static void deleteTask(String filename, String date, String taskTitle, LastAction lastAction) throws IOException {
 		// reads in the file, line by line
 		boolean taskExists = false;
 		
@@ -779,7 +778,7 @@ public class Flex{
 	
 	// changes one of the variables in a task, EXCEPT for the comparison value
 	// for sorting all tasks by date and starting time
-	private static void changeTaskVariable(String filename, String remainingCommandString, LastAction lastAction, FlexWindow flexWindow) throws IOException {		
+	static void changeTaskVariable(String filename, String remainingCommandString, LastAction lastAction, FlexWindow flexWindow) throws IOException {		
 		boolean atLeastOneTaskChanged = false;
 		int whitespaceIndex1 = remainingCommandString.indexOf(" ");
 		
