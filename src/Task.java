@@ -239,7 +239,7 @@ public class Task {
 
 	
 	// retrieves the comparisonValue for sorting
-	public long getComparisonValue(){
+	public int getComparisonValue(){
 		return this.comparisonValue;
 	}
 
