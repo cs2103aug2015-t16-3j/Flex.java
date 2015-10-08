@@ -1,10 +1,5 @@
 import static org.junit.Assert.*;
-
 import java.io.IOException;
-import java.util.Scanner;
-
-import javax.swing.JFrame;
-
 import org.junit.Test;
 
 // FlexTest3.java tests that the correct, valid date can be generated from a valid date

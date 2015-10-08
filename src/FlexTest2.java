@@ -1,10 +1,5 @@
 import static org.junit.Assert.*;
-
 import java.io.IOException;
-import java.util.Scanner;
-
-import javax.swing.JFrame;
-
 import org.junit.Test;
 
 // FlexTest2.java tests that valid Task "lines" are true, using valid Task "lines", to test the logic of checkTask()
