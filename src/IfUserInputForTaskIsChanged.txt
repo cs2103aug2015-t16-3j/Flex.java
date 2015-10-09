@@ -21,7 +21,8 @@ and the format for printTask() and getPrintTaskString()
 
 3) Flex.java, for readAndExecuteCommand();
 
-4) Checker.java (because it needs to use checkTask())
+4) Checker.java (because it needs to use checkTask()) [NOTE: This will work, if FlexTest2.java, which is a JUnit Test Class, works (with a green bar shown in Eclipse).]
+
 
 
 Checker.java, for checkTask()
