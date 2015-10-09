@@ -1,0 +1,37 @@
+add 1/1/1111, 0000, 0001, title, description, priority, category
+
+add 31/1/1111 0000 0000 title, description, priority, category
+
+Provided that the format for date, starting time and ending time are kept the same.
+
+title, description, priority and category each can have more than one word
+
+What symbol should the separating character/symbol "," (comma) be replaced by?
+
+Are the number of separating symbols to be fixed?
+
+Do all 7 variables still need to be there?
+
+If the Task's format is changed, the following classes need to have their code edited:
+
+1) Task.java, for how the variables are extracted from the user input,
+and the format for printTask() and getPrintTaskString()
+
+2) CRUD.java, for addTask(), deleteTask(), changeTaskVariable() and undo()
+
+3) Flex.java, for readAndExecuteCommand();
+
+4) Checker.java (because it needs to use checkTask())
+
+
+Checker.java, for checkTask()
+
+If the Task's format is changed, the following classes do NOT need to have their code edited:
+
+1) LastAction.java (has a Task.java object, and LastAction.java only needs to get or change the Task.java object)
+
+2) FlexWindow.java (does not need to be aware of Task.java)
+
+3) SortAndShow.java (because it only uses checkDate() from Checker.java)
+
+4) ShowDays.java (because it only uses checkDate() from Checker.java)
