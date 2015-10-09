@@ -1,10 +1,5 @@
 import static org.junit.Assert.*;
-
 import java.io.IOException;
-import java.util.Scanner;
-
-import javax.swing.JFrame;
-
 import org.junit.Test;
 
 // FlexTest3.java tests that the correct, valid date can be generated from a valid date
@@ -34,7 +29,7 @@ public class FlexTest3{
 	
 	@Test
 	public void testOutput() throws IOException{
-		Flex tester = new Flex();
+		ShowDays tester = new ShowDays();
 		
 		assertEquals("generating the next date from 27/1/2014", "28/1/2014", tester.generateNextDate("27/1/2014"));
 		
