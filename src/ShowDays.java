@@ -35,7 +35,7 @@ public class ShowDays {
 	
 	// used to show tasks which are in 7 consecutive days
 	// starting from the date the user indicates
-	static void showWeek(String filename, String previousChangeTerm, String previousAction, Task previousTask, FlexWindow flexWindow) throws IOException {
+	static void showWeek(String filename, FlexWindow flexWindow) throws IOException {
 		sc = new Scanner(System.in);
 		
 		BufferedReader reader = null;

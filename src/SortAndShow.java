@@ -160,8 +160,7 @@ public class SortAndShow {
 	
 	// sort and show tasks alphabetically by task title
 	// without editing the schedule file
-	static void sortAndShowByTaskTitle(String filename, String previousChangeTerm, String previousAction,
-			Task previousTask, FlexWindow flexWindow) throws IOException {
+	static void sortAndShowByTaskTitle(String filename, FlexWindow flexWindow) throws IOException {
 		BufferedReader reader = null;
 		
 		reader = new BufferedReader(new FileReader(filename));
@@ -212,8 +211,7 @@ public class SortAndShow {
 	}
 	// sort and show tasks by ending time
 	// without editing the schedule file
-	static void sortAndShowByEndingTime(String filename, String previousChangeTerm, String previousAction,
-			Task previousTask, FlexWindow flexWindow) throws IOException {
+	static void sortAndShowByEndingTime(String filename, FlexWindow flexWindow) throws IOException {
 		BufferedReader reader = null;
 		
 		reader = new BufferedReader(new FileReader(filename));
@@ -269,8 +267,7 @@ public class SortAndShow {
 	
 	// sort and show tasks alphabetically by starting time
 	// without editing the schedule file
-	static void sortAndShowByStartingTime(String filename, String previousChangeTerm, String previousAction,
-		Task previousTask, FlexWindow flexWindow) throws IOException {
+	static void sortAndShowByStartingTime(String filename, FlexWindow flexWindow) throws IOException {
 		BufferedReader reader = null;
 		
 		reader = new BufferedReader(new FileReader(filename));
@@ -325,8 +322,7 @@ public class SortAndShow {
 
 	// sorts and displays all tasks in the schedule file, which are not done
 	// without editing or overwriting the schedule file
-	static void sortAndShowByNotDoneTasks(String filename, String previousChangeTerm, String previousAction,
-			Task previousTask, FlexWindow flexWindow) throws IOException {
+	static void sortAndShowByNotDoneTasks(String filename, FlexWindow flexWindow) throws IOException {
 		BufferedReader reader = null;
 		
 		reader = new BufferedReader(new FileReader(filename));
@@ -368,8 +364,7 @@ public class SortAndShow {
 	
 	// sorts and displays all tasks in the schedule file
 	// without editing or overwriting the schedule file
-	static void readAndDisplayAll(String filename, String previousChangeTerm, String previousAction,
-			Task previousTask, FlexWindow flexWindow) throws IOException {
+	static void readAndDisplayAll(String filename, FlexWindow flexWindow) throws IOException {
 			BufferedReader reader = null;
 		
 			reader = new BufferedReader(new FileReader(filename));
@@ -424,8 +419,7 @@ public class SortAndShow {
 	
 	// sort and show tasks alphabetically by task description
 	// without editing the schedule file
-	static void sortAndShowByTaskDescription(String filename, String previousChangeTerm, String previousAction,
-			Task previousTask, FlexWindow flexWindow) throws IOException {
+	static void sortAndShowByTaskDescription(String filename, FlexWindow flexWindow) throws IOException {
 		BufferedReader reader = null;
 		
 		reader = new BufferedReader(new FileReader(filename));
@@ -477,8 +471,7 @@ public class SortAndShow {
 	
 	// shows tasks sorted by priority level
 	// without editing the schedule file
-	static void sortAndShowByPriority(String filename, String previousChangeTerm, String previousAction,
-			Task previousTask, FlexWindow flexWindow) throws IOException {
+	static void sortAndShowByPriority(String filename, FlexWindow flexWindow) throws IOException {
 		BufferedReader reader = null;
 		
 		reader = new BufferedReader(new FileReader(filename));
@@ -530,8 +523,7 @@ public class SortAndShow {
 	
 	// sort and show tasks by category
 	// without editing the schedule file
-	static void sortAndShowByCategory(String filename, String previousChangeTerm, String previousAction,
-			Task previousTask, FlexWindow flexWindow) throws IOException {
+	static void sortAndShowByCategory(String filename, FlexWindow flexWindow) throws IOException {
 		BufferedReader reader = null;
 		
 		reader = new BufferedReader(new FileReader(filename));
