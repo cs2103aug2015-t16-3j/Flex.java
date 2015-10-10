@@ -1,18 +1,14 @@
 import java.util.*;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import javax.swing.JFrame;
 import java.util.logging.*;
 
 public class CRUD {
 	private static final Logger logger = Logger.getLogger(CRUD.class.getName());
-	
-	private static FlexWindow flexWindow;
-		
+			
 	private static final String NOTHING_TO_UNDO_MESSAGE = "Nothing to undo as no valid 1) adding of a task, 2) deleting of a task, OR 3) Changing a task variable, has been carried out by the user during this program run.";
 	private static final String DELETED_MESSAGE = "The specified task has been deleted.";
 	private static String ADDED_MESSAGE = "The task has been successfully added.";
@@ -34,7 +30,7 @@ public class CRUD {
 	
 	
 	// deletes a task
-	static void deleteTask(String filename, String date, String taskTitle, LastAction lastAction) throws IOException {
+	static void deleteTask(String filename, String date, String taskTitle, LastAction lastAction, FlexWindow flexWindow) throws IOException {
 		// reads in the file, line by line
 		boolean taskExists = false;
 		
@@ -811,7 +807,7 @@ public class CRUD {
 	}
 
 	// adds a task
-	private static void addTask(String filename, String remainingCommandString, LastAction lastAction, FlexWindow flexWindow) throws IOException {
+	static void addTask(String filename, String remainingCommandString, LastAction lastAction, FlexWindow flexWindow) throws IOException {
 		String remainingCommandString1 = remainingCommandString.trim();
 		
 		boolean isTaskValid = true;
@@ -930,7 +926,7 @@ public class CRUD {
 	// deleting a task, 
 	// or changing a task's variable
 	// This is because there is no need to undo a search task
-	private static void undo(String filename, LastAction lastAction, FlexWindow flexWindow) throws IOException, NullPointerException {
+	static void undo(String filename, LastAction lastAction, FlexWindow flexWindow) throws IOException, NullPointerException {
 		
 		if(lastAction.getPreviousAction()==null || lastAction.getPreviousTask() ==null){
 			flexWindow.getTextArea().append(NOTHING_TO_UNDO_MESSAGE + "\n");
@@ -955,7 +951,7 @@ public class CRUD {
 				System.out.println(ADD_UNDONE_MESSAGE);
 				System.out.println();
 				
-				deleteTask(filename, lastAction.getPreviousTask().getDate(), lastAction.getPreviousTask().getTaskTitle(), lastAction);
+				deleteTask(filename, lastAction.getPreviousTask().getDate(), lastAction.getPreviousTask().getTaskTitle(), lastAction, flexWindow);
 				
 			}
 			else if(lastAction.getPreviousAction().equalsIgnoreCase("delete")){

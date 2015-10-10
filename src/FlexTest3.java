@@ -29,40 +29,39 @@ public class FlexTest3{
 	
 	@Test
 	public void testOutput() throws IOException{
-		ShowDays tester = new ShowDays();
 		
-		assertEquals("generating the next date from 27/1/2014", "28/1/2014", tester.generateNextDate("27/1/2014"));
+		assertEquals("generating the next date from 27/1/2014", "28/1/2014", ShowDays.generateNextDate("27/1/2014"));
 		
-		assertEquals("generating the next date from " + JANUARY_DAYS + " /1/2014", "1/2/2014", tester.generateNextDate("31/1/2014"));
-		
-		// leap year case
-		assertEquals("generating the next date from " + (FEBRUARY_DAYS + 1) + " /2/2012", "1/3/2012", tester.generateNextDate("29/2/2012"));
+		assertEquals("generating the next date from " + JANUARY_DAYS + " /1/2014", "1/2/2014", ShowDays.generateNextDate("31/1/2014"));
 		
 		// leap year case
-		assertEquals("generating the next date from " + FEBRUARY_DAYS + " /2/2012", "29/2/2012", tester.generateNextDate("28/2/2012"));
+		assertEquals("generating the next date from " + (FEBRUARY_DAYS + 1) + " /2/2012", "1/3/2012", ShowDays.generateNextDate("29/2/2012"));
+		
+		// leap year case
+		assertEquals("generating the next date from " + FEBRUARY_DAYS + " /2/2012", "29/2/2012", ShowDays.generateNextDate("28/2/2012"));
 						
-		assertEquals("generating the next date from " + JANUARY_DAYS + " /1/2013", "1/2/2013", tester.generateNextDate("31/1/2013"));
+		assertEquals("generating the next date from " + JANUARY_DAYS + " /1/2013", "1/2/2013", ShowDays.generateNextDate("31/1/2013"));
 		
-		assertEquals("generating the next date from " + FEBRUARY_DAYS + " /2/2013", "1/3/2013", tester.generateNextDate("28/2/2013"));
+		assertEquals("generating the next date from " + FEBRUARY_DAYS + " /2/2013", "1/3/2013", ShowDays.generateNextDate("28/2/2013"));
 		
-		assertEquals("generating the next date from " + MARCH_DAYS + " /3/2013", "1/4/2013", tester.generateNextDate("31/3/2013"));
+		assertEquals("generating the next date from " + MARCH_DAYS + " /3/2013", "1/4/2013", ShowDays.generateNextDate("31/3/2013"));
 	
-		assertEquals("generating the next date from " + APRIL_DAYS + " /4/2013", "1/5/2013", tester.generateNextDate("30/4/2013"));
+		assertEquals("generating the next date from " + APRIL_DAYS + " /4/2013", "1/5/2013", ShowDays.generateNextDate("30/4/2013"));
 		
-		assertEquals("generating the next date from " + MAY_DAYS + " /5/2013", "1/6/2013", tester.generateNextDate("31/5/2013"));
+		assertEquals("generating the next date from " + MAY_DAYS + " /5/2013", "1/6/2013", ShowDays.generateNextDate("31/5/2013"));
 		
-		assertEquals("generating the next date from " + JUNE_DAYS + " /6/2013", "1/7/2013", tester.generateNextDate("30/6/2013"));
+		assertEquals("generating the next date from " + JUNE_DAYS + " /6/2013", "1/7/2013", ShowDays.generateNextDate("30/6/2013"));
 		
-		assertEquals("generating the next date from " + JULY_DAYS + " /7/2013", "1/8/2013", tester.generateNextDate("31/7/2013"));
+		assertEquals("generating the next date from " + JULY_DAYS + " /7/2013", "1/8/2013", ShowDays.generateNextDate("31/7/2013"));
 		
-		assertEquals("generating the next date from " + AUGUST_DAYS + " /8/2013", "1/9/2013", tester.generateNextDate("31/8/2013"));
+		assertEquals("generating the next date from " + AUGUST_DAYS + " /8/2013", "1/9/2013", ShowDays.generateNextDate("31/8/2013"));
 		
-		assertEquals("generating the next date from " + SEPTEMBER_DAYS + " /9/2013", "1/10/2013", tester.generateNextDate("30/9/2013"));
+		assertEquals("generating the next date from " + SEPTEMBER_DAYS + " /9/2013", "1/10/2013", ShowDays.generateNextDate("30/9/2013"));
 		
-		assertEquals("generating the next date from " + OCTOBER_DAYS + " /10/2013", "1/11/2013", tester.generateNextDate("31/10/2013"));
+		assertEquals("generating the next date from " + OCTOBER_DAYS + " /10/2013", "1/11/2013", ShowDays.generateNextDate("31/10/2013"));
 		
-		assertEquals("generating the next date from " + NOVEMBER_DAYS + " /11/2013", "1/12/2013", tester.generateNextDate("30/11/2013"));
+		assertEquals("generating the next date from " + NOVEMBER_DAYS + " /11/2013", "1/12/2013", ShowDays.generateNextDate("30/11/2013"));
 		
-		assertEquals("generating the next date from " + DECEMBER_DAYS + " /12/2013", "1/1/2014", tester.generateNextDate("31/12/2013"));		
+		assertEquals("generating the next date from " + DECEMBER_DAYS + " /12/2013", "1/1/2014", ShowDays.generateNextDate("31/12/2013"));		
 	}
 }

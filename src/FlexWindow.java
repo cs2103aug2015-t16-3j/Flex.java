@@ -11,6 +11,10 @@ import java.awt.Color;
 
 public class FlexWindow extends JFrame{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	// this is the program output display area
 	private TextArea textArea;
