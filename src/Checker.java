@@ -7,7 +7,7 @@ import java.util.logging.*;
 
 public class Checker {
 	
-	private static final Logger logger = Logger.getLogger(Flex.class.getName());
+	private static final Logger logger = Logger.getLogger(Checker.class.getName());
 
 	private static final String FIRST_COMMA_SPACE_MISSING_MESSAGE = "First comma and space are missing.";
 	private static final String SECOND_COMMA_SPACE_MISSING_MESSAGE = "Second comma and space are missing.";

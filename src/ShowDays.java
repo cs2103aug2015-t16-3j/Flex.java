@@ -6,7 +6,7 @@ import java.util.logging.*;
 
 public class ShowDays {
 
-	private static final Logger logger = Logger.getLogger(Flex.class.getName());
+	private static final Logger logger = Logger.getLogger(ShowDays.class.getName());
 
 	private static FlexWindow flexWindow;
 	private static Scanner sc;

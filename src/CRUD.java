@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 import java.util.logging.*;
 
 public class CRUD {
-	private static final Logger logger = Logger.getLogger(Flex.class.getName());
+	private static final Logger logger = Logger.getLogger(CRUD.class.getName());
 	
 	private static FlexWindow flexWindow;
 		

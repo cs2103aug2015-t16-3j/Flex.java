@@ -6,7 +6,7 @@ import java.util.logging.*;
 
 public class SortAndShow {
 
-	private static final Logger logger = Logger.getLogger(Flex.class.getName());
+	private static final Logger logger = Logger.getLogger(SortAndShow.class.getName());
 
 	private static final String DISPLAY_SORTED_BY_STARTING_TIMES_MESSAGE = "The tasks, sorted by starting time, are displayed.";
 	private static final String DISPLAY_SORTED_BY_ENDING_TIMES_MESSAGE = "The tasks, sorted by ending time, are displayed.";
