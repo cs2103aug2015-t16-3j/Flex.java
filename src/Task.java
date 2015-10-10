@@ -14,7 +14,7 @@ public class Task {
 	// for less  important tasks. The number should not be 0 or less than 0.]
 	// private String category = null;  
 	private int comparisonValue = -1;
-	// [this means the status: “blocked”, “pending”(which means not done), or “done”]
+	// [this means the status: "blocked", "pending"(which means not done), or "done"]
 	String[] taskVariables = new String[7];
 	
 	// example of user input for adding a task

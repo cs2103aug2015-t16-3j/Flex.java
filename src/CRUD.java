@@ -216,7 +216,7 @@ public class CRUD {
 		// last action done
 		String previousAction = new String("");
 		
-		if(changeVariableType.equalsIgnoreCase("date")){
+		if(changeVariableType.equalsIgnoreCase("date")||changeVariableType.equalsIgnoreCase("day")){
 			
 			// check if this input by the user is valid
 			String newDate = newTerm;

@@ -65,7 +65,7 @@ public class SortAndShow {
 			reader.close();
 		}				
 					
-		if(searchVariableType.equalsIgnoreCase("date")){
+		if(searchVariableType.equalsIgnoreCase("date")||searchVariableType.equalsIgnoreCase("day")){
 			// check if this input by the user is valid
 			String tempDate = searchTerm;
 				

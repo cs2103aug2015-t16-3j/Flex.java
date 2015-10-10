@@ -435,15 +435,15 @@ public class Flex{
 				
 				// Case 9-[1]: Show tasks by date, or show all tasks
 				// By displaying all tasks in the schedule list
-				if((remainingString.equalsIgnoreCase("by date"))||(remainingString.equalsIgnoreCase("by day")||(remainingString.equalsIgnoreCase("all")))){					
+				if((remainingString.equalsIgnoreCase("by date"))||(remainingString.equalsIgnoreCase("by day")||(remainingString.equalsIgnoreCase("all")))||(remainingString.equalsIgnoreCase("by task date"))||(remainingString.equalsIgnoreCase("by task day"))){					
 					SortAndShow.readAndDisplayAll(filename, previousChangeTerm, previousAction, previousTask, flexWindow);
 				}
 				// Case 9-[2]: Show tasks by starting time (in order of minutes)
-				else if((remainingString.equalsIgnoreCase("by starting time"))||(remainingString.equalsIgnoreCase("by start"))||(remainingString.equalsIgnoreCase("by start time"))){
+				else if((remainingString.equalsIgnoreCase("by starting time"))||(remainingString.equalsIgnoreCase("by start"))||(remainingString.equalsIgnoreCase("by start time"))||(remainingString.equalsIgnoreCase("by task starting time"))||(remainingString.equalsIgnoreCase("by task start"))||(remainingString.equalsIgnoreCase("by task start time"))){
 					SortAndShow.sortAndShowByStartingTime(filename, previousChangeTerm, previousAction, previousTask, flexWindow);
 				}
 				// Case 9-[3]: Show tasks by ending time (in order of minutes)
-				else if(remainingString.equalsIgnoreCase(("by ending time"))||(remainingString.equalsIgnoreCase("by end"))||(remainingString.equalsIgnoreCase("by end time"))){
+				else if(remainingString.equalsIgnoreCase(("by ending time"))||(remainingString.equalsIgnoreCase("by end"))||(remainingString.equalsIgnoreCase("by end time"))||(remainingString.equalsIgnoreCase("by task ending time"))||(remainingString.equalsIgnoreCase("by task end"))||(remainingString.equalsIgnoreCase("by date"))||(remainingString.equalsIgnoreCase("by task end time"))){
 					SortAndShow.sortAndShowByEndingTime(filename, previousChangeTerm, previousAction, previousTask, flexWindow);
 				}
 				// Case 9-[4]: Show tasks by title (in alphabetical order)
@@ -458,12 +458,12 @@ public class Flex{
 				// or rather, tasks with the same priority will be grouped together
 				// and only the tasks with the same number priorityLevels will be in numerical order
 				// from the smallest to the biggest number for their priorityLevels
-				else if(remainingString.equalsIgnoreCase("by priority")){
+				else if(remainingString.equalsIgnoreCase("by priority")||(remainingString.equalsIgnoreCase("by task priority"))||(remainingString.equalsIgnoreCase("by priority level"))||(remainingString.equalsIgnoreCase("by task priority level"))){
 					SortAndShow.sortAndShowByPriority(filename, previousChangeTerm, previousAction, previousTask, flexWindow);				
 				}
 				// Case 9-[7]: show tasks by category (in alphabetical order)
 				// Meaning in this order - "blocked", "done", "pending"
-				else if(remainingString.equalsIgnoreCase("by category")){
+				else if(remainingString.equalsIgnoreCase("by category")||(remainingString.equalsIgnoreCase("by task category"))){
 					SortAndShow.sortAndShowByCategory(filename, previousChangeTerm, previousAction, previousTask, flexWindow);
 				}
 				// Case 9-[8]: show tasks which are done
