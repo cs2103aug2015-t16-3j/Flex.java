@@ -99,11 +99,4 @@ public class FlexWindow extends JFrame{
 		return textArea;
 	}
 
-	public Button getButton(){
-		return button;
-	}
-
-
-
-
 }
