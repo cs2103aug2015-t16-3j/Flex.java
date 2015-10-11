@@ -322,7 +322,7 @@ public class SortAndShow {
 
 	// sorts and displays all tasks in the schedule file, which are not done
 	// without editing or overwriting the schedule file
-	static void sortAndShowByNotDoneTasks(String filename, FlexWindow flexWindow) throws IOException {
+	static void showNotDoneTasks(String filename, FlexWindow flexWindow) throws IOException {
 		BufferedReader reader = null;
 		
 		reader = new BufferedReader(new FileReader(filename));

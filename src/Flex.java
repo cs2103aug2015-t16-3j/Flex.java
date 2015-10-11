@@ -466,7 +466,7 @@ public class Flex{
 				// Case 9-[11]: show tasks which are still pending or still blocked
 				// that is, tasks which are not marked as done yet
 				else if((remainingString.equalsIgnoreCase("blocked and pending"))||(remainingString.equalsIgnoreCase("blocked & pending"))||(remainingString.equalsIgnoreCase("pending and blocked"))||(remainingString.equalsIgnoreCase("pending & blocked"))||(remainingString.equalsIgnoreCase("not done"))){
-					SortAndShow.sortAndShowByNotDoneTasks(filename, flexWindow);
+					SortAndShow.showNotDoneTasks(filename, flexWindow);
 				}		
 				// Case 9-[12]: show the week starting on the date given by the user
 				// the week includes the starting date of the week as one of the seven days in it
