@@ -114,7 +114,7 @@ public class CRUD {
 			System.out.println(INVALID_INPUT_MESSAGE);
 			System.out.println();
 			
-			readAndExecuteCommand(filename, lastAction, flexWindow);	
+			return;	
 		}
 		
 		String changeVariableType = new String("");
@@ -134,7 +134,7 @@ public class CRUD {
 			System.out.println(INVALID_INPUT_MESSAGE);
 			System.out.println();
 			
-			readAndExecuteCommand(filename, lastAction, flexWindow);	
+			return;	
 		}
 		
 		String tempDateString = new String("");
