@@ -232,13 +232,16 @@ public class CRUD {
 				if((allTasksList.get(i).getDate().equalsIgnoreCase(currentDate))&&(allTasksList.get(i).getTaskTitle().equalsIgnoreCase(currentTaskTitle))){
 					tempChangedTerm = allTasksList.get(i).getDate();
 					allTasksList.get(i).setDate(newTerm);
-					allTasksList.get(i).recalculateComparisonValue();
-					
+					if(!((allTasksList.get(i).getDate().equalsIgnoreCase("undefined")) || (allTasksList.get(i).getStartingTime().equalsIgnoreCase("undefined")))){
+						allTasksList.get(i).recalculateComparisonValue();
+					}
 					// if the new change term(date) is invalid, reverse the change, and stop going through the 
 					// rest of the changeTaskVariable() method
 					if(!Checker.checkTask(allTasksList.get(i).getPrintTaskString())&&!Checker.checkDeadlineTaskOutput(allTasksList.get(i).getPrintTaskString())&&!Checker.checkFloatingTaskOutput(allTasksList.get(i).getPrintTaskString())){
 						allTasksList.get(i).setDate(tempChangedTerm);
-						allTasksList.get(i).recalculateComparisonValue();
+						if(!((allTasksList.get(i).getDate().equalsIgnoreCase("undefined")) || (allTasksList.get(i).getStartingTime().equalsIgnoreCase("undefined")))){
+							allTasksList.get(i).recalculateComparisonValue();
+						}
 						flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
 						flexWindow.getTextArea().append("\n");
 
@@ -309,13 +312,17 @@ public class CRUD {
 					tempChangedTerm = allTasksList.get(i).getStartingTime();
 					
 					allTasksList.get(i).setStartingTime(newTerm);
-					allTasksList.get(i).recalculateComparisonValue();
+					if(!((allTasksList.get(i).getDate().equalsIgnoreCase("undefined")) || (allTasksList.get(i).getStartingTime().equalsIgnoreCase("undefined")))){
+						allTasksList.get(i).recalculateComparisonValue();
+					}
 					
 					// if the new change term(starting time) is invalid, reverse the change, and stop going through the 
 					// rest of the changeTaskVariable() method
 					if(!Checker.checkTask(allTasksList.get(i).getPrintTaskString())&&!Checker.checkDeadlineTaskOutput(allTasksList.get(i).getPrintTaskString())&&!Checker.checkFloatingTaskOutput(allTasksList.get(i).getPrintTaskString())){
 						allTasksList.get(i).setDate(tempChangedTerm);
-						allTasksList.get(i).recalculateComparisonValue();
+						if(!((allTasksList.get(i).getDate().equalsIgnoreCase("undefined")) || (allTasksList.get(i).getStartingTime().equalsIgnoreCase("undefined")))){
+							allTasksList.get(i).recalculateComparisonValue();
+						}
 						flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
 						flexWindow.getTextArea().append("\n");
 
@@ -324,29 +331,31 @@ public class CRUD {
 						System.out.println();
 						return;
 					}
-									
-					if( ( Integer.valueOf(allTasksList.get(i).getStartingTime().substring(0, 2)) * HOUR_MINUTES + Integer.valueOf(allTasksList.get(i).getStartingTime().substring(2, 4)) ) > ( Integer.valueOf(allTasksList.get(i).getEndingTime().substring(0, 2)) * HOUR_MINUTES + Integer.valueOf(allTasksList.get(i).getEndingTime().substring(2, 4)) ) ){
-						allTasksList.get(i).setStartingTime(tempChangedTerm);
-						System.out.println();
-						
-						flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-						flexWindow.getTextArea().append("\n");	
-						
-						logger.finest(INVALID_INPUT_MESSAGE);
-						System.out.println(INVALID_INPUT_MESSAGE);
-						System.out.println();
-						
-						flexWindow.getTextArea().append(STARTING_TIME_LATER_THAN_ENDING_TIME_MESSAGE + "\n");
-						flexWindow.getTextArea().append("\n");	
-						
-						logger.finest(STARTING_TIME_LATER_THAN_ENDING_TIME_MESSAGE);
-						System.out.print(STARTING_TIME_LATER_THAN_ENDING_TIME_MESSAGE);
-						System.out.println();
-						
-						System.out.println();
-						return;
-					}
+					if((!allTasksList.get(i).getStartingTime().equalsIgnoreCase("undefined"))&&(!allTasksList.get(i).getEndingTime().equalsIgnoreCase("undefined"))){
 					
+					
+						if( ( Integer.valueOf(allTasksList.get(i).getStartingTime().substring(0, 2)) * HOUR_MINUTES + Integer.valueOf(allTasksList.get(i).getStartingTime().substring(2, 4)) ) > ( Integer.valueOf(allTasksList.get(i).getEndingTime().substring(0, 2)) * HOUR_MINUTES + Integer.valueOf(allTasksList.get(i).getEndingTime().substring(2, 4)) ) ){
+							allTasksList.get(i).setStartingTime(tempChangedTerm);
+							System.out.println();
+						
+							flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+							flexWindow.getTextArea().append("\n");	
+						
+							logger.finest(INVALID_INPUT_MESSAGE);
+							System.out.println(INVALID_INPUT_MESSAGE);
+							System.out.println();
+						
+							flexWindow.getTextArea().append(STARTING_TIME_LATER_THAN_ENDING_TIME_MESSAGE + "\n");
+							flexWindow.getTextArea().append("\n");	
+						
+							logger.finest(STARTING_TIME_LATER_THAN_ENDING_TIME_MESSAGE);
+							System.out.print(STARTING_TIME_LATER_THAN_ENDING_TIME_MESSAGE);
+							System.out.println();
+						
+							System.out.println();
+							return;
+						}
+					}
 					atLeastOneTaskChanged = true;
 					
 					tempTask = allTasksList.get(i);
@@ -418,26 +427,28 @@ public class CRUD {
 						return;
 					}
 					
-					if( ( Integer.valueOf(allTasksList.get(i).getStartingTime().substring(0, 2)) * HOUR_MINUTES + Integer.valueOf(allTasksList.get(i).getStartingTime().substring(2, 4)) ) > ( Integer.valueOf(allTasksList.get(i).getEndingTime().substring(0, 2)) * HOUR_MINUTES + Integer.valueOf(allTasksList.get(i).getEndingTime().substring(2, 4)) ) ){
-						allTasksList.get(i).setEndingTime(tempChangedTerm);
-						System.out.println();
+					if((!allTasksList.get(i).getStartingTime().equalsIgnoreCase("undefined"))&&(!allTasksList.get(i).getEndingTime().equalsIgnoreCase("undefined"))){
+						if( ( Integer.valueOf(allTasksList.get(i).getStartingTime().substring(0, 2)) * HOUR_MINUTES + Integer.valueOf(allTasksList.get(i).getStartingTime().substring(2, 4)) ) > ( Integer.valueOf(allTasksList.get(i).getEndingTime().substring(0, 2)) * HOUR_MINUTES + Integer.valueOf(allTasksList.get(i).getEndingTime().substring(2, 4)) ) ){
+							allTasksList.get(i).setEndingTime(tempChangedTerm);
+							System.out.println();
 						
-						flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-						flexWindow.getTextArea().append("\n");
+							flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+							flexWindow.getTextArea().append("\n");
 						
-						logger.finest(INVALID_INPUT_MESSAGE);
-						System.out.println(INVALID_INPUT_MESSAGE);
-						System.out.println();
+							logger.finest(INVALID_INPUT_MESSAGE);
+							System.out.println(INVALID_INPUT_MESSAGE);
+							System.out.println();
 						
-						flexWindow.getTextArea().append(ENDING_TIME_EARLIER_THAN_STARTING_TIME_MESSAGE + "\n");
-						flexWindow.getTextArea().append("\n");
+							flexWindow.getTextArea().append(ENDING_TIME_EARLIER_THAN_STARTING_TIME_MESSAGE + "\n");
+							flexWindow.getTextArea().append("\n");
 						
-						logger.finest(ENDING_TIME_EARLIER_THAN_STARTING_TIME_MESSAGE);
-						System.out.print(ENDING_TIME_EARLIER_THAN_STARTING_TIME_MESSAGE);
-						System.out.println();
+							logger.finest(ENDING_TIME_EARLIER_THAN_STARTING_TIME_MESSAGE);
+							System.out.print(ENDING_TIME_EARLIER_THAN_STARTING_TIME_MESSAGE);
+							System.out.println();
 						
-						System.out.println();
-						return;
+							System.out.println();
+							return;
+						}
 					}
 					
 					atLeastOneTaskChanged = true;
