@@ -54,6 +54,8 @@ public class Task {
 	private static final int NOVEMBER_ACCUMULATED_DAYS = YEAR_DAYS - DECEMBER_DAYS;
 	private static final int DECEMBER_ACCUMULATED_DAYS = YEAR_DAYS;
 	
+	private static final int FLOATING_COMPARISON_VALUE = 0;
+	
 	// default constructor required by Flex.java
 	public Task() {
 	}
@@ -65,85 +67,344 @@ public class Task {
 
 		remainingString.trim();
 		
-		// extracts the date
-		int commaWhitespaceIndex1 = remainingString.indexOf(", ");
+		if(Checker.checkFloatingTaskOutput(taskInformation)){
+			// extracts the date
+			int commaWhitespaceIndex1 = remainingString.indexOf(", ");
 
-		this.taskVariables[0] = remainingString.substring(0, commaWhitespaceIndex1).trim();
-		remainingString = remainingString.substring(commaWhitespaceIndex1 + 2);
+			this.taskVariables[0] = remainingString.substring(0, commaWhitespaceIndex1).trim();
+			remainingString = remainingString.substring(commaWhitespaceIndex1 + 2);
 
-		// extracts the starting time
-		int commaWhitespaceIndex2 = remainingString.indexOf(", ");
+			// extracts the starting time
+			int commaWhitespaceIndex2 = remainingString.indexOf(", ");
 
-		this.taskVariables[1] = remainingString.substring(0, commaWhitespaceIndex2).trim();
-		remainingString = remainingString.substring(commaWhitespaceIndex2 + 2).trim();
+			this.taskVariables[1] = remainingString.substring(0, commaWhitespaceIndex2).trim();
+			remainingString = remainingString.substring(commaWhitespaceIndex2 + 2).trim();
 	
-		// extracts the ending time
-		int commaWhitespaceIndex3 = remainingString.indexOf(", ");
+			// extracts the ending time
+			int commaWhitespaceIndex3 = remainingString.indexOf(", ");
 	
-		this.taskVariables[2] = remainingString.substring(0, commaWhitespaceIndex3).trim();
-		remainingString = remainingString.substring(commaWhitespaceIndex3 + 2).trim();
+			this.taskVariables[2] = remainingString.substring(0, commaWhitespaceIndex3).trim();
+			remainingString = remainingString.substring(commaWhitespaceIndex3 + 2).trim();
 	
-		// extracts the task title
-		int commaWhitespaceIndex4 = remainingString.indexOf(", ");
+			// extracts the task title
+			int commaWhitespaceIndex4 = remainingString.indexOf(", ");
 		
-		this.taskVariables[3] = remainingString.substring(0, commaWhitespaceIndex4).trim();
-		remainingString = remainingString.substring(commaWhitespaceIndex4 + 2).trim();
+			this.taskVariables[3] = remainingString.substring(0, commaWhitespaceIndex4).trim();
+			remainingString = remainingString.substring(commaWhitespaceIndex4 + 2).trim();
 		
-		// extracts the task description
-		int commaWhitespaceIndex5 = remainingString.indexOf(", ");
+			// extracts the task description
+			int commaWhitespaceIndex5 = remainingString.indexOf(", ");
 		
-		this.taskVariables[4] = remainingString.substring(0, commaWhitespaceIndex5).trim();
-		remainingString = remainingString.substring(commaWhitespaceIndex5 + 2).trim();
+			this.taskVariables[4] = remainingString.substring(0, commaWhitespaceIndex5).trim();
+			remainingString = remainingString.substring(commaWhitespaceIndex5 + 2).trim();
 
-		// extracts the priority level, and the category of the task
-		int commaWhitespaceIndex6 = remainingString.indexOf(", ");
+			// extracts the priority level, and the category of the task
+			int commaWhitespaceIndex6 = remainingString.indexOf(", ");
 		
-		this.taskVariables[5] = remainingString.substring(0, commaWhitespaceIndex6).trim();
-		remainingString = remainingString.substring(commaWhitespaceIndex6 + 2).trim();
-		this.taskVariables[6] = remainingString.trim();		
+			this.taskVariables[5] = remainingString.substring(0, commaWhitespaceIndex6).trim();
+			remainingString = remainingString.substring(commaWhitespaceIndex6 + 2).trim();
+			this.taskVariables[6] = remainingString.trim();		
 		
-		// e.g. 7/9/2015
-		String tempDateString = this.taskVariables[0];
-		
-		int slashIndex1 = tempDateString.indexOf("/");
-		int day = Integer.valueOf(tempDateString.substring(0, slashIndex1).trim());
-		
-		tempDateString = tempDateString.substring(slashIndex1 + 1);
-		
-		// e.g. 31/12/2014 with starting time 0859
-		int slashIndex2 = tempDateString.indexOf("/");
-		
-		// the month December (the 12th month of each year)
-		int month = Integer.valueOf(tempDateString.substring(0, slashIndex2).trim());
-		
-		// The year 2014
-		int year = Integer.valueOf(tempDateString.substring(slashIndex2 + 1).trim());
-
-		// 8 hours
-		int startingTimeHours = Integer.valueOf(this.taskVariables[1].substring(0, 2).trim());
-		
-		// 59 minutes
-		int startingTimeMinutes = Integer.valueOf(this.taskVariables[1].substring(2).trim());
-				
-		// used for sorting all tasks by date and starting time (taking year 0, 0000 hours as reference)
-		// (2014 - 1) / 4 = 2013 / 4 = 503 (not considering the remainder)
-		int numberOfPastLeapYears = (year - 1) / 4;
-		// (2014 - 1) - 503 = 2013 - 503 = 1500
-		int numberOfPastNonLeapyears = (year - 1) - numberOfPastLeapYears;
-		
-		int leapYearFebruaryDay = 0;
-		
-		// 2014%4 = 1
-		if((year%4==0) && ((month -1)>=2)){
-			leapYearFebruaryDay = 1;
+			this.comparisonValue = FLOATING_COMPARISON_VALUE;
 		}
+		else if(Checker.checkDeadlineTaskOutput(taskInformation)){
+			// extracts the date
+			int commaWhitespaceIndex1 = remainingString.indexOf(", ");
+
+			this.taskVariables[0] = remainingString.substring(0, commaWhitespaceIndex1).trim();
+			remainingString = remainingString.substring(commaWhitespaceIndex1 + 2);
+
+			// extracts the starting time
+			int commaWhitespaceIndex2 = remainingString.indexOf(", ");
+
+			this.taskVariables[1] = remainingString.substring(0, commaWhitespaceIndex2).trim();
+			remainingString = remainingString.substring(commaWhitespaceIndex2 + 2).trim();
+	
+			// extracts the ending time
+			int commaWhitespaceIndex3 = remainingString.indexOf(", ");
+	
+			this.taskVariables[2] = remainingString.substring(0, commaWhitespaceIndex3).trim();
+			remainingString = remainingString.substring(commaWhitespaceIndex3 + 2).trim();
+	
+			// extracts the task title
+			int commaWhitespaceIndex4 = remainingString.indexOf(", ");
 		
-		int numberOfAccumulatedPastDaysInCurrentYear = findNumberOfAccumulatedPastDaysInCurrentYear(month - 1, day - 1);
-		int numberOfPastHours = startingTimeHours;
-		int numberOfPastMinutes = startingTimeMinutes;
+			this.taskVariables[3] = remainingString.substring(0, commaWhitespaceIndex4).trim();
+			remainingString = remainingString.substring(commaWhitespaceIndex4 + 2).trim();
 		
-		// e.g. this.comparisonValue = 503 * 366 + 1500 * 365 + (NOVEMBER_ACCUMULATED_DAYS + 0) * 24 * 60 + 8 * 60 + 59;
-		this.comparisonValue = numberOfPastLeapYears * LEAP_YEAR_DAYS * DAY_HOURS * HOUR_MINUTES + numberOfPastNonLeapyears * YEAR_DAYS * DAY_HOURS * HOUR_MINUTES + (numberOfAccumulatedPastDaysInCurrentYear + leapYearFebruaryDay) * DAY_HOURS * HOUR_MINUTES + numberOfPastHours * HOUR_MINUTES + numberOfPastMinutes;
+			// extracts the task description
+			int commaWhitespaceIndex5 = remainingString.indexOf(", ");
+		
+			this.taskVariables[4] = remainingString.substring(0, commaWhitespaceIndex5).trim();
+			remainingString = remainingString.substring(commaWhitespaceIndex5 + 2).trim();
+
+			// extracts the priority level, and the category of the task
+			int commaWhitespaceIndex6 = remainingString.indexOf(", ");
+		
+			this.taskVariables[5] = remainingString.substring(0, commaWhitespaceIndex6).trim();
+			remainingString = remainingString.substring(commaWhitespaceIndex6 + 2).trim();
+			this.taskVariables[6] = remainingString.trim();		
+		
+			// e.g. 7/9/2015
+			String tempDateString = this.taskVariables[0];
+		
+			int slashIndex1 = tempDateString.indexOf("/");
+			int day = Integer.valueOf(tempDateString.substring(0, slashIndex1).trim());
+		
+			tempDateString = tempDateString.substring(slashIndex1 + 1);
+		
+			// e.g. 31/12/2014 with starting time 0859
+			int slashIndex2 = tempDateString.indexOf("/");
+		
+			// the month December (the 12th month of each year)
+			int month = Integer.valueOf(tempDateString.substring(0, slashIndex2).trim());
+		
+			// The year 2014
+			int year = Integer.valueOf(tempDateString.substring(slashIndex2 + 1).trim());
+
+			
+			// used for sorting all tasks by date and starting time (taking year 0, 0000 hours as reference)
+			// (2014 - 1) / 4 = 2013 / 4 = 503 (not considering the remainder)
+			int numberOfPastLeapYears = (year - 1) / 4;
+			// (2014 - 1) - 503 = 2013 - 503 = 1500
+			int numberOfPastNonLeapyears = (year - 1) - numberOfPastLeapYears;
+		
+			int leapYearFebruaryDay = 0;
+		
+			// 2014%4 = 1
+			if((year%4==0) && ((month -1)>=2)){
+				leapYearFebruaryDay = 1;
+			}
+			
+			int numberOfAccumulatedPastDaysInCurrentYear = findNumberOfAccumulatedPastDaysInCurrentYear(month - 1, day - 1);
+			
+			this.comparisonValue = numberOfPastLeapYears * LEAP_YEAR_DAYS * DAY_HOURS * HOUR_MINUTES + numberOfPastNonLeapyears * YEAR_DAYS * DAY_HOURS * HOUR_MINUTES + (numberOfAccumulatedPastDaysInCurrentYear + leapYearFebruaryDay) * DAY_HOURS * HOUR_MINUTES;
+			
+		}
+		// the input of a floating task is
+		// title, description, priority
+		else if(Checker.checkFloatingTaskInput(taskInformation)){
+			String tempString = new String("");
+			// checks the full String
+			tempString = taskInformation;
+			
+			// title, starting time and ending time are all undefined
+			this.taskVariables[0] = "undefined";
+			this.taskVariables[1] = "undefined";
+			this.taskVariables[2] = "undefined";
+			
+			// checks for the first separator
+			int commaWhitespaceIndex1 = tempString.indexOf(", ");
+			
+			// title is extracted
+			this.taskVariables[3] = tempString.substring(0, commaWhitespaceIndex1);
+
+			// checks the rest of the String after the first separator				
+			tempString = tempString.substring(commaWhitespaceIndex1 + 2);
+
+			// checks for the second separator
+			int commaWhitespaceIndex2 = tempString.indexOf(", ");
+			
+			// description is extracted
+			this.taskVariables[4] = tempString.substring(0, commaWhitespaceIndex2);
+
+			// priority is extracted
+			this.taskVariables[5] = tempString.substring(commaWhitespaceIndex2 + 2);
+
+			// category set as "floating"
+			this.taskVariables[6] = "floating";
+			
+			this.comparisonValue = FLOATING_COMPARISON_VALUE;
+
+		}
+		// the input of a deadline task is
+		// date, ending time, title, description, priority
+		else if(Checker.checkDeadlineTaskInput(taskInformation)){
+			
+			String tempString = new String("");
+			tempString = taskInformation;
+			
+			// starting time is undefined
+			this.taskVariables[1] = "undefined";
+			
+			// category is "deadline"
+			this.taskVariables[6] = "deadline";
+			
+			String[] tempTaskVariables = new String[5];
+
+			// format e.g. 10/10/2015, 0000, title, description, priority
+			
+	
+			int commaWhitespaceIndex1 = tempString.indexOf(", ");
+		
+		
+			tempTaskVariables[0] = tempString.substring(0, commaWhitespaceIndex1);
+			
+			// extracts the date
+			this.taskVariables[0] = tempTaskVariables[0];	
+			
+			tempString = tempString.substring(commaWhitespaceIndex1 + 2);
+						
+			int commaWhitespaceIndex2 = tempString.indexOf(", ");
+			
+			tempTaskVariables[1] = tempString.substring(0, commaWhitespaceIndex2);	
+			
+			// extracts the ending time
+			this.taskVariables[2] = tempTaskVariables[1];
+			
+			// ENDING TIME
+			
+			// e.g. 1100
+												
+			// tempString.substring(commaWhitespaceIndex2 + 2) is title title1, description description2, priorityLevel 1
+			tempString = tempString.substring(commaWhitespaceIndex2 + 2);
+		
+
+			int commaWhitespaceIndex3 = tempString.indexOf(", ");
+			
+
+			tempTaskVariables[2] = tempString.substring(0, commaWhitespaceIndex3);
+			
+			// extracts the title
+			this.taskVariables[3] = tempTaskVariables[2];
+			
+			// tempString.substring(commaWhitespaceIndex4 + 2) is description description2, priorityLevel 1, category unknown
+
+			tempString = tempString.substring(commaWhitespaceIndex3 + 2);
+			
+	
+			int commaWhitespaceIndex4 = tempString.indexOf(", ");
+			
+
+			tempTaskVariables[3] = tempString.substring(0, commaWhitespaceIndex4);					
+			
+			// extracts the description
+			this.taskVariables[4] = tempTaskVariables[3];
+			
+			tempString = tempString.substring(commaWhitespaceIndex4+2);
+
+			tempTaskVariables[4] = tempString;
+			
+			// extracts the priority
+			this.taskVariables[5] = tempTaskVariables[4];
+
+			// e.g. 7/9/2015
+			String tempDateString = this.taskVariables[0];
+		
+			int slashIndex1 = tempDateString.indexOf("/");
+			int day = Integer.valueOf(tempDateString.substring(0, slashIndex1).trim());
+		
+			tempDateString = tempDateString.substring(slashIndex1 + 1);
+		
+			// e.g. 31/12/2014 with starting time 0859
+			int slashIndex2 = tempDateString.indexOf("/");
+		
+			// the month December (the 12th month of each year)
+			int month = Integer.valueOf(tempDateString.substring(0, slashIndex2).trim());
+		
+			// The year 2014
+			int year = Integer.valueOf(tempDateString.substring(slashIndex2 + 1).trim());
+
+			
+			// used for sorting all tasks by date and starting time (taking year 0, 0000 hours as reference)
+			// (2014 - 1) / 4 = 2013 / 4 = 503 (not considering the remainder)
+			int numberOfPastLeapYears = (year - 1) / 4;
+			// (2014 - 1) - 503 = 2013 - 503 = 1500
+			int numberOfPastNonLeapyears = (year - 1) - numberOfPastLeapYears;
+		
+			int leapYearFebruaryDay = 0;
+		
+			// 2014%4 = 1
+			if((year%4==0) && ((month -1)>=2)){
+				leapYearFebruaryDay = 1;
+			}
+			
+			int numberOfAccumulatedPastDaysInCurrentYear = findNumberOfAccumulatedPastDaysInCurrentYear(month - 1, day - 1);
+			
+			this.comparisonValue = numberOfPastLeapYears * LEAP_YEAR_DAYS * DAY_HOURS * HOUR_MINUTES + numberOfPastNonLeapyears * YEAR_DAYS * DAY_HOURS * HOUR_MINUTES + (numberOfAccumulatedPastDaysInCurrentYear + leapYearFebruaryDay) * DAY_HOURS * HOUR_MINUTES;
+				
+		}
+		else if(Checker.checkTask(taskInformation)){
+			// extracts the date
+			int commaWhitespaceIndex1 = remainingString.indexOf(", ");
+
+			this.taskVariables[0] = remainingString.substring(0, commaWhitespaceIndex1).trim();
+			remainingString = remainingString.substring(commaWhitespaceIndex1 + 2);
+
+			// extracts the starting time
+			int commaWhitespaceIndex2 = remainingString.indexOf(", ");
+
+			this.taskVariables[1] = remainingString.substring(0, commaWhitespaceIndex2).trim();
+			remainingString = remainingString.substring(commaWhitespaceIndex2 + 2).trim();
+	
+			// extracts the ending time
+			int commaWhitespaceIndex3 = remainingString.indexOf(", ");
+	
+			this.taskVariables[2] = remainingString.substring(0, commaWhitespaceIndex3).trim();
+			remainingString = remainingString.substring(commaWhitespaceIndex3 + 2).trim();
+	
+			// extracts the task title
+			int commaWhitespaceIndex4 = remainingString.indexOf(", ");
+		
+			this.taskVariables[3] = remainingString.substring(0, commaWhitespaceIndex4).trim();
+			remainingString = remainingString.substring(commaWhitespaceIndex4 + 2).trim();
+		
+			// extracts the task description
+			int commaWhitespaceIndex5 = remainingString.indexOf(", ");
+		
+			this.taskVariables[4] = remainingString.substring(0, commaWhitespaceIndex5).trim();
+			remainingString = remainingString.substring(commaWhitespaceIndex5 + 2).trim();
+
+			// extracts the priority level, and the category of the task
+			int commaWhitespaceIndex6 = remainingString.indexOf(", ");
+		
+			this.taskVariables[5] = remainingString.substring(0, commaWhitespaceIndex6).trim();
+			remainingString = remainingString.substring(commaWhitespaceIndex6 + 2).trim();
+			this.taskVariables[6] = remainingString.trim();		
+		
+			// e.g. 7/9/2015
+			String tempDateString = this.taskVariables[0];
+		
+			int slashIndex1 = tempDateString.indexOf("/");
+			int day = Integer.valueOf(tempDateString.substring(0, slashIndex1).trim());
+		
+			tempDateString = tempDateString.substring(slashIndex1 + 1);
+		
+			// e.g. 31/12/2014 with starting time 0859
+			int slashIndex2 = tempDateString.indexOf("/");
+		
+			// the month December (the 12th month of each year)
+			int month = Integer.valueOf(tempDateString.substring(0, slashIndex2).trim());
+		
+			// The year 2014
+			int year = Integer.valueOf(tempDateString.substring(slashIndex2 + 1).trim());
+
+			// 8 hours
+			int startingTimeHours = Integer.valueOf(this.taskVariables[1].substring(0, 2).trim());
+		
+			// 59 minutes
+			int startingTimeMinutes = Integer.valueOf(this.taskVariables[1].substring(2).trim());
+				
+			// used for sorting all tasks by date and starting time (taking year 0, 0000 hours as reference)
+			// (2014 - 1) / 4 = 2013 / 4 = 503 (not considering the remainder)
+			int numberOfPastLeapYears = (year - 1) / 4;
+			// (2014 - 1) - 503 = 2013 - 503 = 1500
+			int numberOfPastNonLeapyears = (year - 1) - numberOfPastLeapYears;
+		
+			int leapYearFebruaryDay = 0;
+		
+			// 2014%4 = 1
+			if((year%4==0) && ((month -1)>=2)){
+				leapYearFebruaryDay = 1;
+			}
+		
+			int numberOfAccumulatedPastDaysInCurrentYear = findNumberOfAccumulatedPastDaysInCurrentYear(month - 1, day - 1);
+			int numberOfPastHours = startingTimeHours;
+			int numberOfPastMinutes = startingTimeMinutes;
+		
+			// e.g. this.comparisonValue = 503 * 366 + 1500 * 365 + (NOVEMBER_ACCUMULATED_DAYS + 0) * 24 * 60 + 8 * 60 + 59;
+			this.comparisonValue = numberOfPastLeapYears * LEAP_YEAR_DAYS * DAY_HOURS * HOUR_MINUTES + numberOfPastNonLeapyears * YEAR_DAYS * DAY_HOURS * HOUR_MINUTES + (numberOfAccumulatedPastDaysInCurrentYear + leapYearFebruaryDay) * DAY_HOURS * HOUR_MINUTES + numberOfPastHours * HOUR_MINUTES + numberOfPastMinutes;
+		}
 	}
 	
 	// e.g. 31/12/2014 with starting time 0859 gives numberOfPastMonths = 12 - 1 = 11, and numberOfPastDays = 31 - 1 = 30

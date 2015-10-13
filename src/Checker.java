@@ -76,10 +76,244 @@ public class Checker {
 	private static final int NOVEMBER_DAYS = 30;
 	private static final int DECEMBER_DAYS = 31;
 
-	// checks the validity of the potential Task String	
+	// checks the validity of the potential Task String for a floating task
+	// which is a task without a date, starting time and ending time, and without a category
+	// it will therefore only have a title, a description, and a priority (level)
+	// That means 3 terms.
+	// and prints out error messages for only the first mistake made by the user, 
+	// for the Task String 
+	// Do take note that there will be 2 ", " (comma and whitespace String) separators as there are 4 terms
+	static boolean checkFloatingTaskInput(String taskString){
+		String tempString = new String("");
+		// checks the full String
+		tempString = taskString;
+		
+		// checks for the first separator
+		int commaWhitespaceIndex1 = tempString.indexOf(", ");
+		
+		if(commaWhitespaceIndex1 < 0){
+			return false;
+		}
+		
+		// checks if the term before the first separator is empty
+		if(tempString.substring(0, commaWhitespaceIndex1).length()<=0){
+			return false;
+		}
+		
+		// checks the rest of the String after the first separator				
+		tempString = tempString.substring(commaWhitespaceIndex1 + 2);
+		
+		// checks for the second separator
+		int commaWhitespaceIndex2 = tempString.indexOf(", ");
+		
+		
+		if(commaWhitespaceIndex2 < 0){
+			return false;
+		}
+		
+		// checks if the term before the second separator is empty
+		if(tempString.substring(0, commaWhitespaceIndex2).length()<=0){
+			return false;
+		}		
+		
+		// checks the rest of the String after the second separator 
+		tempString = tempString.substring(commaWhitespaceIndex2 + 2);
+		
+		// checks for the third separator
+		int commaWhitespaceIndex3 = tempString.indexOf(", ");
+		
+		
+		if(commaWhitespaceIndex3 >= 0){
+			return false;
+		}
+		
+		return true;
+	}
+	
+	// checks the validity of a floating task AFTER it is added
+	// i.e. check whether the Task object is a floating task
+	static boolean checkCategoryFloatingTask(Task task){
+		if(task.getCategory().equalsIgnoreCase("floating")){
+			return true;
+		}
+		
+		return false;
+	}
+	
+	// checks the validity of the potential Task String for a deadline task
+	// which is a task without a starting time and ending time, and without a category
+	// it will therefore only have a date, an ending time, a title, a description, and a priority 
+	// that means 5 terms
+	// and prints out error messages for only the first mistake made by the user, 
+	// for the Task String 
+	// Do take note that there will be 4 ", " (comma and whitespace String) separators as there are 6 terms
+	static boolean checkDeadlineTaskInput(String taskString){
+		
+		String tempString = new String("");
+		tempString = taskString;
+		
+		String[] tempTaskVariables = new String[5];
+
+		// format e.g. 10/10/2015, 0000, title, description, priority
+		
+		// extracts the date
+		int commaWhitespaceIndex1 = tempString.indexOf(", ");
+		
+		if(commaWhitespaceIndex1 < 0){
+			
+			return false;
+		}
+		
+	
+		// tempTaskVariables[0] is the extracted date
+		tempTaskVariables[0] = tempString.substring(0, commaWhitespaceIndex1);
+		
+		// e.g. tempDateString is "27/9/2015"
+		
+		String tempDateString = tempTaskVariables[0];
+		
+		if(!checkDate(tempDateString)){
+			return false;
+		}
+		
+		assert(checkDate(tempDateString));
+		
+		// tempString.substring(commaWhitespaceIndex1 + 2) is 1100, title title1, description description2, priorityLevel 1
+		
+		tempString = tempString.substring(commaWhitespaceIndex1 + 2);
+		
+		
+		int commaWhitespaceIndex2 = tempString.indexOf(", ");
+		
+		if(commaWhitespaceIndex2 < 0){
+
+			return false;
+		}
+		
+		
+		// tempTaskVariables[1] is the ending time
+		tempTaskVariables[1] = tempString.substring(0, commaWhitespaceIndex2);	
+		
+		// ENDING TIME
+		
+		// e.g. 1100
+		
+		// checks if the ending time is missing
+		if(tempTaskVariables[1].length()==0){
+
+			return false;				
+		}
+		
+		// checks if there is a dash in the ending time
+		if(tempTaskVariables[1].indexOf("-")>=0){
+	
+			return false;							
+		}
+			
+		// checks if the ending time is a number
+		char[] tempCharArray5 = new char[tempTaskVariables[1].length()];
+		tempTaskVariables[1].getChars(0, tempTaskVariables[1].length(), tempCharArray5, 0);
+
+		
+		for(int m=0; m<tempTaskVariables[1].length(); m++){
+			if(!Character.isDigit(tempCharArray5[m])){			
+
+				return false;				
+			}
+		}				
+	
+		// checks if the ending time has four digits
+		if(tempTaskVariables[1].length()!=4){
+
+			return false;					
+		}
+
+		// checks if the hours for the ending time, is more than 23
+		if(Integer.valueOf(tempTaskVariables[1].substring(0, 2))>23){
+
+			return false;	
+		}
+		
+		// checks if the minutes for the ending time, is more than 59
+		if(Integer.valueOf(tempTaskVariables[1].substring(2, 4))>59){
+
+			return false;	
+		}
+		
+		// checks if the ending time is a number greater than 2359 (11:59pm)
+		if(Integer.valueOf(tempTaskVariables[1])>2359){
+
+			return false;	
+		}
+								
+		// tempString.substring(commaWhitespaceIndex2 + 2) is title title1, description description2, priorityLevel 1
+		tempString = tempString.substring(commaWhitespaceIndex2 + 2);
+	
+		// extracts the task title
+		int commaWhitespaceIndex3 = tempString.indexOf(", ");
+		
+		if(commaWhitespaceIndex3 < 0){
+
+			return false;
+		}
+		
+		// tempTaskVariables[2] is the task title
+		tempTaskVariables[2] = tempString.substring(0, commaWhitespaceIndex3);
+	
+		
+		// tempString.substring(commaWhitespaceIndex4 + 2) is description description2, priorityLevel 1, category unknown
+
+		tempString = tempString.substring(commaWhitespaceIndex3 + 2);
+		
+		// extracts the task description
+		int commaWhitespaceIndex4 = tempString.indexOf(", ");
+		
+		if(commaWhitespaceIndex4 < 0){
+
+			return false;
+		}
+		
+		// tempTaskVariables[3] is the extracted task description
+		tempTaskVariables[3] = tempString.substring(0, commaWhitespaceIndex4);	
+				
+		if(tempString.substring(commaWhitespaceIndex4+2).length()<=0){
+			return false;
+		}
+		
+		tempString = tempString.substring(commaWhitespaceIndex4+2);
+		
+		int commaWhitespaceIndex5 = tempString.indexOf(", ");
+		
+		if(commaWhitespaceIndex5 >= 0){
+			return false;
+		}
+		
+		// tempTaskVariables[4] is the priority
+		tempTaskVariables[4] = tempString;
+				
+		return true;
+		
+	}
+	
+	
+	// checks the validity of a floating task AFTER it is added
+	// i.e. check whether the Task object is a floating task
+	static boolean checkCategoryDeadlineTask(Task task){
+		if(task.getCategory().equalsIgnoreCase("deadline")){
+			return true;
+		}
+		
+		return false;
+	}
+
+	
+	// checks the validity of the potential Task String	for a USUAL (NORMAL) task
 	// and prints out error messages for only the first mistake made by the user, 
 	// for the Task String
-	static boolean checkTask(String taskString, FlexWindow flexWindow) {
+	// This includes a date, a starting time, an ending time, a title, a description, a priority and a category
+	// Do take note that there will be 6 ", " (comma and whitespace String) separators as there are 7 terms
+	// This method can check for the Task's String form ONLY after it is created
+	static boolean checkTask(String taskString) {
 			
 		String tempString = new String("");
 		tempString = taskString.trim();
@@ -101,20 +335,7 @@ public class Checker {
 		int commaWhitespaceIndex1 = tempString.indexOf(", ");
 			
 		if(commaWhitespaceIndex1 < 0){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
 
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-			
-			flexWindow.getTextArea().append(FIRST_COMMA_SPACE_MISSING_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(FIRST_COMMA_SPACE_MISSING_MESSAGE);
-			System.out.println(FIRST_COMMA_SPACE_MISSING_MESSAGE);
-			System.out.println();
-				
 			return false;
 		}
 			
@@ -126,11 +347,11 @@ public class Checker {
 			
 		String tempDateString = tempTaskVariables[0];
 			
-		if(!checkDate(tempDateString, flexWindow)){
+		if(!checkDate(tempDateString)){
 			return false;
 		}
 			
-		assert(checkDate(tempDateString, flexWindow));
+		assert(checkDate(tempDateString));
 									
 		// tempString.substring(commaWhitespaceIndex1 + 2) is 0011, 1100, title title1, description description2, priorityLevel 1, category unknown		
 			
@@ -140,20 +361,7 @@ public class Checker {
 		int commaWhitespaceIndex2 = tempString.indexOf(", ");
 							
 		if(commaWhitespaceIndex2 < 0){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
 
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-				
-			flexWindow.getTextArea().append(SECOND_COMMA_SPACE_MISSING_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(SECOND_COMMA_SPACE_MISSING_MESSAGE);
-			System.out.println(SECOND_COMMA_SPACE_MISSING_MESSAGE);
-			System.out.println();
-				
 			return false;
 		}
 
@@ -166,139 +374,48 @@ public class Checker {
 			
 		// checks if the starting time is missing
 		if(tempTaskVariables[1].length()==0){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
 
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-				
-			flexWindow.getTextArea().append(STARTING_TIME_MISSING_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-				
-			logger.finest(STARTING_TIME_MISSING_MESSAGE);
-			System.out.println(STARTING_TIME_MISSING_MESSAGE);
-			System.out.println();
-				
 			return false;				
 		}
 			
 		// checks if there is a dash in the starting time
 		if(tempTaskVariables[1].indexOf("-")>=0){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
 
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-			
-			flexWindow.getTextArea().append(DASH_IN_STARTING_TIME_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(DASH_IN_STARTING_TIME_MESSAGE);
-			System.out.println(DASH_IN_STARTING_TIME_MESSAGE);
-			System.out.println();
-				
 			return false;							
 		}
 			
 		// checks if the starting time is a number
-		char[] tempCharArray4 = new char[tempTaskVariables[1].trim().length()];
-		tempTaskVariables[1].trim().getChars(0, tempTaskVariables[1].trim().length(), tempCharArray4, 0);
+		char[] tempCharArray4 = new char[tempTaskVariables[1].trim().length()];				
+		tempTaskVariables[1].trim().getChars(0, tempTaskVariables[1].trim().length(), tempCharArray4, 0);		
 		for(int l=0; l<tempTaskVariables[1].trim().length(); l++){
 			if(!Character.isDigit(tempCharArray4[l])){
-				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-				flexWindow.getTextArea().append("\n");
 
-				logger.finest(INVALID_INPUT_MESSAGE);
-				System.out.println(INVALID_INPUT_MESSAGE);
-				System.out.println();
-					
-				flexWindow.getTextArea().append(STARTING_TIME_NOT_A_NUMBER_MESSAGE + "\n");
-				flexWindow.getTextArea().append("\n");
-
-				logger.finest(STARTING_TIME_NOT_A_NUMBER_MESSAGE);
-				System.out.println(STARTING_TIME_NOT_A_NUMBER_MESSAGE);
-				System.out.println();
-					
 				return false;				
 			}
 		}				
 		
 		// checks if the starting time has four digits
 		if(tempTaskVariables[1].length()!=4){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
 
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-				
-			flexWindow.getTextArea().append(STARTING_TIME_IS_A_NUMBER_BUT_NOT_A_4_DIGIT_NUMBER_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-		
-			logger.finest(STARTING_TIME_IS_A_NUMBER_BUT_NOT_A_4_DIGIT_NUMBER_MESSAGE);
-			System.out.println(STARTING_TIME_IS_A_NUMBER_BUT_NOT_A_4_DIGIT_NUMBER_MESSAGE);
-			System.out.println();
-				
 			return false;					
 		}
 			
 		// checks if the hours for the starting time, is more than 23
 		if(Integer.valueOf(tempTaskVariables[1].substring(0, 2))>23){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
 
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-				
-			flexWindow.getTextArea().append(STARTING_TIME_HOURS_GREATER_THAN_TWENTY_THREE_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(STARTING_TIME_HOURS_GREATER_THAN_TWENTY_THREE_MESSAGE);
-			System.out.println(STARTING_TIME_HOURS_GREATER_THAN_TWENTY_THREE_MESSAGE);
-			System.out.println();
-			
 			return false;	
 		}
 		
 		// checks if the minutes for the starting time, is more than 59
 		if(Integer.valueOf(tempTaskVariables[1].substring(2, 4))>59){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-				
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-				
-			flexWindow.getTextArea().append(STARTING_TIME_MINUTES_GREATER_THAN_FIFTY_NINE_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
 
-			logger.finest(STARTING_TIME_MINUTES_GREATER_THAN_FIFTY_NINE_MESSAGE);
-			System.out.println(STARTING_TIME_MINUTES_GREATER_THAN_FIFTY_NINE_MESSAGE);
-			System.out.println();
-				
 			return false;	
 		}
 			
 			
 		// checks if the starting time is a number greater than 2359 (11:59pm)
 		if(Integer.valueOf(tempTaskVariables[1])>2359){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
 
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-			
-			flexWindow.getTextArea().append(STARTING_TIME_IS_A_NUMBER_GREATER_THAN_TWO_THREE_FIVE_NINE_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(STARTING_TIME_IS_A_NUMBER_GREATER_THAN_TWO_THREE_FIVE_NINE_MESSAGE);
-			System.out.println(STARTING_TIME_IS_A_NUMBER_GREATER_THAN_TWO_THREE_FIVE_NINE_MESSAGE);
-			System.out.println();
-				
 			return false;	
 		}
 			
@@ -310,20 +427,7 @@ public class Checker {
 		int commaWhitespaceIndex3 = tempString.indexOf(", ");
 			
 		if(commaWhitespaceIndex3 < 0){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
 
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-				
-			flexWindow.getTextArea().append(THIRD_COMMA_SPACE_MISSING_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(THIRD_COMMA_SPACE_MISSING_MESSAGE);
-			System.out.println(THIRD_COMMA_SPACE_MISSING_MESSAGE);
-			System.out.println();
-			
 			return false;
 		}
 			
@@ -336,60 +440,21 @@ public class Checker {
 			
 		// checks if the ending time is missing
 		if(tempTaskVariables[2].length()==0){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
 
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-				
-			flexWindow.getTextArea().append(ENDING_TIME_MISSING_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-				
-			logger.finest(ENDING_TIME_MISSING_MESSAGE);
-			System.out.println(ENDING_TIME_MISSING_MESSAGE);
-			System.out.println();
-				
 			return false;				
 		}
 			
 		// checks if there is a dash in the ending time
 		if(tempTaskVariables[2].indexOf("-")>=0){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
 
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-			
-			flexWindow.getTextArea().append(DASH_IN_ENDING_TIME_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(DASH_IN_ENDING_TIME_MESSAGE);
-			System.out.println(DASH_IN_ENDING_TIME_MESSAGE);
-			System.out.println();
-				
 			return false;							
 		}
 			
-		// checks if the starting time is a number
+		// checks if the ending time is a number
 		char[] tempCharArray5 = new char[tempTaskVariables[2].trim().length()];
 		tempTaskVariables[2].trim().getChars(0, tempTaskVariables[2].trim().length(), tempCharArray5, 0);
 		for(int m=0; m<tempTaskVariables[2].trim().length(); m++){
 			if(!Character.isDigit(tempCharArray5[m])){
-				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-				flexWindow.getTextArea().append("\n");
-
-				logger.finest(INVALID_INPUT_MESSAGE);
-				System.out.println(INVALID_INPUT_MESSAGE);
-				System.out.println();
-					
-				flexWindow.getTextArea().append(ENDING_TIME_NOT_A_NUMBER_MESSAGE + "\n");
-				flexWindow.getTextArea().append("\n");
-
-				logger.finest(ENDING_TIME_NOT_A_NUMBER_MESSAGE);
-				System.out.println(ENDING_TIME_NOT_A_NUMBER_MESSAGE);
-				System.out.println();
 				
 				return false;				
 			}
@@ -397,77 +462,25 @@ public class Checker {
 		
 		// checks if the ending time has four digits
 		if(tempTaskVariables[2].length()!=4){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
 
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-				
-			flexWindow.getTextArea().append(ENDING_TIME_IS_A_NUMBER_BUT_NOT_A_4_DIGIT_NUMBER_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(ENDING_TIME_IS_A_NUMBER_BUT_NOT_A_4_DIGIT_NUMBER_MESSAGE);
-			System.out.println(ENDING_TIME_IS_A_NUMBER_BUT_NOT_A_4_DIGIT_NUMBER_MESSAGE);
-			System.out.println();
-				
 			return false;					
 		}
 
 		// checks if the hours for the ending time, is more than 23
 		if(Integer.valueOf(tempTaskVariables[2].substring(0, 2))>23){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
 
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-				
-			flexWindow.getTextArea().append(ENDING_TIME_HOURS_GREATER_THAN_TWENTY_THREE_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-				
-			logger.finest(ENDING_TIME_HOURS_GREATER_THAN_TWENTY_THREE_MESSAGE);
-			System.out.println(ENDING_TIME_HOURS_GREATER_THAN_TWENTY_THREE_MESSAGE);
-			System.out.println();
-				
 			return false;	
 		}
 			
 		// checks if the minutes for the ending time, is more than 59
 		if(Integer.valueOf(tempTaskVariables[2].substring(2, 4))>59){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-				
-			flexWindow.getTextArea().append(ENDING_TIME_MINUTES_GREATER_THAN_FIFTY_NINE_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(ENDING_TIME_MINUTES_GREATER_THAN_FIFTY_NINE_MESSAGE);
-			System.out.println(ENDING_TIME_MINUTES_GREATER_THAN_FIFTY_NINE_MESSAGE);
-			System.out.println();
 				
 			return false;	
 		}
 			
 		// checks if the ending time is a number greater than 2359 (11:59pm)
 		if(Integer.valueOf(tempTaskVariables[2])>2359){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
 
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-				
-			flexWindow.getTextArea().append(ENDING_TIME_IS_A_NUMBER_GREATER_THAN_TWO_THREE_FIVE_NINE_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(ENDING_TIME_IS_A_NUMBER_GREATER_THAN_TWO_THREE_FIVE_NINE_MESSAGE);
-			System.out.println(ENDING_TIME_IS_A_NUMBER_GREATER_THAN_TWO_THREE_FIVE_NINE_MESSAGE);
-			System.out.println();
-			
 			return false;	
 		}
 							
@@ -478,20 +491,7 @@ public class Checker {
 		int commaWhitespaceIndex4 = tempString.indexOf(", ");
 			
 		if(commaWhitespaceIndex4 < 0){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-				
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-				
-			flexWindow.getTextArea().append(FOURTH_COMMA_SPACE_MISSING_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
 
-			logger.finest(FOURTH_COMMA_SPACE_MISSING_MESSAGE);
-			System.out.println(FOURTH_COMMA_SPACE_MISSING_MESSAGE);
-			System.out.println();
-				
 			return false;
 		}
 			
@@ -506,19 +506,6 @@ public class Checker {
 		int commaWhitespaceIndex5 = tempString.indexOf(", ");
 			
 		if(commaWhitespaceIndex5 < 0){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-				
-			flexWindow.getTextArea().append(FIFTH_COMMA_SPACE_MISSING_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(FIFTH_COMMA_SPACE_MISSING_MESSAGE);
-			System.out.println(FIFTH_COMMA_SPACE_MISSING_MESSAGE);
-			System.out.println();
 				
 			return false;
 		}
@@ -532,20 +519,7 @@ public class Checker {
 		int commaWhitespaceIndex6 = tempString.indexOf(", ");
 			
 		if(commaWhitespaceIndex6 < 0){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
 
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-				
-			flexWindow.getTextArea().append(SIXTH_COMMA_SPACE_MISSING_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(SIXTH_COMMA_SPACE_MISSING_MESSAGE);
-			System.out.println(SIXTH_COMMA_SPACE_MISSING_MESSAGE);
-			System.out.println();
-				
 			return false;
 		}
 			
@@ -567,7 +541,7 @@ public class Checker {
 	/// checks the validity of the date,
 	// not perfectly for the day,
 	// but perfectly for the month and the year
-	static boolean checkDate(String dateString, FlexWindow flexWindow){
+	static boolean checkDate(String dateString){
 		String tempDateString = dateString;
 		
 		int slashIndex1 = tempDateString.indexOf("/");
@@ -578,19 +552,6 @@ public class Checker {
 		
 		// checks for the first slash in the date
 		if(slashIndex1 < 0){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-			
-			flexWindow.getTextArea().append(DATE_FIRST_SLASH_MISSING_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(DATE_FIRST_SLASH_MISSING_MESSAGE);
-			System.out.println(DATE_FIRST_SLASH_MISSING_MESSAGE);
-			System.out.println();
 			
 			return false;
 		}
@@ -599,39 +560,13 @@ public class Checker {
 		
 		// checks for any missing of the day in the date	
 		if(tempDateString.substring(0, slashIndex1).trim().length()==0){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
 
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-			
-			flexWindow.getTextArea().append(DAY_IN_DATE_MISSING_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(DAY_IN_DATE_MISSING_MESSAGE);
-			System.out.println(DAY_IN_DATE_MISSING_MESSAGE);
-			System.out.println();
-			
 			return false;			
 		}
 		
 		// checks for any "-" (dash) in the day of the date
 		if(tempDateString.substring(0, slashIndex1).trim().indexOf("-")>=0){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
 
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-			
-			flexWindow.getTextArea().append(DASH_IN_DAY_OF_DATE_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(DASH_IN_DAY_OF_DATE_MESSAGE);
-			System.out.println(DASH_IN_DAY_OF_DATE_MESSAGE);
-			System.out.println();
-			
 			return false;
 		}
 
@@ -640,19 +575,6 @@ public class Checker {
 		tempDateString.substring(0, slashIndex1).getChars(0, tempDateString.substring(0, slashIndex1).trim().length(), tempCharArray1, 0);
 		for(int i=0; i<tempDateString.substring(0, slashIndex1).trim().length(); i++){
 			if(!Character.isDigit(tempCharArray1[i])){
-				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-				flexWindow.getTextArea().append("\n");
-
-				logger.finest(INVALID_INPUT_MESSAGE);
-				System.out.println(INVALID_INPUT_MESSAGE);
-				System.out.println();
-				
-				flexWindow.getTextArea().append(DAY_IN_DATE_NOT_A_NUMBER_MESSAGE + "\n");
-				flexWindow.getTextArea().append("\n");
-
-				logger.finest(DAY_IN_DATE_NOT_A_NUMBER_MESSAGE);
-				System.out.println(DAY_IN_DATE_NOT_A_NUMBER_MESSAGE);
-				System.out.println();
 				
 				return false;				
 			}
@@ -660,58 +582,19 @@ public class Checker {
 		
 		// checks if the day has more than two digits
 		if(tempDateString.substring(0, slashIndex1).trim().length()>2){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
 
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-			
-			flexWindow.getTextArea().append(DAY_IN_DATE_MORE_THAN_TWO_DIGITS_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(DAY_IN_DATE_MORE_THAN_TWO_DIGITS_MESSAGE);
-			System.out.println(DAY_IN_DATE_MORE_THAN_TWO_DIGITS_MESSAGE);
-			System.out.println();
-			
 			return false;				
 		}
 		
 		// checks whether the day in the date is more than 31
 		if(Integer.valueOf(tempDateString.substring(0, slashIndex1).trim())>31){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
 
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-			
-			flexWindow.getTextArea().append(DAY_IN_DATE_MORE_THAN_THIRTY_ONE_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(DAY_IN_DATE_MORE_THAN_THIRTY_ONE_MESSAGE);
-			System.out.println(DAY_IN_DATE_MORE_THAN_THIRTY_ONE_MESSAGE);
-			System.out.println();
-			
 			return false;				
 		}
 		
 		// checks whether the day in the date is 0, or less than zero
 		if(Integer.valueOf(tempDateString.substring(0, slashIndex1).trim())<=0){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
 
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-			
-			flexWindow.getTextArea().append(DAY_IN_DATE_IS_ZERO_OR_LESS_THAN_ZERO_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(DAY_IN_DATE_IS_ZERO_OR_LESS_THAN_ZERO_MESSAGE);
-			System.out.println(DAY_IN_DATE_IS_ZERO_OR_LESS_THAN_ZERO_MESSAGE);
-			System.out.println();
-			
 			return false;				
 		}
 		
@@ -725,20 +608,7 @@ public class Checker {
 		
 		// checks for the second slash in the date
 		if(slashIndex2 < 0){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
 
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-			
-			flexWindow.getTextArea().append(DATE_SECOND_SLASH_MISSING_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(DATE_SECOND_SLASH_MISSING_MESSAGE);
-			System.out.println(DATE_SECOND_SLASH_MISSING_MESSAGE);
-			System.out.println();
-			
 			return false;
 		}
 							
@@ -749,39 +619,13 @@ public class Checker {
 		
 		// checks for any missing of the month in the date	
 		if(tempDateString.substring(0, slashIndex2).trim().length()==0){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
 
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-			
-			flexWindow.getTextArea().append(MONTH_IN_DATE_MISSING_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(MONTH_IN_DATE_MISSING_MESSAGE);
-			System.out.println(MONTH_IN_DATE_MISSING_MESSAGE);
-			System.out.println();
-			
 			return false;			
 		}
 		
 		// checks for any "-" (dash) in the month of the date
 		if(tempDateString.substring(0, slashIndex2).trim().indexOf("-")>=0){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
 
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-			
-			flexWindow.getTextArea().append(DASH_IN_MONTH_OF_DATE_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(DASH_IN_MONTH_OF_DATE_MESSAGE);
-			System.out.println(DASH_IN_MONTH_OF_DATE_MESSAGE);
-			System.out.println();
-			
 			return false;
 		}
 
@@ -790,78 +634,26 @@ public class Checker {
 		tempDateString.substring(0, slashIndex2).getChars(0, tempDateString.substring(0, slashIndex2).trim().length(), tempCharArray2, 0);
 		for(int j=0; j<tempDateString.substring(0, slashIndex2).trim().length(); j++){
 			if(!Character.isDigit(tempCharArray2[j])){
-				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-				flexWindow.getTextArea().append("\n");
-				
-				logger.finest(INVALID_INPUT_MESSAGE);
-				System.out.println(INVALID_INPUT_MESSAGE);
-				System.out.println();
-				
-				flexWindow.getTextArea().append(MONTH_IN_DATE_NOT_A_NUMBER_MESSAGE + "\n");
-				flexWindow.getTextArea().append("\n");
 
-				logger.finest(MONTH_IN_DATE_NOT_A_NUMBER_MESSAGE);
-				System.out.println(MONTH_IN_DATE_NOT_A_NUMBER_MESSAGE);
-				System.out.println();
-				
 				return false;				
 			}
 		}
 		
 		// checks if the month has more than two digits
 		if(tempDateString.substring(0, slashIndex2).trim().length()>2){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-			
-			flexWindow.getTextArea().append(MONTH_IN_DATE_MORE_THAN_TWO_DIGITS_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(MONTH_IN_DATE_MORE_THAN_TWO_DIGITS_MESSAGE);
-			System.out.println(MONTH_IN_DATE_MORE_THAN_TWO_DIGITS_MESSAGE);
-			System.out.println();
 			
 			return false;				
 		}
 		
 		// checks if the month is more than 12
 		if(Integer.valueOf(tempDateString.substring(0, slashIndex2))>12){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
 
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-			
-			flexWindow.getTextArea().append(MONTH_IN_DATE_MORE_THAN_TWELVE_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(MONTH_IN_DATE_MORE_THAN_TWELVE_MESSAGE);
-			System.out.println(MONTH_IN_DATE_MORE_THAN_TWELVE_MESSAGE);
-			System.out.println();
-			
 			return false;				
 		}
 		
 		// checks if the month is 0, or less than 0
 		if(Integer.valueOf(tempDateString.substring(0, slashIndex2))<=0){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
 
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-			
-			flexWindow.getTextArea().append(MONTH_IN_DATE_IS_ZERO_OR_LESS_THAN_ZERO_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(MONTH_IN_DATE_IS_ZERO_OR_LESS_THAN_ZERO_MESSAGE);
-			System.out.println(MONTH_IN_DATE_IS_ZERO_OR_LESS_THAN_ZERO_MESSAGE);
-			System.out.println();
-			
 			return false;				
 		}
 		
@@ -873,39 +665,13 @@ public class Checker {
 		
 		// checks for any missing of the month in the date			
 		if(tempDateString.substring(slashIndex2 + 1).trim().length()==0){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
 
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-			
-			flexWindow.getTextArea().append(YEAR_IN_DATE_MISSING_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(YEAR_IN_DATE_MISSING_MESSAGE);
-			System.out.println(YEAR_IN_DATE_MISSING_MESSAGE);
-			System.out.println();
-			
 			return false;			
 		}
 		
 		// checks for any "-" (dash) in the month of the date
 		if(tempDateString.substring(slashIndex2 + 1).trim().indexOf("-")>=0){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
 
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-			
-			flexWindow.getTextArea().append(DASH_IN_YEAR_OF_DATE_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(DASH_IN_YEAR_OF_DATE_MESSAGE);
-			System.out.println(DASH_IN_YEAR_OF_DATE_MESSAGE);
-			System.out.println();
-			
 			return false;
 		}
 
@@ -914,19 +680,6 @@ public class Checker {
 		tempDateString.substring(slashIndex2 + 1).getChars(0, tempDateString.substring(slashIndex2 + 1).trim().length(), tempCharArray3, 0);
 		for(int k=0; k<tempDateString.substring(slashIndex2 + 1).trim().length(); k++){
 			if(!Character.isDigit(tempCharArray3[k])){
-				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-				flexWindow.getTextArea().append("\n");
-
-				logger.finest(INVALID_INPUT_MESSAGE);
-				System.out.println(INVALID_INPUT_MESSAGE);
-				System.out.println();
-				
-				flexWindow.getTextArea().append(YEAR_IN_DATE_NOT_A_NUMBER_MESSAGE + "\n");
-				flexWindow.getTextArea().append("\n");
-
-				logger.finest(YEAR_IN_DATE_NOT_A_NUMBER_MESSAGE);
-				System.out.println(YEAR_IN_DATE_NOT_A_NUMBER_MESSAGE);
-				System.out.println();
 				
 				return false;				
 			}
@@ -934,39 +687,13 @@ public class Checker {
 						
 		// checks if the year is 0, or less than 0
 		if(Integer.valueOf(tempDateString.substring(slashIndex2 + 1))<=0){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
 
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-			
-			flexWindow.getTextArea().append(YEAR_IN_DATE_IS_ZERO_OR_LESS_THAN_ZERO_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(YEAR_IN_DATE_IS_ZERO_OR_LESS_THAN_ZERO_MESSAGE);
-			System.out.println(YEAR_IN_DATE_IS_ZERO_OR_LESS_THAN_ZERO_MESSAGE);
-			System.out.println();
-			
 			return false;				
 		}
 		
 		int year = Integer.valueOf(tempDateString.substring(slashIndex2 + 1));
 		
 		if((month==1)&&(day>JANUARY_DAYS)){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-			
-			flexWindow.getTextArea().append(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
-			System.out.println(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
-			System.out.println();
 			
 			return false;
 		}
@@ -974,213 +701,240 @@ public class Checker {
 			boolean isLeapYear = (year%4==0);
 			
 			if((!isLeapYear)&&(day>FEBRUARY_DAYS)){
-				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-				flexWindow.getTextArea().append("\n");
-
-				logger.finest(INVALID_INPUT_MESSAGE);
-				System.out.println(INVALID_INPUT_MESSAGE);
-				System.out.println();
-				
-				flexWindow.getTextArea().append(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE + "\n");
-				flexWindow.getTextArea().append("\n");
-
-				logger.finest(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
-				System.out.println(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
-				System.out.println();
 				
 				return false;				
 			}
 			else if((isLeapYear)&&(day>(FEBRUARY_DAYS + 1))){
-				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-				flexWindow.getTextArea().append("\n");
 
-				logger.finest(INVALID_INPUT_MESSAGE);
-				System.out.println(INVALID_INPUT_MESSAGE);
-				System.out.println();
-				
-				flexWindow.getTextArea().append(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE + "\n");
-				flexWindow.getTextArea().append("\n");
-
-				logger.finest(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
-				System.out.println(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
-				System.out.println();
-				
 				return false;
 			}
 		}
 		else if((month==3)&&(day>MARCH_DAYS)){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-			
-			flexWindow.getTextArea().append(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
-			System.out.println(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
-			System.out.println();
 			
 			return false;			
 		}
 		else if((month==4)&&(day>APRIL_DAYS)){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-			
-			flexWindow.getTextArea().append(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
-			System.out.println(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
-			System.out.println();
 			
 			return false;			
 		}
 		else if((month==5)&&(day>MAY_DAYS)){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-			
-			flexWindow.getTextArea().append(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
-			System.out.println(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
-			System.out.println();
 			
 			return false;
 		}
 		else if((month==6)&&(day>JUNE_DAYS)){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-			
-			flexWindow.getTextArea().append(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
-			System.out.println(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
-			System.out.println();
 			
 			return false;
 		}
 		else if((month==7)&&(day>JULY_DAYS)){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-			
-			flexWindow.getTextArea().append(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
-			System.out.println(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
-			System.out.println();
 			
 			return false;
 		}
 		else if((month==8)&&(day>AUGUST_DAYS)){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-			
-			flexWindow.getTextArea().append(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
-			System.out.println(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
-			System.out.println();
 			
 			return false;
 		}
 		else if((month==9)&&(day>SEPTEMBER_DAYS)){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-			
-			flexWindow.getTextArea().append(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
-			System.out.println(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
-			System.out.println();
 			
 			return false;
 		}
 		else if((month==10)&&(day>OCTOBER_DAYS)){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-			
-			flexWindow.getTextArea().append(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
-			System.out.println(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
-			System.out.println();
 			
 			return false;
 		}
 		else if((month==11)&&(day>NOVEMBER_DAYS)){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
 
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-			
-			flexWindow.getTextArea().append(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
-			System.out.println(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
-			System.out.println();
-			
 			return false;
 		}
 		else if((month==12)&&(day>DECEMBER_DAYS)){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-			
-			flexWindow.getTextArea().append(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
-			System.out.println(NUMBER_OF_DAYS_MORE_THAN_EXPECTED_MESSAGE);
-			System.out.println();
 			
 			return false;
 		}
 		
 		
 		return true;
+	}
+
+	// user input command for adding a floating task is
+	// add title, description, priority
+	// the new task string, when a floating task is initially added, is:
+	// undefined, undefined, undefined, title, description, priority, floating
+	static boolean checkFloatingTaskOutput(String taskInformation) {
+		String remainingString = new String("");
+		remainingString = taskInformation;
+		
+		String[] taskVariables = new String[7];
+		
+		// extracts the date
+		int commaWhitespaceIndex1 = remainingString.indexOf(", ");
+		
+		if(commaWhitespaceIndex1 < 0){
+			return false;
+		}
+		
+		taskVariables[0] = remainingString.substring(0, commaWhitespaceIndex1).trim();
+		
+		// check if the date is "undefined"
+		if(taskVariables[0].equalsIgnoreCase("undefined")){
+			return true;
+		}
+		
+		remainingString = remainingString.substring(commaWhitespaceIndex1 + 2);
+
+		// extracts the starting time
+		int commaWhitespaceIndex2 = remainingString.indexOf(", ");
+
+		if(commaWhitespaceIndex2 < 0){
+			return false;
+		}
+		
+		taskVariables[1] = remainingString.substring(0, commaWhitespaceIndex2).trim();
+		
+		// check if the starting time is "undefined"
+		if(taskVariables[1].equalsIgnoreCase("undefined")){
+			return true;
+		}
+		
+		remainingString = remainingString.substring(commaWhitespaceIndex2 + 2).trim();
+
+		// extracts the ending time
+		int commaWhitespaceIndex3 = remainingString.indexOf(", ");
+		
+		if(commaWhitespaceIndex3 < 0){
+			return false;
+		}
+		
+		taskVariables[2] = remainingString.substring(0, commaWhitespaceIndex3).trim();
+		
+		// check if the ending time is "undefined"
+		if(taskVariables[2].equalsIgnoreCase("undefined")){
+			return true;
+		}
+		
+		remainingString = remainingString.substring(commaWhitespaceIndex3 + 2).trim();
+
+		// extracts the task title
+		int commaWhitespaceIndex4 = remainingString.indexOf(", ");
+		
+		if(commaWhitespaceIndex4 < 0){
+			return false;
+		}
+	
+		taskVariables[3] = remainingString.substring(0, commaWhitespaceIndex4).trim();
+		remainingString = remainingString.substring(commaWhitespaceIndex4 + 2).trim();
+	
+		// extracts the task description
+		int commaWhitespaceIndex5 = remainingString.indexOf(", ");
+		
+		if(commaWhitespaceIndex5 < 0){
+			return false;
+		}
+	
+		taskVariables[4] = remainingString.substring(0, commaWhitespaceIndex5).trim();
+		remainingString = remainingString.substring(commaWhitespaceIndex5 + 2).trim();
+
+		// extracts the priority level, and the category of the task
+		int commaWhitespaceIndex6 = remainingString.indexOf(", ");
+		
+		if(commaWhitespaceIndex6 < 0){
+			return false;
+		}
+	
+		taskVariables[5] = remainingString.substring(0, commaWhitespaceIndex6).trim();
+		remainingString = remainingString.substring(commaWhitespaceIndex6 + 2).trim();
+		taskVariables[6] = remainingString.trim();		
+		
+		// check if the category is "floating"
+		if(taskVariables[6].equalsIgnoreCase("floating")){
+			return true;
+		}
+		
+		return false;
+
+	}
+
+	// user input command for adding a deadline task is
+	// add 11/1/1111, 0021, title, description, priority
+	// the new task string, when a floating task is initially added, is:
+	// 11/1/1111, undefined, 0021, title, description, priority, deadline
+	static boolean checkDeadlineTaskOutput(String taskInformation) {
+		String remainingString = new String("");
+		remainingString = taskInformation;
+		
+		String[] taskVariables = new String[7];
+		
+		// extracts the date
+		int commaWhitespaceIndex1 = remainingString.indexOf(", ");
+		
+		if(commaWhitespaceIndex1 < 0){
+			return false;
+		}
+
+		taskVariables[0] = remainingString.substring(0, commaWhitespaceIndex1).trim();
+		remainingString = remainingString.substring(commaWhitespaceIndex1 + 2);
+
+		// extracts the starting time
+		int commaWhitespaceIndex2 = remainingString.indexOf(", ");
+		
+		if(commaWhitespaceIndex2 < 0){
+			return false;
+		}
+		
+		taskVariables[1] = remainingString.substring(0, commaWhitespaceIndex2).trim();
+		
+		// check if the starting time is "undefined"
+		if(taskVariables[1].equalsIgnoreCase("undefined")){
+			return true;
+		}
+		
+		remainingString = remainingString.substring(commaWhitespaceIndex2 + 2).trim();
+
+		// extracts the ending time
+		int commaWhitespaceIndex3 = remainingString.indexOf(", ");
+
+		if(commaWhitespaceIndex3 < 0){
+			return false;
+		}
+		
+		taskVariables[2] = remainingString.substring(0, commaWhitespaceIndex3).trim();
+		remainingString = remainingString.substring(commaWhitespaceIndex3 + 2).trim();
+
+		// extracts the task title
+		int commaWhitespaceIndex4 = remainingString.indexOf(", ");
+	
+		if(commaWhitespaceIndex4 < 0){
+			return false;
+		}
+		
+		taskVariables[3] = remainingString.substring(0, commaWhitespaceIndex4).trim();
+		remainingString = remainingString.substring(commaWhitespaceIndex4 + 2).trim();
+	
+		// extracts the task description
+		int commaWhitespaceIndex5 = remainingString.indexOf(", ");
+	
+		if(commaWhitespaceIndex5 < 0){
+			return false;
+		}
+		
+		taskVariables[4] = remainingString.substring(0, commaWhitespaceIndex5).trim();
+		remainingString = remainingString.substring(commaWhitespaceIndex5 + 2).trim();
+
+		// extracts the priority level, and the category of the task
+		int commaWhitespaceIndex6 = remainingString.indexOf(", ");
+	
+		if(commaWhitespaceIndex6 < 0){
+			return false;
+		}
+		
+		taskVariables[5] = remainingString.substring(0, commaWhitespaceIndex6).trim();
+		remainingString = remainingString.substring(commaWhitespaceIndex6 + 2).trim();
+		taskVariables[6] = remainingString.trim();		
+		
+		// check if the category is "deadline"
+		if(taskVariables[6].equalsIgnoreCase("deadline")){
+			return true;
+		}
+	
+		return false;
 	}
 
 }

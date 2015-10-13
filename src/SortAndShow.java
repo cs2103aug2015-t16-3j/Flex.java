@@ -15,7 +15,7 @@ public class SortAndShow {
 	private static final String DISPLAY_SORTED_BY_PRIORITY_LEVELS_MESSAGE = "The tasks, sorted in alphabetical order by priority level, is displayed.";
 	private static final String DISPLAY_SORTED_BY_CATEGORIES_MESSAGE = "The tasks, sorted in alphabetical order by category, are displayed.";
 
-	private static final String TASKS_NOT_DONE_DISPLAYED_MESSAGE = "The tasks which have not been marked as done are displayed.";
+	private static final String NOT_DONE_TASKS_DISPLAYED_MESSAGE = "The tasks in the schedule, which are not marked as " + "done" +" for their categories, are displayed.";
 	private static final String ALL_TASKS_DISPLAYED_MESSAGE = "All the tasks in the schedule are displayed.";
 	private static final String INVALID_INPUT_MESSAGE = "Invalid input. Please try again.";
 	// that is, it is valid only if its starting time, or ending time, are NOT between the starting
@@ -69,7 +69,7 @@ public class SortAndShow {
 			// check if this input by the user is valid
 			String tempDate = searchTerm;
 				
-			if(!Checker.checkDate(tempDate, flexWindow)){
+			if(!Checker.checkDate(tempDate)&&!tempDate.equalsIgnoreCase("undefined")){
 				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
 				flexWindow.getTextArea().append("\n");
 
@@ -80,7 +80,7 @@ public class SortAndShow {
 				return;
 			}
 				
-			assert(Checker.checkDate(tempDate, flexWindow));
+			assert(Checker.checkDate(tempDate));
 				
 			for(int i=0; i<allTasksList.size(); i++){
 				if(allTasksList.get(i).getDate().equalsIgnoreCase(searchTerm)){
@@ -355,8 +355,8 @@ public class SortAndShow {
 			flexWindow.getTextArea().append("\n");
 		}
 
-		logger.finest(TASKS_NOT_DONE_DISPLAYED_MESSAGE);
-		System.out.println(TASKS_NOT_DONE_DISPLAYED_MESSAGE);
+		logger.finest(NOT_DONE_TASKS_DISPLAYED_MESSAGE);
+		System.out.println(NOT_DONE_TASKS_DISPLAYED_MESSAGE);
 		System.out.println();
 		
 		flexWindow.getTextArea().append("\n");

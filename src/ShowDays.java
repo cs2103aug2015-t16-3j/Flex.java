@@ -8,7 +8,6 @@ public class ShowDays {
 
 	private static final Logger logger = Logger.getLogger(ShowDays.class.getName());
 
-	private static FlexWindow flexWindow;
 	private static Scanner sc;
 
 	private static final String STARTING_DATE_REQUEST_MESSAGE = "Please enter the starting date (format: dd/mm/yyyy): " + "\n";
@@ -73,7 +72,7 @@ public class ShowDays {
 		
 		flexWindow.getTextArea().setText("");
 				
-		if(!Checker.checkDate(tempDate, flexWindow)){
+		if(!Checker.checkDate(tempDate)){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");	
 			flexWindow.getTextArea().append("\n");
 
@@ -84,7 +83,7 @@ public class ShowDays {
 			return;
 		}
 		
-		assert(Checker.checkDate(tempDate, flexWindow));
+		assert(Checker.checkDate(tempDate));
 		
 		date1.trim();
 		
@@ -143,7 +142,7 @@ public class ShowDays {
 	// assumed to be in the format dd/mm/yyyy
 	static String generateNextDate(String date) {
 				
-		assert(Checker.checkDate(date, flexWindow));
+		assert(Checker.checkDate(date));
 				
 		String tempDate = date;
 				
