@@ -145,7 +145,7 @@ public class CRUD {
 				
 		tempDateString = changeRemainingString.substring(0, commaWhitespaceIndex1);
 		
-		if(!Checker.checkDate(tempDateString)){			
+		if(!Checker.checkDate(tempDateString)&&!tempDateString.equalsIgnoreCase("undefined")){			
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
 			flexWindow.getTextArea().append("\n");	
 
@@ -154,9 +154,7 @@ public class CRUD {
 			System.out.println();
 			
 			return;	
-		}		
-		
-		assert(Checker.checkDate(tempDateString));
+		}				
 						
 		changeRemainingString = changeRemainingString.substring(commaWhitespaceIndex1 + 2).trim();
 		changeRemainingString.trim();
@@ -217,7 +215,7 @@ public class CRUD {
 			// check if this input by the user is valid
 			String newDate = newTerm;
 						
-			if(!Checker.checkDate(newDate)){			
+			if(!Checker.checkDate(newDate)&&!newDate.equalsIgnoreCase("undefined")){			
 				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
 				flexWindow.getTextArea().append("\n");	
 
@@ -238,13 +236,19 @@ public class CRUD {
 					
 					// if the new change term(date) is invalid, reverse the change, and stop going through the 
 					// rest of the changeTaskVariable() method
-					if(!Checker.checkTask(allTasksList.get(i).getPrintTaskString())){
+					if(!Checker.checkTask(allTasksList.get(i).getPrintTaskString())&&!Checker.checkDeadlineTaskOutput(allTasksList.get(i).getPrintTaskString())&&!Checker.checkFloatingTaskOutput(allTasksList.get(i).getPrintTaskString())){
 						allTasksList.get(i).setDate(tempChangedTerm);
 						allTasksList.get(i).recalculateComparisonValue();
+						flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+						flexWindow.getTextArea().append("\n");
+
+						logger.finest(INVALID_INPUT_MESSAGE);
+						System.out.println(INVALID_INPUT_MESSAGE);
+						System.out.println();
 						return;
 					}
 					
-					assert(Checker.checkTask(allTasksList.get(i).getPrintTaskString()));
+					
 					
 					atLeastOneTaskChanged = true;
 					
@@ -309,14 +313,18 @@ public class CRUD {
 					
 					// if the new change term(starting time) is invalid, reverse the change, and stop going through the 
 					// rest of the changeTaskVariable() method
-					if(!Checker.checkTask(allTasksList.get(i).getPrintTaskString())){
-						allTasksList.get(i).setStartingTime(tempChangedTerm);
+					if(!Checker.checkTask(allTasksList.get(i).getPrintTaskString())&&!Checker.checkDeadlineTaskOutput(allTasksList.get(i).getPrintTaskString())&&!Checker.checkFloatingTaskOutput(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setDate(tempChangedTerm);
 						allTasksList.get(i).recalculateComparisonValue();
+						flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+						flexWindow.getTextArea().append("\n");
+
+						logger.finest(INVALID_INPUT_MESSAGE);
+						System.out.println(INVALID_INPUT_MESSAGE);
+						System.out.println();
 						return;
 					}
-					
-					assert(Checker.checkTask(allTasksList.get(i).getPrintTaskString()));
-					
+									
 					if( ( Integer.valueOf(allTasksList.get(i).getStartingTime().substring(0, 2)) * HOUR_MINUTES + Integer.valueOf(allTasksList.get(i).getStartingTime().substring(2, 4)) ) > ( Integer.valueOf(allTasksList.get(i).getEndingTime().substring(0, 2)) * HOUR_MINUTES + Integer.valueOf(allTasksList.get(i).getEndingTime().substring(2, 4)) ) ){
 						allTasksList.get(i).setStartingTime(tempChangedTerm);
 						System.out.println();
@@ -398,12 +406,17 @@ public class CRUD {
 					
 					// if the new change term(ending time) is invalid, reverse the change, and stop going through the 
 					// rest of the changeTaskVariable() method
-					if(!Checker.checkTask(allTasksList.get(i).getPrintTaskString())){
-						allTasksList.get(i).setEndingTime(tempChangedTerm);
+					if(!Checker.checkTask(allTasksList.get(i).getPrintTaskString())&&!Checker.checkDeadlineTaskOutput(allTasksList.get(i).getPrintTaskString())&&!Checker.checkFloatingTaskOutput(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setDate(tempChangedTerm);
+						allTasksList.get(i).recalculateComparisonValue();
+						flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+						flexWindow.getTextArea().append("\n");
+
+						logger.finest(INVALID_INPUT_MESSAGE);
+						System.out.println(INVALID_INPUT_MESSAGE);
+						System.out.println();
 						return;
 					}
-					
-					assert(Checker.checkTask(allTasksList.get(i).getPrintTaskString()));
 					
 					if( ( Integer.valueOf(allTasksList.get(i).getStartingTime().substring(0, 2)) * HOUR_MINUTES + Integer.valueOf(allTasksList.get(i).getStartingTime().substring(2, 4)) ) > ( Integer.valueOf(allTasksList.get(i).getEndingTime().substring(0, 2)) * HOUR_MINUTES + Integer.valueOf(allTasksList.get(i).getEndingTime().substring(2, 4)) ) ){
 						allTasksList.get(i).setEndingTime(tempChangedTerm);
@@ -486,16 +499,16 @@ public class CRUD {
 					
 					// if the new change term(task title) is invalid, reverse the change, and stop going through the 
 					// rest of the changeTaskVariable() method
-					if(!Checker.checkTask(allTasksList.get(i).getPrintTaskString())){
-						allTasksList.get(i).setTaskTitle(tempChangedTerm);
+					if(!Checker.checkTask(allTasksList.get(i).getPrintTaskString())&&!Checker.checkDeadlineTaskOutput(allTasksList.get(i).getPrintTaskString())&&!Checker.checkFloatingTaskOutput(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setDate(tempChangedTerm);
+						allTasksList.get(i).recalculateComparisonValue();
 						
 						flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
 						flexWindow.getTextArea().append("\n");
-						
+
 						logger.finest(INVALID_INPUT_MESSAGE);
 						System.out.println(INVALID_INPUT_MESSAGE);
 						System.out.println();
-						
 						return;
 					}
 					
@@ -561,12 +574,13 @@ public class CRUD {
 					
 					// if the new change term(task description) is invalid, reverse the change, and stop going through the 
 					// rest of the changeTaskVariable() method
-					if(!Checker.checkTask(allTasksList.get(i).getPrintTaskString())){
-						allTasksList.get(i).setTaskDescription(tempChangedTerm);
+					if(!Checker.checkTask(allTasksList.get(i).getPrintTaskString())&&!Checker.checkDeadlineTaskOutput(allTasksList.get(i).getPrintTaskString())&&!Checker.checkFloatingTaskOutput(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setDate(tempChangedTerm);
+						allTasksList.get(i).recalculateComparisonValue();
 						
 						flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
 						flexWindow.getTextArea().append("\n");
-						
+
 						logger.finest(INVALID_INPUT_MESSAGE);
 						System.out.println(INVALID_INPUT_MESSAGE);
 						System.out.println();
