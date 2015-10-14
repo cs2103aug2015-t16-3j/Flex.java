@@ -80,8 +80,6 @@ public class SortAndShow {
 				return;
 			}
 				
-			assert(Checker.checkDate(tempDate));
-				
 			for(int i=0; i<allTasksList.size(); i++){
 				if(allTasksList.get(i).getDate().equalsIgnoreCase(searchTerm)){
 					flexWindow.getTextArea().append(allTasksList.get(i).getPrintTaskString() + "\n");
