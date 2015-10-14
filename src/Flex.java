@@ -33,6 +33,7 @@ public class Flex{
 	private static final String NOT_DONE_TASKS_DISPLAYED_MESSAGE = "The tasks in the schedule, which are not marked as " + "done" +" for their categories, are displayed.";
 	private static final String DEADLINE_TASKS_DISPLAYED_MESSAGE = "The tasks in the schedule, which are marked as " + "deadline" + " for their categories, are displayed.";
 	private static final String FLOATING_TASKS_DISPLAYED_MESSAGE = "The tasks in the schedule, which are marked as " + "floating" + " for their categories, are displayed.";
+	private static final String DEFAULT_TASKS_DISPLAYED_MESSAGE = "The tasks in the schedule, which are marked as " + "default" + " for their categories, are displayed.";
 	
 	private static final String INVALID_INPUT_MESSAGE = "Invalid input. Please try again.";
 	
@@ -385,7 +386,8 @@ public class Flex{
 					System.out.println();
 					
 					SortAndShow.showNotDoneTasks(filename, flexWindow);
-				}		
+				}
+				// Case 9-[12]: show tasks which are still deadline tasks
 				else if(remainingString.equalsIgnoreCase("deadline")){
 					logger.finest(DEADLINE_TASKS_DISPLAYED_MESSAGE);
 					System.out.println(DEADLINE_TASKS_DISPLAYED_MESSAGE);
@@ -393,6 +395,7 @@ public class Flex{
 					
 					SortAndShow.searchAndShowTask(filename, "category" + " " + "deadline", flexWindow);
 				}	
+				// Case 9-[13]: show tasks which are still floating tasks
 				else if(remainingString.equalsIgnoreCase("floating")){
 					logger.finest(FLOATING_TASKS_DISPLAYED_MESSAGE);
 					System.out.println(FLOATING_TASKS_DISPLAYED_MESSAGE);
@@ -400,12 +403,22 @@ public class Flex{
 					
 					SortAndShow.searchAndShowTask(filename, "category" + " " + "floating", flexWindow);
 				}	
-				// Case 9-[14]: show the week starting on the date given by the user
+				// Case 9-[14]: show tasks which are still default tasks
+				// Either floating or deadline tasks being edited to become normal/usual (default) tasks
+				// or default tasks with their category being "default", when they were initially added by the user
+				else if(remainingString.equalsIgnoreCase("default")){
+					logger.finest(DEFAULT_TASKS_DISPLAYED_MESSAGE);
+					System.out.println(DEFAULT_TASKS_DISPLAYED_MESSAGE);
+					System.out.println();
+					
+					SortAndShow.searchAndShowTask(filename, "category" + " " + "default", flexWindow);
+				}	
+				// Case 9-[15]: show the week starting on the date given by the user
 				// the week includes the starting date of the week as one of the seven days in it
 				else if(remainingString.equalsIgnoreCase("week")){
 					ShowDays.showWeek(filename, flexWindow);
 				}			
-				// Case 9-[15]: invalid input for user input command String starting with the word "show"
+				// Case 9-[16]: invalid input for user input command String starting with the word "show"
 				else{
 					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");	
 					flexWindow.getTextArea().append("\n");

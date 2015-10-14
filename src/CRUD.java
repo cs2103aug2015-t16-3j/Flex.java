@@ -226,8 +226,6 @@ public class CRUD {
 				return;	
 			}	
 			
-			assert(Checker.checkDate(newDate));
-			
 			for(int i=0; i<allTasksList.size(); i++){
 				if((allTasksList.get(i).getDate().equalsIgnoreCase(currentDate))&&(allTasksList.get(i).getTaskTitle().equalsIgnoreCase(currentTaskTitle))){
 					tempChangedTerm = allTasksList.get(i).getDate();
@@ -255,12 +253,27 @@ public class CRUD {
 					
 					atLeastOneTaskChanged = true;
 					
+					assert(Checker.checkTask(allTasksList.get(i).getPrintTaskString())||Checker.checkFloatingTaskOutput(allTasksList.get(i).getPrintTaskString())||Checker.checkDeadlineTaskOutput(allTasksList.get(i).getPrintTaskString()));				
+					
+					if(Checker.checkFloatingTaskOutput(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setCategory("floating");
+					}
+					else if(Checker.checkDeadlineTaskOutput(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setCategory("deadline");
+					}
+					else if(((allTasksList.get(i).getCategory().equalsIgnoreCase("floating"))||allTasksList.get(i).getCategory().equalsIgnoreCase("floating"))&&Checker.checkTask(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setCategory("default");
+					}
+
+											
 					tempTask = allTasksList.get(i);
 					previousAction = "change date";
 					
 					lastAction.setPreviousChangedTerm(tempChangedTerm);
 					lastAction.setPreviousAction(previousAction);
 					lastAction.setPreviousTask(tempTask);
+
+					
 				}
 			}	
 			
@@ -358,12 +371,25 @@ public class CRUD {
 					}
 					atLeastOneTaskChanged = true;
 					
+					assert(Checker.checkTask(allTasksList.get(i).getPrintTaskString())||Checker.checkFloatingTaskOutput(allTasksList.get(i).getPrintTaskString())||Checker.checkDeadlineTaskOutput(allTasksList.get(i).getPrintTaskString()));
+					
+					if(Checker.checkFloatingTaskOutput(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setCategory("floating");
+					}
+					else if(Checker.checkDeadlineTaskOutput(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setCategory("deadline");
+					}
+					else if(((allTasksList.get(i).getCategory().equalsIgnoreCase("floating"))||allTasksList.get(i).getCategory().equalsIgnoreCase("floating"))&&Checker.checkTask(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setCategory("default");
+					}
+
 					tempTask = allTasksList.get(i);
 					previousAction = "change start";
 					
 					lastAction.setPreviousChangedTerm(tempChangedTerm);
 					lastAction.setPreviousAction(previousAction);
 					lastAction.setPreviousTask(tempTask);
+					
 				}
 			}		
 			
@@ -453,9 +479,21 @@ public class CRUD {
 					
 					atLeastOneTaskChanged = true;
 					
+					assert(Checker.checkTask(allTasksList.get(i).getPrintTaskString())||Checker.checkFloatingTaskOutput(allTasksList.get(i).getPrintTaskString())||Checker.checkDeadlineTaskOutput(allTasksList.get(i).getPrintTaskString()));
+					
+					if(Checker.checkFloatingTaskOutput(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setCategory("floating");
+					}
+					else if(Checker.checkDeadlineTaskOutput(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setCategory("deadline");
+					}
+					else if(((allTasksList.get(i).getCategory().equalsIgnoreCase("floating"))||allTasksList.get(i).getCategory().equalsIgnoreCase("floating"))&&Checker.checkTask(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setCategory("default");
+					}
+					
 					tempTask = allTasksList.get(i);
 					previousAction = "change end";
-					
+										
 					lastAction.setPreviousChangedTerm(tempChangedTerm);
 					lastAction.setPreviousAction(previousAction);
 					lastAction.setPreviousTask(tempTask);
@@ -523,12 +561,22 @@ public class CRUD {
 						return;
 					}
 					
-					assert(Checker.checkTask(allTasksList.get(i).getPrintTaskString()));
+					assert(Checker.checkTask(allTasksList.get(i).getPrintTaskString())||Checker.checkFloatingTaskOutput(allTasksList.get(i).getPrintTaskString())||Checker.checkDeadlineTaskOutput(allTasksList.get(i).getPrintTaskString()));
 					
 					atLeastOneTaskChanged = true;
+
+					if(Checker.checkFloatingTaskOutput(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setCategory("floating");
+					}
+					else if(Checker.checkDeadlineTaskOutput(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setCategory("deadline");
+					}
+					else if(((allTasksList.get(i).getCategory().equalsIgnoreCase("floating"))||allTasksList.get(i).getCategory().equalsIgnoreCase("floating"))&&Checker.checkTask(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setCategory("default");
+					}
 					
 					tempTask = allTasksList.get(i);
-					previousAction = "change title";
+					previousAction = "change title";					
 					
 					lastAction.setPreviousChangedTerm(tempChangedTerm);
 					lastAction.setPreviousAction(previousAction);
@@ -599,10 +647,20 @@ public class CRUD {
 						return;
 					}
 					
-					assert(Checker.checkTask(allTasksList.get(i).getPrintTaskString()));
+					assert(Checker.checkTask(allTasksList.get(i).getPrintTaskString())||Checker.checkFloatingTaskOutput(allTasksList.get(i).getPrintTaskString())||Checker.checkDeadlineTaskOutput(allTasksList.get(i).getPrintTaskString()));
 					
 					atLeastOneTaskChanged = true;
-					
+
+					if(Checker.checkFloatingTaskOutput(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setCategory("floating");
+					}
+					else if(Checker.checkDeadlineTaskOutput(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setCategory("deadline");
+					}
+					else if(((allTasksList.get(i).getCategory().equalsIgnoreCase("floating"))||allTasksList.get(i).getCategory().equalsIgnoreCase("floating"))&&Checker.checkTask(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setCategory("default");
+					}
+
 					tempTask = allTasksList.get(i);
 					previousAction = "change description";
 					
@@ -672,10 +730,20 @@ public class CRUD {
 						return;
 					}
 					
-					assert(Checker.checkTask(allTasksList.get(i).getPrintTaskString()));
-								
+					assert(Checker.checkTask(allTasksList.get(i).getPrintTaskString())||Checker.checkFloatingTaskOutput(allTasksList.get(i).getPrintTaskString())||Checker.checkDeadlineTaskOutput(allTasksList.get(i).getPrintTaskString()));
+					
 					atLeastOneTaskChanged = true;
 					
+					if(Checker.checkFloatingTaskOutput(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setCategory("floating");
+					}
+					else if(Checker.checkDeadlineTaskOutput(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setCategory("deadline");
+					}
+					else if(((allTasksList.get(i).getCategory().equalsIgnoreCase("floating"))||allTasksList.get(i).getCategory().equalsIgnoreCase("floating"))&&Checker.checkTask(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setCategory("default");
+					}
+
 					tempTask = allTasksList.get(i);
 					previousAction = "change priority";
 					
@@ -746,10 +814,20 @@ public class CRUD {
 						return;
 					}
 					
-					assert(Checker.checkTask(allTasksList.get(i).getPrintTaskString()));
+					assert(Checker.checkTask(allTasksList.get(i).getPrintTaskString())||Checker.checkFloatingTaskOutput(allTasksList.get(i).getPrintTaskString())||Checker.checkDeadlineTaskOutput(allTasksList.get(i).getPrintTaskString()));
 					
 					atLeastOneTaskChanged = true;
 					
+					if(Checker.checkFloatingTaskOutput(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setCategory("floating");
+					}
+					else if(Checker.checkDeadlineTaskOutput(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setCategory("deadline");
+					}
+					else if(((allTasksList.get(i).getCategory().equalsIgnoreCase("floating"))||allTasksList.get(i).getCategory().equalsIgnoreCase("floating"))&&Checker.checkTask(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setCategory("default");
+					}
+
 					tempTask = allTasksList.get(i);
 					previousAction = "change category";
 					

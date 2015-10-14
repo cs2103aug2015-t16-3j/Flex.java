@@ -787,12 +787,7 @@ public class Checker {
 			return false;
 		}
 		
-		taskVariables[1] = remainingString.substring(0, commaWhitespaceIndex2).trim();
-		
-		// check if the starting time is "undefined"
-		if(taskVariables[1].equalsIgnoreCase("undefined")){
-			return true;
-		}
+		taskVariables[1] = remainingString.substring(0, commaWhitespaceIndex2).trim();		
 		
 		remainingString = remainingString.substring(commaWhitespaceIndex2 + 2).trim();
 
@@ -842,11 +837,6 @@ public class Checker {
 		taskVariables[5] = remainingString.substring(0, commaWhitespaceIndex6).trim();
 		remainingString = remainingString.substring(commaWhitespaceIndex6 + 2).trim();
 		taskVariables[6] = remainingString.trim();		
-		
-		// check if the category is "floating"
-		if(taskVariables[6].equalsIgnoreCase("floating")){
-			return true;
-		}
 		
 		return false;
 
@@ -929,11 +919,6 @@ public class Checker {
 		remainingString = remainingString.substring(commaWhitespaceIndex6 + 2).trim();
 		taskVariables[6] = remainingString.trim();		
 		
-		// check if the category is "deadline"
-		if(taskVariables[6].equalsIgnoreCase("deadline")){
-			return true;
-		}
-	
 		return false;
 	}
 

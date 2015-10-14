@@ -54,7 +54,7 @@ public class Task {
 	private static final int NOVEMBER_ACCUMULATED_DAYS = YEAR_DAYS - DECEMBER_DAYS;
 	private static final int DECEMBER_ACCUMULATED_DAYS = YEAR_DAYS;
 	
-	private static final int FLOATING_COMPARISON_VALUE = 0;
+	private static final int FLOATING_COMPARISON_VALUE = -1;
 	
 	// default constructor required by Flex.java
 	public Task() {
@@ -360,8 +360,14 @@ public class Task {
 		
 			this.taskVariables[5] = remainingString.substring(0, commaWhitespaceIndex6).trim();
 			remainingString = remainingString.substring(commaWhitespaceIndex6 + 2).trim();
-			this.taskVariables[6] = remainingString.trim();		
-		
+			
+			if(remainingString.equalsIgnoreCase("floating")||remainingString.equalsIgnoreCase("deadline")){
+				this.taskVariables[6] = "default";		
+			}
+			else{
+				this.taskVariables[6] = remainingString.trim();
+			}
+			
 			// e.g. 7/9/2015
 			String tempDateString = this.taskVariables[0];
 		
