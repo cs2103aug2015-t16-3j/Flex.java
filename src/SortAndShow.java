@@ -360,8 +360,8 @@ public class SortAndShow {
 		flexWindow.getTextArea().append("\n");
 	}
 	
-	// sorts and displays all tasks in the schedule file
-	// without editing or overwriting the schedule file
+	// displays all files in the schedule by Task.java's comparisonValue
+	// only non-deadline and non-floating tasks will be in order of date and starting time
 	static void readAndDisplayAll(String filename, FlexWindow flexWindow) throws IOException {
 			BufferedReader reader = null;
 		
@@ -382,6 +382,8 @@ public class SortAndShow {
 				reader.close();
 			}				
 		
+			SortAndShow.sortAllTasksByDateAndStartingTime(allTasksList);
+			
 			for(int j=0; j<allTasksList.size(); j++){
 				flexWindow.getTextArea().append(allTasksList.get(j).getPrintTaskString() + "\n");
 				flexWindow.getTextArea().append("\n");

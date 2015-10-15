@@ -230,9 +230,19 @@ public class CRUD {
 				if((allTasksList.get(i).getDate().equalsIgnoreCase(currentDate))&&(allTasksList.get(i).getTaskTitle().equalsIgnoreCase(currentTaskTitle))){
 					tempChangedTerm = allTasksList.get(i).getDate();
 					allTasksList.get(i).setDate(newTerm);
-					if(!((allTasksList.get(i).getDate().equalsIgnoreCase("undefined")) || (allTasksList.get(i).getStartingTime().equalsIgnoreCase("undefined")))){
-						allTasksList.get(i).recalculateComparisonValue();
+					
+					if(Checker.checkFloatingTaskOutput(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setCategory("floating");
 					}
+					else if(Checker.checkDeadlineTaskOutput(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setCategory("deadline");
+					}
+					else if(((allTasksList.get(i).getCategory().equalsIgnoreCase("floating"))||allTasksList.get(i).getCategory().equalsIgnoreCase("deadline"))&&Checker.checkTask(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setCategory("default");
+					}
+					
+					allTasksList.get(i).recalculateComparisonValue();
+					
 					// if the new change term(date) is invalid, reverse the change, and stop going through the 
 					// rest of the changeTaskVariable() method
 					if(!Checker.checkTask(allTasksList.get(i).getPrintTaskString())&&!Checker.checkDeadlineTaskOutput(allTasksList.get(i).getPrintTaskString())&&!Checker.checkFloatingTaskOutput(allTasksList.get(i).getPrintTaskString())){
@@ -325,17 +335,26 @@ public class CRUD {
 					tempChangedTerm = allTasksList.get(i).getStartingTime();
 					
 					allTasksList.get(i).setStartingTime(newTerm);
-					if(!((allTasksList.get(i).getDate().equalsIgnoreCase("undefined")) || (allTasksList.get(i).getStartingTime().equalsIgnoreCase("undefined")))){
-						allTasksList.get(i).recalculateComparisonValue();
+					
+					if(Checker.checkFloatingTaskOutput(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setCategory("floating");
 					}
+					else if(Checker.checkDeadlineTaskOutput(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setCategory("deadline");
+					}
+					else if(((allTasksList.get(i).getCategory().equalsIgnoreCase("floating"))||allTasksList.get(i).getCategory().equalsIgnoreCase("deadline"))&&Checker.checkTask(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setCategory("default");
+					}
+					
+					allTasksList.get(i).recalculateComparisonValue();
+					
 					
 					// if the new change term(starting time) is invalid, reverse the change, and stop going through the 
 					// rest of the changeTaskVariable() method
 					if(!Checker.checkTask(allTasksList.get(i).getPrintTaskString())&&!Checker.checkDeadlineTaskOutput(allTasksList.get(i).getPrintTaskString())&&!Checker.checkFloatingTaskOutput(allTasksList.get(i).getPrintTaskString())){
 						allTasksList.get(i).setDate(tempChangedTerm);
-						if(!((allTasksList.get(i).getDate().equalsIgnoreCase("undefined")) || (allTasksList.get(i).getStartingTime().equalsIgnoreCase("undefined")))){
-							allTasksList.get(i).recalculateComparisonValue();
-						}
+						allTasksList.get(i).recalculateComparisonValue();
+
 						flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
 						flexWindow.getTextArea().append("\n");
 
@@ -439,6 +458,17 @@ public class CRUD {
 					tempChangedTerm = allTasksList.get(i).getEndingTime();
 					allTasksList.get(i).setEndingTime(newTerm);
 					
+					if(Checker.checkFloatingTaskOutput(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setCategory("floating");
+					}
+					else if(Checker.checkDeadlineTaskOutput(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setCategory("deadline");
+					}
+					else if(((allTasksList.get(i).getCategory().equalsIgnoreCase("floating"))||allTasksList.get(i).getCategory().equalsIgnoreCase("deadline"))&&Checker.checkTask(allTasksList.get(i).getPrintTaskString())){
+						allTasksList.get(i).setCategory("default");
+					}
+					
+					allTasksList.get(i).recalculateComparisonValue();
 					// if the new change term(ending time) is invalid, reverse the change, and stop going through the 
 					// rest of the changeTaskVariable() method
 					if(!Checker.checkTask(allTasksList.get(i).getPrintTaskString())&&!Checker.checkDeadlineTaskOutput(allTasksList.get(i).getPrintTaskString())&&!Checker.checkFloatingTaskOutput(allTasksList.get(i).getPrintTaskString())){
