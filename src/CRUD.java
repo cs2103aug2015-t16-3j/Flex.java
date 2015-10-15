@@ -202,95 +202,84 @@ public class CRUD {
 		String tempChangedTerm = new String("");
 		String previousAction = new String("");
 
-		for (int i = 0; i < allTasksList.size(); i++) {
+		// case of "change task name, exacttaskname, newtaskname"
+		if (tempString.toLowerCase().indexOf("task name") == 0) {
+			int commaWhitespaceIndex1 = tempString.indexOf(", ");
 
-			// case of "change task name, exacttaskname, newtaskname"
-			if (tempString.toLowerCase().indexOf("task name") == 0) {
-				int commaWhitespaceIndex1 = tempString.indexOf(", ");
+			if (commaWhitespaceIndex1 < 0) {
+				// INVALID
+				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				flexWindow.getTextArea().append("\n");
 
-				if (commaWhitespaceIndex1 < 0) {
-					// INVALID
-					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-					flexWindow.getTextArea().append("\n");
+				logger.finest(INVALID_INPUT_MESSAGE);
+				System.out.println(INVALID_INPUT_MESSAGE);
+				System.out.println();
+				return;
+			}
 
-					logger.finest(INVALID_INPUT_MESSAGE);
-					System.out.println(INVALID_INPUT_MESSAGE);
-					System.out.println();
-					return;
-				}
+			tempString = tempString.substring(commaWhitespaceIndex1 + 2).trim();
 
-				tempString = tempString.substring(commaWhitespaceIndex1 + 2).trim();
+			int commaWhitespaceIndex2 = tempString.indexOf(", ");
 
-				int commaWhitespaceIndex2 = tempString.indexOf(", ");
+			if (commaWhitespaceIndex2 < 0) {
+				// INVALID
+				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				flexWindow.getTextArea().append("\n");
 
-				if (commaWhitespaceIndex2 < 0) {
-					// INVALID
-					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-					flexWindow.getTextArea().append("\n");
+				logger.finest(INVALID_INPUT_MESSAGE);
+				System.out.println(INVALID_INPUT_MESSAGE);
+				System.out.println();
+				return;
+			}
 
-					logger.finest(INVALID_INPUT_MESSAGE);
-					System.out.println(INVALID_INPUT_MESSAGE);
-					System.out.println();
-					return;
-				}
+			String taskNameMatchString = new String("");
+			taskNameMatchString = tempString.substring(0, commaWhitespaceIndex2);
 
-				String taskNameMatchString = new String("");
-				taskNameMatchString = tempString.substring(0, commaWhitespaceIndex2);
+			if (taskNameMatchString.length() == 0) {
+				// INVALID
+				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				flexWindow.getTextArea().append("\n");
 
-				if (taskNameMatchString.length() == 0) {
-					// INVALID
-					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-					flexWindow.getTextArea().append("\n");
+				logger.finest(INVALID_INPUT_MESSAGE);
+				System.out.println(INVALID_INPUT_MESSAGE);
+				System.out.println();
+				return;
+			}
 
-					logger.finest(INVALID_INPUT_MESSAGE);
-					System.out.println(INVALID_INPUT_MESSAGE);
-					System.out.println();
-					return;
-				}
+			tempString = tempString.substring(commaWhitespaceIndex2 + 2).trim();
 
-				tempString = tempString.substring(commaWhitespaceIndex2 + 2).trim();
+			if (tempString.length() == 0) {
+				// INVALID
+				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				flexWindow.getTextArea().append("\n");
 
-				if (tempString.length() == 0) {
-					// INVALID
-					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-					flexWindow.getTextArea().append("\n");
+				logger.finest(INVALID_INPUT_MESSAGE);
+				System.out.println(INVALID_INPUT_MESSAGE);
+				System.out.println();
+				return;
+			}
 
-					logger.finest(INVALID_INPUT_MESSAGE);
-					System.out.println(INVALID_INPUT_MESSAGE);
-					System.out.println();
-					return;
-				}
+			String newTaskNameString = new String("");
+			newTaskNameString = tempString;
 
-				String newTaskNameString = new String("");
-				newTaskNameString = tempString;
+			int commaWhitespaceIndex3 = newTaskNameString.indexOf(", ");
 
-				int commaWhitespaceIndex3 = newTaskNameString.indexOf(", ");
+			if (commaWhitespaceIndex3 > 0) {
+				// INVALID
+				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				flexWindow.getTextArea().append("\n");
 
-				if (commaWhitespaceIndex3 > 0) {
-					// INVALID
-					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-					flexWindow.getTextArea().append("\n");
+				logger.finest(INVALID_INPUT_MESSAGE);
+				System.out.println(INVALID_INPUT_MESSAGE);
+				System.out.println();
+				return;
+			}
 
-					logger.finest(INVALID_INPUT_MESSAGE);
-					System.out.println(INVALID_INPUT_MESSAGE);
-					System.out.println();
-					return;
-				}
-
-				System.out.println("allTasksList.get(i).getTaskName() : " + allTasksList.get(i).getTaskName());
-
+			for (int i = 0; i < allTasksList.size(); i++) {
 				if (allTasksList.get(i).getTaskName().equalsIgnoreCase(taskNameMatchString)) {
-					// FOR CHECKING
-					System.out.println("taskNameMatchString: " + taskNameMatchString);
-
-					// CHECKING
-					System.out.println("BEFORE: " + allTasksList.get(i).getScheduleString());
 
 					tempChangedTerm = allTasksList.get(i).getTaskName();
 					allTasksList.get(i).setTaskName(newTaskNameString);
-
-					// CHECKING
-					System.out.println("AFTER: " + allTasksList.get(i).getScheduleString());
 
 					tempTask = allTasksList.get(i);
 					previousAction = "change task name";
@@ -301,29 +290,69 @@ public class CRUD {
 
 					atLeastOneTaskChanged = true;
 				}
-			} else if (tempString.toLowerCase().indexOf("change date") == 0) {
-
-			} else if (tempString.toLowerCase().indexOf("change start") == 0) {
-
-			} else if (tempString.toLowerCase().indexOf("change end") == 0) {
-
-			} else if (tempString.toLowerCase().indexOf("change priority") == 0) {
-
-			} else if (tempString.toLowerCase().indexOf("change event to floating") == 0) {
-
-			} else if (tempString.toLowerCase().indexOf("change deadline to floating") == 0) {
-
-			} else if (tempString.toLowerCase().indexOf("change deadline to event") == 0) {
-
-			} else if (tempString.toLowerCase().indexOf("change floating to deadline") == 0) {
-
-			} else if (tempString.toLowerCase().indexOf("change floating to event") == 0) {
-
 			}
+			// if no changes have been made
+			if (!atLeastOneTaskChanged) {
+				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				flexWindow.getTextArea().append("\n");
+
+				logger.finest(INVALID_INPUT_MESSAGE);
+				System.out.println(INVALID_INPUT_MESSAGE);
+				System.out.println();
+
+				flexWindow.getTextArea()
+						.append(VALID_INPUT_WITHOUT_MATCHING_TASKS_TO_HAVE_INFORMATION_CHANGED_MESSAGE + "\n");
+				flexWindow.getTextArea().append("\n");
+
+				logger.finest(VALID_INPUT_WITHOUT_MATCHING_TASKS_TO_HAVE_INFORMATION_CHANGED_MESSAGE);
+				System.out.println(VALID_INPUT_WITHOUT_MATCHING_TASKS_TO_HAVE_INFORMATION_CHANGED_MESSAGE);
+				System.out.println();
+
+				return;
+			}
+
+			// sort all tasks by date and starting time
+			SortAndShow.sortAllTasksByDateAndStartingTime(allTasksList);
+
+			// overwrites to the file, line by line
+			BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
+
+			for (int j = 0; j < allTasksList.size(); j++) {
+				writer.write(allTasksList.get(j).getScheduleString());
+				writer.newLine();
+				flexWindow.getTextArea().append(allTasksList.get(j).getDisplayString() + "\n");
+				flexWindow.getTextArea().append("\n");
+			}
+
+			writer.close();
+
+			logger.finest(CHANGED_MESSAGE);
+			System.out.println(CHANGED_MESSAGE);
+			System.out.println();
+
+			return;
+		} else if (tempString.toLowerCase().indexOf("change date") == 0) {
+
+		} else if (tempString.toLowerCase().indexOf("change start") == 0) {
+
+		} else if (tempString.toLowerCase().indexOf("change end") == 0) {
+
+		} else if (tempString.toLowerCase().indexOf("change priority") == 0) {
+
+		} else if (tempString.toLowerCase().indexOf("change event to floating") == 0) {
+
+		} else if (tempString.toLowerCase().indexOf("change deadline to floating") == 0) {
+
+		} else if (tempString.toLowerCase().indexOf("change deadline to event") == 0) {
+
+		} else if (tempString.toLowerCase().indexOf("change floating to deadline") == 0) {
+
+		} else if (tempString.toLowerCase().indexOf("change floating to event") == 0) {
+
 		}
 
 		// if no changes have been made
-		if (!atLeastOneTaskChanged) {
+		if (!atLeastOneTaskChanged){
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
 			flexWindow.getTextArea().append("\n");
 
@@ -348,10 +377,8 @@ public class CRUD {
 		// overwrites to the file, line by line
 		BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
 
-		for (int i = 0; i < allTasksList.size(); i++) {
+		for (int i = 0; i < allTasksList.size(); i++){
 			writer.write(allTasksList.get(i).getScheduleString());
-			flexWindow.getTextArea().append(allTasksList.get(i).getDisplayString() + "\n");
-			flexWindow.getTextArea().append("\n");
 			writer.newLine();
 		}
 
@@ -360,6 +387,10 @@ public class CRUD {
 		logger.finest(CHANGED_MESSAGE);
 		System.out.println(CHANGED_MESSAGE);
 		System.out.println();
+		
+		SortAndShow.readAndDisplayAll(filename, flexWindow);
+
+		return;
 
 	}
 
@@ -608,28 +639,17 @@ public class CRUD {
 
 				addTask(filename, lastAction.getPreviousTask().getScheduleString(), lastAction, flexWindow);
 			}
+		} else {
+
+			if (lastAction.getPreviousAction().trim().equalsIgnoreCase("change task name")) {
+
+				logger.finest(CHANGE_UNDONE_MESSAGE);
+				System.out.println(CHANGE_UNDONE_MESSAGE);
+				System.out.println();
+
+				changeTaskVariable(filename, "task name" + ", " + lastAction.getPreviousTask().getTaskName() + ", " + lastAction.getPreviousChangedTerm(), lastAction, flexWindow);
+			}
+
 		}
-		// }
-		// }
-		// else{
-
-		// if(lastAction.getPreviousAction().substring(0,
-		// whitespaceIndex1).trim().equalsIgnoreCase("change")){
-
-		// logger.finest(CHANGE_UNDONE_MESSAGE);
-		// System.out.println(CHANGE_UNDONE_MESSAGE);
-		// System.out.println();
-
-		// int whitespaceIndex2 = lastAction.getPreviousAction().indexOf(" ");
-
-		// changeTaskVariable(filename,
-		// lastAction.getPreviousAction().substring(whitespaceIndex2 + 1).trim()
-		// + " " + lastAction.getPreviousTask().getDate() + ", " +
-		// lastAction.getPreviousTask().getTaskTitle() + ", " +
-		// lastAction.getPreviousChangedTerm(), lastAction, flexWindow);
-
-		// }
-		// }
-		// }
 	}
 }
