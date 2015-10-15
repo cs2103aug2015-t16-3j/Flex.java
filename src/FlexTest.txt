@@ -1,13 +1,13 @@
 27/1/2014, undefined, undefined, title hundred, description hundred, hundred, floating
 2/3/3, undefined, undefined, title titles, description, priority pri, floating
-undefined, undefined, undefined, T, PI, D, floating
-undefined, undefined, undefined, T, D, P, floating
 undefined, undefined, undefined, tit3le, description, priority, floating
-1/1/1, undefined, 0357, titlAe titles, description, priority pri, deadline
+1/1/1, undefined, undefined, titlAe titles, description, priority pri, floating
 1/1/1, 0000, 1234, t, d, p, c
+1/1/1, undefined, 0001, TI, DI, PI, deadline
 1/1/1, 0234, 0357, title titles, description, priority pri, default
 1/1/1, 1235, 1236, t, d, p, c
 2/2/2, undefined, 2359, title2, dew, priority, deadline
+3/3/3, 0000, 0000, TI, PI, DI, default
 1/1/1051, 0000, 0001, t, d, p, c
 1/1/2000, undefined, 0357, title titles, description, priority pri, deadline
 1/1/2011, 0001, 0002, t, d, p, c
@@ -42,3 +42,5 @@ undefined, undefined, undefined, tit3le, description, priority, floating
 1/1/2028, 0000, 2359, t, d, p, c
 1/1/2029, 1000, 1000, t, d, p, c
 3/1/2042, 0000, 0000, t, d, p, c
+3/1/2042, undefined, 0000, 0000, t, d, deadline
+4/1/2042, 0000, 0000, t, d, p, default

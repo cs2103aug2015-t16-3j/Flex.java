@@ -22,5 +22,7 @@ public class FlexTest2{
 		
 		assertTrue(Checker.checkTask("11/12/2014, 1000, 1100, title hundred, description1 234, 1, blocked"));
 		
+		assertTrue(Checker.checkTask("11/12/2014, 1000, 1100, title hundred, description1 234, 1,               a ")); 
+		
 	}
 }

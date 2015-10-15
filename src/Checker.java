@@ -1,5 +1,3 @@
-import java.util.logging.*;
-
 // Checker.java contains the original checkTask() and checkDate() methods.
 // Both methods return boolean values.
 // checkTask() uses checkDate()
@@ -24,6 +22,67 @@ public class Checker {
 	private static final int NOVEMBER_DAYS = 30;
 	private static final int DECEMBER_DAYS = 31;
 
+	
+	// checks a string containing the time, on whether it is in the required format
+	static boolean checkTime(String time){
+		
+		String tempString = new String("");
+		tempString = time.trim();
+		// ENDING TIME
+		
+		// e.g. 1100
+		
+		// checks if the time is missing
+		if(tempString.length()==0){
+
+			return false;				
+		}
+		
+		// checks if there is a dash in the time
+		if(tempString.indexOf("-")>=0){
+	
+			return false;							
+		}
+			
+		// checks if the time is a number
+		char[] tempCharArray5 = new char[tempString.length()];
+		tempString.getChars(0, tempString.length(), tempCharArray5, 0);
+
+		
+		for(int m=0; m<tempString.length(); m++){
+			if(!Character.isDigit(tempCharArray5[m])){			
+
+				return false;				
+			}
+		}				
+	
+		// checks if the time has four digits
+		if(tempString.length()!=4){
+
+			return false;					
+		}
+
+		// checks if the hours for the time, is more than 23
+		if(Integer.valueOf(tempString.substring(0, 2))>23){
+
+			return false;	
+		}
+		
+		// checks if the minutes for the time, is more than 59
+		if(Integer.valueOf(tempString.substring(2, 4))>59){
+
+			return false;	
+		}
+		
+		// checks if the time is a number greater than 2359 (11:59pm)
+		if(Integer.valueOf(tempString)>2359){
+
+			return false;	
+		}
+		
+		return true;
+	}
+	
 	// checks the validity of the potential Task String for a floating task
 	// which is a task without a date, starting time and ending time, and without a category
 	// it will therefore only have a title, a description, and a priority (level)
@@ -34,7 +93,7 @@ public class Checker {
 	static boolean checkFloatingTaskInput(String taskString){
 		String tempString = new String("");
 		// checks the full String
-		tempString = taskString;
+		tempString = taskString.trim();
 		
 		// checks for the first separator
 		int commaWhitespaceIndex1 = tempString.indexOf(", ");
@@ -49,7 +108,7 @@ public class Checker {
 		}
 		
 		// checks the rest of the String after the first separator				
-		tempString = tempString.substring(commaWhitespaceIndex1 + 2);
+		tempString = tempString.substring(commaWhitespaceIndex1 + 2).trim();
 		
 		// checks for the second separator
 		int commaWhitespaceIndex2 = tempString.indexOf(", ");
@@ -65,7 +124,7 @@ public class Checker {
 		}		
 		
 		// checks the rest of the String after the second separator 
-		tempString = tempString.substring(commaWhitespaceIndex2 + 2);
+		tempString = tempString.substring(commaWhitespaceIndex2 + 2).trim();
 		
 		// checks for the third separator
 		int commaWhitespaceIndex3 = tempString.indexOf(", ");
@@ -98,7 +157,7 @@ public class Checker {
 	static boolean checkDeadlineTaskInput(String taskString){
 		
 		String tempString = new String("");
-		tempString = taskString;
+		tempString = taskString.trim();
 		
 		String[] tempTaskVariables = new String[5];
 
@@ -114,7 +173,7 @@ public class Checker {
 		
 	
 		// tempTaskVariables[0] is the extracted date
-		tempTaskVariables[0] = tempString.substring(0, commaWhitespaceIndex1);
+		tempTaskVariables[0] = tempString.substring(0, commaWhitespaceIndex1).trim();
 		
 		// e.g. tempDateString is "27/9/2015"
 		
@@ -128,7 +187,7 @@ public class Checker {
 		
 		// tempString.substring(commaWhitespaceIndex1 + 2) is 1100, title title1, description description2, priorityLevel 1
 		
-		tempString = tempString.substring(commaWhitespaceIndex1 + 2);
+		tempString = tempString.substring(commaWhitespaceIndex1 + 2).trim();
 		
 		
 		int commaWhitespaceIndex2 = tempString.indexOf(", ");
@@ -140,62 +199,18 @@ public class Checker {
 		
 		
 		// tempTaskVariables[1] is the ending time
-		tempTaskVariables[1] = tempString.substring(0, commaWhitespaceIndex2);	
+		tempTaskVariables[1] = tempString.substring(0, commaWhitespaceIndex2).trim();	
 		
 		// ENDING TIME
 		
-		// e.g. 1100
-		
-		// checks if the ending time is missing
-		if(tempTaskVariables[1].length()==0){
-
-			return false;				
+		if(!Checker.checkTime(tempTaskVariables[1])){
+			return false;
 		}
 		
-		// checks if there is a dash in the ending time
-		if(tempTaskVariables[1].indexOf("-")>=0){
-	
-			return false;							
-		}
-			
-		// checks if the ending time is a number
-		char[] tempCharArray5 = new char[tempTaskVariables[1].length()];
-		tempTaskVariables[1].getChars(0, tempTaskVariables[1].length(), tempCharArray5, 0);
-
-		
-		for(int m=0; m<tempTaskVariables[1].length(); m++){
-			if(!Character.isDigit(tempCharArray5[m])){			
-
-				return false;				
-			}
-		}				
-	
-		// checks if the ending time has four digits
-		if(tempTaskVariables[1].length()!=4){
-
-			return false;					
-		}
-
-		// checks if the hours for the ending time, is more than 23
-		if(Integer.valueOf(tempTaskVariables[1].substring(0, 2))>23){
-
-			return false;	
-		}
-		
-		// checks if the minutes for the ending time, is more than 59
-		if(Integer.valueOf(tempTaskVariables[1].substring(2, 4))>59){
-
-			return false;	
-		}
-		
-		// checks if the ending time is a number greater than 2359 (11:59pm)
-		if(Integer.valueOf(tempTaskVariables[1])>2359){
-
-			return false;	
-		}
+		assert(Checker.checkTime(tempTaskVariables[1]));
 								
 		// tempString.substring(commaWhitespaceIndex2 + 2) is title title1, description description2, priorityLevel 1
-		tempString = tempString.substring(commaWhitespaceIndex2 + 2);
+		tempString = tempString.substring(commaWhitespaceIndex2 + 2).trim();
 	
 		// extracts the task title
 		int commaWhitespaceIndex3 = tempString.indexOf(", ");
@@ -206,12 +221,12 @@ public class Checker {
 		}
 		
 		// tempTaskVariables[2] is the task title
-		tempTaskVariables[2] = tempString.substring(0, commaWhitespaceIndex3);
+		tempTaskVariables[2] = tempString.substring(0, commaWhitespaceIndex3).trim();
 	
 		
 		// tempString.substring(commaWhitespaceIndex4 + 2) is description description2, priorityLevel 1, category unknown
 
-		tempString = tempString.substring(commaWhitespaceIndex3 + 2);
+		tempString = tempString.substring(commaWhitespaceIndex3 + 2).trim();
 		
 		// extracts the task description
 		int commaWhitespaceIndex4 = tempString.indexOf(", ");
@@ -222,13 +237,13 @@ public class Checker {
 		}
 		
 		// tempTaskVariables[3] is the extracted task description
-		tempTaskVariables[3] = tempString.substring(0, commaWhitespaceIndex4);	
+		tempTaskVariables[3] = tempString.substring(0, commaWhitespaceIndex4).trim();	
 				
 		if(tempString.substring(commaWhitespaceIndex4+2).length()<=0){
 			return false;
 		}
 		
-		tempString = tempString.substring(commaWhitespaceIndex4+2);
+		tempString = tempString.substring(commaWhitespaceIndex4+2).trim();
 		
 		int commaWhitespaceIndex5 = tempString.indexOf(", ");
 		
@@ -288,7 +303,7 @@ public class Checker {
 		}
 			
 		
-		// tempTaskVariables[6] is the extracted date
+		// tempTaskVariables[0] is the extracted date
 		tempTaskVariables[0] = tempString.substring(0, commaWhitespaceIndex1).trim();
 			
 		// e.g. tempDateString is "27/9/2015"
@@ -315,60 +330,15 @@ public class Checker {
 
 		// tempTaskVariables[1] is the extracted starting time
 		tempTaskVariables[1] = tempString.substring(0, commaWhitespaceIndex2).trim();
-			
+		
 		// STARTING TIME
-			
-		// e.g. 0011
-			
-		// checks if the starting time is missing
-		if(tempTaskVariables[1].length()==0){
-
-			return false;				
-		}
-			
-		// checks if there is a dash in the starting time
-		if(tempTaskVariables[1].indexOf("-")>=0){
-
-			return false;							
-		}
-			
-		// checks if the starting time is a number
-		char[] tempCharArray4 = new char[tempTaskVariables[1].trim().length()];				
-		tempTaskVariables[1].trim().getChars(0, tempTaskVariables[1].trim().length(), tempCharArray4, 0);		
-		for(int l=0; l<tempTaskVariables[1].trim().length(); l++){
-			if(!Character.isDigit(tempCharArray4[l])){
-
-				return false;				
-			}
-		}				
 		
-		// checks if the starting time has four digits
-		if(tempTaskVariables[1].length()!=4){
-
-			return false;					
-		}
-			
-		// checks if the hours for the starting time, is more than 23
-		if(Integer.valueOf(tempTaskVariables[1].substring(0, 2))>23){
-
-			return false;	
+		if(!Checker.checkTime(tempTaskVariables[1])){
+			return false;
 		}
 		
-		// checks if the minutes for the starting time, is more than 59
-		if(Integer.valueOf(tempTaskVariables[1].substring(2, 4))>59){
-
-			return false;	
-		}
-			
-			
-		// checks if the starting time is a number greater than 2359 (11:59pm)
-		if(Integer.valueOf(tempTaskVariables[1])>2359){
-
-			return false;	
-		}
-			
-		// tempString.substring(commaWhitespaceIndex2 + 2) is 1100, title title1, description description2, priorityLevel 1, category unknown
-			
+		assert(Checker.checkTime(tempTaskVariables[1]));
+		
 		tempString = tempString.substring(commaWhitespaceIndex2 + 2).trim();
 		
 		// extracts the ending time
@@ -381,57 +351,15 @@ public class Checker {
 			
 		// tempTaskVariables[2] is the ending time
 		tempTaskVariables[2] = tempString.substring(0, commaWhitespaceIndex3).trim();	
-			
+
 		// ENDING TIME
-			
-		// e.g. 1100
-			
-		// checks if the ending time is missing
-		if(tempTaskVariables[2].length()==0){
-
-			return false;				
-		}
-			
-		// checks if there is a dash in the ending time
-		if(tempTaskVariables[2].indexOf("-")>=0){
-
-			return false;							
-		}
-			
-		// checks if the ending time is a number
-		char[] tempCharArray5 = new char[tempTaskVariables[2].trim().length()];
-		tempTaskVariables[2].trim().getChars(0, tempTaskVariables[2].trim().length(), tempCharArray5, 0);
-		for(int m=0; m<tempTaskVariables[2].trim().length(); m++){
-			if(!Character.isDigit(tempCharArray5[m])){
-				
-				return false;				
-			}
-		}				
 		
-		// checks if the ending time has four digits
-		if(tempTaskVariables[2].length()!=4){
-
-			return false;					
+		if(!Checker.checkTime(tempTaskVariables[2])){
+			return false;
 		}
-
-		// checks if the hours for the ending time, is more than 23
-		if(Integer.valueOf(tempTaskVariables[2].substring(0, 2))>23){
-
-			return false;	
-		}
+		
+		assert(Checker.checkTime(tempTaskVariables[2]));
 			
-		// checks if the minutes for the ending time, is more than 59
-		if(Integer.valueOf(tempTaskVariables[2].substring(2, 4))>59){
-				
-			return false;	
-		}
-			
-		// checks if the ending time is a number greater than 2359 (11:59pm)
-		if(Integer.valueOf(tempTaskVariables[2])>2359){
-
-			return false;	
-		}
-							
 		// tempString.substring(commaWhitespaceIndex3 + 2) is title title1, description description2, priorityLevel 1, category unknown
 		tempString = tempString.substring(commaWhitespaceIndex3 + 2).trim();
 		
@@ -445,7 +373,7 @@ public class Checker {
 			
 		// tempTaskVariables[3] is the task title
 		tempTaskVariables[3] = tempString.substring(0, commaWhitespaceIndex4).trim();
-			
+		
 		// tempString.substring(commaWhitespaceIndex4 + 2) is description description2, priorityLevel 1, category unknown
 
 		tempString = tempString.substring(commaWhitespaceIndex4 + 2).trim();
@@ -460,8 +388,9 @@ public class Checker {
 			
 		// tempTaskVariables[4] is the extracted task description
 		tempTaskVariables[4] = tempString.substring(0, commaWhitespaceIndex5).trim();	
-			
+		
 		// tempString.substring(commaWhitespaceIndex5 + 2) is priorityLevel 1, category unknown
+		tempString = tempString.substring(commaWhitespaceIndex5 + 2).trim();
 
 		// extracts the priority level, and the category of the task
 		int commaWhitespaceIndex6 = tempString.indexOf(", ");
@@ -481,7 +410,7 @@ public class Checker {
 			
 		// tempTaskVariables[6] is the extracted category
 		tempTaskVariables[6] = tempString.trim();	
-					
+		
 		return true;
 	}
 	
@@ -708,7 +637,7 @@ public class Checker {
 	// undefined, undefined, undefined, title, description, priority, floating
 	static boolean checkFloatingTaskOutput(String taskInformation) {
 		String remainingString = new String("");
-		remainingString = taskInformation;
+		remainingString = taskInformation.trim();
 		
 		String[] taskVariables = new String[7];
 		
@@ -726,7 +655,7 @@ public class Checker {
 			return true;
 		}
 		
-		remainingString = remainingString.substring(commaWhitespaceIndex1 + 2);
+		remainingString = remainingString.substring(commaWhitespaceIndex1 + 2).trim();
 
 		// extracts the starting time
 		int commaWhitespaceIndex2 = remainingString.indexOf(", ");
@@ -796,7 +725,7 @@ public class Checker {
 	// 11/1/1111, undefined, 0021, title, description, priority, deadline
 	static boolean checkDeadlineTaskOutput(String taskInformation) {
 		String remainingString = new String("");
-		remainingString = taskInformation;
+		remainingString = taskInformation.trim();
 		
 		String[] taskVariables = new String[7];
 		
@@ -808,7 +737,7 @@ public class Checker {
 		}
 
 		taskVariables[0] = remainingString.substring(0, commaWhitespaceIndex1).trim();
-		remainingString = remainingString.substring(commaWhitespaceIndex1 + 2);
+		remainingString = remainingString.substring(commaWhitespaceIndex1 + 2).trim();
 
 		// extracts the starting time
 		int commaWhitespaceIndex2 = remainingString.indexOf(", ");
@@ -826,14 +755,21 @@ public class Checker {
 		
 		remainingString = remainingString.substring(commaWhitespaceIndex2 + 2).trim();
 
-		// extracts the ending time
 		int commaWhitespaceIndex3 = remainingString.indexOf(", ");
 
 		if(commaWhitespaceIndex3 < 0){
 			return false;
 		}
-		
+		// extracts the ending time
 		taskVariables[2] = remainingString.substring(0, commaWhitespaceIndex3).trim();
+		
+		// check the format of the ending time
+		if(!checkTime(taskVariables[2])){
+			return false;
+		}
+		
+		assert(checkTime(taskVariables[2]));
+		
 		remainingString = remainingString.substring(commaWhitespaceIndex3 + 2).trim();
 
 		// extracts the task title

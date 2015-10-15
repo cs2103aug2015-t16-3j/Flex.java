@@ -212,7 +212,7 @@ public class CRUD {
 		
 		if(changeVariableType.equalsIgnoreCase("date")||changeVariableType.equalsIgnoreCase("day")){
 			
-			// check if this input by the user is valid
+			// check if the new date valid
 			String newDate = newTerm;
 						
 			if(!Checker.checkDate(newDate)&&!newDate.equalsIgnoreCase("undefined")){			
@@ -330,6 +330,18 @@ public class CRUD {
 			
 		}
 		else if(changeVariableType.equalsIgnoreCase("start")){
+			// if the new starting time is invalid
+			// stop continuing this method
+			if(!Checker.checkTime(newTerm)&&!newTerm.equalsIgnoreCase("undefined")){
+				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				flexWindow.getTextArea().append("\n");
+
+				logger.finest(INVALID_INPUT_MESSAGE);
+				System.out.println(INVALID_INPUT_MESSAGE);
+				System.out.println();
+				return;				
+			}
+			
 			for(int i=0; i<allTasksList.size(); i++){
 				if((allTasksList.get(i).getDate().equalsIgnoreCase(currentDate))&&(allTasksList.get(i).getTaskTitle().equalsIgnoreCase(currentTaskTitle))){
 					tempChangedTerm = allTasksList.get(i).getStartingTime();
@@ -453,6 +465,18 @@ public class CRUD {
 			return;
 		}
 		else if(changeVariableType.equalsIgnoreCase("end")){
+			// if the new ending time is invalid
+			// stop continuing this method
+			if(!Checker.checkTime(newTerm)&&!newTerm.equalsIgnoreCase("undefined")){
+				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				flexWindow.getTextArea().append("\n");
+
+				logger.finest(INVALID_INPUT_MESSAGE);
+				System.out.println(INVALID_INPUT_MESSAGE);
+				System.out.println();
+				return;				
+			}
+			
 			for(int i=0; i<allTasksList.size(); i++){
 				if((allTasksList.get(i).getDate().equalsIgnoreCase(currentDate))&&(allTasksList.get(i).getTaskTitle().equalsIgnoreCase(currentTaskTitle))){
 					tempChangedTerm = allTasksList.get(i).getEndingTime();
