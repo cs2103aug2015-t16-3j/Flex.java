@@ -261,7 +261,7 @@ public class CRUD {
 					else if(Checker.checkDeadlineTaskOutput(allTasksList.get(i).getPrintTaskString())){
 						allTasksList.get(i).setCategory("deadline");
 					}
-					else if(((allTasksList.get(i).getCategory().equalsIgnoreCase("floating"))||allTasksList.get(i).getCategory().equalsIgnoreCase("floating"))&&Checker.checkTask(allTasksList.get(i).getPrintTaskString())){
+					else if(((allTasksList.get(i).getCategory().equalsIgnoreCase("floating"))||allTasksList.get(i).getCategory().equalsIgnoreCase("deadline"))&&Checker.checkTask(allTasksList.get(i).getPrintTaskString())){
 						allTasksList.get(i).setCategory("default");
 					}
 
@@ -379,7 +379,7 @@ public class CRUD {
 					else if(Checker.checkDeadlineTaskOutput(allTasksList.get(i).getPrintTaskString())){
 						allTasksList.get(i).setCategory("deadline");
 					}
-					else if(((allTasksList.get(i).getCategory().equalsIgnoreCase("floating"))||allTasksList.get(i).getCategory().equalsIgnoreCase("floating"))&&Checker.checkTask(allTasksList.get(i).getPrintTaskString())){
+					else if(((allTasksList.get(i).getCategory().equalsIgnoreCase("floating"))||allTasksList.get(i).getCategory().equalsIgnoreCase("deadline"))&&Checker.checkTask(allTasksList.get(i).getPrintTaskString())){
 						allTasksList.get(i).setCategory("default");
 					}
 
@@ -487,7 +487,7 @@ public class CRUD {
 					else if(Checker.checkDeadlineTaskOutput(allTasksList.get(i).getPrintTaskString())){
 						allTasksList.get(i).setCategory("deadline");
 					}
-					else if(((allTasksList.get(i).getCategory().equalsIgnoreCase("floating"))||allTasksList.get(i).getCategory().equalsIgnoreCase("floating"))&&Checker.checkTask(allTasksList.get(i).getPrintTaskString())){
+					else if(((allTasksList.get(i).getCategory().equalsIgnoreCase("floating"))||allTasksList.get(i).getCategory().equalsIgnoreCase("deadline"))&&Checker.checkTask(allTasksList.get(i).getPrintTaskString())){
 						allTasksList.get(i).setCategory("default");
 					}
 					
@@ -571,7 +571,7 @@ public class CRUD {
 					else if(Checker.checkDeadlineTaskOutput(allTasksList.get(i).getPrintTaskString())){
 						allTasksList.get(i).setCategory("deadline");
 					}
-					else if(((allTasksList.get(i).getCategory().equalsIgnoreCase("floating"))||allTasksList.get(i).getCategory().equalsIgnoreCase("floating"))&&Checker.checkTask(allTasksList.get(i).getPrintTaskString())){
+					else if(((allTasksList.get(i).getCategory().equalsIgnoreCase("floating"))||allTasksList.get(i).getCategory().equalsIgnoreCase("deadline"))&&Checker.checkTask(allTasksList.get(i).getPrintTaskString())){
 						allTasksList.get(i).setCategory("default");
 					}
 					
@@ -657,7 +657,7 @@ public class CRUD {
 					else if(Checker.checkDeadlineTaskOutput(allTasksList.get(i).getPrintTaskString())){
 						allTasksList.get(i).setCategory("deadline");
 					}
-					else if(((allTasksList.get(i).getCategory().equalsIgnoreCase("floating"))||allTasksList.get(i).getCategory().equalsIgnoreCase("floating"))&&Checker.checkTask(allTasksList.get(i).getPrintTaskString())){
+					else if(((allTasksList.get(i).getCategory().equalsIgnoreCase("floating"))||allTasksList.get(i).getCategory().equalsIgnoreCase("deadline"))&&Checker.checkTask(allTasksList.get(i).getPrintTaskString())){
 						allTasksList.get(i).setCategory("default");
 					}
 
@@ -740,7 +740,7 @@ public class CRUD {
 					else if(Checker.checkDeadlineTaskOutput(allTasksList.get(i).getPrintTaskString())){
 						allTasksList.get(i).setCategory("deadline");
 					}
-					else if(((allTasksList.get(i).getCategory().equalsIgnoreCase("floating"))||allTasksList.get(i).getCategory().equalsIgnoreCase("floating"))&&Checker.checkTask(allTasksList.get(i).getPrintTaskString())){
+					else if(((allTasksList.get(i).getCategory().equalsIgnoreCase("floating"))||allTasksList.get(i).getCategory().equalsIgnoreCase("deadline"))&&Checker.checkTask(allTasksList.get(i).getPrintTaskString())){
 						allTasksList.get(i).setCategory("default");
 					}
 
@@ -824,7 +824,7 @@ public class CRUD {
 					else if(Checker.checkDeadlineTaskOutput(allTasksList.get(i).getPrintTaskString())){
 						allTasksList.get(i).setCategory("deadline");
 					}
-					else if(((allTasksList.get(i).getCategory().equalsIgnoreCase("floating"))||allTasksList.get(i).getCategory().equalsIgnoreCase("floating"))&&Checker.checkTask(allTasksList.get(i).getPrintTaskString())){
+					else if(((allTasksList.get(i).getCategory().equalsIgnoreCase("floating"))||allTasksList.get(i).getCategory().equalsIgnoreCase("deadline"))&&Checker.checkTask(allTasksList.get(i).getPrintTaskString())){
 						allTasksList.get(i).setCategory("default");
 					}
 
