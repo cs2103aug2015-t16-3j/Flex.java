@@ -3,18 +3,21 @@ import java.io.IOException;
 import org.junit.Test;
 
 // FlexTest5.java tests if the input for a deadline task works
-// date, ending time, title, description, priority
-//also tests for the validity of the task string after such an adding input
+// format of a deadline task
+// task, date, ending time
+// e.g.
+// task, 1/1/1, 0000
 
 public class FlexTest5 {
 
 	@Test
 	public void testOutput() throws IOException{
-
-		assertTrue(Checker.checkDeadlineTaskInput("1/1/1, 0357, title titles, description, priority pri,"));
-		assertTrue(Checker.checkDeadlineTaskInput("1/1/1, 0357, title titles, description, priority pri,,"));
-		assertTrue(Checker.checkDeadlineTaskInput("1/1/1, 0357, title titles, description, priority pri"));
 		
-		assertTrue(Checker.checkDeadlineTaskOutput("1/1/1, undefined, 0357, title titles, description, priority pri, deadline"));
+		assertTrue(Checker.isDeadlineTask("task, 1/1/1, 2000"));
+		
+		assertTrue(Checker.isDeadlineTask("task test testing, 12/12/2015, 2359"));
+		
+		assertTrue(Checker.isDeadlineTask("task test tester, 12/1/2015, 2300"));
+		
 	}
 }

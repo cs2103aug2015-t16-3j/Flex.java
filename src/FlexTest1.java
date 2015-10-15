@@ -12,17 +12,17 @@ public class FlexTest1{
 	public void testOutput() throws IOException{
 
 		
-		assertTrue(Checker.checkDate("31/12/2012"));
+		assertTrue(Checker.isValidDate("31/12/2012"));
 		
-		assertTrue(Checker.checkDate("29/2/2012"));
+		assertTrue(Checker.isValidDate("29/2/2012"));
 		
-		assertTrue(Checker.checkDate("28/2/2012"));
+		assertTrue(Checker.isValidDate("28/2/2012"));
 		
-		assertTrue(Checker.checkDate("31/1/2012"));
+		assertTrue(Checker.isValidDate("31/1/2012"));
 		
-		assertTrue(Checker.checkDate("1/1/2012"));
+		assertTrue(Checker.isValidDate("1/1/2012"));
 		
-		assertTrue(Checker.checkDate("1/1/2011"));
+		assertTrue(Checker.isValidDate("1/1/2011"));
 		
 	}
 }
