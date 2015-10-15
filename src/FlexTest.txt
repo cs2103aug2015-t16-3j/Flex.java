@@ -1,51 +1,16 @@
-2/1/1, undefined, undefined, titlAe titles, description, priority pri, floating
-2/3/3, undefined, undefined, title titles, description, priority pri, floating
-27/1/2014, undefined, undefined, title hundred, description hundred, hundred, floating
-undefined, undefined, undefined, tit3le, description, priority, floating
-1/1/1, undefined, 0001, TI, DI, PI, deadline
-1/1/1, 0000, 1234, t, d, p, c
-1/1/1, 0234, 0357, title titles, description, priority pri, default
-1/1/1, 1235, 1236, t, d, p, c
-2/2/2, undefined, 2359, title2, dew, priority, deadline
-3/3/3, 0000, 0000, TI, PI, DI, default
-1/1/1051, 0000, 0001, t, d, p, c
-1/1/2000, undefined, 0357, title titles, description, priority pri, deadline
-1/1/2011, 0001, 0002, t, d, p, c
-1/2/2011, 0002, 0013, t, p, d, c
-8/8/2013, 0001, 0002, test1minuTe, test1minute only, -100, blocked
-28/1/2014, 1000, 1100, title hundred, description hundred, 1, default
-30/1/2014, 1000, 1100, title hundred, description hundred, 1, blocked
-31/1/2014, 1000, 1100, title hundred, description hundred, 1, blocked
-30/11/2014, 1000, 1100, title hundred, description hundred, 1, blocked
-10/12/2014, 1000, 1100, title hundred, description infinite, 1, blocked
-11/12/2014, 1000, 1100, title hundred, description1 234, 1, blocked
-30/12/2014, 1000, 1100, title hundred, description hundred, 1, blocked
-1/1/2015, 1000, 1150, title three, description three, 2, pending
-1/2/2015, 0800, 0801, title four, description five, two, pending
-1/2/2015, 1000, 1150, title three, description three, 2, pending
-2/2/2015, 1000, 1100, title hundred, description million, 1, blocked
-1/3/2015, 1000, 1150, title three, description eleven, 2, non-default category
-1/4/2015, 0000, 0001, title one, description two, priority three, category four
-2/9/2015, 1000, 1159, title two, description two, 1, pending
-3/9/2015, 1000, 1159, title five, description five, 1, pending
-7/9/2015, 0800, 0959, title one, testingAgain, 1, pending
-7/9/2015, 1000, 1159, title two, description two, 1, pending
-11/9/2015, 1000, 1159, title two, description two, 1, done
-12/9/2015, 1000, 1159, title two, description two, 1, blocked
-13/9/2015, 1000, 1129, ti, de, pri, ca
-22/9/2015, 1000, 1129, titl, de, prio, ca
-10/10/2015, 0000, 0003, t, d, p, c
-31/12/2016, 0001, 0003, title, desc, pri, ca
-30/9/2017, 0001, 0002, t, d, p, c
-2/11/2017, 0002, 0005, t, d, p, c
-1/1/2028, 0000, 2359, t, d, p, c
-1/1/2028, 0000, 0000, t, d, p, c
-1/1/2029, 1000, 1000, t, d, p, c
-3/1/2042, undefined, 0000, 0000, t, d, deadline
-3/1/2042, 0000, 0000, t, d, p, c
-4/1/2042, 0000, 0000, t, d, p, default
-5/1/2042, 0000, 0000, t, d, p, default
-1/1/2400, 0000, 0001, t, d, p, c
-1/1/3000, 0000, 0001, t, d, p, c
-1/1/4000, 0000, 0001, t, d, p, c
-2/1/4050, 0000, 0001, t, d, p, c
+task tasking, 1/1/1, 0000
+twt, 1/1/1, 0000, 0000, terwr
+teari, 2/2/2, 2358
+t, 4/4/4, 0123
+t, 13/12/11, 2359, 2359, t
+te, 14/12/11, 2359, 2359, t
+task, 22/11/1111, 0000, 0001, priority
+task taskW, 15/10/2015, 2359
+ttt, 15/10/2015, 2357, 2358, t
+ti, 15/10/2015, 2359, 2359, t
+tas
+tasssssssssss
+tear
+task tasker
+tas
+w

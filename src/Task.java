@@ -128,6 +128,9 @@ public class Task {
 			// set the task of the normal task
 			this.taskVariables[0] = tempString.substring(0, commaWhitespaceIndex1).trim();
 			
+			// FOR CHECKING
+			System.out.println("this.taskVariables[0]: " + this.taskVariables[0]);
+			
 			tempString = tempString.substring(commaWhitespaceIndex1 + 2).trim();
 			
 			int commaWhitespaceIndex2 = tempString.indexOf(", ");
@@ -135,12 +138,18 @@ public class Task {
 			// set the date of the normal task
 			this.taskVariables[1] = tempString.substring(0, commaWhitespaceIndex2).trim();
 			
-			tempString = tempString.substring(0, commaWhitespaceIndex2 + 2).trim();
+			// FOR CHECKING
+			System.out.println("this.taskVariables[1]: " + this.taskVariables[1]);
+			
+			tempString = tempString.substring(commaWhitespaceIndex2 + 2).trim();
 			
 			int commaWhitespaceIndex3 = tempString.indexOf(", ");
 			
 			// set the starting time of the normal task
 			this.taskVariables[2] = tempString.substring(0, commaWhitespaceIndex3).trim();
+			
+			// FOR CHECKING
+			System.out.println("this.taskVariables[2]: " + this.taskVariables[2]);
 			
 			tempString = tempString.substring(commaWhitespaceIndex3 + 2).trim();
 			
@@ -149,8 +158,14 @@ public class Task {
 			// set the ending time of the normal task
 			this.taskVariables[3] = tempString.substring(0, commaWhitespaceIndex4).trim();
 			
+			// FOR CHECKING
+			System.out.println("this.taskVariables[3]: " + this.taskVariables[3]);
+			
 			// set the priority of the normal task
 			this.taskVariables[4] = tempString.substring(commaWhitespaceIndex4 + 2).trim();
+			
+			// FOR CHECKING
+			System.out.println("this.taskVariables[4]: " + this.taskVariables[4]);
 			
 			// calculate the comparison value of the normal task
 			calculateComparisonValue(remainingString);
@@ -158,6 +173,10 @@ public class Task {
 				
 	}
 	
+	// default Task constructor
+	public Task() {
+	}
+
 	// e.g. 31/12/2014 with starting time 0859 gives numberOfPastMonths = 12 - 1 = 11, and numberOfPastDays = 31 - 1 = 30
 	private int findNumberOfAccumulatedPastDaysInCurrentYear(int numberOfPastMonths, int numberOfPastDays) {
 		int accumulatedNumberOfDaysInPastMonths = 0;
@@ -191,10 +210,11 @@ public class Task {
 		return accumulatedNumberOfDaysInPastMonths + numberOfPastDays;
 	}
 	
-	public void calculateComparisonValue(String taskString){
-		if(Checker.isFloatingTask(taskString)){
+	public void calculateComparisonValue(String tempString){
+		if(Checker.isFloatingTask(tempString)){
+			// calculate the comparison value of the floating task
 			this.comparisonValue = FLOATING_TASK_COMPARISON_VALUE;
-		} else if(Checker.isDeadlineTask(taskString)){
+		} else if(Checker.isDeadlineTask(tempString)){
 			// calculate the comparison value of the deadline task
 			String tempDateString = new String("");
 			
@@ -229,7 +249,7 @@ public class Task {
 			// Note the need for "-0.5", for sorting deadline tasks to be in front of normal tasks for any given date
 			this.comparisonValue = -0.5 + (numberOfPastLeapYears * LEAP_YEAR_DAYS * DAY_HOURS * HOUR_MINUTES + numberOfPastNonLeapyears * YEAR_DAYS * DAY_HOURS * HOUR_MINUTES + (numberOfAccumulatedPastDaysInCurrentYear + leapYearFebruaryDay) * DAY_HOURS * HOUR_MINUTES);
 			
-		} else if(Checker.isNormalTask(taskString)){
+		} else if(Checker.isNormalTask(tempString)){
 			// calculate the comparison value of the normal task
 			String tempDateString = new String("");
 			
@@ -344,30 +364,37 @@ public class Task {
 		taskVariables[2] = newStart;
 	}
 	
+	// retrieves the ending time
 	public String getEnd(){
 		return taskVariables[3];
 	}
 	
+	// edits the ending time
 	public void setEnd(String newEnd){
 		taskVariables[3] = newEnd;
 	}
 	
+	// retrieves the priority
 	public String getPriority(){
 		return taskVariables[4];
 	}
 	
+	// sets the priority
 	public void setPriority(String newPriority){
 		taskVariables[4] = newPriority;
 	}	
 	
+	// checks if a task is done
 	public boolean isTaskDone(){
 		return this.isTaskDone;
 	}
 	
+	// marks a task as done
 	public void setTaskDone(){
 		this.isTaskDone = true;
 	}
 	
+	// marks a task as not done
 	public void setTaskNotDone(){
 		this.isTaskDone = false;
 	}

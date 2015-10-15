@@ -382,8 +382,6 @@ public class Checker {
 		// the task of the normal task
 		taskVariables[0] = tempString.substring(0, commaWhitespaceIndex1).trim();
 
-		System.out.println("taskVariables[0] : " + taskVariables[0]);
-
 		tempString = tempString.substring(commaWhitespaceIndex1 + 2).trim();
 
 		int commaWhitespaceIndex2 = tempString.indexOf(", ");
@@ -394,7 +392,6 @@ public class Checker {
 
 		// the date of the normal task
 		taskVariables[1] = tempString.substring(0, commaWhitespaceIndex2).trim();
-		System.out.println("taskVariables[1] : " + taskVariables[1]);
 
 		// checks if the date is in the correct format
 		if (!Checker.isValidDate(taskVariables[1])) {
@@ -412,8 +409,6 @@ public class Checker {
 		// the starting time of the normal task
 		taskVariables[2] = tempString.substring(0, commaWhitespaceIndex3).trim();
 
-		System.out.println("taskVariables[2] : " + taskVariables[2]);
-
 		// checks if the starting time is in the correct format
 		if (!Checker.isValidTime(taskVariables[2])) {
 			return false;
@@ -430,8 +425,6 @@ public class Checker {
 		// the ending time of the normal task
 		taskVariables[3] = tempString.substring(0, commaWhitespaceIndex4).trim();
 
-		System.out.println("taskVariables[3] : " + taskVariables[3]);
-
 		// checks if the ending time is in the correct format
 		if (!Checker.isValidTime(taskVariables[3])) {
 			return false;
@@ -439,8 +432,6 @@ public class Checker {
 
 		// the priority of the normal task
 		taskVariables[4] = tempString.substring(commaWhitespaceIndex4 + 2).trim();
-
-		System.out.println("taskVariables[4] : " + taskVariables[4]);
 
 		return true;
 	}
