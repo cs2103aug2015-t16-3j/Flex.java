@@ -22,6 +22,8 @@ public class Checker {
 	private static final int NOVEMBER_DAYS = 30;
 	private static final int DECEMBER_DAYS = 31;
 
+	private static final String DONE_STRING = "[done]";
+	
 	// checks a string containing the time, on whether it is in the required
 	// format
 	static boolean isValidTime(String time) {
@@ -297,6 +299,10 @@ public class Checker {
 		String tempString = new String("");
 		tempString = remainingString.trim();
 
+		if (tempString.length() == 0) {
+			return false;
+		}
+
 		int commaWhitespaceIndex1 = tempString.indexOf(", ");
 
 		if (commaWhitespaceIndex1 < 0) {
@@ -362,13 +368,13 @@ public class Checker {
 		return true;
 	}
 
-	// checks if a task is a normal task
+	// checks if a task is a event task
 	// format for a normal task
 	// task, date, starting time, ending time, priority
 	// e.g.
 	// task, 1/1/1, 0000, 0001, priority
 	// NOTE: There are 4 ", " Strings
-	static boolean isNormalTask(String remainingString) {
+	static boolean isEventTask(String remainingString) {
 		String tempString = new String("");
 		tempString = remainingString.trim();
 		String[] taskVariables = new String[5];
@@ -434,6 +440,77 @@ public class Checker {
 		taskVariables[4] = tempString.substring(commaWhitespaceIndex4 + 2).trim();
 
 		return true;
+	}
+
+	static boolean isDoneFloatingTask(String remainingString) {
+		String tempString = new String("");
+		tempString = remainingString;
+		
+		if(tempString.length()<7){
+			return false;
+		}
+		
+		int doneStringIndex = tempString.indexOf(DONE_STRING);
+	
+		if(doneStringIndex < 2){
+			return false;
+		}
+		
+		tempString = tempString.substring(0, doneStringIndex).trim();
+		
+		if(!Checker.isFloatingTask(tempString)){
+			return false;
+		}
+		
+		return true;
+	
+	}
+
+	static boolean isDoneDeadlineTask(String remainingString) {
+		String tempString = new String("");
+		tempString = remainingString;
+		
+		if(tempString.length()<7){
+			return false;
+		}
+		
+		int doneStringIndex = tempString.indexOf(DONE_STRING);
+
+		if(doneStringIndex < 14){
+			return false;
+		}
+		
+		tempString = tempString.substring(0, doneStringIndex).trim();
+		
+		if(!Checker.isDeadlineTask(tempString)){
+			return false;
+		}
+		return true;
+	
+	}
+
+	static boolean isDoneEventTask(String remainingString) {
+		String tempString = new String("");
+		tempString = remainingString;
+		
+		if(tempString.length()<7){
+			return false;
+		}
+
+		int doneStringIndex = tempString.indexOf(DONE_STRING);
+		
+		if(doneStringIndex < 22){
+			return false; 
+		}
+		
+		tempString = tempString.substring(0, doneStringIndex).trim();
+		
+		if(!Checker.isEventTask(tempString)){
+			return false;
+		}
+		
+		return true;
+	
 	}
 
 }

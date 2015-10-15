@@ -18,6 +18,10 @@ public class FlexTest4 {
 		assertTrue(Checker.isFloatingTask("task test"));
 		
 		assertTrue(Checker.isFloatingTask("task test test1"));
+		
+		assertTrue(Checker.isDoneFloatingTask("task [done]"));
+		
+		assertTrue(Checker.isDoneFloatingTask("t [done]"));
 	}
 	
 }

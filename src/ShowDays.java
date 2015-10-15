@@ -10,7 +10,8 @@ public class ShowDays {
 
 	private static Scanner sc;
 
-	private static final String STARTING_DATE_REQUEST_MESSAGE = "Please enter the starting date (format: dd/mm/yyyy): " + "\n";
+	private static final String STARTING_DATE_REQUEST_MESSAGE = "Please enter the starting date (format: dd/mm/yyyy): "
+			+ "\n";
 
 	private static final String TASKS_FOR_WEEK_DISPLAYED_FRONT_MESSAGE = "The tasks for the whole week starting on ";
 	private static final String TASKS_FOR_WEEK_DISLAYED_BACK_MESSAGE = " are displayed.";
@@ -31,106 +32,105 @@ public class ShowDays {
 	private static final int OCTOBER_DAYS = 31;
 	private static final int NOVEMBER_DAYS = 30;
 	private static final int DECEMBER_DAYS = 31;
-	
+
 	// used to show tasks which are in 7 consecutive days
 	// starting from the date the user indicates
 	static void showWeek(String filename, FlexWindow flexWindow) throws IOException {
 		sc = new Scanner(System.in);
-		
+
 		BufferedReader reader = null;
-		
+
 		reader = new BufferedReader(new FileReader(filename));
 		String currentLine = null;
-	
+
 		ArrayList<Task> allTasksList = new ArrayList<Task>();
-		
-		do{
+
+		do {
 			currentLine = reader.readLine();
-			if(currentLine!=null){
-				
-				allTasksList.add(new Task(currentLine));				
+			if (currentLine != null) {
+
+				allTasksList.add(new Task(currentLine));
 			}
-		}while(currentLine!=null);			
-		
-		if(reader!=null){
+		} while (currentLine != null);
+
+		if (reader != null) {
 			reader.close();
-		}				
-		
+		}
+
 		flexWindow.getTextArea().append(STARTING_DATE_REQUEST_MESSAGE + "\n");
 		flexWindow.getTextArea().append("\n");
 
 		logger.finest(STARTING_DATE_REQUEST_MESSAGE);
 		System.out.println(STARTING_DATE_REQUEST_MESSAGE);
 		System.out.println();
-		
+
 		// day 1
-		
+
 		String date1 = sc.nextLine();
-		
+
 		// check if this input by the user is valid
 		String tempDate = date1;
-		
+
 		flexWindow.getTextArea().setText("");
-				
-		if(!Checker.checkDate(tempDate)){
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");	
+
+		if (!Checker.isValidDate(tempDate)) {
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
 			flexWindow.getTextArea().append("\n");
 
 			logger.finest(INVALID_INPUT_MESSAGE);
 			System.out.println(INVALID_INPUT_MESSAGE);
 			System.out.println();
-			
+
 			return;
 		}
-		
-		assert(Checker.checkDate(tempDate));
-		
+
+		assert (Checker.isValidDate(tempDate));
+
 		date1.trim();
-		
-		SortAndShow.searchAndShowTask(filename, "date " + date1,  flexWindow);
-		
+
+		SortAndShow.searchAndShowTask(filename, "date " + date1, flexWindow);
+
 		// day 2
 		String date2 = generateNextDate(date1);
-		
+
 		date2.trim();
-		
+
 		SortAndShow.searchAndShowTask(filename, "date " + date2, flexWindow);
-		
+
 		// day 3
 		String date3 = generateNextDate(date2);
-		
+
 		date3.trim();
-		
+
 		SortAndShow.searchAndShowTask(filename, "date " + date3, flexWindow);
-		
+
 		// day 4
-		
+
 		String date4 = generateNextDate(date3);
-		
+
 		date4.trim();
-		
+
 		SortAndShow.searchAndShowTask(filename, "date " + date4, flexWindow);
-		
+
 		// day 5
 		String date5 = generateNextDate(date4);
-		
+
 		date5.trim();
-		
+
 		SortAndShow.searchAndShowTask(filename, "date " + date5, flexWindow);
-		
+
 		// day 6
 		String date6 = generateNextDate(date5);
-		
+
 		date6.trim();
-		
+
 		SortAndShow.searchAndShowTask(filename, "date " + date6, flexWindow);
-		
-		
+
 		// day 7
 		String date7 = generateNextDate(date6);
-		
+
 		date7.trim();
-		
+
 		SortAndShow.searchAndShowTask(filename, "date " + date7, flexWindow);
 
 		logger.finest(TASKS_FOR_WEEK_DISPLAYED_FRONT_MESSAGE + date1 + TASKS_FOR_WEEK_DISLAYED_BACK_MESSAGE);
@@ -141,131 +141,120 @@ public class ShowDays {
 	// generates the next date, given the day, month and year of a date
 	// assumed to be in the format dd/mm/yyyy
 	static String generateNextDate(String date) {
-				
-		assert(Checker.checkDate(date));
-				
+
+		assert (Checker.isValidDate(date));
+
 		String tempDate = date;
-				
+
 		// the three variables of the current date
 		int slashIndex1 = tempDate.indexOf("/");
 		int currentDay = Integer.valueOf(tempDate.substring(0, slashIndex1));
 		tempDate = tempDate.substring(slashIndex1 + 1).trim();
-				
-		int slashIndex2 = tempDate.indexOf("/");		
+
+		int slashIndex2 = tempDate.indexOf("/");
 		int currentMonth = Integer.valueOf(tempDate.substring(0, slashIndex2));
-				
-		int currentYear = Integer.valueOf(tempDate.substring(slashIndex2 + 1));		
-				
+
+		int currentYear = Integer.valueOf(tempDate.substring(slashIndex2 + 1));
+
 		// the three variables of the next date
 		int newDay = -1;
 		int newMonth = -1;
 		int newYear = -1;
-						
+
 		boolean isLeapYear = false;
 		boolean isLastDayOfMonth = false;
 		boolean isLastDayOfYear = false;
 
-		if(currentYear%4==0){
+		if (currentYear % 4 == 0) {
 			isLeapYear = true;
 		}
-		
-		if(currentMonth==1){
-			if(currentDay==JANUARY_DAYS){
+
+		if (currentMonth == 1) {
+			if (currentDay == JANUARY_DAYS) {
 				isLastDayOfMonth = true;
 			}
-		}
-		else if(currentMonth==2){
-			// if it is a leap year, the last day of February is 29th of February for that year
+		} else if (currentMonth == 2) {
+			// if it is a leap year, the last day of February is 29th of
+			// February for that year
 			// Note: FEBRUARY_DAYS = 28;
-			if(isLeapYear){
-				if( currentDay == (FEBRUARY_DAYS + 1) ){
+			if (isLeapYear) {
+				if (currentDay == (FEBRUARY_DAYS + 1)) {
+					isLastDayOfMonth = true;
+				}
+			} else {
+				if (currentDay == (FEBRUARY_DAYS)) {
 					isLastDayOfMonth = true;
 				}
 			}
-			else{
-				if(currentDay == (FEBRUARY_DAYS) ){
-					isLastDayOfMonth = true;
-				}
-			}
-		}
-		else if(currentMonth==3){
-			if(currentDay==MARCH_DAYS){
+		} else if (currentMonth == 3) {
+			if (currentDay == MARCH_DAYS) {
 				isLastDayOfMonth = true;
 			}
-		}
-		else if(currentMonth==4){
-			if(currentDay==APRIL_DAYS){
+		} else if (currentMonth == 4) {
+			if (currentDay == APRIL_DAYS) {
 				isLastDayOfMonth = true;
 			}
-		}
-		else if(currentMonth==5){
-			if(currentDay==MAY_DAYS){
+		} else if (currentMonth == 5) {
+			if (currentDay == MAY_DAYS) {
 				isLastDayOfMonth = true;
 			}
-		}
-		else if(currentMonth==6){
-			if(currentDay==JUNE_DAYS){
+		} else if (currentMonth == 6) {
+			if (currentDay == JUNE_DAYS) {
 				isLastDayOfMonth = true;
 			}
-		}
-		else if(currentMonth==7){
-			if(currentDay==JULY_DAYS){
+		} else if (currentMonth == 7) {
+			if (currentDay == JULY_DAYS) {
 				isLastDayOfMonth = true;
 			}
-		}
-		else if(currentMonth==8){
-			if(currentDay==AUGUST_DAYS){
+		} else if (currentMonth == 8) {
+			if (currentDay == AUGUST_DAYS) {
 				isLastDayOfMonth = true;
 			}
-		}
-		else if(currentMonth==9){
-			if(currentDay==SEPTEMBER_DAYS){
+		} else if (currentMonth == 9) {
+			if (currentDay == SEPTEMBER_DAYS) {
 				isLastDayOfMonth = true;
 			}
-		}
-		else if(currentMonth==10){
-			if(currentDay==OCTOBER_DAYS){
+		} else if (currentMonth == 10) {
+			if (currentDay == OCTOBER_DAYS) {
 				isLastDayOfMonth = true;
 			}
-		}
-		else if(currentMonth==11){
-			if(currentDay==NOVEMBER_DAYS){
+		} else if (currentMonth == 11) {
+			if (currentDay == NOVEMBER_DAYS) {
 				isLastDayOfMonth = true;
 			}
-		}
-		else if(currentMonth==12){
-			if(currentDay==DECEMBER_DAYS){
+		} else if (currentMonth == 12) {
+			if (currentDay == DECEMBER_DAYS) {
 				isLastDayOfMonth = true;
 				isLastDayOfYear = true;
 			}
 		}
-				
+
 		// Case 1: if the date given is the last day of the year, that is
 		// 31st December of that year
-		if(isLastDayOfYear){
+		if (isLastDayOfYear) {
 			newDay = 1;
 			newMonth = 1;
 			newYear = currentYear + 1;
 		}
 		// Case 2: The given date is not the last day of the year,
 		// but it is the last day of the month
-		else if((!isLastDayOfYear)&&(isLastDayOfMonth)){
+		else if ((!isLastDayOfYear) && (isLastDayOfMonth)) {
 			newDay = 1;
-			newMonth = currentMonth + 1; 
+			newMonth = currentMonth + 1;
 			newYear = currentYear;
 		}
 		// Case 3: The given date is not the last day of the year,
 		// and also not the last day of the month
-		else if((!isLastDayOfYear)&&(!isLastDayOfMonth)){
+		else if ((!isLastDayOfYear) && (!isLastDayOfMonth)) {
 			newDay = currentDay + 1;
 			newMonth = currentMonth;
 			newYear = currentYear;
 		}
 
-		logger.finest(DATE_GENERATED_MESSAGE + newDay +  "/" + newMonth + "/" + newYear);
-			
-		return newDay +  "/" + newMonth + "/" + newYear;
-			
-	}		
+		logger.finest(DATE_GENERATED_MESSAGE + newDay + "/" + newMonth + "/" + newYear);
+
+		return newDay + "/" + newMonth + "/" + newYear;
+
+	}
 
 }
