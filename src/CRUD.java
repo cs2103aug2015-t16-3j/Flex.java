@@ -202,8 +202,10 @@ public class CRUD {
 		String tempChangedTerm = new String("");
 		String previousAction = new String("");
 
-		// case of "change task name, exacttaskname, newtaskname"
+		
 		if (tempString.toLowerCase().indexOf("task name") == 0) {
+			// case of "change task name, exacttaskname, newtaskname"
+			
 			int commaWhitespaceIndex1 = tempString.indexOf(", ");
 
 			if (commaWhitespaceIndex1 < 0) {
@@ -332,24 +334,43 @@ public class CRUD {
 
 			return;
 		} else if (tempString.toLowerCase().indexOf("change date") == 0) {
+			// case of "change date, exacttaskname, newdate"
 
 		} else if (tempString.toLowerCase().indexOf("change start") == 0) {
+			// case of "change start, exacttaskname, newstart"
 
 		} else if (tempString.toLowerCase().indexOf("change end") == 0) {
+			// case of "change end, exacttaskname, newend"
 
 		} else if (tempString.toLowerCase().indexOf("change priority") == 0) {
+			// case of "change priority, exacttaskname, priority"
 
 		} else if (tempString.toLowerCase().indexOf("change event to floating") == 0) {
+			// case of "change event to floating, exacttaskname"
 
 		} else if (tempString.toLowerCase().indexOf("change deadline to floating") == 0) {
-
+			// case of "change deadline to floating, exacttaskname"
+			
 		} else if (tempString.toLowerCase().indexOf("change deadline to event") == 0) {
-
+			// case of "change deadline to event, exacttaskname, newstart, newpriority)
+			
 		} else if (tempString.toLowerCase().indexOf("change floating to deadline") == 0) {
+			// case of "change floating to deadline, exacttaskname, date, newend"
 
 		} else if (tempString.toLowerCase().indexOf("change floating to event") == 0) {
+			// case of "change floating to event, exacttaskname, date, start, end, priority"
 
-		}
+		} else if (tempString.toLowerCase().indexOf("change status") == 0) {
+			// this is for marking tasks as done, or not done
+			// done tasks will have " [done]", without the quotation marks
+			// at the back of a Task's String form in the file
+			// e.g.
+			// 1) "change status, exacttaskname, done"
+			// OR
+			// 2) "change status, exacttaskname, not done"
+			
+
+		} 
 
 		// if no changes have been made
 		if (!atLeastOneTaskChanged){
