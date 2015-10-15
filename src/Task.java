@@ -103,9 +103,51 @@ public class Task {
 		
 			this.taskVariables[5] = remainingString.substring(0, commaWhitespaceIndex6).trim();
 			remainingString = remainingString.substring(commaWhitespaceIndex6 + 2).trim();
-			this.taskVariables[6] = "floating";		
-		
-			this.comparisonValue = FLOATING_COMPARISON_VALUE;
+			this.taskVariables[6] = "floating";					
+			
+			if(this.taskVariables[6].equalsIgnoreCase("floating")){
+				if(this.taskVariables[0].equalsIgnoreCase("undefined")){
+					this.comparisonValue = FLOATING_COMPARISON_VALUE;
+				}
+				else{
+					// e.g. 7/9/2015
+					String tempDateString = this.taskVariables[0];
+				
+					int slashIndex1 = tempDateString.indexOf("/");
+					int day = Integer.valueOf(tempDateString.substring(0, slashIndex1).trim());
+				
+					tempDateString = tempDateString.substring(slashIndex1 + 1);
+				
+					// e.g. 31/12/2014 with starting time 0859
+					int slashIndex2 = tempDateString.indexOf("/");
+				
+					// the month December (the 12th month of each year)
+					int month = Integer.valueOf(tempDateString.substring(0, slashIndex2).trim());
+				
+					// The year 2014
+					int year = Integer.valueOf(tempDateString.substring(slashIndex2 + 1).trim());
+						
+					// used for sorting all tasks by date and starting time (taking year 0, 0000 hours as reference)
+					// (2014 - 1) / 4 = 2013 / 4 = 503 (not considering the remainder)
+					int numberOfPastLeapYears = (year - 1) / 4;
+					// (2014 - 1) - 503 = 2013 - 503 = 1500
+					int numberOfPastNonLeapyears = (year - 1) - numberOfPastLeapYears;
+				
+					int leapYearFebruaryDay = 0;
+				
+					// 2014%4 = 1
+					if((year%4==0) && ((month -1)>=2)){
+						leapYearFebruaryDay = 1;
+					}
+				
+					int numberOfAccumulatedPastDaysInCurrentYear = findNumberOfAccumulatedPastDaysInCurrentYear(month - 1, day - 1);
+				
+					// note the "-1 *"
+					// and the omission of anything to do with starting time
+					int tempValue = -1 * (numberOfPastLeapYears * LEAP_YEAR_DAYS * DAY_HOURS * HOUR_MINUTES + numberOfPastNonLeapyears * YEAR_DAYS * DAY_HOURS * HOUR_MINUTES + (numberOfAccumulatedPastDaysInCurrentYear + leapYearFebruaryDay) * DAY_HOURS * HOUR_MINUTES);		
+					this.setComparisonValue(tempValue);
+				}
+			}			
 		}
 		else if(Checker.checkDeadlineTaskOutput(taskInformation)){
 			// extracts the date
@@ -214,7 +256,49 @@ public class Task {
 			// category set as "floating"
 			this.taskVariables[6] = "floating";
 			
-			this.comparisonValue = FLOATING_COMPARISON_VALUE;
+			if(this.taskVariables[6].equalsIgnoreCase("floating")){
+				if(this.taskVariables[0].equalsIgnoreCase("undefined")){
+					this.comparisonValue = FLOATING_COMPARISON_VALUE;
+				}
+				else{
+					// e.g. 7/9/2015
+					String tempDateString = this.taskVariables[0];
+				
+					int slashIndex1 = tempDateString.indexOf("/");
+					int day = Integer.valueOf(tempDateString.substring(0, slashIndex1).trim());
+				
+					tempDateString = tempDateString.substring(slashIndex1 + 1);
+				
+					// e.g. 31/12/2014 with starting time 0859
+					int slashIndex2 = tempDateString.indexOf("/");
+				
+					// the month December (the 12th month of each year)
+					int month = Integer.valueOf(tempDateString.substring(0, slashIndex2).trim());
+				
+					// The year 2014
+					int year = Integer.valueOf(tempDateString.substring(slashIndex2 + 1).trim());
+						
+					// used for sorting all tasks by date and starting time (taking year 0, 0000 hours as reference)
+					// (2014 - 1) / 4 = 2013 / 4 = 503 (not considering the remainder)
+					int numberOfPastLeapYears = (year - 1) / 4;
+					// (2014 - 1) - 503 = 2013 - 503 = 1500
+					int numberOfPastNonLeapyears = (year - 1) - numberOfPastLeapYears;
+				
+					int leapYearFebruaryDay = 0;
+				
+					// 2014%4 = 1
+					if((year%4==0) && ((month -1)>=2)){
+						leapYearFebruaryDay = 1;
+					}
+				
+					int numberOfAccumulatedPastDaysInCurrentYear = findNumberOfAccumulatedPastDaysInCurrentYear(month - 1, day - 1);
+				
+					// note the "-1 *"
+					// and the omission of anything to do with starting time
+					int tempValue = -1 * (numberOfPastLeapYears * LEAP_YEAR_DAYS * DAY_HOURS * HOUR_MINUTES + numberOfPastNonLeapyears * YEAR_DAYS * DAY_HOURS * HOUR_MINUTES + (numberOfAccumulatedPastDaysInCurrentYear + leapYearFebruaryDay) * DAY_HOURS * HOUR_MINUTES);		
+					this.setComparisonValue(tempValue);
+				}
+			}
 
 		}
 		// the input of a deadline task is
@@ -459,7 +543,47 @@ public class Task {
 	
 	public void recalculateComparisonValue(){
 		if(this.taskVariables[6].equalsIgnoreCase("floating")){
-			this.comparisonValue = FLOATING_COMPARISON_VALUE;
+			if(this.taskVariables[0].equalsIgnoreCase("undefined")){
+				this.comparisonValue = FLOATING_COMPARISON_VALUE;
+			}
+			else{
+				// e.g. 7/9/2015
+				String tempDateString = this.taskVariables[0];
+			
+				int slashIndex1 = tempDateString.indexOf("/");
+				int day = Integer.valueOf(tempDateString.substring(0, slashIndex1).trim());
+			
+				tempDateString = tempDateString.substring(slashIndex1 + 1);
+			
+				// e.g. 31/12/2014 with starting time 0859
+				int slashIndex2 = tempDateString.indexOf("/");
+			
+				// the month December (the 12th month of each year)
+				int month = Integer.valueOf(tempDateString.substring(0, slashIndex2).trim());
+			
+				// The year 2014
+				int year = Integer.valueOf(tempDateString.substring(slashIndex2 + 1).trim());
+					
+				// used for sorting all tasks by date and starting time (taking year 0, 0000 hours as reference)
+				// (2014 - 1) / 4 = 2013 / 4 = 503 (not considering the remainder)
+				int numberOfPastLeapYears = (year - 1) / 4;
+				// (2014 - 1) - 503 = 2013 - 503 = 1500
+				int numberOfPastNonLeapyears = (year - 1) - numberOfPastLeapYears;
+			
+				int leapYearFebruaryDay = 0;
+			
+				// 2014%4 = 1
+				if((year%4==0) && ((month -1)>=2)){
+					leapYearFebruaryDay = 1;
+				}
+			
+				int numberOfAccumulatedPastDaysInCurrentYear = findNumberOfAccumulatedPastDaysInCurrentYear(month - 1, day - 1);
+			
+				// note the "-1 *"
+				// and the omission of anything to do with starting time
+				int tempValue = -1 * (numberOfPastLeapYears * LEAP_YEAR_DAYS * DAY_HOURS * HOUR_MINUTES + numberOfPastNonLeapyears * YEAR_DAYS * DAY_HOURS * HOUR_MINUTES + (numberOfAccumulatedPastDaysInCurrentYear + leapYearFebruaryDay) * DAY_HOURS * HOUR_MINUTES);		
+				this.setComparisonValue(tempValue);
+			}
 		}
 		else if((!this.taskVariables[6].equalsIgnoreCase("floating"))&&(!this.taskVariables[6].equalsIgnoreCase("deadline"))){
 			// e.g. 7/9/2015
