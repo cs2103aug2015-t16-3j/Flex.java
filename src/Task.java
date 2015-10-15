@@ -55,6 +55,8 @@ public class Task {
 	private static final int DECEMBER_ACCUMULATED_DAYS = YEAR_DAYS;
 	
 	private static final int FLOATING_COMPARISON_VALUE = -1000;
+	private static final int SET_OFF_VALUE_FOR_FLOATING_TASKS_WITH_DATES = 2129611680;
+	// 2129611680 is the positive comparison value of 1/1/4100
 	
 	// default constructor required by Flex.java
 	public Task() {
@@ -142,9 +144,9 @@ public class Task {
 				
 					int numberOfAccumulatedPastDaysInCurrentYear = findNumberOfAccumulatedPastDaysInCurrentYear(month - 1, day - 1);
 				
-					// note the "-1 *"
+					
 					// and the omission of anything to do with starting time
-					int tempValue = -1 * (numberOfPastLeapYears * LEAP_YEAR_DAYS * DAY_HOURS * HOUR_MINUTES + numberOfPastNonLeapyears * YEAR_DAYS * DAY_HOURS * HOUR_MINUTES + (numberOfAccumulatedPastDaysInCurrentYear + leapYearFebruaryDay) * DAY_HOURS * HOUR_MINUTES);		
+					int tempValue = -SET_OFF_VALUE_FOR_FLOATING_TASKS_WITH_DATES + (numberOfPastLeapYears * LEAP_YEAR_DAYS * DAY_HOURS * HOUR_MINUTES + numberOfPastNonLeapyears * YEAR_DAYS * DAY_HOURS * HOUR_MINUTES + (numberOfAccumulatedPastDaysInCurrentYear + leapYearFebruaryDay) * DAY_HOURS * HOUR_MINUTES);		
 					this.setComparisonValue(tempValue);
 				}
 			}			
@@ -295,7 +297,7 @@ public class Task {
 				
 					// note the "-1 *"
 					// and the omission of anything to do with starting time
-					int tempValue = -1 * (numberOfPastLeapYears * LEAP_YEAR_DAYS * DAY_HOURS * HOUR_MINUTES + numberOfPastNonLeapyears * YEAR_DAYS * DAY_HOURS * HOUR_MINUTES + (numberOfAccumulatedPastDaysInCurrentYear + leapYearFebruaryDay) * DAY_HOURS * HOUR_MINUTES);		
+					int tempValue = -SET_OFF_VALUE_FOR_FLOATING_TASKS_WITH_DATES+ (numberOfPastLeapYears * LEAP_YEAR_DAYS * DAY_HOURS * HOUR_MINUTES + numberOfPastNonLeapyears * YEAR_DAYS * DAY_HOURS * HOUR_MINUTES + (numberOfAccumulatedPastDaysInCurrentYear + leapYearFebruaryDay) * DAY_HOURS * HOUR_MINUTES);		
 					this.setComparisonValue(tempValue);
 				}
 			}
@@ -493,7 +495,9 @@ public class Task {
 			int numberOfPastMinutes = startingTimeMinutes;
 		
 			// e.g. this.comparisonValue = 503 * 366 + 1500 * 365 + (NOVEMBER_ACCUMULATED_DAYS + 0) * 24 * 60 + 8 * 60 + 59;
+
 			this.comparisonValue = numberOfPastLeapYears * LEAP_YEAR_DAYS * DAY_HOURS * HOUR_MINUTES + numberOfPastNonLeapyears * YEAR_DAYS * DAY_HOURS * HOUR_MINUTES + (numberOfAccumulatedPastDaysInCurrentYear + leapYearFebruaryDay) * DAY_HOURS * HOUR_MINUTES + numberOfPastHours * HOUR_MINUTES + numberOfPastMinutes;
+			
 		}
 	}
 	
