@@ -30,11 +30,12 @@ public class FlexTest2 {
 		// event task output
 		assertTrue(Checker.isEventTaskOutput("task is about, 0000-0001 on 1/1/1, priority prior"));
 		
-		assertTrue(!Checker.isEventTaskOutput("task is about, 0000-0001 on 0/1/1, priority prior"));
+		// this is a case of invalid partition for the output (GUI Display) String of an event task
+		assertTrue(!Checker.isEventTaskOutput("task is about, 0000 0001 on 0/1/1, priority prior"));
 		
 		// done event task
 		assertTrue(Checker.isDoneEventTask("task, 0000-0001 on 22/10/1110, priority [done]"));
 		
-		assertTrue(!Checker.isDoneEventTask("t, 0000-0001, 1/1/1, priority"));
+		assertTrue(!Checker.isDoneEventTask("t, 0000-0001 1/1/1, priority"));
 	}
 }

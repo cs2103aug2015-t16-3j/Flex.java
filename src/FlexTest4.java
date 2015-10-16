@@ -6,7 +6,7 @@ import org.junit.Test;
 // and the validity of an occurence task
 
 // format of a floating task
-// NOTE: a floating task should not have "; " separators and ", " separators
+// NOTE: a floating task should not have ";" 
 // input
 // add <taskname>
 
@@ -34,18 +34,21 @@ public class FlexTest4 {
 		// floating task input
 		assertTrue(Checker.isFloatingTaskInput("task"));
 		
-		assertTrue(Checker.isFloatingTaskInput("task test"));
-		
-		assertTrue(!Checker.isFloatingTaskInput(", task"));
+		assertTrue(Checker.isFloatingTaskInput("task, test"));
 		
 		assertTrue(!Checker.isFloatingTaskInput("; task test"));
 		
+		assertTrue(!Checker.isFloatingTaskInput(""));
+		
+		assertTrue(!Checker.isFloatingTaskInput(";task test"));
+		
 		// floating task output
-		assertTrue(Checker.isFloatingTaskOutput("task test test1"));		
+		assertTrue(Checker.isFloatingTaskOutput("task test test1"));	
+		
+		assertTrue(Checker.isFloatingTaskOutput("task test test1, a"));
 		
 		assertTrue(!Checker.isFloatingTaskOutput("task test test1; a"));
-		
-		assertTrue(!Checker.isFloatingTaskOutput("task test test1, a"));
+	
 		
 		// done floating task
 		assertTrue(!Checker.isDoneFloatingTask("task [don], a"));
@@ -65,9 +68,9 @@ public class FlexTest4 {
 		assertTrue(!Checker.isRecurringTaskOutput("task name, 0002-0003 evry tuesday, priority"));
 				
 		// done recurring task
-	    assertTrue(Checker.isRecurringDoneTask("tasker; 0001-2359 every wednesday; priority [done]"));		
+	    assertTrue(Checker.isDoneRecurringTask("tasker, 0001-2359 every wednesday, priority [done]"));		
 
-	    assertTrue(!Checker.isRecurringDoneTask("tasker; 0001-2359 every wednesday; priority"));		
+	    assertTrue(!Checker.isDoneRecurringTask("tasker; 0001-2359 every wednesday; priority"));		
 
 	}
 	

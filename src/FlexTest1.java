@@ -14,6 +14,8 @@ public class FlexTest1{
 		
 		assertTrue(Checker.isValidDate("31/12/2012"));
 		
+		// this is the sub-boundary case of a date (in a month) in the valid date parition, 
+		// provided that it is a leap year.
 		assertTrue(Checker.isValidDate("29/2/2012"));
 		
 		assertTrue(Checker.isValidDate("28/2/2012"));
