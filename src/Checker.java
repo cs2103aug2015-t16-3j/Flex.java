@@ -302,11 +302,25 @@ public class Checker {
 			return false;
 		}
 		
+		
 		// IMPORTANT: make sure that this task is not marked as done
-		int doneStringIndex = tempString.indexOf(DONE_STRING);
-		if(doneStringIndex >= 0){
+		int doneStringIndex1 = tempString.indexOf(DONE_STRING);
+		if(doneStringIndex1 >= 0){
 			return false;
 		}
+		
+		// IMPORTANT: make sure that this task is not marked as done
+		int doneStringIndex2 = tempString.indexOf("[done");
+		if(doneStringIndex2 >= 0){
+			return false;
+		}
+		
+		// IMPORTANT: make sure that this task is not marked as done
+		int doneStringIndex3 = tempString.indexOf("done]");
+		if(doneStringIndex3 >= 0){
+			return false;
+		}
+		
 		
 		int semicolonIndex = tempString.indexOf(";");
 		if (semicolonIndex >= 0) {
@@ -357,9 +371,22 @@ public class Checker {
 			return false;
 		}
 		
+		
 		// IMPORTANT: make sure that this task is not marked as done
-		int doneStringIndex = tempString.indexOf(DONE_STRING);
-		if(doneStringIndex >= 0){
+		int doneStringIndex1 = tempString.indexOf(DONE_STRING);
+		if(doneStringIndex1 >= 0){
+			return false;
+		}
+		
+		// IMPORTANT: make sure that this task is not marked as done
+		int doneStringIndex2 = tempString.indexOf("[done");
+		if(doneStringIndex2 >= 0){
+			return false;
+		}
+		
+		// IMPORTANT: make sure that this task is not marked as done
+		int doneStringIndex3 = tempString.indexOf("done]");
+		if(doneStringIndex3 >= 0){
 			return false;
 		}
 		
@@ -410,8 +437,20 @@ public class Checker {
 		}
 		
 		// IMPORTANT: make sure that this task is not marked as done
-		int doneStringIndex = tempString.indexOf(DONE_STRING);
-		if(doneStringIndex >= 0){
+		int doneStringIndex1 = tempString.indexOf(DONE_STRING);
+		if(doneStringIndex1 >= 0){
+			return false;
+		}
+		
+		// IMPORTANT: make sure that this task is not marked as done
+		int doneStringIndex2 = tempString.indexOf("[done");
+		if(doneStringIndex2 >= 0){
+			return false;
+		}
+		
+		// IMPORTANT: make sure that this task is not marked as done
+		int doneStringIndex3 = tempString.indexOf("done]");
+		if(doneStringIndex3 >= 0){
 			return false;
 		}
 		
@@ -518,11 +557,25 @@ public class Checker {
 			return false;
 		}
 		
+		
 		// IMPORTANT: make sure that this task is not marked as done
-		int doneStringIndex = tempString.indexOf(DONE_STRING);
-		if(doneStringIndex >= 0){
+		int doneStringIndex1 = tempString.indexOf(DONE_STRING);
+		if(doneStringIndex1 >= 0){
 			return false;
 		}
+		
+		// IMPORTANT: make sure that this task is not marked as done
+		int doneStringIndex2 = tempString.indexOf("[done");
+		if(doneStringIndex2 >= 0){
+			return false;
+		}
+		
+		// IMPORTANT: make sure that this task is not marked as done
+		int doneStringIndex3 = tempString.indexOf("done]");
+		if(doneStringIndex3 >= 0){
+			return false;
+		}
+		
 		
 		int commaWhitespaceIndex1 = tempString.indexOf(", ");
 		
@@ -628,9 +681,22 @@ public class Checker {
 			return false;
 		}
 		
+		
 		// IMPORTANT: make sure that this task is not marked as done
-		int doneStringIndex = tempString.indexOf(DONE_STRING);
-		if(doneStringIndex >= 0){
+		int doneStringIndex1 = tempString.indexOf(DONE_STRING);
+		if(doneStringIndex1 >= 0){
+			return false;
+		}
+		
+		// IMPORTANT: make sure that this task is not marked as done
+		int doneStringIndex2 = tempString.indexOf("[done");
+		if(doneStringIndex2 >= 0){
+			return false;
+		}
+		
+		// IMPORTANT: make sure that this task is not marked as done
+		int doneStringIndex3 = tempString.indexOf("done]");
+		if(doneStringIndex3 >= 0){
 			return false;
 		}
 		
@@ -767,9 +833,22 @@ public class Checker {
 			return false;
 		}
 		
+		
 		// IMPORTANT: make sure that this task is not marked as done
-		int doneStringIndex = tempString.indexOf(DONE_STRING);
-		if(doneStringIndex >= 0){
+		int doneStringIndex1 = tempString.indexOf(DONE_STRING);
+		if(doneStringIndex1 >= 0){
+			return false;
+		}
+		
+		// IMPORTANT: make sure that this task is not marked as done
+		int doneStringIndex2 = tempString.indexOf("[done");
+		if(doneStringIndex2 >= 0){
+			return false;
+		}
+		
+		// IMPORTANT: make sure that this task is not marked as done
+		int doneStringIndex3 = tempString.indexOf("done]");
+		if(doneStringIndex3 >= 0){
 			return false;
 		}
 		
@@ -907,10 +986,23 @@ public class Checker {
 		}
 		
 		// IMPORTANT: make sure that this task is not marked as done
-		int doneStringIndex = tempString.indexOf(DONE_STRING);
-		if(doneStringIndex >= 0){
+		int doneStringIndex1 = tempString.indexOf(DONE_STRING);
+		if(doneStringIndex1 >= 0){
 			return false;
 		}
+		
+		// IMPORTANT: make sure that this task is not marked as done
+		int doneStringIndex2 = tempString.indexOf("[done");
+		if(doneStringIndex2 >= 0){
+			return false;
+		}
+		
+		// IMPORTANT: make sure that this task is not marked as done
+		int doneStringIndex3 = tempString.indexOf("done]");
+		if(doneStringIndex3 >= 0){
+			return false;
+		}
+		
 		
 		int semicolonWhitespaceIndex1 = tempString.indexOf("; ");
 		
@@ -1042,10 +1134,22 @@ public class Checker {
 		if(tempString.length()==0){
 			return false;
 		}
-
+		
 		// IMPORTANT: make sure that this task is not marked as done
-		int doneStringIndex = tempString.indexOf(DONE_STRING);
-		if(doneStringIndex >= 0){
+		int doneStringIndex1 = tempString.indexOf(DONE_STRING);
+		if(doneStringIndex1 >= 0){
+			return false;
+		}
+		
+		// IMPORTANT: make sure that this task is not marked as done
+		int doneStringIndex2 = tempString.indexOf("[done");
+		if(doneStringIndex2 >= 0){
+			return false;
+		}
+		
+		// IMPORTANT: make sure that this task is not marked as done
+		int doneStringIndex3 = tempString.indexOf("done]");
+		if(doneStringIndex3 >= 0){
 			return false;
 		}
 		
