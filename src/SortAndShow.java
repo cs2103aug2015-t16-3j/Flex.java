@@ -100,10 +100,10 @@ public class SortAndShow {
 
 			for (int i = 0; i < allTasksList.size(); i++) {
 				// only a deadline task (done or not done) or an event task (done or not done) will have a date
-				if (Checker.isDeadlineTask(allTasksList.get(i).getScheduleString())
-						|| Checker.isEventTask(allTasksList.get(i).getScheduleString())
-						|| Checker.isDoneDeadlineTask(allTasksList.get(i).getScheduleString())
-						|| Checker.isDoneEventTask(allTasksList.get(i).getScheduleString())) {
+				if (Checker.isDeadlineTaskInput(allTasksList.get(i).getScheduleString())
+						|| Checker.isEventTaskInput(allTasksList.get(i).getScheduleString())
+						|| Checker.isDoneDeadlineTaskInput(allTasksList.get(i).getScheduleString())
+						|| Checker.isDoneEventTaskInput(allTasksList.get(i).getScheduleString())) {
 					if (allTasksList.get(i).getDate().equalsIgnoreCase(searchTerm)) {
 						deadlineOrEventTasksList.add(allTasksList.get(i));
 					}
@@ -127,8 +127,8 @@ public class SortAndShow {
 
 			for (int i = 0; i < allTasksList.size(); i++) {
 				// only an event (done or not done) task will have a starting time
-				if (Checker.isEventTask(allTasksList.get(i).getScheduleString())
-						|| Checker.isDoneEventTask(allTasksList.get(i).getScheduleString())) {
+				if (Checker.isEventTaskInput(allTasksList.get(i).getScheduleString())
+						|| Checker.isDoneEventTaskInput(allTasksList.get(i).getScheduleString())) {
 					if (allTasksList.get(i).getStart().equalsIgnoreCase(searchTerm)) {
 						deadlineOrEventTasksList.add(allTasksList.get(i));
 					}
@@ -153,10 +153,10 @@ public class SortAndShow {
 			for (int i = 0; i < allTasksList.size(); i++) {
 				// only a deadline task (done or not done) or an event task (done or not done)
 				// will have an ending time
-				if (Checker.isDeadlineTask(allTasksList.get(i).getScheduleString())
-						|| Checker.isEventTask(allTasksList.get(i).getScheduleString())
-						|| Checker.isDoneDeadlineTask(allTasksList.get(i).getScheduleString())
-						|| Checker.isDoneEventTask(allTasksList.get(i).getScheduleString())) {
+				if (Checker.isDeadlineTaskInput(allTasksList.get(i).getScheduleString())
+						|| Checker.isEventTaskInput(allTasksList.get(i).getScheduleString())
+						|| Checker.isDoneDeadlineTaskInput(allTasksList.get(i).getScheduleString())
+						|| Checker.isDoneEventTaskInput(allTasksList.get(i).getScheduleString())) {
 					if (allTasksList.get(i).getEnd().equalsIgnoreCase(searchTerm)) {
 						deadlineOrEventTasksList.add(allTasksList.get(i));
 					}
@@ -165,8 +165,8 @@ public class SortAndShow {
 		} else if (searchVariableType.equalsIgnoreCase("priority")) {
 			for (int i = 0; i < allTasksList.size(); i++) {
 				// only an event task (done or not done) will have a priority (level)
-				if (Checker.isEventTask(allTasksList.get(i).getScheduleString())
-						|| Checker.isDoneEventTask(allTasksList.get(i).getScheduleString())) {
+				if (Checker.isEventTaskInput(allTasksList.get(i).getScheduleString())
+						|| Checker.isDoneEventTaskInput(allTasksList.get(i).getScheduleString())) {
 					if (allTasksList.get(i).getPriority().toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0) {
 						deadlineOrEventTasksList.add(allTasksList.get(i));
 					}
@@ -249,10 +249,10 @@ public class SortAndShow {
 		do {
 			currentLine = reader.readLine();
 			if (currentLine != null) {
-				if (Checker.isDeadlineTask(currentLine) || Checker.isDoneDeadlineTask(currentLine)
-						|| Checker.isEventTask(currentLine) || Checker.isDoneEventTask(currentLine)) {
+				if (Checker.isDeadlineTaskInput(currentLine) || Checker.isDoneDeadlineTaskInput(currentLine)
+						|| Checker.isEventTaskInput(currentLine) || Checker.isDoneEventTaskInput(currentLine)) {
 					deadlineOrEventTasksList.add(new Task(currentLine));
-				} else if (Checker.isFloatingTask(currentLine) || Checker.isDoneFloatingTask(currentLine)) {
+				} else if (Checker.isFloatingTaskInput(currentLine) || Checker.isDoneFloatingTaskInput(currentLine)) {
 					floatingTasksList.add(new Task(currentLine));
 				}
 			}
@@ -345,7 +345,7 @@ public class SortAndShow {
 
 		
 		for(int j=0; j<allTasksList.size(); j++){
-			if(Checker.isFloatingTask(allTasksList.get(j).getScheduleString())||Checker.isDoneFloatingTask(allTasksList.get(j).getScheduleString())){
+			if(Checker.isFloatingTaskInput(allTasksList.get(j).getScheduleString())||Checker.isDoneFloatingTaskInput(allTasksList.get(j).getScheduleString())){
 				floatingTasksList.add(allTasksList.get(j));
 			}
 		}
@@ -394,7 +394,7 @@ public class SortAndShow {
 		do {
 			currentLine = reader.readLine();
 			if (currentLine != null) {
-				if (Checker.isEventTask(currentLine)) {
+				if (Checker.isEventTaskInput(currentLine)) {
 					showEventTasks.add(new Task(currentLine));
 				}
 			}
@@ -462,7 +462,7 @@ public class SortAndShow {
 		do {
 			currentLine = reader.readLine();
 			if (currentLine != null) {
-				if (Checker.isDeadlineTask(currentLine)) {
+				if (Checker.isDeadlineTaskInput(currentLine)) {
 					deadlineTasksList.add(new Task(currentLine));
 				}
 			}
@@ -531,7 +531,7 @@ public class SortAndShow {
 		do {
 			currentLine = reader.readLine();
 			if (currentLine != null) {
-				if (Checker.isFloatingTask(currentLine)) {
+				if (Checker.isFloatingTaskInput(currentLine)) {
 					floatingTasksList.add(new Task(currentLine));
 				}
 			}
@@ -569,9 +569,9 @@ public class SortAndShow {
 		do {
 			currentLine = reader.readLine();
 			if (currentLine != null) {
-				if (Checker.isDoneFloatingTask(currentLine)) {
+				if (Checker.isDoneFloatingTaskInput(currentLine)) {
 					doneFloatingTasksList.add(new Task(currentLine));
-				} else if (Checker.isDoneDeadlineTask(currentLine) || Checker.isDoneEventTask(currentLine)) {
+				} else if (Checker.isDoneDeadlineTaskInput(currentLine) || Checker.isDoneEventTaskInput(currentLine)) {
 					doneDeadlineOrEventTasksList.add(new Task(currentLine));
 				}
 			}
@@ -646,9 +646,9 @@ public class SortAndShow {
 		do {
 			currentLine = reader.readLine();
 			if (currentLine != null) {
-				if (Checker.isFloatingTask(currentLine)) {
+				if (Checker.isFloatingTaskInput(currentLine)) {
 					floatingTasksList.add(new Task(currentLine));
-				} else if (Checker.isDeadlineTask(currentLine) || Checker.isEventTask(currentLine)) {
+				} else if (Checker.isDeadlineTaskInput(currentLine) || Checker.isEventTaskInput(currentLine)) {
 					deadlineOrEventTasksList.add(new Task(currentLine));
 				}
 			}
