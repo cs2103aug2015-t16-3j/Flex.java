@@ -120,7 +120,8 @@ public class CRUD {
 		}
 
 		SortAndShow.sortAllTasksByDateAndStartingTime(deadlineOrEventTasksList);
-
+		SortAndShow.sortAllTasksByDateAndStartingTime(floatingTasksList);
+		
 		String tempDate = new String("");
 
 		if (!deadlineOrEventTasksList.isEmpty()) {
@@ -282,7 +283,8 @@ public class CRUD {
 
 					tempChangedTerm = allTasksList.get(i).getTaskName();
 					allTasksList.get(i).setTaskName(newTaskNameString);
-
+					allTasksList.get(i).calculateComparisonValue(allTasksList.get(i).getScheduleString());
+					
 					tempTask = allTasksList.get(i);
 					previousAction = "change task name";
 
@@ -293,46 +295,6 @@ public class CRUD {
 					atLeastOneTaskChanged = true;
 				}
 			}
-			// if no changes have been made
-			if (!atLeastOneTaskChanged) {
-				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-				flexWindow.getTextArea().append("\n");
-
-				logger.finest(INVALID_INPUT_MESSAGE);
-				System.out.println(INVALID_INPUT_MESSAGE);
-				System.out.println();
-
-				flexWindow.getTextArea()
-						.append(VALID_INPUT_WITHOUT_MATCHING_TASKS_TO_HAVE_INFORMATION_CHANGED_MESSAGE + "\n");
-				flexWindow.getTextArea().append("\n");
-
-				logger.finest(VALID_INPUT_WITHOUT_MATCHING_TASKS_TO_HAVE_INFORMATION_CHANGED_MESSAGE);
-				System.out.println(VALID_INPUT_WITHOUT_MATCHING_TASKS_TO_HAVE_INFORMATION_CHANGED_MESSAGE);
-				System.out.println();
-
-				return;
-			}
-
-			// sort all tasks by date and starting time
-			SortAndShow.sortAllTasksByDateAndStartingTime(allTasksList);
-
-			// overwrites to the file, line by line
-			BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
-
-			for (int j = 0; j < allTasksList.size(); j++) {
-				writer.write(allTasksList.get(j).getScheduleString());
-				writer.newLine();
-				flexWindow.getTextArea().append(allTasksList.get(j).getDisplayString() + "\n");
-				flexWindow.getTextArea().append("\n");
-			}
-
-			writer.close();
-
-			logger.finest(CHANGED_MESSAGE);
-			System.out.println(CHANGED_MESSAGE);
-			System.out.println();
-
-			return;
 		} else if (tempString.toLowerCase().indexOf("change date") == 0) {
 			// case of "change date, exacttaskname, newdate"
 
@@ -408,8 +370,6 @@ public class CRUD {
 		logger.finest(CHANGED_MESSAGE);
 		System.out.println(CHANGED_MESSAGE);
 		System.out.println();
-		
-		SortAndShow.readAndDisplayAll(filename, flexWindow);
 
 		return;
 
@@ -571,6 +531,7 @@ public class CRUD {
 		}
 
 		SortAndShow.sortAllTasksByDateAndStartingTime(deadlineOrEventTasksList);
+		SortAndShow.sortAllTasksByDateAndStartingTime(floatingTasksList);
 
 		String tempDate = new String("");
 

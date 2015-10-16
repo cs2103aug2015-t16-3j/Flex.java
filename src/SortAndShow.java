@@ -263,6 +263,7 @@ public class SortAndShow {
 		}
 
 		SortAndShow.sortAllTasksByDateAndStartingTime(deadlineOrEventTasksList);
+		SortAndShow.sortAllTasksByDateAndStartingTime(floatingTasksList);
 
 		String tempDate = new String("");
 
@@ -318,24 +319,61 @@ public class SortAndShow {
 				
 		// sort (done or not done) deadline tasks and event tasks by comparison value
 		int size1 = allTasksList.size();
-		int i, start, min_index;
+		int i, start1, min_index1 = 0;
 
-		for (start = 0; start < size1 - 1; start++) {
-			min_index = start;
+		for (start1 = 0; start1 < size1 - 1; start1++) {
+			min_index1 = start1;
 
-			for (i = start + 1; i < size1; i++) {
-				if (allTasksList.get(i).getComparisonValue() < allTasksList.get(min_index).getComparisonValue()) {
-					min_index = i;
+			for (i = start1 + 1; i < size1; i++) {
+				if (allTasksList.get(i).getComparisonValue() < allTasksList.get(min_index1).getComparisonValue()) {
+					min_index1 = i;
 				}
 			}
 
-			Task temp1 = allTasksList.get(start);
-			Task temp2 = allTasksList.get(min_index);
-			allTasksList.set(start, temp2);
-			allTasksList.set(min_index, temp1);
+			Task temp1 = allTasksList.get(start1);
+			Task temp2 = allTasksList.get(min_index1);
+			allTasksList.set(start1, temp2);
+			allTasksList.set(min_index1, temp1);
 		}
 		
+		ArrayList<Task> floatingTasksList = new ArrayList<Task>();
+
 		
+		for(int j=0; j<allTasksList.size(); j++){
+			if(Checker.isFloatingTask(allTasksList.get(j).getScheduleString())||Checker.isDoneFloatingTask(allTasksList.get(j).getScheduleString())){
+				floatingTasksList.add(allTasksList.get(j));
+			}
+		}
+
+		int numberOfNonFloatingTasks = allTasksList.size() - floatingTasksList.size();
+		
+		int size2 = floatingTasksList.size();
+		int w, start2, min_index2 = 0;
+
+		for (start2 = 0; start2 < size2 - 1; start2++) {
+			min_index2 = start2;
+
+			for (w = start2 + 1; w < size2; w++) {
+				if (floatingTasksList.get(w).getScheduleString().compareToIgnoreCase(floatingTasksList.get(min_index2).getScheduleString()) < 0) {
+					min_index2 = w;
+				}
+			}
+
+			Task temp3 = floatingTasksList.get(start2);
+			Task temp4 = floatingTasksList.get(min_index2);
+			floatingTasksList.set(start2, temp4);
+			floatingTasksList.set(min_index2, temp3);
+		}
+		
+		// if there is at least 1 floatingTaskList element,
+		// if there are 2 for numberOfNonFloatingTasks
+		// and there are 3 floatingTasksList elements
+		// then the "for" loop below sets element index 2, 3 and 4 (2 to 4)
+		if(!floatingTasksList.isEmpty()){
+			for(int x=0; x < floatingTasksList.size(); x++){
+				allTasksList.set(numberOfNonFloatingTasks + x, floatingTasksList.get(x));
+			}
+		}
 	}
 
 	// shows event tasks in the schedule
