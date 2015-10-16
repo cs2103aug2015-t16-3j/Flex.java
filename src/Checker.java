@@ -311,6 +311,34 @@ public class Checker {
 
 	}
 
+	// done floating task (user input command or file storage format)
+	static boolean isDoneFloatingTaskInput(String string) {
+		String tempString = new String("");
+		tempString = string.trim();
+		
+		if(tempString.length()==0){
+			return false;
+		}
+		
+		int doneStringIndex = tempString.indexOf(DONE_STRING);
+		
+		if(doneStringIndex < 0){
+			return false;
+		}
+		
+		tempString = tempString.substring(0, doneStringIndex).trim();
+		
+		if(tempString.length()==0){
+			return false;
+		}
+		
+		if(!Checker.isFloatingTaskInput(tempString)){
+			return false;
+		}
+		
+		return true;
+	}
+	
 	// makes sure that a floating task's display(output on the GUI) String, will
 	// not have ";" (semicolons)
 	// as they are used as separators (not needed by a floating task)
@@ -330,9 +358,9 @@ public class Checker {
 		return true;
 	}
 
-	// makes sure that a floating task is done
+	// makes sure that a floating task is done (GUI Display form)
 	// format: <taskname> [done]
-	public static boolean isDoneFloatingTask(String string) {
+	static boolean isDoneFloatingTaskOutput(String string) {
 		String tempString = new String("");
 		tempString = string.trim();
 		
@@ -434,6 +462,34 @@ public class Checker {
 		return true;
 		
 	}
+	
+	// check the validity of file storage and/or user input version of a done deadline task
+	static boolean isDoneDeadlineTaskInput(String string) {
+		String tempString = new String("");
+		tempString = string.trim();
+		
+		if(tempString.length()==0){
+			return false;
+		}
+		
+		int doneStringIndex = tempString.indexOf(DONE_STRING);
+		
+		if(doneStringIndex < 0){
+			return false;
+		}
+		
+		tempString = tempString.substring(0, doneStringIndex).trim();
+		
+		if(tempString.length()==0){
+			return false;
+		}
+		
+		if(!Checker.isDeadlineTaskInput(tempString)){
+			return false;
+		}
+		
+		return true;
+	}
     
 	// <taskname>, by <end> on <date>
 	static boolean isDeadlineTaskOutput(String string) {
@@ -509,8 +565,9 @@ public class Checker {
 		return true;
 	}
 	
+	// check the validity of the GUI display of a done deadline task
 	// <taskname>, by <end> on <date> [done]
-	static boolean isDoneDeadlineTask(String string) {
+	static boolean isDoneDeadlineTaskOutput(String string) {
 		String tempString = new String("");
 		tempString = string.trim();
 		
@@ -537,6 +594,7 @@ public class Checker {
 		return true;
 	}
 
+	// recurring task user input command (not done)
 	// <taskname>; <start>-<end> every <day>; priority
 	static boolean isRecurringTaskInput(String string) {
 		String tempString = new String("");
@@ -640,7 +698,36 @@ public class Checker {
 		return true;		
 		
 	}
+	
+	// done recurring task (user input command or file storage format)
+	static boolean isDoneRecurringTaskInput(String string) {
+		String tempString = new String("");
+		tempString = string.trim();
+		
+		if(tempString.length()==0){
+			return false;
+		}
+		
+		int doneStringIndex = tempString.indexOf(DONE_STRING);
+		
+		if(doneStringIndex < 0){
+			return false;
+		}
+		
+		tempString = tempString.substring(0, doneStringIndex).trim();
+		
+		if(tempString.length()==0){
+			return false;
+		}
+		
+		if(!Checker.isRecurringTaskInput(tempString)){
+			return false;
+		}
+		
+		return true;
+	}
 
+	// recurring task (not done) (GUI Display format)
 	// <taskname>, <start>-<end> every <day>, priority
 	static boolean isRecurringTaskOutput(String string) {
 		String tempString = new String("");
@@ -744,8 +831,9 @@ public class Checker {
 		return true;	
 	}
 
+	// done recurring task (GUI Display) format
 	// <taskname>, <start>-<end> every <day>, priority [done]
-	static boolean isDoneRecurringTask(String string) {
+	static boolean isDoneRecurringTaskOutput(String string) {
 		String tempString = new String("");
 		tempString = string.trim();
 		
@@ -874,6 +962,34 @@ public class Checker {
 		
 		return true;
 	}
+	
+	static boolean isDoneEventTaskInput(String string) {
+		String tempString = new String("");
+		tempString = string.trim();
+		
+		if(tempString.length()==0){
+			return false;
+		}
+		
+		int doneStringIndex = tempString.indexOf(DONE_STRING);
+		
+		if(doneStringIndex < 0){
+			return false;
+		}
+		
+		tempString = tempString.substring(0, doneStringIndex).trim();
+		
+		if(tempString.length()==0){
+			return false;
+		}
+		
+		if(!Checker.isEventTaskInput(tempString)){
+			return false;
+		}
+		
+		return true;
+	}
+	
 
 	// <taskname>, <start>-<end> on <date>, <priority>
 	static boolean isEventTaskOutput(String string) {
@@ -979,7 +1095,7 @@ public class Checker {
 	}
 	
 	// <taskname>, <start>-<end> on <date>, <priority> [done]
-	static boolean isDoneEventTask(String string) {
+	static boolean isDoneEventTaskOutput(String string) {
 		String tempString = new String("");
 		tempString = string.trim();
 		

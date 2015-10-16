@@ -49,13 +49,20 @@ public class FlexTest4 {
 		
 		assertTrue(!Checker.isFloatingTaskOutput("task test test1; a"));
 	
+		// done floating task (user input command or file storage)
+		assertTrue(Checker.isDoneFloatingTaskInput("t [done]"));
 		
-		// done floating task
-		assertTrue(!Checker.isDoneFloatingTask("task [don], a"));
+		assertTrue(!Checker.isDoneFloatingTaskInput("task [don]; a"));
 		
-		assertTrue(!Checker.isDoneFloatingTask("task [don], a"));
+		assertTrue(!Checker.isDoneFloatingTaskInput("task [don]; a"));
 		
-		assertTrue(Checker.isDoneFloatingTask("t [done]"));
+		// done floating task (GUI display)
+		
+		assertTrue(Checker.isDoneFloatingTaskOutput("t [done]"));
+		
+		assertTrue(!Checker.isDoneFloatingTaskOutput("task [don], a"));
+		
+		assertTrue(!Checker.isDoneFloatingTaskOutput("task [don], a"));
 		
 		// recurring task input
 		assertTrue(Checker.isRecurringTaskInput("task; 1258-1259 every monday; priority priority1"));
@@ -66,11 +73,16 @@ public class FlexTest4 {
 		assertTrue(Checker.isRecurringTaskOutput("task name, 0002-0003 every tuesday, priority"));				
 
 		assertTrue(!Checker.isRecurringTaskOutput("task name, 0002-0003 evry tuesday, priority"));
-				
-		// done recurring task
-	    assertTrue(Checker.isDoneRecurringTask("tasker, 0001-2359 every wednesday, priority [done]"));		
+	
+		// done recurring task (user input command or file storage)
+	    assertTrue(Checker.isDoneRecurringTaskInput("tasker; 0001-2359 every wednesday; priority [done]"));		
 
-	    assertTrue(!Checker.isDoneRecurringTask("tasker; 0001-2359 every wednesday; priority"));		
+	    assertTrue(!Checker.isDoneRecurringTaskInput("tasker; 0001-2359 every wednesday, priority"));	
+		
+		// done recurring task (GUI display)
+	    assertTrue(Checker.isDoneRecurringTaskOutput("tasker, 0001-2359 every wednesday, priority [done]"));		
+
+	    assertTrue(!Checker.isDoneRecurringTaskOutput("tasker; 0001-2359 every wednesday; priority"));		
 
 	}
 	

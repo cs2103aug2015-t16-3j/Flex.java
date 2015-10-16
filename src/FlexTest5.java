@@ -29,14 +29,19 @@ public class FlexTest5 {
 		
 		assertTrue(!Checker.isDeadlineTaskOutput("task test tester; by 2500 on 12/1/2015"));	
 		
-		// done deadline task
+		// done deadline task (user input and/or file storage form)
+		assertTrue(Checker.isDoneDeadlineTaskInput("task; by 2000 on 1/1/1 [done]"));
+		assertTrue(!Checker.isDoneDeadlineTaskInput("t, by 2000 on 1/1/1 [done"));
+		assertTrue(!Checker.isDoneDeadlineTaskInput("t, by 2000 on 1/1/1 [done]"));
 		
-		assertTrue(Checker.isDoneDeadlineTask("task, by 2000 on 1/1/1 [done]"));
+		// done deadline task output (GUI Display)
+		
+		assertTrue(Checker.isDoneDeadlineTaskOutput("task, by 2000 on 1/1/1 [done]"));
 		
 		// all Strings, without the "[done]" substring, are in
 		// the invalid input partition for a deadline task which is done
 		// (other than a null String)
-		assertTrue(!Checker.isDoneDeadlineTask("t, by 2000 on 1/1/1 [done"));
+		assertTrue(!Checker.isDoneDeadlineTaskOutput("t, by 2000 on 1/1/1 [done"));
 
 	}
 }
