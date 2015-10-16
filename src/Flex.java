@@ -49,7 +49,7 @@ public class Flex {
 
 	public static void main(String[] args) throws IOException {
 		flexWindow = new FlexWindow();
-		flexWindow.setTitle("");
+		flexWindow.setTitle("Flex");
 		flexWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		flexWindow.setBounds(100, 100, 450, 300);
 		flexWindow.setVisible(true);
