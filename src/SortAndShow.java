@@ -302,8 +302,8 @@ public class SortAndShow {
 						+ "\n");
 		flexWindow.getTextArea().append("\n");
 		
-		// floating header ""
-		flexWindow.getTextArea().append("");
+		// floating header "Floating"
+		flexWindow.getTextArea().append("Floating");
 		flexWindow.getTextArea().append("\n");
 		
 		

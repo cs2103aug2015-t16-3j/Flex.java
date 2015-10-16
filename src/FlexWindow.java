@@ -38,7 +38,7 @@ public class FlexWindow extends JFrame {
 	 */
 	public FlexWindow() {
 		setBackground(new Color(255, 235, 205));
-		setTitle("");
+		setTitle("Flex");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 611, 424);
 
