@@ -34,7 +34,7 @@ public class FlexTest4 {
 		// floating task input
 		assertTrue(Checker.isFloatingTaskInput("task"));
 		
-		assertTrue(Checker.isFloatingTaskInput("task, test"));
+		assertTrue(!Checker.isFloatingTaskInput("task, test [done]"));
 		
 		assertTrue(!Checker.isFloatingTaskInput("; task test"));
 		
@@ -45,7 +45,7 @@ public class FlexTest4 {
 		// floating task output
 		assertTrue(Checker.isFloatingTaskOutput("task test test1"));	
 		
-		assertTrue(Checker.isFloatingTaskOutput("task test test1, a"));
+		assertTrue(!Checker.isFloatingTaskOutput("task test test1, a [done]"));
 		
 		assertTrue(!Checker.isFloatingTaskOutput("task test test1; a"));
 	
@@ -67,10 +67,14 @@ public class FlexTest4 {
 		// recurring task input
 		assertTrue(Checker.isRecurringTaskInput("task; 1258-1259 every monday; priority priority1"));
 		
+		assertTrue(!Checker.isRecurringTaskInput("task; 1258-1259 every monday; priority priority1 [done]"));
+		
 		assertTrue(!Checker.isRecurringTaskInput("task; 1258 1259 every monday; priority priority1"));		
 		
 		// recurring task output
-		assertTrue(Checker.isRecurringTaskOutput("task name, 0002-0003 every tuesday, priority"));				
+		assertTrue(Checker.isRecurringTaskOutput("task name, 0002-0003 every tuesday, priority"));		
+		
+		assertTrue(!Checker.isRecurringTaskOutput("task name, 0002-0003 every tuesday, priority [done]"));
 
 		assertTrue(!Checker.isRecurringTaskOutput("task name, 0002-0003 evry tuesday, priority"));
 	

@@ -302,6 +302,12 @@ public class Checker {
 			return false;
 		}
 		
+		// IMPORTANT: make sure that this task is not marked as done
+		int doneStringIndex = tempString.indexOf(DONE_STRING);
+		if(doneStringIndex >= 0){
+			return false;
+		}
+		
 		int semicolonIndex = tempString.indexOf(";");
 		if (semicolonIndex >= 0) {
 			return false;
@@ -351,6 +357,12 @@ public class Checker {
 			return false;
 		}
 		
+		// IMPORTANT: make sure that this task is not marked as done
+		int doneStringIndex = tempString.indexOf(DONE_STRING);
+		if(doneStringIndex >= 0){
+			return false;
+		}
+		
 		int semicolonIndex = tempString.indexOf(";");
 		if (semicolonIndex >= 0) {
 			return false;
@@ -394,6 +406,12 @@ public class Checker {
 		tempString = string.trim();
 		
 		if(tempString.length()==0){
+			return false;
+		}
+		
+		// IMPORTANT: make sure that this task is not marked as done
+		int doneStringIndex = tempString.indexOf(DONE_STRING);
+		if(doneStringIndex >= 0){
 			return false;
 		}
 		
@@ -500,6 +518,12 @@ public class Checker {
 			return false;
 		}
 		
+		// IMPORTANT: make sure that this task is not marked as done
+		int doneStringIndex = tempString.indexOf(DONE_STRING);
+		if(doneStringIndex >= 0){
+			return false;
+		}
+		
 		int commaWhitespaceIndex1 = tempString.indexOf(", ");
 		
 		if(commaWhitespaceIndex1 <= 0){
@@ -601,6 +625,12 @@ public class Checker {
 		tempString = string.trim();
 		
 		if(tempString.length()==0){
+			return false;
+		}
+		
+		// IMPORTANT: make sure that this task is not marked as done
+		int doneStringIndex = tempString.indexOf(DONE_STRING);
+		if(doneStringIndex >= 0){
 			return false;
 		}
 		
@@ -737,6 +767,12 @@ public class Checker {
 			return false;
 		}
 		
+		// IMPORTANT: make sure that this task is not marked as done
+		int doneStringIndex = tempString.indexOf(DONE_STRING);
+		if(doneStringIndex >= 0){
+			return false;
+		}
+		
 		int commaWhitespaceIndex1 = tempString.indexOf(", ");
 		
 		if(commaWhitespaceIndex1 <= 0){
@@ -870,6 +906,12 @@ public class Checker {
 			return false;
 		}
 		
+		// IMPORTANT: make sure that this task is not marked as done
+		int doneStringIndex = tempString.indexOf(DONE_STRING);
+		if(doneStringIndex >= 0){
+			return false;
+		}
+		
 		int semicolonWhitespaceIndex1 = tempString.indexOf("; ");
 		
 		if(semicolonWhitespaceIndex1 <= 0){
@@ -998,6 +1040,12 @@ public class Checker {
 		tempString = string.trim();
 		
 		if(tempString.length()==0){
+			return false;
+		}
+
+		// IMPORTANT: make sure that this task is not marked as done
+		int doneStringIndex = tempString.indexOf(DONE_STRING);
+		if(doneStringIndex >= 0){
 			return false;
 		}
 		

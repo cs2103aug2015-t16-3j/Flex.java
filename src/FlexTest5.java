@@ -22,17 +22,23 @@ public class FlexTest5 {
 		// deadline task input
 		assertTrue(Checker.isDeadlineTaskInput("task; by 2000 on 1/1/1"));
 		
+		assertTrue(!Checker.isDeadlineTaskInput("task; by 2000 on 1/1/1 [done]"));
+		
 		assertTrue(!Checker.isDeadlineTaskInput("task test testing, by 2359 On 12/12/2015"));
 
 		//deadline task output
 		assertTrue(Checker.isDeadlineTaskOutput("task test tester, bY 2300 on 12/1/2015"));
+	
+		assertTrue(!Checker.isDeadlineTaskOutput("task test tester, bY 2300 on 12/1/2015 [done]"));
 		
 		assertTrue(!Checker.isDeadlineTaskOutput("task test tester; by 2500 on 12/1/2015"));	
 		
 		// done deadline task (user input and/or file storage form)
 		assertTrue(Checker.isDoneDeadlineTaskInput("task; by 2000 on 1/1/1 [done]"));
+		
+		assertTrue(!Checker.isDoneDeadlineTaskInput("t; by 2000 on 1/1/1 [done"));
+		
 		assertTrue(!Checker.isDoneDeadlineTaskInput("t, by 2000 on 1/1/1 [done"));
-		assertTrue(!Checker.isDoneDeadlineTaskInput("t, by 2000 on 1/1/1 [done]"));
 		
 		// done deadline task output (GUI Display)
 		
