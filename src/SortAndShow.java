@@ -301,7 +301,12 @@ public class SortAndShow {
 				.append("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
 						+ "\n");
 		flexWindow.getTextArea().append("\n");
-
+		
+		// floating header ""
+		flexWindow.getTextArea().append("");
+		flexWindow.getTextArea().append("\n");
+		
+		
 		for (int k = 0; k < floatingTasksList.size(); k++) {
 			flexWindow.getTextArea().append(floatingTasksList.get(k).getDisplayString() + "\n");
 			flexWindow.getTextArea().append("\n");

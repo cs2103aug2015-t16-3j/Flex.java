@@ -417,8 +417,8 @@ public class Task {
 			// for a floating task
 			// return the task name
 
-			return this.taskVariables[0] + " (floating)";
-
+			return this.taskVariables[0];
+			
 		} else if (this.taskVariables[2] == null && this.taskVariables[4] == null && this.taskVariables[5] == null) {
 
 			// for a deadline task
