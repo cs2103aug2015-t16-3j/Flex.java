@@ -612,7 +612,7 @@ public class CRUD {
 				System.out.println();
 
 				deleteTask(filename, lastAction.getPreviousTask().getTaskName(), lastAction, flexWindow);
-
+				
 			} else if (lastAction.getPreviousAction().equalsIgnoreCase("delete")) {
 
 				logger.finest(DELETE_UNDONE_MESSAGE);
@@ -620,6 +620,7 @@ public class CRUD {
 				System.out.println();
 
 				addTask(filename, lastAction.getPreviousTask().getScheduleString(), lastAction, flexWindow);
+								
 			}
 		} else {
 
@@ -633,5 +634,8 @@ public class CRUD {
 			}
 
 		}
+		
+		SortAndShow.readAndDisplayAll(filename, flexWindow);
+		
 	}
 }

@@ -74,8 +74,17 @@ public class Task {
 		remainingString = taskInformation.trim();
 
 		if (Checker.isDoneFloatingTask(remainingString)) {
+			
+			String tempString = new String("");
+
+			tempString = remainingString.trim();
+			
+			int doneStringIndex = tempString.indexOf(DONE_STRING);
+			
+			tempString = tempString.substring(0, doneStringIndex);
+			
 			// set the task name of the floating task
-			this.taskVariables[0] = remainingString;
+			this.taskVariables[0] = tempString;
 
 			// set the date of the floating task to be null
 			this.taskVariables[1] = null;
@@ -96,11 +105,15 @@ public class Task {
 			calculateComparisonValue(remainingString);
 
 		} else if (Checker.isDoneDeadlineTask(remainingString)) {
-
+									
 			String tempString = new String("");
 
 			tempString = remainingString.trim();
-
+			
+			int doneStringIndex = tempString.indexOf(DONE_STRING);
+			
+			tempString = tempString.substring(0, doneStringIndex);						
+			
 			int commaWhitespaceIndex1 = tempString.indexOf(", ");
 
 			// set the task name of the deadline task
@@ -130,10 +143,14 @@ public class Task {
 
 		}
 		if (Checker.isDoneEventTask(remainingString)) {
-
+			
 			String tempString = new String("");
 
 			tempString = remainingString.trim();
+			
+			int doneStringIndex = tempString.indexOf(DONE_STRING);
+			
+			tempString = tempString.substring(0, doneStringIndex);
 
 			int commaWhitespaceIndex1 = tempString.indexOf(", ");
 
