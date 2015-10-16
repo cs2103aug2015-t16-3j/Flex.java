@@ -1,19 +1,17 @@
-task tasking, 1/1/1, 0000
-twt, 1/1/1, 0000, 0000, terwr
-teari, 2/2/2, 2358
-t, 4/4/4, 0123
-text, 6/6/6, 1245
-t, 13/12/11, 2359, 2359, t
-te, 14/12/11, 2359, 2359, t
-task, 22/11/1111, 0000, 0001, priority
-task taskW, 15/10/2015, 2359
-ttt, 15/10/2015, 2357, 2358, t
-ti, 15/10/2015, 2359, 2359, t
-t
-tas
-tas
-task tasker
-tasssssssssss
-tea
-teari
-w
+Project Manual, 9/11/2015, 2359
+V0.2, 22/10/2015, 1600, 1700, high
+Reflection 2, 17/10/2015, 2359
+Reflection Peer Review, 20/10/2015, 2359
+OP2 Conferencing, 20/10/2015, 1045, 1115, medium
+Project Meeting, 16/10/2015, 1200, 1400, medium
+Lab Meeting, 22/10/2015, 1200, 1400, low
+Lab Report, 23/10/2015, 2359
+Mid-term Test, 8/11/2015, 0800, 1000, high
+Study session, 10/11/2015, 0900, 1700, low
+Watch Despicable Me
+Play DOTA2
+Run at the park
+Water plants at home
+Read a book
+Do laundry
+Clean my room
