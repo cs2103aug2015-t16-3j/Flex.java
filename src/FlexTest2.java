@@ -4,22 +4,37 @@ import org.junit.Test;
 
 // FlexTest2.java tests that valid USUAL (EVENT) Task "lines" are true, using valid Task "lines", to test the logic of checkTask()
 // format of an event task:
-// task, date, starting time, ending time, priority
-// e.g.
-// task, 1/1/1, 0000, 0001, priority
+
+// input
+// add <taskname>; <start>-<end> on <date>; <priority>
+
+// output
+// <taskname>, <start>-<end> on <date>, <priority>
+
+// done
+// <taskname>, <start>-<end> on <date>, <priority> [done]
+
+
 public class FlexTest2 {
 
 	@Test
 	public void testOutput() throws IOException {
-
-		assertTrue(Checker.isEventTask("task, 1/1/1, 0000, 0001, priority"));
-
-		assertTrue(Checker.isEventTask("task, 22/11/1111, 0000, 0001, priority"));
-
-		assertTrue(Checker.isEventTask("task is about, 1/1/1, 0000, 0001, priority prior"));
 		
-		assertTrue(Checker.isDoneEventTask("task, 1/1/1, 0000, 0001, priority [done]"));
+		// event task input
+		assertTrue(Checker.isEventTaskInput("task; 0000-0001 on 1/1/1; priority"));
+
+		assertTrue(Checker.isEventTaskInput("task; 0000-0001 on 22/11/1111; priority"));
+
+		assertTrue(!Checker.isEventTaskInput("task; 0000-2400 on 22/11/1111; priority"));
 		
-		assertTrue(Checker.isDoneEventTask("t, 1/1/1, 0000, 0001, priority [done]"));
+		// event task output
+		assertTrue(Checker.isEventTaskOutput("task is about, 0000-0001 on 1/1/1, priority prior"));
+		
+		assertTrue(!Checker.isEventTaskOutput("task is about, 0000-0001 on 0/1/1, priority prior"));
+		
+		// done event task
+		assertTrue(Checker.isDoneEventTask("task, 0000-0001 on 22/10/1110, priority [done]"));
+		
+		assertTrue(!Checker.isDoneEventTask("t, 0000-0001, 1/1/1, priority"));
 	}
 }
