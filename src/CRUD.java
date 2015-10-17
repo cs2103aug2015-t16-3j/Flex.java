@@ -25,7 +25,7 @@ public class CRUD {
 	private static final String INVALID_INPUT_MESSAGE = "Invalid input. Please try again.";
 
 	private static final String TASK_DOES_NOT_EXIST_MESSAGE = "Task does not exist, so no such task can be deleted.";
-	private static final String BLOCKED_MESSAGE = "Unable to add the new task, because the new task clashes with existing tasks (on the same date) which have not been marked as tasks which have been done.";
+	private static final String BLOCKED_MESSAGE = "Unable to add the new event task (which is not done), because the new task (which is not done) clashes with existing event tasks  (which are not done) (on the same date).";
 	private static final int HOUR_MINUTES = 60;
 
 	// deletes a task
@@ -350,6 +350,23 @@ public class CRUD {
 
 	// changes one of the variables in a task, EXCEPT for the comparison value
 	// for sorting all tasks by date and starting time
+	// Case 7: changing a task's variable
+	// each change/edit command starts with the hyphen on the far left
+
+	// For Editing An Event Task
+	// change <date> <number> to <newdate>
+	// change <date> <number> priority to <newpriority>
+	// change <date> <number> time to <newstart>-<newend>
+
+	// For Editing A Deadline Task
+	// change <date> <number> to <newdate>
+	// change <date> <number> end by <new end>
+	// change <date> <number> by <newend> on <newdate>
+
+	// For Editing A Recurring Task
+	// -day: change rec <number> to every <newday>
+	// -<start>-<end>: change rec <number> time to <newstart>-<newend>
+
 	static void changeTaskVariable(String filename, String remainingCommandString, LastAction lastAction,
 			FlexWindow flexWindow) throws IOException {
 		boolean atLeastOneTaskChanged = false;
@@ -379,158 +396,6 @@ public class CRUD {
 		Task tempTask = new Task();
 		String tempChangedTerm = new String("");
 		String previousAction = new String("");
-
-		if (tempString.toLowerCase().indexOf("task name") == 0) {
-			// case of "change task name, exacttaskname, newtaskname"
-
-			int commaWhitespaceIndex1 = tempString.indexOf(", ");
-
-			if (commaWhitespaceIndex1 < 0) {
-				// INVALID
-				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-				flexWindow.getTextArea().append("\n");
-
-				logger.finest(INVALID_INPUT_MESSAGE);
-				System.out.println(INVALID_INPUT_MESSAGE);
-				System.out.println();
-				return;
-			}
-
-			tempString = tempString.substring(commaWhitespaceIndex1 + 2).trim();
-
-			int commaWhitespaceIndex2 = tempString.indexOf(", ");
-
-			if (commaWhitespaceIndex2 < 0) {
-				// INVALID
-				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-				flexWindow.getTextArea().append("\n");
-
-				logger.finest(INVALID_INPUT_MESSAGE);
-				System.out.println(INVALID_INPUT_MESSAGE);
-				System.out.println();
-				return;
-			}
-
-			String taskNameMatchString = new String("");
-			taskNameMatchString = tempString.substring(0, commaWhitespaceIndex2);
-
-			if (taskNameMatchString.length() == 0) {
-				// INVALID
-				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-				flexWindow.getTextArea().append("\n");
-
-				logger.finest(INVALID_INPUT_MESSAGE);
-				System.out.println(INVALID_INPUT_MESSAGE);
-				System.out.println();
-				return;
-			}
-
-			tempString = tempString.substring(commaWhitespaceIndex2 + 2).trim();
-
-			if (tempString.length() == 0) {
-				// INVALID
-				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-				flexWindow.getTextArea().append("\n");
-
-				logger.finest(INVALID_INPUT_MESSAGE);
-				System.out.println(INVALID_INPUT_MESSAGE);
-				System.out.println();
-				return;
-			}
-
-			String newTaskNameString = new String("");
-			newTaskNameString = tempString;
-
-			int commaWhitespaceIndex3 = newTaskNameString.indexOf(", ");
-
-			if (commaWhitespaceIndex3 > 0) {
-				// INVALID
-				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-				flexWindow.getTextArea().append("\n");
-
-				logger.finest(INVALID_INPUT_MESSAGE);
-				System.out.println(INVALID_INPUT_MESSAGE);
-				System.out.println();
-				return;
-			}
-
-			for (int i = 0; i < allTasksList.size(); i++) {
-				if (allTasksList.get(i).getTaskName().equalsIgnoreCase(taskNameMatchString)) {
-
-					tempChangedTerm = allTasksList.get(i).getTaskName();
-					allTasksList.get(i).setTaskName(newTaskNameString);
-					allTasksList.get(i).calculateAndSetComparisonValue(allTasksList.get(i).getScheduleString());
-
-					tempTask = allTasksList.get(i);
-					previousAction = "change task name";
-
-					lastAction.setPreviousChangedTerm(tempChangedTerm);
-					lastAction.setPreviousAction(previousAction);
-					lastAction.setPreviousTask(tempTask);
-
-					atLeastOneTaskChanged = true;
-				}
-			}
-		} else if (tempString.toLowerCase().indexOf("change date") == 0) {
-			// case of "change date, exacttaskname, newdate"
-
-		} else if (tempString.toLowerCase().indexOf("change start") == 0) {
-			// case of "change start, exacttaskname, newstart"
-
-		} else if (tempString.toLowerCase().indexOf("change end") == 0) {
-			// case of "change end, exacttaskname, newend"
-
-		} else if (tempString.toLowerCase().indexOf("change priority") == 0) {
-			// case of "change priority, exacttaskname, priority"
-
-		} else if (tempString.toLowerCase().indexOf("change event to floating") == 0) {
-			// case of "change event to floating, exacttaskname"
-
-		} else if (tempString.toLowerCase().indexOf("change deadline to floating") == 0) {
-			// case of "change deadline to floating, exacttaskname"
-
-		} else if (tempString.toLowerCase().indexOf("change deadline to event") == 0) {
-			// case of "change deadline to event, exacttaskname, newstart,
-			// newpriority)
-
-		} else if (tempString.toLowerCase().indexOf("change floating to deadline") == 0) {
-			// case of "change floating to deadline, exacttaskname, date,
-			// newend"
-
-		} else if (tempString.toLowerCase().indexOf("change floating to event") == 0) {
-			// case of "change floating to event, exacttaskname, date, start,
-			// end, priority"
-
-		} else if (tempString.toLowerCase().indexOf("change status") == 0) {
-			// this is for marking tasks as done, or not done
-			// done tasks will have " [done]", without the quotation marks
-			// at the back of a Task's String form in the file
-			// e.g.
-			// 1) "change status, exacttaskname, done"
-			// OR
-			// 2) "change status, exacttaskname, not done"
-
-		}
-
-		// if no changes have been made
-		if (!atLeastOneTaskChanged) {
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-
-			flexWindow.getTextArea()
-					.append(VALID_INPUT_WITHOUT_MATCHING_TASKS_TO_HAVE_INFORMATION_CHANGED_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			logger.finest(VALID_INPUT_WITHOUT_MATCHING_TASKS_TO_HAVE_INFORMATION_CHANGED_MESSAGE);
-			System.out.println(VALID_INPUT_WITHOUT_MATCHING_TASKS_TO_HAVE_INFORMATION_CHANGED_MESSAGE);
-			System.out.println();
-
-			return;
-		}
 
 		// sort all tasks by date and starting time
 		SortAndShow.sortAllTasksByDateAndStartingTime(allTasksList);
@@ -603,8 +468,61 @@ public class CRUD {
 
 			return;
 		}
+		Task temporaryTask = new Task(remainingCommandString1);
+		// ***TO CHECK FOR CLASH IN START AND END FOR EVENT TASK INPUT***
 
-		// ***TO CHECK FOR CLASH IN START AND END FOR EVENT TASK INPUT LATER***
+		// This means that there is a clash between an existing event task which
+		// is NOT marked as done
+		// and a NEW task which is an event task which is NOT marked as done
+		if (Checker.isEventTaskInput(remainingCommandString1)) {
+
+			int startingTimeHours = Integer.valueOf(temporaryTask.getStart().substring(0, 2).trim());
+			int startingTimeMinutes = Integer.valueOf(temporaryTask.getStart().substring(2, 4).trim());
+			int totalStartingTime = startingTimeHours * HOUR_MINUTES + startingTimeMinutes;
+
+			int endingTimeHours = Integer.valueOf(temporaryTask.getEnd().substring(0, 2).trim());
+			int endingTimeMinutes = Integer.valueOf(temporaryTask.getEnd().substring(2, 4).trim());
+			int totalEndingTime = endingTimeHours * HOUR_MINUTES + endingTimeMinutes;
+
+			for (int w = 0; w < allTasksList.size(); w++) {
+				if (Checker.isEventTaskInput(allTasksList.get(w).getScheduleString())) {
+
+					int existingStartingTimeHours = Integer
+							.valueOf(allTasksList.get(w).getStart().substring(0, 2).trim());
+					int existingStartingTimeMinutes = Integer
+							.valueOf(allTasksList.get(w).getStart().substring(2, 4).trim());
+					int existingTotalStartingTime = existingStartingTimeHours * HOUR_MINUTES
+							+ existingStartingTimeMinutes;
+
+					int existingEndingTimeHours = Integer.valueOf(allTasksList.get(w).getEnd().substring(0, 2).trim());
+					int existingEndingTimeMinutes = Integer
+							.valueOf(allTasksList.get(w).getEnd().substring(2, 4).trim());
+					int existingTotalEndingTime = existingEndingTimeHours * HOUR_MINUTES + existingEndingTimeMinutes;
+
+					if ((totalStartingTime > existingTotalStartingTime) && (totalStartingTime < existingTotalEndingTime)
+							|| ((totalEndingTime > existingTotalStartingTime)
+									&& (totalEndingTime < existingTotalEndingTime))) {
+						flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+						flexWindow.getTextArea().append("\n");
+
+						logger.finest(INVALID_INPUT_MESSAGE);
+						System.out.println(INVALID_INPUT_MESSAGE);
+						System.out.println();
+				
+						flexWindow.getTextArea().append(BLOCKED_MESSAGE + "\n");
+						flexWindow.getTextArea().append("\n");
+
+						logger.finest(BLOCKED_MESSAGE);
+						System.out.println(BLOCKED_MESSAGE);
+						System.out.println();
+						
+						return;
+
+					}
+
+				}
+			}
+		}
 
 		allTasksList.add(new Task(remainingCommandString1));
 

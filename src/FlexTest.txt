@@ -6,6 +6,10 @@ task; by 0001 on 1/1/2
 task; by 0001 on 1/1/2 [done]
 task; 0000-0001 on 2/2/2; priority
 task; 0000-0001 on 2/2/2; priority [done]
+task; 1000-1100 on 2/2/2; priority
+task; 1000-1100 on 2/2/2; priority
+task; 1000-1100 on 2/2/2; priority
+task; 1001-1100 on 2/2/2; priority
 task; 0000-0001 on 3/3/3; priority
 task; 0000-0001 on 4/4/4; priority [done]
 tasking; by 0020 on 5/5/5
@@ -25,6 +29,7 @@ modular
 module
 node
 thunder
+tree
 water
 task; 0000-0001 every tuesday; prioriWy
 task; 0000-0001 every tuesday; priority [done]

@@ -242,6 +242,9 @@ public class Flex {
 
 			} else if (firstWord.equalsIgnoreCase("change")) {
 				// Case 7: changing a task's variable
+				// each change/edit command starts with the hyphen on the far
+				// left
+
 				String remainingCommandString = command.substring(whitespaceIndex + 1).trim();
 				remainingCommandString.trim();
 
