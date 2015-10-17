@@ -8,6 +8,7 @@ task; 0000-0001 on 2/2/2; priority [done]
 task; 0000-0001 on 2/2/2; priority
 task; 0000-0001 on 3/3/3; priority
 task; 0000-0001 on 4/4/4; priority [done]
+tasking; by 0020 on 5/5/5
 task; by 0001 on 9/9/9
 task; by 0001 on 9/9/10
 task; by 0001 on 10/10/10
@@ -16,20 +17,21 @@ task; by 0002 on 11/11/11 [done]
 task; by 0001 on 1/1/4100
 task; by 0002 on 1/1/4200
 task; by 0003 on 1/1/5000
-free
+fine
+fire
+ice
+icy
+modular
+module
+node
+thunder
 water
-ice
-ice
-teateatea
-task; 0000-0001 every monday; prioriWy
-task; 0000-0001 every tuesday; prioriWy [done]
-task; 0000-0001 every tuesday; prioriWy
 task; 0000-0001 every tuesday; priority [done]
+task; 0000-0001 every tuesday; prioriWy
 task; 0001-0002 every tuesday; prioriWy
 task; 2359-2359 every tuesday; priworiWy
 task; 0000-0001 every wednesday; prioriWy
 task; 0000-0001 every thursday; prioriWy
-task; 0000-0001 every friday; prioriWy
 task; 0000-0001 every saturday; prioriWy
-task; 0000-0001 every sunday; priorityMILLION [done]
 task; 0000-0001 every sunday; priority1 [done]
+task; 0000-2221 every sunday; priority1 [done]

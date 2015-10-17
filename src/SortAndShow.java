@@ -470,8 +470,7 @@ public class SortAndShow {
 	// used to sort tasks by starting date and starting time
 	static void sortAllTasksByDateAndStartingTime(ArrayList<Task> allTasksList) {
 
-		// sort (done or not done) deadline tasks and event tasks by comparison
-		// value
+		// sort all tasks by comparisonValue first
 		int size1 = allTasksList.size();
 		int i, start1, min_index1 = 0;
 
@@ -494,6 +493,8 @@ public class SortAndShow {
 		ArrayList<Task> floatingTasksList = new ArrayList<Task>();		
 		ArrayList<Task> recurringTasksList = new ArrayList<Task>();
 		
+		
+		
 		for(int j=0; j<allTasksList.size(); j++){
 			if(Checker.isDeadlineTaskInput(allTasksList.get(j).getScheduleString())||Checker.isDoneDeadlineTaskInput(allTasksList.get(j).getScheduleString())||Checker.isEventTaskInput(allTasksList.get(j).getScheduleString())||Checker.isDoneEventTaskInput(allTasksList.get(j).getScheduleString())){
 				deadlineOrEventTasksList.add(allTasksList.get(j));
@@ -504,23 +505,45 @@ public class SortAndShow {
 			}					
 		}
 		
-		// sort recurring tasks by day and starting time
-		int size2 = recurringTasksList.size();
-		int k, start2, min_index2 = 0;
+		// sort floating tasks in alphabetical order
+		int size2 = floatingTasksList.size();
+		int q, start2, min_index2 = 0;
 
 		for (start2 = 0; start2 < size2 - 1; start2++) {
 			min_index2 = start2;
 
-			for (k = start2 + 1; k < size2; k++) {
-				if (recurringTasksList.get(k).getRecurringTaskValue() < recurringTasksList.get(min_index2).getRecurringTaskValue()) {
-					min_index2 = k;
+			for (q = start2 + 1; q < size2; q++) {
+				if (floatingTasksList.get(q).getScheduleString().compareToIgnoreCase(floatingTasksList.get(min_index2).getScheduleString()) < 0) {
+					min_index2 = q;
 				}
 			}
 
-			Task temp3 = recurringTasksList.get(start2);
-			Task temp4 = recurringTasksList.get(min_index2);
-			recurringTasksList.set(start2, temp4);
-			recurringTasksList.set(min_index2, temp3);
+			Task temp3 = floatingTasksList.get(start2);
+			Task temp4 = floatingTasksList.get(min_index2);
+			floatingTasksList.set(start2, temp4);
+			floatingTasksList.set(min_index2, temp3);
+		}
+		
+		
+		
+		
+		// sort recurring tasks by day and starting time
+		int size3 = recurringTasksList.size();
+		int k, start3, min_index3 = 0;
+
+		for (start3 = 0; start3 < size3 - 1; start3++) {
+			min_index3 = start3;
+
+			for (k = start3 + 1; k < size3; k++) {
+				if (recurringTasksList.get(k).getRecurringTaskValue() < recurringTasksList.get(min_index3).getRecurringTaskValue()) {
+					min_index3 = k;
+				}
+			}
+
+			Task temp5 = recurringTasksList.get(start3);
+			Task temp6 = recurringTasksList.get(min_index3);
+			recurringTasksList.set(start3, temp6);
+			recurringTasksList.set(min_index3, temp5);
 		}
 		
 		ArrayList<Task> tempTasksList = new ArrayList<Task>();

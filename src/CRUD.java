@@ -29,7 +29,7 @@ public class CRUD {
 	private static final int HOUR_MINUTES = 60;
 
 	// deletes a task
-	static void deleteTask(String filename, String tempTaskName, LastAction lastAction, FlexWindow flexWindow)
+	static void deleteTask(String filename, String remainingString, LastAction lastAction, FlexWindow flexWindow)
 			throws IOException {
 		// reads in the file, line by line
 		boolean taskExists = false;
@@ -53,14 +53,251 @@ public class CRUD {
 			reader.close();
 		}
 
+		ArrayList<Task> deadlineOrEventTasksList = new ArrayList<Task>();
+		ArrayList<Task> floatingTasksList = new ArrayList<Task>();
+		ArrayList<Task> recurringTasksList = new ArrayList<Task>();
+
+		for (int j = 0; j < allTasksList.size(); j++) {
+			if (Checker.isDeadlineTaskInput(allTasksList.get(j).getScheduleString())
+					|| Checker.isDoneDeadlineTaskInput(allTasksList.get(j).getScheduleString())
+					|| Checker.isEventTaskInput(allTasksList.get(j).getScheduleString())
+					|| Checker.isDoneEventTaskInput(allTasksList.get(j).getScheduleString())) {
+				deadlineOrEventTasksList.add(allTasksList.get(j));
+			} else if (Checker.isFloatingTaskInput(allTasksList.get(j).getScheduleString())
+					|| Checker.isDoneFloatingTaskInput(allTasksList.get(j).getScheduleString())) {
+				floatingTasksList.add(allTasksList.get(j));
+			} else if (Checker.isRecurringTaskInput(allTasksList.get(j).getScheduleString())
+					|| Checker.isDoneRecurringTaskInput(allTasksList.get(j).getScheduleString())) {
+				recurringTasksList.add(allTasksList.get(j));
+			}
+		}
+
 		Task tempTask = new Task();
 
-		for (int i = 0; i < allTasksList.size(); i++) {
-			if (allTasksList.get(i).getTaskName().equalsIgnoreCase(tempTaskName)) {
-				tempTask = allTasksList.get(i);
-				allTasksList.remove(i);
-				taskExists = true;
+		String tempString = new String("");
+
+		tempString = remainingString.trim();
+
+		if (tempString.length() <= 0) {
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+			flexWindow.getTextArea().append("\n");
+
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+		}
+
+		int whitespaceIndex1 = tempString.indexOf(" ");
+		if (whitespaceIndex1 < 0) {
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+			flexWindow.getTextArea().append("\n");
+
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+
+			return;
+		}
+
+		String deleteVariableType = new String("");
+		deleteVariableType = tempString.substring(0, whitespaceIndex1).trim();
+
+		tempString = tempString.substring(whitespaceIndex1 + 1).trim();
+
+		if (tempString.length() <= 0) {
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+			flexWindow.getTextArea().append("\n");
+
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+
+			return;
+		}
+
+		if (deleteVariableType.equalsIgnoreCase("floating")) {
+			String tempNumber = tempString.trim();
+
+			char[] charArray = new char[tempNumber.length()];
+			tempNumber.getChars(0, tempNumber.length(), charArray, 0);
+
+			boolean isNumberValid = true;
+
+			for (int b = 0; b < tempNumber.length(); b++) {
+				if (!Character.isDigit(charArray[b])) {
+					isNumberValid = false;
+				}
 			}
+
+			if (!isNumberValid) {
+				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				flexWindow.getTextArea().append("\n");
+
+				logger.finest(INVALID_INPUT_MESSAGE);
+				System.out.println(INVALID_INPUT_MESSAGE);
+				System.out.println();
+
+				return;
+			}
+
+			if (Integer.valueOf(tempNumber) <= 0) {
+				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				flexWindow.getTextArea().append("\n");
+
+				logger.finest(INVALID_INPUT_MESSAGE);
+				System.out.println(INVALID_INPUT_MESSAGE);
+				System.out.println();
+
+				return;
+			}
+
+			if (Integer.valueOf(tempNumber) > floatingTasksList.size()) {
+				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				flexWindow.getTextArea().append("\n");
+
+				logger.finest(INVALID_INPUT_MESSAGE);
+				System.out.println(INVALID_INPUT_MESSAGE);
+				System.out.println();
+
+				return;
+			}
+
+			tempTask = allTasksList.get(deadlineOrEventTasksList.size() + Integer.valueOf(tempNumber) - 1);
+
+			lastAction.setPreviousTask(tempTask);
+
+			lastAction.setPreviousAction("delete");
+
+			allTasksList.remove(deadlineOrEventTasksList.size() + Integer.valueOf(tempNumber) - 1);
+
+			taskExists = true;
+
+		} else if (deleteVariableType.equalsIgnoreCase("rec")) {
+			// delete rec <number>
+
+			String tempNumber = tempString.trim();
+
+			char[] charArray1 = new char[tempNumber.length()];
+			tempNumber.getChars(0, tempNumber.length(), charArray1, 0);
+
+			boolean isNumberValid = true;
+
+			for (int c = 0; c < tempNumber.length(); c++) {
+				if (!Character.isDigit(charArray1[c])) {
+					isNumberValid = false;
+				}
+			}
+
+			if (!isNumberValid) {
+				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				flexWindow.getTextArea().append("\n");
+
+				logger.finest(INVALID_INPUT_MESSAGE);
+				System.out.println(INVALID_INPUT_MESSAGE);
+				System.out.println();
+
+				return;
+			}
+
+			if (Integer.valueOf(tempNumber) <= 0) {
+				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				flexWindow.getTextArea().append("\n");
+
+				logger.finest(INVALID_INPUT_MESSAGE);
+				System.out.println(INVALID_INPUT_MESSAGE);
+				System.out.println();
+
+				return;
+			}
+
+			if (Integer.valueOf(tempNumber) > recurringTasksList.size()) {
+				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				flexWindow.getTextArea().append("\n");
+
+				logger.finest(INVALID_INPUT_MESSAGE);
+				System.out.println(INVALID_INPUT_MESSAGE);
+				System.out.println();
+
+				return;
+			}
+
+			tempTask = allTasksList.get(deadlineOrEventTasksList.size() + floatingTasksList.size() + Integer.valueOf(tempNumber) - 1);
+
+			lastAction.setPreviousTask(tempTask);
+
+			lastAction.setPreviousAction("delete");
+
+			allTasksList.remove(deadlineOrEventTasksList.size() + floatingTasksList.size() + Integer.valueOf(tempNumber) - 1);
+
+			taskExists = true;
+
+		} else if (Checker.isValidDate(deleteVariableType)) {
+			// delete <date> <number>
+			String tempNumber = tempString.trim();
+
+			char[] charArray2 = new char[tempNumber.length()];
+			tempNumber.getChars(0, tempNumber.length(), charArray2, 0);
+
+			boolean isNumberValid = true;
+
+			for (int d = 0; d < tempNumber.length(); d++) {
+				if (!Character.isDigit(charArray2[d])) {
+					isNumberValid = false;
+				}
+			}
+
+			if (!isNumberValid) {
+				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				flexWindow.getTextArea().append("\n");
+
+				logger.finest(INVALID_INPUT_MESSAGE);
+				System.out.println(INVALID_INPUT_MESSAGE);
+				System.out.println();
+
+				return;
+			}
+
+			if (Integer.valueOf(tempNumber) <= 0) {
+				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				flexWindow.getTextArea().append("\n");
+
+				logger.finest(INVALID_INPUT_MESSAGE);
+				System.out.println(INVALID_INPUT_MESSAGE);
+				System.out.println();
+
+				return;
+			}
+
+			if (Integer.valueOf(tempNumber) > deadlineOrEventTasksList.size()) {
+				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				flexWindow.getTextArea().append("\n");
+
+				logger.finest(INVALID_INPUT_MESSAGE);
+				System.out.println(INVALID_INPUT_MESSAGE);
+				System.out.println();
+
+				return;
+			}
+
+			tempTask = deadlineOrEventTasksList.get(Integer.valueOf(tempNumber) - 1);
+
+			lastAction.setPreviousTask(tempTask);
+
+			lastAction.setPreviousAction("delete");
+
+			allTasksList.remove(Integer.valueOf(tempNumber) - 1);
+
+			taskExists = true;
+
+		} else {
+			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+			flexWindow.getTextArea().append("\n");
+
+			logger.finest(INVALID_INPUT_MESSAGE);
+			System.out.println(INVALID_INPUT_MESSAGE);
+			System.out.println();
+
+			return;
 		}
 
 		if (taskExists == false) {
@@ -90,83 +327,6 @@ public class CRUD {
 		logger.finest(DELETED_MESSAGE);
 		System.out.println(DELETED_MESSAGE);
 		System.out.println();
-
-		lastAction.setPreviousAction("delete");
-		lastAction.setPreviousTask(tempTask);
-
-		flexWindow.getTextArea().append("\n");
-
-		BufferedReader reader1 = null;
-
-		reader1 = new BufferedReader(new FileReader(filename));
-		String currentLine1 = null;
-
-		ArrayList<Task> floatingTasksList = new ArrayList<Task>();
-		ArrayList<Task> deadlineOrEventTasksList = new ArrayList<Task>();
-
-		do {
-			currentLine1 = reader1.readLine();
-			if (currentLine1 != null) {
-				if (Checker.isFloatingTaskInput(currentLine1)) {
-					floatingTasksList.add(new Task(currentLine1));
-				} else if (Checker.isDeadlineTaskInput(currentLine1) || Checker.isEventTaskInput(currentLine1)) {
-					deadlineOrEventTasksList.add(new Task(currentLine1));
-				}
-			}
-		} while (currentLine1 != null);
-
-		if (reader1 != null) {
-			reader1.close();
-		}
-
-		SortAndShow.sortAllTasksByDateAndStartingTime(deadlineOrEventTasksList);
-		SortAndShow.sortAllTasksByDateAndStartingTime(floatingTasksList);
-
-		String tempDate = new String("");
-
-		if (!deadlineOrEventTasksList.isEmpty()) {
-			flexWindow.getTextArea()
-					.append("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
-							+ "\n");
-			flexWindow.getTextArea().append("\n");
-			tempDate = deadlineOrEventTasksList.get(0).getDate();
-			flexWindow.getTextArea().append("Date: " + tempDate + "\n");
-			flexWindow.getTextArea().append("\n");
-		}
-
-		for (int j = 0; j < deadlineOrEventTasksList.size(); j++) {
-			if (deadlineOrEventTasksList.get(j).getDate().equalsIgnoreCase(tempDate)) {
-				flexWindow.getTextArea().append(deadlineOrEventTasksList.get(j).getDisplayString() + "\n");
-				flexWindow.getTextArea().append("\n");
-			} else {
-				flexWindow.getTextArea()
-						.append("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
-								+ "\n");
-				flexWindow.getTextArea().append("\n");
-
-				tempDate = deadlineOrEventTasksList.get(j).getDate();
-
-				flexWindow.getTextArea().append("Date: " + tempDate + "\n");
-				flexWindow.getTextArea().append("\n");
-
-				flexWindow.getTextArea().append(deadlineOrEventTasksList.get(j).getDisplayString() + "\n");
-				flexWindow.getTextArea().append("\n");
-			}
-		}
-
-		flexWindow.getTextArea()
-				.append("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
-						+ "\n");
-		flexWindow.getTextArea().append("\n");
-
-		for (int k = 0; k < floatingTasksList.size(); k++) {
-			flexWindow.getTextArea().append(floatingTasksList.get(k).getDisplayString() + "\n");
-			flexWindow.getTextArea().append("\n");
-		}
-
-		System.out.println();
-
-		flexWindow.getTextArea().append("\n");
 
 		return;
 	}
@@ -453,10 +613,10 @@ public class CRUD {
 		lastAction.setPreviousAction("add");
 		lastAction.setPreviousTask(tempTask);
 
-		flexWindow.getTextArea().append("The task " + "\"" + tempTask.getDisplayString() + "\"" + " has been added." + "\n");	
+		flexWindow.getTextArea()
+				.append("The task " + "\"" + tempTask.getDisplayString() + "\"" + " has been added." + "\n");
 		flexWindow.getTextArea().append("\n");
 
-		
 		return;
 	}
 
@@ -489,16 +649,56 @@ public class CRUD {
 				System.out.println(ADD_UNDONE_MESSAGE);
 				System.out.println();
 
-				deleteTask(filename, lastAction.getPreviousTask().getTaskName(), lastAction, flexWindow);
+				// reads in the file, line by line
+				BufferedReader reader = null;
+
+				reader = new BufferedReader(new FileReader(filename));
+				String currentLine = null;
+
+				ArrayList<Task> allTasksList = new ArrayList<Task>();
+
+				do {
+					currentLine = reader.readLine();
+					if (currentLine != null) {
+
+						allTasksList.add(new Task(currentLine));
+					}
+				} while (currentLine != null);
+
+				if (reader != null) {
+					reader.close();
+				}
+				
+				Task tempTask = new Task();
+				
+				// for exactness, equalsIgnoreCase is not used
+				for(int i=0; i<allTasksList.size(); i++){
+					if(lastAction.getPreviousTask().getScheduleString().equals(allTasksList.get(i).getScheduleString())){
+						tempTask = allTasksList.get(i);
+						allTasksList.remove(i);
+						lastAction.setPreviousAction("delete");
+						lastAction.setPreviousTask(tempTask);
+						
+						BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
+
+						for (int j = 0; j < allTasksList.size(); j++) {
+							writer.write(allTasksList.get(j).getScheduleString());
+							writer.newLine();
+						}
+
+						writer.close();
+						
+					}
+				}
+				
 
 			} else if (lastAction.getPreviousAction().equalsIgnoreCase("delete")) {
 
 				logger.finest(DELETE_UNDONE_MESSAGE);
 				System.out.println(DELETE_UNDONE_MESSAGE);
 				System.out.println();
-
-				addTask(filename, lastAction.getPreviousTask().getScheduleString(), lastAction, flexWindow);
-
+	
+				CRUD.addTask(filename, lastAction.getPreviousTask().getScheduleString(), lastAction, flexWindow);
 			}
 		} else {
 

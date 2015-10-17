@@ -239,7 +239,6 @@ public class Flex {
 
 				// only if input is valid
 				CRUD.deleteTask(filename, remainingCommandString, lastAction, flexWindow);
-				SortAndShow.readAndDisplayAll(filename, flexWindow);
 
 			} else if (firstWord.equalsIgnoreCase("change")) {
 				// Case 7: changing a task's variable
