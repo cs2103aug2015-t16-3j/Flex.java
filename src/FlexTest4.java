@@ -40,6 +40,7 @@ public class FlexTest4 {
 		
 		assertTrue(!Checker.isFloatingTaskInput("task, test [done"));
 		
+		// semicolon invalid case
 		assertTrue(!Checker.isFloatingTaskInput("; task test"));
 		
 		assertTrue(!Checker.isFloatingTaskInput(""));
@@ -55,10 +56,22 @@ public class FlexTest4 {
 		
 		assertTrue(!Checker.isFloatingTaskOutput("task test test1, a [done]"));
 		
+		assertTrue(!Checker.isFloatingTaskOutput("task test test1, a [done];"));
+		
+		// semicolon invalid case
 		assertTrue(!Checker.isFloatingTaskOutput("task test test1; a"));
 	
 		// done floating task (user input command or file storage)
 		assertTrue(Checker.isDoneFloatingTaskInput("t [done]"));
+		
+		assertTrue(!Checker.isDoneFloatingTaskInput("t [done"));
+		
+		assertTrue(!Checker.isDoneFloatingTaskInput("t done]"));
+		
+		assertTrue(!Checker.isDoneFloatingTaskInput("t [done]c"));
+		
+		// semicolon invalid case
+		assertTrue(!Checker.isDoneFloatingTaskInput("t [done];"));
 		
 		assertTrue(!Checker.isDoneFloatingTaskInput("task [don]; a"));
 		
@@ -67,6 +80,15 @@ public class FlexTest4 {
 		// done floating task (GUI display)
 		
 		assertTrue(Checker.isDoneFloatingTaskOutput("t [done]"));
+		
+		assertTrue(!Checker.isDoneFloatingTaskOutput("t [done"));
+		
+		assertTrue(!Checker.isDoneFloatingTaskOutput("t done]"));
+		
+		assertTrue(!Checker.isDoneFloatingTaskOutput("t [done]d"));
+		
+		// semicolon invalid case
+		assertTrue(!Checker.isDoneFloatingTaskOutput("task [done];"));
 		
 		assertTrue(!Checker.isDoneFloatingTaskOutput("task [don], a"));
 		
@@ -96,11 +118,23 @@ public class FlexTest4 {
 	
 		// done recurring task (user input command or file storage)
 	    assertTrue(Checker.isDoneRecurringTaskInput("tasker; 0001-2359 every wednesday; priority [done]"));		
+	    
+	    assertTrue(!Checker.isDoneRecurringTaskInput("tasker; 0001-2359 every wednesday; priority [done"));	
+	    
+	    assertTrue(!Checker.isDoneRecurringTaskInput("tasker; 0001-2359 every wednesday; priority done]"));	
+	    
+	    assertTrue(!Checker.isDoneRecurringTaskInput("tasker; 0001-2359 every wednesday; priority [done]w"));	
 
 	    assertTrue(!Checker.isDoneRecurringTaskInput("tasker; 0001-2359 every wednesday, priority"));	
 		
 		// done recurring task (GUI display)
-	    assertTrue(Checker.isDoneRecurringTaskOutput("tasker, 0001-2359 every wednesday, priority [done]"));		
+	    assertTrue(Checker.isDoneRecurringTaskOutput("tasker, 0001-2359 every wednesday, priority [done]"));	
+	    
+	    assertTrue(!Checker.isDoneRecurringTaskOutput("tasker, 0001-2359 every wednesday, priority [done"));	
+	    
+	    assertTrue(!Checker.isDoneRecurringTaskOutput("tasker, 0001-2359 every wednesday, priority done]"));	
+	    
+	    assertTrue(!Checker.isDoneRecurringTaskOutput("tasker, 0001-2359 every wednesday, priority [done]x"));	
 
 	    assertTrue(!Checker.isDoneRecurringTaskOutput("tasker; 0001-2359 every wednesday; priority"));		
 

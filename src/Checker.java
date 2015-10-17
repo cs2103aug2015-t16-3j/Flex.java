@@ -297,12 +297,16 @@ public class Checker {
 	static boolean isFloatingTaskInput(String string) {
 		String tempString = new String("");
 		tempString = string.trim();
-		
+			
 		if(tempString.length()==0){
 			return false;
 		}
-		
-		
+			
+		int semicolonIndex = tempString.indexOf(";");
+		if (semicolonIndex >= 0) {
+			return false;
+		}
+				
 		// IMPORTANT: make sure that this task is not marked as done
 		int doneStringIndex1 = tempString.indexOf(DONE_STRING);
 		if(doneStringIndex1 >= 0){
@@ -321,12 +325,6 @@ public class Checker {
 			return false;
 		}
 		
-		
-		int semicolonIndex = tempString.indexOf(";");
-		if (semicolonIndex >= 0) {
-			return false;
-		}
-		
 		return true;
 
 	}
@@ -336,6 +334,11 @@ public class Checker {
 		String tempString = new String("");
 		tempString = string.trim();
 		
+		int semicolonIndex = tempString.indexOf(";");
+		if (semicolonIndex >= 0) {
+			return false;
+		}
+		
 		if(tempString.length()==0){
 			return false;
 		}
@@ -343,6 +346,12 @@ public class Checker {
 		int doneStringIndex = tempString.indexOf(DONE_STRING);
 		
 		if(doneStringIndex < 0){
+			return false;
+		}
+		
+		String afterDoneString = tempString.substring(doneStringIndex + 6).trim();
+		
+		if(afterDoneString.length()!=0){
 			return false;
 		}
 		
@@ -371,6 +380,10 @@ public class Checker {
 			return false;
 		}
 		
+		int semicolonIndex = tempString.indexOf(";");
+		if (semicolonIndex >= 0) {
+			return false;
+		}
 		
 		// IMPORTANT: make sure that this task is not marked as done
 		int doneStringIndex1 = tempString.indexOf(DONE_STRING);
@@ -390,10 +403,6 @@ public class Checker {
 			return false;
 		}
 		
-		int semicolonIndex = tempString.indexOf(";");
-		if (semicolonIndex >= 0) {
-			return false;
-		}
 		return true;
 	}
 
@@ -407,9 +416,20 @@ public class Checker {
 			return false;
 		}
 		
+		int semicolonIndex = tempString.indexOf(";");
+		if (semicolonIndex >= 0) {
+			return false;
+		}
+				
 		int doneStringIndex = tempString.indexOf(DONE_STRING);
 		
 		if(doneStringIndex < 0){
+			return false;
+		}
+		
+		String afterDoneString = tempString.substring(doneStringIndex + 6).trim();
+		
+		if(afterDoneString.length()!=0){
 			return false;
 		}
 		
@@ -535,6 +555,12 @@ public class Checker {
 			return false;
 		}
 		
+		String afterDoneString = tempString.substring(doneStringIndex + 6).trim();
+		
+		if(afterDoneString.length()!=0){
+			return false;
+		}
+		
 		tempString = tempString.substring(0, doneStringIndex).trim();
 		
 		if(tempString.length()==0){
@@ -655,6 +681,12 @@ public class Checker {
 		int doneStringIndex = tempString.indexOf(DONE_STRING);
 		
 		if(doneStringIndex < 0){
+			return false;
+		}
+		
+		String afterDoneString = tempString.substring(doneStringIndex + 6).trim();
+		
+		if(afterDoneString.length()!=0){
 			return false;
 		}
 		
@@ -810,6 +842,12 @@ public class Checker {
 			return false;
 		}
 		
+		String afterDoneString = tempString.substring(doneStringIndex + 6).trim();
+		
+		if(afterDoneString.length()!=0){
+			return false;
+		}
+		
 		tempString = tempString.substring(0, doneStringIndex).trim();
 		
 		if(tempString.length()==0){
@@ -961,8 +999,14 @@ public class Checker {
 		if(doneStringIndex < 0){
 			return false;
 		}
+	
+		String afterDoneString = tempString.substring(doneStringIndex + 6).trim();
 		
-		tempString = tempString.substring(0, doneStringIndex).trim();
+		if(afterDoneString.length()!=0){
+			return false;
+		}
+		
+		tempString = tempString.substring(0, doneStringIndex).trim();		
 		
 		if(tempString.length()==0){
 			return false;
@@ -1108,6 +1152,12 @@ public class Checker {
 		int doneStringIndex = tempString.indexOf(DONE_STRING);
 		
 		if(doneStringIndex < 0){
+			return false;
+		}
+		
+		String afterDoneString = tempString.substring(doneStringIndex + 6).trim();
+		
+		if(afterDoneString.length()!=0){
 			return false;
 		}
 		
@@ -1258,6 +1308,12 @@ public class Checker {
 		int doneStringIndex = tempString.indexOf(DONE_STRING);
 		
 		if(doneStringIndex < 0){
+			return false;
+		}
+		
+		String afterDoneString = tempString.substring(doneStringIndex + 6).trim();
+		
+		if(afterDoneString.length()!=0){
 			return false;
 		}
 		

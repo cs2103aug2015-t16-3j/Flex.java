@@ -46,10 +46,22 @@ public class FlexTest2 {
 		// done event task input (user input and/or file storage form)
 		assertTrue(Checker.isDoneEventTaskInput("task; 0000-0001 on 22/10/1110; priority [done]"));
 		
+		assertTrue(!Checker.isDoneEventTaskInput("task; 0000-0001 on 22/10/1110; priority [done"));
+		
+		assertTrue(!Checker.isDoneEventTaskInput("task; 0000-0001 on 22/10/1110; priority done]"));
+		
+		assertTrue(!Checker.isDoneEventTaskInput("task; 0000-0001 on 22/10/1110; priority [done]a"));
+		
 		assertTrue(!Checker.isDoneEventTaskInput("t, 0000-0001 1/1/1; priority"));
 		
 		// done event task output(GUI display)
 		assertTrue(Checker.isDoneEventTaskOutput("task, 0000-0001 on 22/10/1110, priority [done]"));
+		
+		assertTrue(!Checker.isDoneEventTaskOutput("task, 0000-0001 on 22/10/1110, priority [done"));
+		
+		assertTrue(!Checker.isDoneEventTaskOutput("task, 0000-0001 on 22/10/1110, priority done]"));
+		
+		assertTrue(!Checker.isDoneEventTaskOutput("task, 0000-0001 on 22/10/1110, priority [done]b"));
 		
 		assertTrue(!Checker.isDoneEventTaskOutput("t, 0000-0001 1/1/1, priority"));
 	}
