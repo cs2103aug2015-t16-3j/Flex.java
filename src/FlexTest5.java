@@ -44,6 +44,8 @@ public class FlexTest5 {
 		// done deadline task (user input and/or file storage form)
 		assertTrue(Checker.isDoneDeadlineTaskInput("task; by 2000 on 1/1/1 [done]"));
 		
+		assertTrue(!Checker.isDoneDeadlineTaskInput("task; by 2000 on 1/1/1[done]"));
+		
 		assertTrue(!Checker.isDoneDeadlineTaskInput("task; by 2000 on 1/1/1 [done]a"));
 		
 		assertTrue(!Checker.isDoneDeadlineTaskInput("t; by 2000 on 1/1/1 [done"));
@@ -54,11 +56,13 @@ public class FlexTest5 {
 		
 		assertTrue(Checker.isDoneDeadlineTaskOutput("task, by 2000 on 1/1/1 [done]"));
 		
+		assertTrue(!Checker.isDoneDeadlineTaskOutput("task, by 2000 on 1/1/1[done]"));
+		
 		assertTrue(!Checker.isDoneDeadlineTaskOutput("task, by 2000 on 1/1/1 [done]a"));
 		
-		assertTrue(!Checker.isDoneDeadlineTaskInput("t, by 2000 on 1/1/1 [done"));
+		assertTrue(!Checker.isDoneDeadlineTaskOutput("t, by 2000 on 1/1/1 [done"));
 		
-		assertTrue(!Checker.isDoneDeadlineTaskInput("t, by 2000 on 1/1/1 [done"));
+		assertTrue(!Checker.isDoneDeadlineTaskOutput("t, by 2000 on 1/1/1 [done"));
 		
 		// all Strings, without the "[done]" substring, are in
 		// the invalid input partition for a deadline task which is done

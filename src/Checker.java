@@ -30,7 +30,7 @@ public class Checker {
 
 		String tempString = new String("");
 		tempString = time.trim();
-		
+
 		// ENDING TIME
 
 		// e.g. 1100
@@ -297,34 +297,36 @@ public class Checker {
 	static boolean isFloatingTaskInput(String string) {
 		String tempString = new String("");
 		tempString = string.trim();
-			
-		if(tempString.length()==0){
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-			
+
+		tempString = string.trim();
+
 		int semicolonIndex = tempString.indexOf(";");
 		if (semicolonIndex >= 0) {
 			return false;
 		}
-				
+
 		// IMPORTANT: make sure that this task is not marked as done
 		int doneStringIndex1 = tempString.indexOf(DONE_STRING);
-		if(doneStringIndex1 >= 0){
+		if (doneStringIndex1 >= 0) {
 			return false;
 		}
-		
+
 		// IMPORTANT: make sure that this task is not marked as done
 		int doneStringIndex2 = tempString.indexOf("[done");
-		if(doneStringIndex2 >= 0){
+		if (doneStringIndex2 >= 0) {
 			return false;
 		}
-		
+
 		// IMPORTANT: make sure that this task is not marked as done
 		int doneStringIndex3 = tempString.indexOf("done]");
-		if(doneStringIndex3 >= 0){
+		if (doneStringIndex3 >= 0) {
 			return false;
 		}
-		
+
 		return true;
 
 	}
@@ -333,41 +335,41 @@ public class Checker {
 	static boolean isDoneFloatingTaskInput(String string) {
 		String tempString = new String("");
 		tempString = string.trim();
-		
+
 		int semicolonIndex = tempString.indexOf(";");
 		if (semicolonIndex >= 0) {
 			return false;
 		}
-		
-		if(tempString.length()==0){
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
-		int doneStringIndex = tempString.indexOf(DONE_STRING);
-		
-		if(doneStringIndex < 0){
+
+		int whitespaceDoneStringIndex = tempString.indexOf(" [done]");
+
+		if (whitespaceDoneStringIndex < 0) {
 			return false;
 		}
-		
-		String afterDoneString = tempString.substring(doneStringIndex + 6).trim();
-		
-		if(afterDoneString.length()!=0){
+
+		String afterDoneString = tempString.substring(whitespaceDoneStringIndex + 7).trim();
+
+		if (afterDoneString.length() != 0) {
 			return false;
 		}
-		
-		tempString = tempString.substring(0, doneStringIndex).trim();
-		
-		if(tempString.length()==0){
+
+		tempString = tempString.substring(0, whitespaceDoneStringIndex).trim();
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
-		if(!Checker.isFloatingTaskInput(tempString)){
+
+		if (!Checker.isFloatingTaskInput(tempString)) {
 			return false;
 		}
-		
+
 		return true;
 	}
-	
+
 	// makes sure that a floating task's display(output on the GUI) String, will
 	// not have ";" (semicolons)
 	// as they are used as separators (not needed by a floating task)
@@ -375,34 +377,34 @@ public class Checker {
 	static boolean isFloatingTaskOutput(String string) {
 		String tempString = new String("");
 		tempString = string.trim();
-		
-		if(tempString.length()==0){
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
+
 		int semicolonIndex = tempString.indexOf(";");
 		if (semicolonIndex >= 0) {
 			return false;
 		}
-		
+
 		// IMPORTANT: make sure that this task is not marked as done
 		int doneStringIndex1 = tempString.indexOf(DONE_STRING);
-		if(doneStringIndex1 >= 0){
+		if (doneStringIndex1 >= 0) {
 			return false;
 		}
-		
+
 		// IMPORTANT: make sure that this task is not marked as done
 		int doneStringIndex2 = tempString.indexOf("[done");
-		if(doneStringIndex2 >= 0){
+		if (doneStringIndex2 >= 0) {
 			return false;
 		}
-		
+
 		// IMPORTANT: make sure that this task is not marked as done
 		int doneStringIndex3 = tempString.indexOf("done]");
-		if(doneStringIndex3 >= 0){
+		if (doneStringIndex3 >= 0) {
 			return false;
 		}
-		
+
 		return true;
 	}
 
@@ -411,295 +413,294 @@ public class Checker {
 	static boolean isDoneFloatingTaskOutput(String string) {
 		String tempString = new String("");
 		tempString = string.trim();
-		
-		if(tempString.length()==0){
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
+
 		int semicolonIndex = tempString.indexOf(";");
 		if (semicolonIndex >= 0) {
 			return false;
 		}
-				
-		int doneStringIndex = tempString.indexOf(DONE_STRING);
-		
-		if(doneStringIndex < 0){
+
+		int whitespaceDoneStringIndex = tempString.indexOf(" [done]");
+
+		if (whitespaceDoneStringIndex < 0) {
 			return false;
 		}
-		
-		String afterDoneString = tempString.substring(doneStringIndex + 6).trim();
-		
-		if(afterDoneString.length()!=0){
+
+		String afterDoneString = tempString.substring(whitespaceDoneStringIndex + 7).trim();
+
+		if (afterDoneString.length() != 0) {
 			return false;
 		}
-		
-		tempString = tempString.substring(0, doneStringIndex).trim();
-		
-		if(tempString.length()==0){
+
+		tempString = tempString.substring(0, whitespaceDoneStringIndex).trim();
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
-		if(!Checker.isFloatingTaskOutput(tempString)){
+
+		if (!Checker.isFloatingTaskOutput(tempString)) {
 			return false;
 		}
-		
+
 		return true;
 	}
-	
-	//checks if the input of a deadline is acceptable
+
+	// checks if the input of a deadline is acceptable
 	// <taskname>; by <end> on <date>
 	static boolean isDeadlineTaskInput(String string) {
 		String tempString = new String("");
 		tempString = string.trim();
-		
-		if(tempString.length()==0){
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
+
 		// IMPORTANT: make sure that this task is not marked as done
 		int doneStringIndex1 = tempString.indexOf(DONE_STRING);
-		if(doneStringIndex1 >= 0){
+		if (doneStringIndex1 >= 0) {
 			return false;
 		}
-		
+
 		// IMPORTANT: make sure that this task is not marked as done
 		int doneStringIndex2 = tempString.indexOf("[done");
-		if(doneStringIndex2 >= 0){
+		if (doneStringIndex2 >= 0) {
 			return false;
 		}
-		
+
 		// IMPORTANT: make sure that this task is not marked as done
 		int doneStringIndex3 = tempString.indexOf("done]");
-		if(doneStringIndex3 >= 0){
+		if (doneStringIndex3 >= 0) {
 			return false;
 		}
-		
+
 		int semicolonWhitespaceIndex1 = tempString.indexOf("; ");
-		
-		if(semicolonWhitespaceIndex1 <= 0){
+
+		if (semicolonWhitespaceIndex1 <= 0) {
 			return false;
 		}
-		
+
 		String taskName = tempString.substring(0, semicolonWhitespaceIndex1).trim();
-		
-		if(taskName.length()==0){
+
+		if (taskName.length() == 0) {
 			return false;
 		}
-		
+
 		tempString = tempString.substring(semicolonWhitespaceIndex1 + 2).trim();
-		
-		if(tempString.length()==0){
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
+
 		int byWhitespaceIndex1 = tempString.toLowerCase().indexOf("by ");
-		
-		if(byWhitespaceIndex1 < 0){
+
+		if (byWhitespaceIndex1 < 0) {
 			return false;
 		}
-		
+
 		tempString = tempString.substring(byWhitespaceIndex1 + 3).trim();
-		
-		if(tempString.length()==0){
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
+
 		int whitespaceOnWhitespaceIndex1 = tempString.toLowerCase().indexOf(" on ");
-		
-		if(whitespaceOnWhitespaceIndex1 < 0){
+
+		if (whitespaceOnWhitespaceIndex1 < 0) {
 			return false;
 		}
-		
+
 		String endingTime = tempString.substring(0, whitespaceOnWhitespaceIndex1);
-		
-		if(!Checker.isValidTime(endingTime)){
+
+		if (!Checker.isValidTime(endingTime)) {
 			return false;
 		}
-		
+
 		tempString = tempString.substring(whitespaceOnWhitespaceIndex1 + 4).trim();
-		
-		if(tempString.length()==0){
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
-		if(tempString.length()==0){
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
+
 		String date = tempString.trim();
-		
-		if(date.length()==0){
+
+		if (date.length() == 0) {
 			return false;
 		}
-		
-		if(!Checker.isValidDate(date)){
+
+		if (!Checker.isValidDate(date)) {
 			return false;
 		}
-		
+
 		return true;
-		
+
 	}
-	
-	// check the validity of file storage and/or user input version of a done deadline task
+
+	// check the validity of file storage and/or user input version of a done
+	// deadline task
 	static boolean isDoneDeadlineTaskInput(String string) {
 		String tempString = new String("");
 		tempString = string.trim();
-		
-		if(tempString.length()==0){
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
-		int doneStringIndex = tempString.indexOf(DONE_STRING);
-		
-		if(doneStringIndex < 0){
+
+		int whitespaceDoneStringIndex = tempString.indexOf(" [done]");
+
+		if (whitespaceDoneStringIndex < 0) {
 			return false;
 		}
-		
-		String afterDoneString = tempString.substring(doneStringIndex + 6).trim();
-		
-		if(afterDoneString.length()!=0){
+
+		String afterDoneString = tempString.substring(whitespaceDoneStringIndex + 7).trim();
+
+		if (afterDoneString.length() != 0) {
 			return false;
 		}
-		
-		tempString = tempString.substring(0, doneStringIndex).trim();
-		
-		if(tempString.length()==0){
+
+		tempString = tempString.substring(0, whitespaceDoneStringIndex).trim();
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
-		if(!Checker.isDeadlineTaskInput(tempString)){
+
+		if (!Checker.isDeadlineTaskInput(tempString)) {
 			return false;
 		}
-		
+
 		return true;
 	}
-    
+
 	// <taskname>, by <end> on <date>
 	static boolean isDeadlineTaskOutput(String string) {
 		String tempString = new String("");
 		tempString = string.trim();
-		
-		if(tempString.length()==0){
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
-		
+
 		// IMPORTANT: make sure that this task is not marked as done
 		int doneStringIndex1 = tempString.indexOf(DONE_STRING);
-		if(doneStringIndex1 >= 0){
+		if (doneStringIndex1 >= 0) {
 			return false;
 		}
-		
+
 		// IMPORTANT: make sure that this task is not marked as done
 		int doneStringIndex2 = tempString.indexOf("[done");
-		if(doneStringIndex2 >= 0){
+		if (doneStringIndex2 >= 0) {
 			return false;
 		}
-		
+
 		// IMPORTANT: make sure that this task is not marked as done
 		int doneStringIndex3 = tempString.indexOf("done]");
-		if(doneStringIndex3 >= 0){
+		if (doneStringIndex3 >= 0) {
 			return false;
 		}
-		
-		
+
 		int commaWhitespaceIndex1 = tempString.indexOf(", ");
-		
-		if(commaWhitespaceIndex1 <= 0){
+
+		if (commaWhitespaceIndex1 <= 0) {
 			return false;
 		}
-		
+
 		String taskName = tempString.substring(0, commaWhitespaceIndex1).trim();
-		
-		if(taskName.length()==0){
+
+		if (taskName.length() == 0) {
 			return false;
 		}
-		
+
 		tempString = tempString.substring(commaWhitespaceIndex1 + 2).trim();
-		
-		if(tempString.length()==0){
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
+
 		int byWhitespaceIndex1 = tempString.toLowerCase().indexOf("by ");
-		
-		if(byWhitespaceIndex1 < 0){
+
+		if (byWhitespaceIndex1 < 0) {
 			return false;
 		}
-		
+
 		tempString = tempString.substring(byWhitespaceIndex1 + 3).trim();
-		
-		if(tempString.length()==0){
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
+
 		int whitespaceOnWhitespaceIndex1 = tempString.toLowerCase().indexOf(" on ");
-		
-		if(whitespaceOnWhitespaceIndex1 < 0){
+
+		if (whitespaceOnWhitespaceIndex1 < 0) {
 			return false;
 		}
-		
+
 		String endingTime = tempString.substring(0, whitespaceOnWhitespaceIndex1);
-		
-		if(!Checker.isValidTime(endingTime)){
+
+		if (!Checker.isValidTime(endingTime)) {
 			return false;
 		}
-		
+
 		tempString = tempString.substring(whitespaceOnWhitespaceIndex1 + 4).trim();
-		
-		if(tempString.length()==0){
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
-		if(tempString.length()==0){
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
+
 		String date = tempString.trim();
-		
-		if(date.length()==0){
+
+		if (date.length() == 0) {
 			return false;
 		}
-		
-		if(!Checker.isValidDate(date)){
+
+		if (!Checker.isValidDate(date)) {
 			return false;
 		}
-		
+
 		return true;
 	}
-	
+
 	// check the validity of the GUI display of a done deadline task
 	// <taskname>, by <end> on <date> [done]
 	static boolean isDoneDeadlineTaskOutput(String string) {
 		String tempString = new String("");
 		tempString = string.trim();
-		
-		if(tempString.length()==0){
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
-		int doneStringIndex = tempString.indexOf(DONE_STRING);
-		
-		if(doneStringIndex < 0){
+
+		int whitespaceDoneStringIndex = tempString.indexOf(" [done]");
+
+		if (whitespaceDoneStringIndex < 0) {
 			return false;
 		}
-		
-		String afterDoneString = tempString.substring(doneStringIndex + 6).trim();
-		
-		if(afterDoneString.length()!=0){
+
+		String afterDoneString = tempString.substring(whitespaceDoneStringIndex + 7).trim();
+
+		if (afterDoneString.length() != 0) {
 			return false;
 		}
-		
-		tempString = tempString.substring(0, doneStringIndex).trim();
-		
-		if(tempString.length()==0){
+
+		tempString = tempString.substring(0, whitespaceDoneStringIndex).trim();
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
-		if(!Checker.isDeadlineTaskOutput(tempString)){
+
+		if (!Checker.isDeadlineTaskOutput(tempString)) {
 			return false;
 		}
-		
+
 		return true;
 	}
 
@@ -708,156 +709,155 @@ public class Checker {
 	static boolean isRecurringTaskInput(String string) {
 		String tempString = new String("");
 		tempString = string.trim();
-		
-		if(tempString.length()==0){
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
-		
+
 		// IMPORTANT: make sure that this task is not marked as done
 		int doneStringIndex1 = tempString.indexOf(DONE_STRING);
-		if(doneStringIndex1 >= 0){
+		if (doneStringIndex1 >= 0) {
 			return false;
 		}
-		
+
 		// IMPORTANT: make sure that this task is not marked as done
 		int doneStringIndex2 = tempString.indexOf("[done");
-		if(doneStringIndex2 >= 0){
+		if (doneStringIndex2 >= 0) {
 			return false;
 		}
-		
+
 		// IMPORTANT: make sure that this task is not marked as done
 		int doneStringIndex3 = tempString.indexOf("done]");
-		if(doneStringIndex3 >= 0){
+		if (doneStringIndex3 >= 0) {
 			return false;
 		}
-		
+
 		int semicolonWhitespaceIndex1 = tempString.indexOf("; ");
-		
-		if(semicolonWhitespaceIndex1 <= 0){
+
+		if (semicolonWhitespaceIndex1 <= 0) {
 			return false;
 		}
 
 		String taskName = tempString.substring(0, semicolonWhitespaceIndex1).trim();
-		
-		if(taskName.length()==0){
+
+		if (taskName.length() == 0) {
 			return false;
 		}
-		
+
 		tempString = tempString.substring(semicolonWhitespaceIndex1 + 2).trim();
-		
-		if(tempString.length()==0){
+
+		if (tempString.length() == 0) {
 			return false;
 		}
 
 		int dashIndex1 = tempString.indexOf("-");
-		
-		if(dashIndex1 < 0){
+
+		if (dashIndex1 < 0) {
 			return false;
 		}
-		
+
 		String startingTime = tempString.substring(0, dashIndex1).trim();
-		
-		if(startingTime.length()!=4){
+
+		if (startingTime.length() != 4) {
 			return false;
 		}
-		
-		if(!isValidTime(startingTime)){
+
+		if (!isValidTime(startingTime)) {
 			return false;
 		}
-		
+
 		tempString = tempString.substring(dashIndex1 + 1).trim();
-		
-		if(tempString.length()==0){
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
+
 		int whitespaceEveryIndex = tempString.toLowerCase().indexOf(" every");
-		
-		if(whitespaceEveryIndex < 0){
+
+		if (whitespaceEveryIndex < 0) {
 			return false;
 		}
-		
+
 		String endingTime = tempString.substring(0, whitespaceEveryIndex);
 
-		if(endingTime.length() !=  4){
+		if (endingTime.length() != 4) {
 			return false;
 		}
-		
-		if(!isValidTime(endingTime)){
+
+		if (!isValidTime(endingTime)) {
 			return false;
 		}
-		
+
 		tempString = tempString.substring(whitespaceEveryIndex + 6).trim();
-		
-		if(tempString.length()==0){
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
+
 		int semicolonWhitespaceIndex2 = tempString.indexOf("; ");
-		
-		if(semicolonWhitespaceIndex2 < 0){
+
+		if (semicolonWhitespaceIndex2 < 0) {
 			return false;
 		}
-		
+
 		String day = tempString.substring(0, semicolonWhitespaceIndex2).trim();
 
 		// monday, tuesday, wednesday, thursday, friday, saturday, sunday
-		if(day.length() == 0){
+		if (day.length() == 0) {
 			return false;
 		}
-		
-		if(!Checker.isValidDay(day)){
+
+		if (!Checker.isValidDay(day)) {
 			return false;
 		}
-		
+
 		tempString = tempString.substring(semicolonWhitespaceIndex2 + 2);
-		
-		if(tempString.length() == 0){
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
+
 		String priority = tempString;
 
-		if(priority.length()==0){
+		if (priority.length() == 0) {
 			return false;
 		}
-		
-		return true;		
-		
+
+		return true;
+
 	}
-	
+
 	// done recurring task (user input command or file storage format)
 	static boolean isDoneRecurringTaskInput(String string) {
 		String tempString = new String("");
 		tempString = string.trim();
-		
-		if(tempString.length()==0){
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
-		int doneStringIndex = tempString.indexOf(DONE_STRING);
-		
-		if(doneStringIndex < 0){
+
+		int whitespaceDoneStringIndex = tempString.indexOf(" [done]");
+
+		if (whitespaceDoneStringIndex < 0) {
 			return false;
 		}
-		
-		String afterDoneString = tempString.substring(doneStringIndex + 6).trim();
-		
-		if(afterDoneString.length()!=0){
+
+		String afterDoneString = tempString.substring(whitespaceDoneStringIndex + 7).trim();
+
+		if (afterDoneString.length() != 0) {
 			return false;
 		}
-		
-		tempString = tempString.substring(0, doneStringIndex).trim();
-		
-		if(tempString.length()==0){
+
+		tempString = tempString.substring(0, whitespaceDoneStringIndex).trim();
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
-		if(!Checker.isRecurringTaskInput(tempString)){
+
+		if (!Checker.isRecurringTaskInput(tempString)) {
 			return false;
 		}
-		
+
 		return true;
 	}
 
@@ -866,122 +866,121 @@ public class Checker {
 	static boolean isRecurringTaskOutput(String string) {
 		String tempString = new String("");
 		tempString = string.trim();
-		
-		if(tempString.length()==0){
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
-		
+
 		// IMPORTANT: make sure that this task is not marked as done
 		int doneStringIndex1 = tempString.indexOf(DONE_STRING);
-		if(doneStringIndex1 >= 0){
+		if (doneStringIndex1 >= 0) {
 			return false;
 		}
-		
+
 		// IMPORTANT: make sure that this task is not marked as done
 		int doneStringIndex2 = tempString.indexOf("[done");
-		if(doneStringIndex2 >= 0){
+		if (doneStringIndex2 >= 0) {
 			return false;
 		}
-		
+
 		// IMPORTANT: make sure that this task is not marked as done
 		int doneStringIndex3 = tempString.indexOf("done]");
-		if(doneStringIndex3 >= 0){
+		if (doneStringIndex3 >= 0) {
 			return false;
 		}
-		
+
 		int commaWhitespaceIndex1 = tempString.indexOf(", ");
-		
-		if(commaWhitespaceIndex1 <= 0){
+
+		if (commaWhitespaceIndex1 <= 0) {
 			return false;
 		}
 
 		String taskName = tempString.substring(0, commaWhitespaceIndex1).trim();
 
-		if(taskName.length()==0){
+		if (taskName.length() == 0) {
 			return false;
 		}
-		
+
 		tempString = tempString.substring(commaWhitespaceIndex1 + 2).trim();
-		
-		if(tempString.length()==0){
+
+		if (tempString.length() == 0) {
 			return false;
 		}
 
 		int dashIndex1 = tempString.indexOf("-");
-		
-		if(dashIndex1 <0){
+
+		if (dashIndex1 < 0) {
 			return false;
 		}
-		
+
 		String startingTime = tempString.substring(0, dashIndex1).trim();
 
-		if(startingTime.length()!=4){
+		if (startingTime.length() != 4) {
 			return false;
 		}
-		
-		if(!isValidTime(startingTime)){
+
+		if (!isValidTime(startingTime)) {
 			return false;
 		}
-		
+
 		tempString = tempString.substring(dashIndex1 + 1).trim();
-		
-		if(tempString.length()==0){
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
+
 		int whitespaceEveryIndex = tempString.toLowerCase().indexOf(" every");
-		
-		if(whitespaceEveryIndex < 0){
+
+		if (whitespaceEveryIndex < 0) {
 			return false;
 		}
-		
+
 		String endingTime = tempString.substring(0, whitespaceEveryIndex).trim();
-		
-		if(endingTime.length() !=4){
+
+		if (endingTime.length() != 4) {
 			return false;
 		}
-		
-		if(!isValidTime(endingTime)){
+
+		if (!isValidTime(endingTime)) {
 			return false;
 		}
-		
+
 		tempString = tempString.substring(whitespaceEveryIndex + 6).trim();
-		
-		if(tempString.length()==0){
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
+
 		int commaWhitespaceIndex2 = tempString.indexOf(", ");
-		
-		if(commaWhitespaceIndex2 < 0){
+
+		if (commaWhitespaceIndex2 < 0) {
 			return false;
 		}
-		
+
 		String day = tempString.substring(0, commaWhitespaceIndex2).trim();
-		
+
 		// monday, tuesday, wednesday, thursday, friday, saturday, sunday
-		if(day.length() == 0){
+		if (day.length() == 0) {
 			return false;
 		}
-		
-		if(!Checker.isValidDay(day)){
+
+		if (!Checker.isValidDay(day)) {
 			return false;
 		}
-		
+
 		tempString = tempString.substring(commaWhitespaceIndex2 + 2);
-		
-		if(tempString.length() == 0){
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
+
 		String priority = tempString;
-		
-		if(priority.length()==0){
+
+		if (priority.length() == 0) {
 			return false;
 		}
-		
-		return true;	
+
+		return true;
 	}
 
 	// done recurring task (GUI Display) format
@@ -989,33 +988,33 @@ public class Checker {
 	static boolean isDoneRecurringTaskOutput(String string) {
 		String tempString = new String("");
 		tempString = string.trim();
-		
-		if(tempString.length()==0){
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
-		int doneStringIndex = tempString.indexOf(DONE_STRING);
-		
-		if(doneStringIndex < 0){
+
+		int whitespaceDoneStringIndex = tempString.indexOf(" [done]");
+
+		if (whitespaceDoneStringIndex < 0) {
 			return false;
 		}
-	
-		String afterDoneString = tempString.substring(doneStringIndex + 6).trim();
-		
-		if(afterDoneString.length()!=0){
+
+		String afterDoneString = tempString.substring(whitespaceDoneStringIndex + 7).trim();
+
+		if (afterDoneString.length() != 0) {
 			return false;
 		}
-		
-		tempString = tempString.substring(0, doneStringIndex).trim();		
-		
-		if(tempString.length()==0){
+
+		tempString = tempString.substring(0, whitespaceDoneStringIndex).trim();
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
-		if(!Checker.isRecurringTaskOutput(tempString)){
+
+		if (!Checker.isRecurringTaskOutput(tempString)) {
 			return false;
 		}
-		
+
 		return true;
 	}
 
@@ -1024,326 +1023,329 @@ public class Checker {
 
 		String tempString = new String("");
 		tempString = string.trim();
-		
-		if(tempString.length()==0){
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
+
 		// IMPORTANT: make sure that this task is not marked as done
 		int doneStringIndex1 = tempString.indexOf(DONE_STRING);
-		if(doneStringIndex1 >= 0){
+		if (doneStringIndex1 >= 0) {
 			return false;
 		}
-		
+
 		// IMPORTANT: make sure that this task is not marked as done
 		int doneStringIndex2 = tempString.indexOf("[done");
-		if(doneStringIndex2 >= 0){
+		if (doneStringIndex2 >= 0) {
 			return false;
 		}
-		
+
 		// IMPORTANT: make sure that this task is not marked as done
 		int doneStringIndex3 = tempString.indexOf("done]");
-		if(doneStringIndex3 >= 0){
+		if (doneStringIndex3 >= 0) {
 			return false;
 		}
-		
-		
+
 		int semicolonWhitespaceIndex1 = tempString.indexOf("; ");
-		
-		if(semicolonWhitespaceIndex1 <= 0){
+
+		if (semicolonWhitespaceIndex1 <= 0) {
 			return false;
 		}
 
 		String taskName = tempString.substring(0, semicolonWhitespaceIndex1).trim();
-		
-		if(taskName.length()==0){
+
+		if (taskName.length() == 0) {
 			return false;
 		}
-		
+
 		tempString = tempString.substring(semicolonWhitespaceIndex1 + 2).trim();
-		
-		if(tempString.length()==0){
+
+		if (tempString.length() == 0) {
 			return false;
 		}
 
 		int dashIndex1 = tempString.indexOf("-");
-		
-		if(dashIndex1 < 0){
+
+		if (dashIndex1 < 0) {
 			return false;
 		}
-		
+
 		String startingTime = tempString.substring(0, dashIndex1).trim();
-		
-		if(startingTime.length() != 4){
+
+		if (startingTime.length() != 4) {
 			return false;
 		}
-		
-		if(!isValidTime(startingTime)){
+
+		if (!isValidTime(startingTime)) {
 			return false;
 		}
-		
+
 		tempString = tempString.substring(dashIndex1 + 1).trim();
 
-		if(tempString.length() == 0){
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
+
 		int whitespaceOnWhitespaceIndex1 = tempString.toLowerCase().indexOf(" on ");
-		
-		if(whitespaceOnWhitespaceIndex1 < 0){
+
+		if (whitespaceOnWhitespaceIndex1 < 0) {
 			return false;
 		}
-		
+
 		String endingTime = tempString.substring(0, whitespaceOnWhitespaceIndex1).trim();
 
-		if(endingTime.length() != 4){
+		if (endingTime.length() != 4) {
 			return false;
 		}
 
-		if(!Checker.isValidTime(endingTime)){
+		if (!Checker.isValidTime(endingTime)) {
 			return false;
 		}
-		
+
 		tempString = tempString.substring(whitespaceOnWhitespaceIndex1 + 4).trim();
-		
-		if(tempString.length() == 0){
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
+
 		int semicolonWhitespaceIndex2 = tempString.indexOf("; ");
-		
-		if(semicolonWhitespaceIndex2 < 0){
+
+		if (semicolonWhitespaceIndex2 < 0) {
 			return false;
 		}
-		
+
 		String date = tempString.substring(0, semicolonWhitespaceIndex2).trim();
 
-		if(date.length() == 0){
+		if (date.length() == 0) {
 			return false;
 		}
-		
-		if(!Checker.isValidDate(date)){
+
+		if (!Checker.isValidDate(date)) {
 			return false;
 		}
 
 		tempString = tempString.substring(semicolonWhitespaceIndex2 + 2).trim();
-		
-		if(tempString.length() == 0){
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
+
 		String priority = tempString.trim();
 
-		if(priority.length() == 0){
+		if (priority.length() == 0) {
 			return false;
 		}
-		
+
 		return true;
 	}
-	
+
 	static boolean isDoneEventTaskInput(String string) {
 		String tempString = new String("");
 		tempString = string.trim();
-		
-		if(tempString.length()==0){
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
-		int doneStringIndex = tempString.indexOf(DONE_STRING);
-		
-		if(doneStringIndex < 0){
+
+		int whitespaceDoneStringIndex = tempString.indexOf(" [done]");
+
+		if (whitespaceDoneStringIndex < 0) {
 			return false;
 		}
-		
-		String afterDoneString = tempString.substring(doneStringIndex + 6).trim();
-		
-		if(afterDoneString.length()!=0){
+
+		String afterDoneString = tempString.substring(whitespaceDoneStringIndex + 7).trim();
+
+		if (afterDoneString.length() != 0) {
 			return false;
 		}
-		
-		tempString = tempString.substring(0, doneStringIndex).trim();
-		
-		if(tempString.length()==0){
+
+		tempString = tempString.substring(0, whitespaceDoneStringIndex).trim();
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
-		if(!Checker.isEventTaskInput(tempString)){
+
+		if (!Checker.isEventTaskInput(tempString)) {
 			return false;
 		}
-		
+
 		return true;
 	}
-	
 
 	// <taskname>, <start>-<end> on <date>, <priority>
 	static boolean isEventTaskOutput(String string) {
 
 		String tempString = new String("");
 		tempString = string.trim();
-		
-		if(tempString.length()==0){
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
+
 		// IMPORTANT: make sure that this task is not marked as done
 		int doneStringIndex1 = tempString.indexOf(DONE_STRING);
-		if(doneStringIndex1 >= 0){
+		if (doneStringIndex1 >= 0) {
 			return false;
 		}
-		
+
 		// IMPORTANT: make sure that this task is not marked as done
 		int doneStringIndex2 = tempString.indexOf("[done");
-		if(doneStringIndex2 >= 0){
+		if (doneStringIndex2 >= 0) {
 			return false;
 		}
-		
+
 		// IMPORTANT: make sure that this task is not marked as done
 		int doneStringIndex3 = tempString.indexOf("done]");
-		if(doneStringIndex3 >= 0){
+		if (doneStringIndex3 >= 0) {
 			return false;
 		}
-		
+
 		int commaWhitespaceIndex1 = tempString.indexOf(", ");
-		
-		if(commaWhitespaceIndex1 <= 0){
+
+		if (commaWhitespaceIndex1 <= 0) {
 			return false;
 		}
 
 		String taskName = tempString.substring(0, commaWhitespaceIndex1).trim();
-		
-		if(taskName.length()==0){
+
+		if (taskName.length() == 0) {
 			return false;
 		}
-		
+
 		tempString = tempString.substring(commaWhitespaceIndex1 + 2).trim();
-		
-		if(tempString.length()==0){
+
+		if (tempString.length() == 0) {
 			return false;
 		}
 
 		int dashIndex1 = tempString.indexOf("-");
-		
-		if(dashIndex1 < 0){
-			return false;
-		}
-		
-		String startingTime = tempString.substring(0, dashIndex1).trim();
-		
-		if(startingTime.length()!=4){
-			return false;
-		}
-		
-		if(!isValidTime(startingTime)){
-			return false;
-		}
-		
-		tempString = tempString.substring(dashIndex1 + 1).trim();
-		
-		if(tempString.length() == 0){
-			return false;
-		}
-		
-		int whitespaceOnWhitespaceIndex1 = tempString.toLowerCase().indexOf(" on ");
-		
-		if(whitespaceOnWhitespaceIndex1 < 0){
-			return false;
-		}
-		
-		String endingTime = tempString.substring(0, whitespaceOnWhitespaceIndex1).trim();
-		
-		if(endingTime.length() != 4){
+
+		if (dashIndex1 < 0) {
 			return false;
 		}
 
-		if(!Checker.isValidTime(endingTime)){
+		String startingTime = tempString.substring(0, dashIndex1).trim();
+
+		if (startingTime.length() != 4) {
 			return false;
 		}
-		
+
+		if (!isValidTime(startingTime)) {
+			return false;
+		}
+
+		tempString = tempString.substring(dashIndex1 + 1).trim();
+
+		if (tempString.length() == 0) {
+			return false;
+		}
+
+		int whitespaceOnWhitespaceIndex1 = tempString.toLowerCase().indexOf(" on ");
+
+		if (whitespaceOnWhitespaceIndex1 < 0) {
+			return false;
+		}
+
+		String endingTime = tempString.substring(0, whitespaceOnWhitespaceIndex1).trim();
+
+		if (endingTime.length() != 4) {
+			return false;
+		}
+
+		if (!Checker.isValidTime(endingTime)) {
+			return false;
+		}
+
 		tempString = tempString.substring(whitespaceOnWhitespaceIndex1 + 4).trim();
-		
-		if(tempString.length() == 0){
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
+
 		int commaWhitespaceIndex2 = tempString.indexOf(", ");
-		
-		if(commaWhitespaceIndex2 < 0){
+
+		if (commaWhitespaceIndex2 < 0) {
 			return false;
 		}
-		
+
 		String date = tempString.substring(0, commaWhitespaceIndex2).trim();
-		
-		if(date.length() == 0){
+
+		if (date.length() == 0) {
 			return false;
 		}
-		
-		if(!Checker.isValidDate(date)){
+
+		if (!Checker.isValidDate(date)) {
 			return false;
 		}
 
 		tempString = tempString.substring(commaWhitespaceIndex2 + 2).trim();
-		
-		if(tempString.length() == 0){
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
+
 		String priority = tempString.trim();
-		
-		if(priority.length() == 0){
+
+		if (priority.length() == 0) {
 			return false;
 		}
-		
+
 		return true;
 	}
-	
+
 	// <taskname>, <start>-<end> on <date>, <priority> [done]
 	static boolean isDoneEventTaskOutput(String string) {
 		String tempString = new String("");
 		tempString = string.trim();
-		
-		if(tempString.length()==0){
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
-		int doneStringIndex = tempString.indexOf(DONE_STRING);
-		
-		if(doneStringIndex < 0){
+
+		int whitespaceDoneStringIndex = tempString.indexOf(" [done]");
+
+		if (whitespaceDoneStringIndex < 0) {
 			return false;
 		}
-		
-		String afterDoneString = tempString.substring(doneStringIndex + 6).trim();
-		
-		if(afterDoneString.length()!=0){
+
+		String afterDoneString = tempString.substring(whitespaceDoneStringIndex + 7).trim();
+
+		if (afterDoneString.length() != 0) {
 			return false;
 		}
-		
-		tempString = tempString.substring(0, doneStringIndex).trim();
-		
-		if(tempString.length()==0){
+
+		tempString = tempString.substring(0, whitespaceDoneStringIndex).trim();
+
+		if (tempString.length() == 0) {
 			return false;
 		}
-		
-		if(!Checker.isEventTaskOutput(tempString)){
+
+		if (!Checker.isEventTaskOutput(tempString)) {
 			return false;
 		}
-		
+
 		return true;
 	}
 
 	// checks if a string is the full name of a day in a week, ignoring case
-	static boolean isValidDay(String string){
+	static boolean isValidDay(String string) {
 		String tempString = new String("");
 		tempString = string.trim();
-		
-		if(tempString.length() <= 5){
+
+		if (tempString.length() <= 5) {
 			return false;
 		}
 
-		if(tempString.toLowerCase().equalsIgnoreCase("monday")||tempString.toLowerCase().equalsIgnoreCase("tuesday")||tempString.toLowerCase().equalsIgnoreCase("wednesday")||tempString.toLowerCase().equalsIgnoreCase("thursday")||tempString.toLowerCase().equalsIgnoreCase("friday")||tempString.toLowerCase().equalsIgnoreCase("saturday")||tempString.toLowerCase().equalsIgnoreCase("sunday")){
+		if (tempString.toLowerCase().equalsIgnoreCase("monday") || tempString.toLowerCase().equalsIgnoreCase("tuesday")
+				|| tempString.toLowerCase().equalsIgnoreCase("wednesday")
+				|| tempString.toLowerCase().equalsIgnoreCase("thursday")
+				|| tempString.toLowerCase().equalsIgnoreCase("friday")
+				|| tempString.toLowerCase().equalsIgnoreCase("saturday")
+				|| tempString.toLowerCase().equalsIgnoreCase("sunday")) {
 			return true;
 		}
-		
+
 		return false;
 	}
-		
+
 }

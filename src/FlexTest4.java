@@ -61,8 +61,10 @@ public class FlexTest4 {
 		// semicolon invalid case
 		assertTrue(!Checker.isFloatingTaskOutput("task test test1; a"));
 	
-		// done floating task (user input command or file storage)
+		// done floating task input(user input command or file storage)
 		assertTrue(Checker.isDoneFloatingTaskInput("t [done]"));
+		
+		assertTrue(!Checker.isDoneFloatingTaskInput("t[done]"));
 		
 		assertTrue(!Checker.isDoneFloatingTaskInput("t [done"));
 		
@@ -77,9 +79,11 @@ public class FlexTest4 {
 		
 		assertTrue(!Checker.isDoneFloatingTaskInput("task [don]; a"));
 		
-		// done floating task (GUI display)
+		// done floating task output (GUI display)
 		
 		assertTrue(Checker.isDoneFloatingTaskOutput("t [done]"));
+		
+		assertTrue(!Checker.isDoneFloatingTaskOutput("t[done]"));
 		
 		assertTrue(!Checker.isDoneFloatingTaskOutput("t [done"));
 		
@@ -116,8 +120,10 @@ public class FlexTest4 {
 
 		assertTrue(!Checker.isRecurringTaskOutput("task name, 0002-0003 evry tuesday, priority"));
 	
-		// done recurring task (user input command or file storage)
+		// done recurring task input (user input command or file storage)
 	    assertTrue(Checker.isDoneRecurringTaskInput("tasker; 0001-2359 every wednesday; priority [done]"));		
+	    
+	    assertTrue(!Checker.isDoneRecurringTaskInput("tasker; 0001-2359 every wednesday; priority[done]"));	
 	    
 	    assertTrue(!Checker.isDoneRecurringTaskInput("tasker; 0001-2359 every wednesday; priority [done"));	
 	    
@@ -127,8 +133,10 @@ public class FlexTest4 {
 
 	    assertTrue(!Checker.isDoneRecurringTaskInput("tasker; 0001-2359 every wednesday, priority"));	
 		
-		// done recurring task (GUI display)
+		// done recurring task output(GUI display)
 	    assertTrue(Checker.isDoneRecurringTaskOutput("tasker, 0001-2359 every wednesday, priority [done]"));	
+	    
+	    assertTrue(!Checker.isDoneRecurringTaskOutput("tasker, 0001-2359 every wednesday, priority[done]"));	
 	    
 	    assertTrue(!Checker.isDoneRecurringTaskOutput("tasker, 0001-2359 every wednesday, priority [done"));	
 	    
