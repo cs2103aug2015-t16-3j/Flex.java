@@ -235,6 +235,9 @@ public class CRUD {
 
 		} else if (Checker.isValidDate(deleteVariableType)) {
 			// delete <date> <number>
+
+			String date = deleteVariableType.trim();
+
 			String tempNumber = tempString.trim();
 
 			char[] charArray2 = new char[tempNumber.length()];
@@ -281,15 +284,27 @@ public class CRUD {
 				return;
 			}
 
-			tempTask = deadlineOrEventTasksList.get(Integer.valueOf(tempNumber) - 1);
+			int counterIndex = 0;
 
-			lastAction.setPreviousTask(tempTask);
+			for (int r = 0; r < allTasksList.size(); r++) {
+				if (Checker.isDeadlineTaskInput(allTasksList.get(r).getScheduleString())
+						|| Checker.isDoneDeadlineTaskInput(allTasksList.get(r).getScheduleString())
+						|| Checker.isEventTaskInput(allTasksList.get(r).getScheduleString())
+						|| Checker.isDoneEventTaskInput(allTasksList.get(r).getScheduleString())) {
+					if (allTasksList.get(r).getDate().equalsIgnoreCase(date)) {
+						counterIndex += 1;
 
-			lastAction.setPreviousAction("delete");
+						if (counterIndex == Integer.valueOf(tempNumber)) {
+							tempTask = allTasksList.get(r);
+							lastAction.setPreviousTask(tempTask);
+							lastAction.setPreviousAction("delete");
 
-			allTasksList.remove(Integer.valueOf(tempNumber) - 1);
-
-			taskExists = true;
+							allTasksList.remove(r);
+							taskExists = true;
+						}
+					}
+				}
+			}
 
 		} else {
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");

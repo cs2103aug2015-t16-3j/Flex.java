@@ -1,11 +1,11 @@
-task; by 0001 on 1/1/1 [done]
+task; by 0001 on 1/1/1
 task; by 0001 on 1/1/1
 task; by 0001 on 1/1/1 [done]
-task; by 0001 on 1/1/1
-task; by 0001 on 1/1/2 [done]
+task; by 0001 on 1/1/1 [done]
 task; by 0001 on 1/1/2
-task; 0000-0001 on 2/2/2; priority [done]
+task; by 0001 on 1/1/2 [done]
 task; 0000-0001 on 2/2/2; priority
+task; 0000-0001 on 2/2/2; priority [done]
 task; 0000-0001 on 3/3/3; priority
 task; 0000-0001 on 4/4/4; priority [done]
 tasking; by 0020 on 5/5/5
@@ -26,8 +26,8 @@ module
 node
 thunder
 water
-task; 0000-0001 every tuesday; priority [done]
 task; 0000-0001 every tuesday; prioriWy
+task; 0000-0001 every tuesday; priority [done]
 task; 0001-0002 every tuesday; prioriWy
 task; 2359-2359 every tuesday; priworiWy
 task; 0000-0001 every wednesday; prioriWy
