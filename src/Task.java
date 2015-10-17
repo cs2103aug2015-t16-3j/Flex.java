@@ -222,19 +222,6 @@ public class Task {
 
 			calculateAndSetComparisonValue(string);
 
-			// FOR CHECKING
-			System.out.println("comparisonValue: " + comparisonValue);
-			System.out.println("deadline task input");
-			System.out.println("this.taskVariables[0] taskname:" + this.taskVariables[0]);
-			System.out.println("this.taskVariables[1] date:" + this.taskVariables[1]);
-			System.out.println("this.taskVariables[2] day:" + this.taskVariables[2]);
-			System.out.println("this.taskVariables[3] starting time:" + this.taskVariables[3]);
-			System.out.println("this.taskVariables[4] ending time:" + this.taskVariables[4]);
-			System.out.println("this.taskVariables[5] priority:" + this.taskVariables[5]);
-			System.out.println("this.taskVariables[6] done_string:" + this.taskVariables[6]);
-			System.out.println("this.taskVariables[7] schedule(file) string:" + this.taskVariables[7]);
-			System.out.println("this.taskVariables[8] display (GUI) string:" + this.taskVariables[8]);
-
 		} else if (Checker.isDoneDeadlineTaskInput(string)) {
 			// format: <taskname>; by <end> on <date> [done]
 			String tempString = new String("");
