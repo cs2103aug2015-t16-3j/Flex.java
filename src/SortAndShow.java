@@ -489,7 +489,63 @@ public class SortAndShow {
 			allTasksList.set(start1, temp2);
 			allTasksList.set(min_index1, temp1);
 		}
+		
+		ArrayList<Task> deadlineOrEventTasksList = new ArrayList<Task>();		
+		ArrayList<Task> floatingTasksList = new ArrayList<Task>();		
+		ArrayList<Task> recurringTasksList = new ArrayList<Task>();
+		
+		for(int j=0; j<allTasksList.size(); j++){
+			if(Checker.isDeadlineTaskInput(allTasksList.get(j).getScheduleString())||Checker.isDoneDeadlineTaskInput(allTasksList.get(j).getScheduleString())||Checker.isEventTaskInput(allTasksList.get(j).getScheduleString())||Checker.isDoneEventTaskInput(allTasksList.get(j).getScheduleString())){
+				deadlineOrEventTasksList.add(allTasksList.get(j));
+			} else if(Checker.isFloatingTaskInput(allTasksList.get(j).getScheduleString())||Checker.isDoneFloatingTaskInput(allTasksList.get(j).getScheduleString())){
+				floatingTasksList.add(allTasksList.get(j));
+			} else if(Checker.isRecurringTaskInput(allTasksList.get(j).getScheduleString())||Checker.isDoneRecurringTaskInput(allTasksList.get(j).getScheduleString())){
+				recurringTasksList.add(allTasksList.get(j));
+			}					
+		}
+		
+		// sort recurring tasks by day and starting time
+		int size2 = recurringTasksList.size();
+		int k, start2, min_index2 = 0;
 
+		for (start2 = 0; start2 < size2 - 1; start2++) {
+			min_index2 = start2;
+
+			for (k = start2 + 1; k < size2; k++) {
+				if (recurringTasksList.get(k).getRecurringTaskValue() < recurringTasksList.get(min_index2).getRecurringTaskValue()) {
+					min_index2 = k;
+				}
+			}
+
+			Task temp3 = recurringTasksList.get(start2);
+			Task temp4 = recurringTasksList.get(min_index2);
+			recurringTasksList.set(start2, temp4);
+			recurringTasksList.set(min_index2, temp3);
+		}
+		
+		ArrayList<Task> tempTasksList = new ArrayList<Task>();
+		
+		if(!deadlineOrEventTasksList.isEmpty()){
+			for(int m=0; m<deadlineOrEventTasksList.size(); m++){
+				tempTasksList.add(deadlineOrEventTasksList.get(m));
+			}
+		}
+		
+		if(!floatingTasksList.isEmpty()){
+			for(int n=0; n<floatingTasksList.size(); n++){
+				tempTasksList.add(floatingTasksList.get(n));
+			}
+		}
+		
+		if(!recurringTasksList.isEmpty()){
+			for(int o=0; o<recurringTasksList.size(); o++){
+				tempTasksList.add(recurringTasksList.get(o));
+			}
+		}
+
+		for(int w=0; w<allTasksList.size(); w++){
+			allTasksList.set(w, tempTasksList.get(w));
+		}
 	}
 
 	// shows event tasks in the schedule

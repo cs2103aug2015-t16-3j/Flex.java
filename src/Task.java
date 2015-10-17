@@ -20,6 +20,8 @@ public class Task {
 	// this is used for sorting the tasks in the schedule file
 	private double comparisonValue = 0.0;
 
+	private double recurringTaskValue = 0.0;
+
 	private static final String DONE_STRING = "[done]";
 
 	// format of the different types of tasks
@@ -74,6 +76,8 @@ public class Task {
 
 	private static final double RECURRING_TASK_COMPARISON_VALUE = 2129611680;
 
+	private static final double DEADLINE_AND_EVENT_NEGATIVE_SETOFF_VALUE = -2129611680;
+
 	public Task(String taskInformation) {
 		String string = new String("");
 
@@ -120,7 +124,7 @@ public class Task {
 			this.taskVariables[7] = string;
 			// <taskname>; <start>-<end> on <date>, <priority>
 			this.taskVariables[8] = taskName + ", " + startingTime + "-" + endingTime + " on " + date + ", " + priority;
-			
+
 			// set the null variables
 			this.taskVariables[2] = null;
 			this.taskVariables[6] = null;
@@ -128,7 +132,6 @@ public class Task {
 			// set the comparison value
 			calculateAndSetComparisonValue(string);
 
-	
 		} else if (Checker.isDoneEventTaskInput(string)) {
 			// format: <taskname>; <start>-<end> on <date>; <priority> [done]
 			String tempString = new String("");
@@ -175,13 +178,13 @@ public class Task {
 			// <taskname>; <start>-<end> on <date>, <priority>
 			this.taskVariables[8] = taskName + ", " + startingTime + "-" + endingTime + " on " + date + ", " + priority
 					+ " " + DONE_STRING;
-			
+
 			// set the null variables
 			this.taskVariables[2] = null;
 
 			// set the comparison value
 			calculateAndSetComparisonValue(string);
-			
+
 		} else if (Checker.isDeadlineTaskInput(string)) {
 			// format: <taskname>; by <end> on <date>
 
@@ -265,7 +268,6 @@ public class Task {
 
 			calculateAndSetComparisonValue(string);
 
-	
 		} else if (Checker.isRecurringTaskInput(string)) {
 			// format: <taskname>; <start>-<end> every <day>; <priority>
 			String tempString = new String("");
@@ -304,17 +306,19 @@ public class Task {
 			this.taskVariables[3] = startingTime;
 			this.taskVariables[4] = endingTime;
 			this.taskVariables[5] = priority;
-			this.taskVariables[7] = taskName + "; " + startingTime + "-" + endingTime + " every " + day.toLowerCase() + "; "
-					+ priority;
-			
-			this.taskVariables[8] = taskName + ", " + startingTime + "-" + endingTime + " every " + day.toLowerCase() + ", "
-					+ priority;
+			this.taskVariables[7] = taskName + "; " + startingTime + "-" + endingTime + " every " + day.toLowerCase()
+					+ "; " + priority;
+
+			this.taskVariables[8] = taskName + ", " + startingTime + "-" + endingTime + " every " + day.toLowerCase()
+					+ ", " + priority;
 
 			// set the null variables
 			this.taskVariables[1] = null;
 			this.taskVariables[6] = null;
 
 			calculateAndSetComparisonValue(string);
+			
+			calculateAndSetRecurringTaskValue(this.taskVariables[7]);
 
 		} else if (Checker.isDoneRecurringTaskInput(string)) {
 			// format: <taskname>; <start>-<end> every <day>; priority [done]
@@ -350,7 +354,7 @@ public class Task {
 			tempString = tempString.substring(semicolonWhitespaceIndex2 + 2);
 
 			String priority = tempString;
-			
+
 			// set the non-null attributes
 			this.taskVariables[0] = taskName;
 			this.taskVariables[2] = day.toLowerCase();
@@ -358,16 +362,18 @@ public class Task {
 			this.taskVariables[4] = endingTime;
 			this.taskVariables[5] = priority;
 			this.taskVariables[6] = DONE_STRING;
-			this.taskVariables[7] = taskName + "; " + startingTime + "-" + endingTime + " every " + day.toLowerCase() + "; " 
-					+ priority + " " + DONE_STRING;;
-			this.taskVariables[8] = taskName + ", " + startingTime + "-" + endingTime + " every " + day.toLowerCase() + ", " 
-					+ priority + " " + DONE_STRING;
+			this.taskVariables[7] = taskName + "; " + startingTime + "-" + endingTime + " every " + day.toLowerCase()
+					+ "; " + priority + " " + DONE_STRING;
+			;
+			this.taskVariables[8] = taskName + ", " + startingTime + "-" + endingTime + " every " + day.toLowerCase()
+					+ ", " + priority + " " + DONE_STRING;
 
 			// set the null variables
 			this.taskVariables[1] = null;
 
 			calculateAndSetComparisonValue(string);
-
+			
+			calculateAndSetRecurringTaskValue(this.taskVariables[7]);
 
 		} else if (Checker.isFloatingTaskInput(string)) {
 			// format: <taskname>
@@ -419,7 +425,6 @@ public class Task {
 
 			calculateAndSetComparisonValue(string);
 
-	
 		}
 	}
 
@@ -461,6 +466,8 @@ public class Task {
 		return accumulatedNumberOfDaysInPastMonths + numberOfPastDays;
 	}
 
+	// calculates and sets comparisonValue for sorting tasks by date and starting time
+	// the String parameter "string" is to be the schedule (file) String of the task
 	public void calculateAndSetComparisonValue(String string) {
 		if (Checker.isEventTaskInput(string)) {
 			// e.g. 7/9/2015
@@ -507,7 +514,8 @@ public class Task {
 
 			// e.g. this.comparisonValue = 503 * 366 + 1500 * 365 +
 			// (NOVEMBER_ACCUMULATED_DAYS + 0) * 24 * 60 + 8 * 60 + 59;
-			this.comparisonValue = numberOfPastLeapYears * LEAP_YEAR_DAYS * DAY_HOURS * HOUR_MINUTES
+			this.comparisonValue = DEADLINE_AND_EVENT_NEGATIVE_SETOFF_VALUE
+					+ numberOfPastLeapYears * LEAP_YEAR_DAYS * DAY_HOURS * HOUR_MINUTES
 					+ numberOfPastNonLeapyears * YEAR_DAYS * DAY_HOURS * HOUR_MINUTES
 					+ (numberOfAccumulatedPastDaysInCurrentYear + leapYearFebruaryDay) * DAY_HOURS * HOUR_MINUTES
 					+ numberOfPastHours * HOUR_MINUTES + numberOfPastMinutes;
@@ -556,7 +564,8 @@ public class Task {
 
 			// e.g. this.comparisonValue = 503 * 366 + 1500 * 365 +
 			// (NOVEMBER_ACCUMULATED_DAYS + 0) * 24 * 60 + 8 * 60 + 59;
-			this.comparisonValue = numberOfPastLeapYears * LEAP_YEAR_DAYS * DAY_HOURS * HOUR_MINUTES
+			this.comparisonValue = DEADLINE_AND_EVENT_NEGATIVE_SETOFF_VALUE
+					+ numberOfPastLeapYears * LEAP_YEAR_DAYS * DAY_HOURS * HOUR_MINUTES
 					+ numberOfPastNonLeapyears * YEAR_DAYS * DAY_HOURS * HOUR_MINUTES
 					+ (numberOfAccumulatedPastDaysInCurrentYear + leapYearFebruaryDay) * DAY_HOURS * HOUR_MINUTES
 					+ numberOfPastHours * HOUR_MINUTES + numberOfPastMinutes;
@@ -600,7 +609,8 @@ public class Task {
 
 			// e.g. this.comparisonValue = 503 * 366 + 1500 * 365 +
 			// (NOVEMBER_ACCUMULATED_DAYS + 0) * 24 * 60;
-			this.comparisonValue = -0.5 + numberOfPastLeapYears * LEAP_YEAR_DAYS * DAY_HOURS * HOUR_MINUTES
+			this.comparisonValue = -0.5 + DEADLINE_AND_EVENT_NEGATIVE_SETOFF_VALUE
+					+ numberOfPastLeapYears * LEAP_YEAR_DAYS * DAY_HOURS * HOUR_MINUTES
 					+ numberOfPastNonLeapyears * YEAR_DAYS * DAY_HOURS * HOUR_MINUTES
 					+ (numberOfAccumulatedPastDaysInCurrentYear + leapYearFebruaryDay) * DAY_HOURS * HOUR_MINUTES;
 
@@ -642,7 +652,8 @@ public class Task {
 
 			// e.g. this.comparisonValue = 503 * 366 + 1500 * 365 +
 			// (NOVEMBER_ACCUMULATED_DAYS + 0) * 24 * 60;
-			this.comparisonValue = -0.5 + numberOfPastLeapYears * LEAP_YEAR_DAYS * DAY_HOURS * HOUR_MINUTES
+			this.comparisonValue = -0.5 + DEADLINE_AND_EVENT_NEGATIVE_SETOFF_VALUE
+					+ numberOfPastLeapYears * LEAP_YEAR_DAYS * DAY_HOURS * HOUR_MINUTES
 					+ numberOfPastNonLeapyears * YEAR_DAYS * DAY_HOURS * HOUR_MINUTES
 					+ (numberOfAccumulatedPastDaysInCurrentYear + leapYearFebruaryDay) * DAY_HOURS * HOUR_MINUTES;
 
@@ -658,7 +669,53 @@ public class Task {
 
 	}
 
-	// retrieves the comparisonValue for sorting
+	// calculates and sets the recurring task's value for sorting only
+	// recurring tasks by day and starting time
+	// the String parameter "recurringTaskInputString" is to be the schedule (file) String of the recurring task
+	public void calculateAndSetRecurringTaskValue(String recurringTaskInputString) {
+		String tempString = new String("");
+		tempString = recurringTaskInputString.trim();
+		
+		if(!(Checker.isRecurringTaskInput(tempString) || Checker.isDoneRecurringTaskInput(tempString))){
+			return;
+		}
+		
+		String day = this.taskVariables[2].trim();
+		
+		double dayValue = 0.0;
+
+		if (day.equalsIgnoreCase("monday")) {
+			dayValue = 1;
+		} else if (day.equalsIgnoreCase("tuesday")) {
+			dayValue = 2;
+		} else if (day.equalsIgnoreCase("wednesday")) {
+			dayValue = 3;
+		} else if (day.equalsIgnoreCase("thursday")) {
+			dayValue = 4;
+		} else if (day.equalsIgnoreCase("friday")) {
+			dayValue = 5;
+		} else if (day.equalsIgnoreCase("saturday")) {
+			dayValue = 6;
+		} else if (day.equalsIgnoreCase("sunday")) {
+			dayValue = 7;
+		} 
+
+		String startingTime = taskVariables[3].trim();
+		
+		double startingTimeHours = Double.valueOf(startingTime.substring(0, 2).trim());
+		
+		double startingTimeMinutes = Double.valueOf(startingTime.substring(2,4).trim());
+		
+		this.recurringTaskValue = dayValue * DAY_HOURS * HOUR_MINUTES + startingTimeHours * HOUR_MINUTES + startingTimeMinutes;
+	}
+
+	// retrieves the comparisonValue for sorting only recurring tasks by day and
+	// starting time
+	public double getRecurringTaskValue() {
+		return this.recurringTaskValue;
+	}
+
+	// retrieves the comparisonValue for sorting tasks by date and starting time
 	public double getComparisonValue() {
 		return this.comparisonValue;
 	}
