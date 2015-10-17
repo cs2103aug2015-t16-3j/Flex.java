@@ -200,13 +200,20 @@ public class Flex {
 					System.out.println();	
 				}
 
+				boolean isAddedTaskValid = (Checker.isFloatingTaskInput(remainingCommandString)
+						|| Checker.isDoneFloatingTaskInput(remainingCommandString)
+						|| Checker.isDeadlineTaskInput(remainingCommandString)
+						|| Checker.isDoneDeadlineTaskInput(remainingCommandString)
+						|| Checker.isEventTaskInput(remainingCommandString)
+						|| Checker.isDoneEventTaskInput(remainingCommandString)
+						|| Checker.isRecurringTaskInput(remainingCommandString))
+						|| Checker.isDoneRecurringTaskInput(remainingCommandString);
+				
 				// Only if the task is a floating task, a deadline task, or a
 				// normal task, then it will be attempted to be added to the
 				// .txt schedule file (i.e. tasks which are not done) yet
-				if (Checker.isFloatingTask(remainingCommandString) || Checker.isDeadlineTask(remainingCommandString)
-						|| Checker.isEventTask(remainingCommandString)) {
+				if (isAddedTaskValid) {
 					CRUD.addTask(filename, remainingCommandString, lastAction, flexWindow);
-					SortAndShow.readAndDisplayAll(filename, flexWindow);
 				} else {
 					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
 					flexWindow.getTextArea().append("\n");

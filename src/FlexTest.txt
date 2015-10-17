@@ -1,17 +1,20 @@
-Project Manual, 9/11/2015, 2359
-V0.2, 22/10/2015, 1600, 1700, high
-Reflection 2, 17/10/2015, 2359
-Reflection Peer Review, 20/10/2015, 2359
-OP2 Conferencing, 20/10/2015, 1045, 1115, medium
-Project Meeting, 16/10/2015, 1200, 1400, medium
-Lab Meeting, 22/10/2015, 1200, 1400, low
-Lab Report, 23/10/2015, 2359
-Mid-term Test, 8/11/2015, 0800, 1000, high
-Study session, 10/11/2015, 0900, 1700, low
-Watch Despicable Me
-Play DOTA2
-Run at the park
-Water plants at home
-Read a book
-Do laundry
-Clean my room
+task; by 0001 on 1/1/1
+task; by 0001 on 1/1/1 [done]
+task; by 0001 on 1/1/1
+task; by 0001 on 1/1/1 [done]
+task; by 0001 on 1/1/2
+task; by 0001 on 1/1/2 [done]
+task; 0000-0001 on 2/2/2; priority
+task; 0000-0001 on 2/2/2; priority [done]
+task; 0000-0001 on 3/3/3; priority
+task; 0000-0001 on 4/4/4; priority [done]
+task; by 0001 on 9/9/9
+task; by 0001 on 9/9/10
+task; by 0001 on 14/12/10 [done]
+task; 0000-0001 every tuesday; priority [done]
+task; 0000-0001 every sunday; priority1 [done]
+task; 0000-0001 every sunday; priorityMILLION [done]
+task; 0000-0001 every tuesday; prioriWy [done]
+task; 0000-0001 every tuesday; prioriWy
+task; 0000-0001 every tuesday; prioriWy
+task; 0000-0001 every tuesday; priworiWy

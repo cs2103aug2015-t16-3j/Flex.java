@@ -107,9 +107,9 @@ public class CRUD {
 		do {
 			currentLine1 = reader1.readLine();
 			if (currentLine1 != null) {
-				if (Checker.isFloatingTask(currentLine1)) {
+				if (Checker.isFloatingTaskInput(currentLine1)) {
 					floatingTasksList.add(new Task(currentLine1));
-				} else if (Checker.isDeadlineTask(currentLine1) || Checker.isEventTask(currentLine1)) {
+				} else if (Checker.isDeadlineTaskInput(currentLine1) || Checker.isEventTaskInput(currentLine1)) {
 					deadlineOrEventTasksList.add(new Task(currentLine1));
 				}
 			}
@@ -121,7 +121,7 @@ public class CRUD {
 
 		SortAndShow.sortAllTasksByDateAndStartingTime(deadlineOrEventTasksList);
 		SortAndShow.sortAllTasksByDateAndStartingTime(floatingTasksList);
-		
+
 		String tempDate = new String("");
 
 		if (!deadlineOrEventTasksList.isEmpty()) {
@@ -203,10 +203,9 @@ public class CRUD {
 		String tempChangedTerm = new String("");
 		String previousAction = new String("");
 
-		
 		if (tempString.toLowerCase().indexOf("task name") == 0) {
 			// case of "change task name, exacttaskname, newtaskname"
-			
+
 			int commaWhitespaceIndex1 = tempString.indexOf(", ");
 
 			if (commaWhitespaceIndex1 < 0) {
@@ -283,8 +282,8 @@ public class CRUD {
 
 					tempChangedTerm = allTasksList.get(i).getTaskName();
 					allTasksList.get(i).setTaskName(newTaskNameString);
-					allTasksList.get(i).calculateComparisonValue(allTasksList.get(i).getScheduleString());
-					
+					allTasksList.get(i).calculateAndSetComparisonValue(allTasksList.get(i).getScheduleString());
+
 					tempTask = allTasksList.get(i);
 					previousAction = "change task name";
 
@@ -312,15 +311,18 @@ public class CRUD {
 
 		} else if (tempString.toLowerCase().indexOf("change deadline to floating") == 0) {
 			// case of "change deadline to floating, exacttaskname"
-			
+
 		} else if (tempString.toLowerCase().indexOf("change deadline to event") == 0) {
-			// case of "change deadline to event, exacttaskname, newstart, newpriority)
-			
+			// case of "change deadline to event, exacttaskname, newstart,
+			// newpriority)
+
 		} else if (tempString.toLowerCase().indexOf("change floating to deadline") == 0) {
-			// case of "change floating to deadline, exacttaskname, date, newend"
+			// case of "change floating to deadline, exacttaskname, date,
+			// newend"
 
 		} else if (tempString.toLowerCase().indexOf("change floating to event") == 0) {
-			// case of "change floating to event, exacttaskname, date, start, end, priority"
+			// case of "change floating to event, exacttaskname, date, start,
+			// end, priority"
 
 		} else if (tempString.toLowerCase().indexOf("change status") == 0) {
 			// this is for marking tasks as done, or not done
@@ -330,12 +332,11 @@ public class CRUD {
 			// 1) "change status, exacttaskname, done"
 			// OR
 			// 2) "change status, exacttaskname, not done"
-			
 
-		} 
+		}
 
 		// if no changes have been made
-		if (!atLeastOneTaskChanged){
+		if (!atLeastOneTaskChanged) {
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
 			flexWindow.getTextArea().append("\n");
 
@@ -360,7 +361,7 @@ public class CRUD {
 		// overwrites to the file, line by line
 		BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
 
-		for (int i = 0; i < allTasksList.size(); i++){
+		for (int i = 0; i < allTasksList.size(); i++) {
 			writer.write(allTasksList.get(i).getScheduleString());
 			writer.newLine();
 		}
@@ -404,8 +405,14 @@ public class CRUD {
 		// and print out error messages for only the first mistake made by the
 		// user,
 		// for the Task String
-		boolean isAddedTaskValid = (Checker.isFloatingTask(remainingCommandString1)
-				|| Checker.isDeadlineTask(remainingCommandString1) || Checker.isEventTask(remainingCommandString1));
+		boolean isAddedTaskValid = (Checker.isFloatingTaskInput(remainingCommandString1)
+				|| Checker.isDoneFloatingTaskInput(remainingCommandString1)
+				|| Checker.isDeadlineTaskInput(remainingCommandString1)
+				|| Checker.isDoneDeadlineTaskInput(remainingCommandString1)
+				|| Checker.isEventTaskInput(remainingCommandString1)
+				|| Checker.isDoneEventTaskInput(remainingCommandString1)
+				|| Checker.isRecurringTaskInput(remainingCommandString1))
+				|| Checker.isDoneRecurringTaskInput(remainingCommandString1);
 
 		// if the task is not valid, do not continue the process of adding a
 		// task
@@ -420,66 +427,7 @@ public class CRUD {
 			return;
 		}
 
-		// Only a usual (normal) task can be checked for blocking (as it has
-		// both starting times and ending times)
-		if (Checker.isEventTask(remainingCommandString1)) {
-			String tempString = new String("");
-
-			tempString = remainingCommandString.trim();
-
-			int commaWhitespaceIndex1 = tempString.indexOf(", ");
-
-			// the task of the normal task
-			String tempTaskName = new String("");
-			tempTaskName = tempString.substring(0, commaWhitespaceIndex1).trim();
-
-			tempString = tempString.substring(commaWhitespaceIndex1 + 2).trim();
-
-			int commaWhitespaceIndex2 = tempString.indexOf(", ");
-
-			// the date of the normal task
-			String tempDate = new String("");
-			tempDate = tempString.substring(0, commaWhitespaceIndex2).trim();
-
-			tempString = tempString.substring(commaWhitespaceIndex2 + 2).trim();
-
-			int commaWhitespaceIndex3 = tempString.indexOf(", ");
-
-			// the start of the normal task
-			String tempStart = new String("");
-			tempStart = tempString.substring(0, commaWhitespaceIndex3).trim();
-
-			tempString = tempString.substring(commaWhitespaceIndex3 + 2).trim();
-
-			int commaWhitespaceIndex4 = tempString.indexOf(", ");
-
-			// the end of the normal task
-			String tempEnd = new String("");
-			tempEnd = tempString.substring(0, commaWhitespaceIndex4).trim();
-
-			// check for clashes in existing event tasks
-			for (int i = 0; i < allTasksList.size(); i++) {
-				if ((Checker.isEventTask(allTasksList.get(i).getScheduleString()))) {
-					if ((allTasksList.get(i).getDate().equalsIgnoreCase(tempDate))) {
-						if (((Integer.valueOf(allTasksList.get(i).getStart()) <= Integer.valueOf(tempStart))
-								&& (Integer.valueOf(allTasksList.get(i).getEnd()) >= Integer.valueOf(tempStart)))
-								|| ((Integer.valueOf(allTasksList.get(i).getStart()) <= Integer.valueOf(tempEnd))
-										&& (Integer.valueOf(allTasksList.get(i).getEnd()) >= Integer
-												.valueOf(tempEnd)))) {
-
-							flexWindow.getTextArea().append(BLOCKED_MESSAGE + "\n");
-							flexWindow.getTextArea().append("\n");
-
-							logger.finest(BLOCKED_MESSAGE);
-							System.out.println(BLOCKED_MESSAGE);
-							System.out.println();
-
-							return;
-						}
-					}
-				}
-			}
-		}
+		// ***TO CHECK FOR CLASH IN START AND END FOR EVENT TASK INPUT LATER***
 
 		allTasksList.add(new Task(remainingCommandString1));
 
@@ -518,9 +466,9 @@ public class CRUD {
 		do {
 			currentLine1 = reader1.readLine();
 			if (currentLine1 != null) {
-				if (Checker.isFloatingTask(currentLine1)) {
+				if (Checker.isFloatingTaskInput(currentLine1)) {
 					floatingTasksList.add(new Task(currentLine1));
-				} else if (Checker.isDeadlineTask(currentLine1) || Checker.isEventTask(currentLine1)) {
+				} else if (Checker.isDeadlineTaskInput(currentLine1) || Checker.isEventTaskInput(currentLine1)) {
 					deadlineOrEventTasksList.add(new Task(currentLine1));
 				}
 			}
@@ -612,7 +560,7 @@ public class CRUD {
 				System.out.println();
 
 				deleteTask(filename, lastAction.getPreviousTask().getTaskName(), lastAction, flexWindow);
-				
+
 			} else if (lastAction.getPreviousAction().equalsIgnoreCase("delete")) {
 
 				logger.finest(DELETE_UNDONE_MESSAGE);
@@ -620,7 +568,7 @@ public class CRUD {
 				System.out.println();
 
 				addTask(filename, lastAction.getPreviousTask().getScheduleString(), lastAction, flexWindow);
-								
+
 			}
 		} else {
 
@@ -630,12 +578,13 @@ public class CRUD {
 				System.out.println(CHANGE_UNDONE_MESSAGE);
 				System.out.println();
 
-				changeTaskVariable(filename, "task name" + ", " + lastAction.getPreviousTask().getTaskName() + ", " + lastAction.getPreviousChangedTerm(), lastAction, flexWindow);
+				changeTaskVariable(filename, "task name" + ", " + lastAction.getPreviousTask().getTaskName() + ", "
+						+ lastAction.getPreviousChangedTerm(), lastAction, flexWindow);
 			}
 
 		}
-		
+
 		SortAndShow.readAndDisplayAll(filename, flexWindow);
-		
+
 	}
 }
