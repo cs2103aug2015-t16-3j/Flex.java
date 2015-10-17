@@ -35,6 +35,7 @@ public class Flex {
 	private static final String DEADLINE_TASKS_DISPLAYED_MESSAGE = "Deadline tasks in the schedule are displayed.";
 	private static final String FLOATING_TASKS_DISPLAYED_MESSAGE = "Floating tasks in the schedule are displayed.";
 	private static final String EVENT_TASKS_DISPLAYED_MESSAGE = "Event tasks in the schedule are displayed.";
+	private static final String RECURRING_TASKS_DISPLAYED_MESSAGE = "Recurring tasks in the schedule are displayed.";
 
 	private static final String INVALID_INPUT_MESSAGE = "Invalid input. Please try again.";
 
@@ -188,16 +189,15 @@ public class Flex {
 				// Case 5: adding a task
 				String remainingCommandString = command.substring(whitespaceIndex + 1).trim();
 				remainingCommandString.trim();
-				
-				
-				if(remainingCommandString.length()==0){
-					//INVALID if the remaining command string is empty
+
+				if (remainingCommandString.length() == 0) {
+					// INVALID if the remaining command string is empty
 					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
 					flexWindow.getTextArea().append("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
 					System.out.println(INVALID_INPUT_MESSAGE);
-					System.out.println();	
+					System.out.println();
 				}
 
 				boolean isAddedTaskValid = (Checker.isFloatingTaskInput(remainingCommandString)
@@ -208,7 +208,7 @@ public class Flex {
 						|| Checker.isDoneEventTaskInput(remainingCommandString)
 						|| Checker.isRecurringTaskInput(remainingCommandString))
 						|| Checker.isDoneRecurringTaskInput(remainingCommandString);
-				
+
 				// Only if the task is a floating task, a deadline task, or a
 				// normal task, then it will be attempted to be added to the
 				// .txt schedule file (i.e. tasks which are not done) yet
@@ -226,17 +226,17 @@ public class Flex {
 				// Case 6: Deleting a task
 				String remainingCommandString = command.substring(whitespaceIndex + 1);
 				remainingCommandString = remainingCommandString.trim();
-				
-				if(remainingCommandString.length()==0){
-					//INVALID if the remaining command string is empty
+
+				if (remainingCommandString.length() == 0) {
+					// INVALID if the remaining command string is empty
 					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
 					flexWindow.getTextArea().append("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
 					System.out.println(INVALID_INPUT_MESSAGE);
-					System.out.println();	
+					System.out.println();
 				}
-				
+
 				// only if input is valid
 				CRUD.deleteTask(filename, remainingCommandString, lastAction, flexWindow);
 				SortAndShow.readAndDisplayAll(filename, flexWindow);
@@ -246,14 +246,14 @@ public class Flex {
 				String remainingCommandString = command.substring(whitespaceIndex + 1).trim();
 				remainingCommandString.trim();
 
-				if(remainingCommandString.length()==0){
-					//INVALID if the remaining command string is empty
+				if (remainingCommandString.length() == 0) {
+					// INVALID if the remaining command string is empty
 					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
 					flexWindow.getTextArea().append("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
 					System.out.println(INVALID_INPUT_MESSAGE);
-					System.out.println();	
+					System.out.println();
 				}
 
 				// only if input is valid
@@ -265,18 +265,18 @@ public class Flex {
 				// Case 8: Search for tasks
 				// (ignoring upper and lower cases),
 				// and displaying the search results
-				
+
 				String remainingCommandString = command.substring(whitespaceIndex + 1).trim();
 				remainingCommandString.trim();
 
-				if(remainingCommandString.length()==0){
-					//INVALID if the remaining command string is empty
+				if (remainingCommandString.length() == 0) {
+					// INVALID if the remaining command string is empty
 					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
 					flexWindow.getTextArea().append("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
 					System.out.println(INVALID_INPUT_MESSAGE);
-					System.out.println();	
+					System.out.println();
 				}
 
 				// only if the input is valid
@@ -289,17 +289,14 @@ public class Flex {
 				// or show all tasks
 				// in the schedule file
 				// without altering/editing/overwriting the schedule file
-				
+
 				String remainingString = command.substring(whitespaceIndex + 1).trim();
 				remainingString.trim();
 
 				// Note: The schedule file is already sorted by date and
 				// starting time
 
-				if ((remainingString.equalsIgnoreCase("by date"))
-						|| (remainingString.equalsIgnoreCase("by day") || (remainingString.equalsIgnoreCase("all")))
-						|| (remainingString.equalsIgnoreCase("by task date"))
-						|| (remainingString.equalsIgnoreCase("by task day"))) {
+				if ((remainingString.equalsIgnoreCase("by date")) || (remainingString.equalsIgnoreCase("all"))) {
 
 					SortAndShow.readAndDisplayAll(filename, flexWindow);
 
@@ -335,6 +332,12 @@ public class Flex {
 					System.out.println();
 
 					SortAndShow.showEventTasks(filename, flexWindow);
+				} else if (remainingString.equalsIgnoreCase("recurring")) {
+					logger.finest(RECURRING_TASKS_DISPLAYED_MESSAGE);
+					System.out.println(RECURRING_TASKS_DISPLAYED_MESSAGE);
+					System.out.println();
+
+					SortAndShow.showRecurringTasks(filename, flexWindow);
 				} else if (remainingString.equalsIgnoreCase("week")) {
 					ShowDays.showWeek(filename, flexWindow);
 				} else {

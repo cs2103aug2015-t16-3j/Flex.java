@@ -256,7 +256,7 @@ public class Task {
 			this.taskVariables[6] = DONE_STRING;
 			this.taskVariables[7] = string;
 			this.taskVariables[8] = this.taskVariables[0] + ", by " + this.taskVariables[4] + " on "
-					+ this.taskVariables[1] + " " + DONE_STRING + " (deadline)";
+					+ this.taskVariables[1] + " (deadline) " + DONE_STRING;
 
 			// set the null variables
 			this.taskVariables[2] = null;
@@ -715,12 +715,12 @@ public class Task {
 
 	// retrieves the priority
 	public String getPriority() {
-		return this.taskVariables[4];
+		return this.taskVariables[5];
 	}
 
 	// sets the priority
 	public void setPriority(String newPriority) {
-		this.taskVariables[4] = newPriority;
+		this.taskVariables[5] = newPriority;
 	}
 
 	// "DONE" MODIFIERS
