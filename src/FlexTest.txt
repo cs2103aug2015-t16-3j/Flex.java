@@ -10,11 +10,15 @@ task; 0000-0001 on 3/3/3; priority
 task; 0000-0001 on 4/4/4; priority [done]
 task; by 0001 on 9/9/9
 task; by 0001 on 9/9/10
+task; by 0001 on 10/10/10
 task; by 0001 on 14/12/10 [done]
-task; 0000-0001 every tuesday; priority [done]
+task; by 0002 on 11/11/11 [done]
+free
+water
 task; 0000-0001 every sunday; priority1 [done]
 task; 0000-0001 every sunday; priorityMILLION [done]
 task; 0000-0001 every tuesday; prioriWy [done]
 task; 0000-0001 every tuesday; prioriWy
 task; 0000-0001 every tuesday; prioriWy
 task; 0000-0001 every tuesday; priworiWy
+task; 0000-0001 every tuesday; priority [done]

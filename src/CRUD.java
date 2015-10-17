@@ -453,80 +453,10 @@ public class CRUD {
 		lastAction.setPreviousAction("add");
 		lastAction.setPreviousTask(tempTask);
 
+		flexWindow.getTextArea().append("The task " + "\"" + tempTask.getDisplayString() + "\"" + " has been added." + "\n");	
 		flexWindow.getTextArea().append("\n");
 
-		BufferedReader reader1 = null;
-
-		reader1 = new BufferedReader(new FileReader(filename));
-		String currentLine1 = null;
-
-		ArrayList<Task> floatingTasksList = new ArrayList<Task>();
-		ArrayList<Task> deadlineOrEventTasksList = new ArrayList<Task>();
-
-		do {
-			currentLine1 = reader1.readLine();
-			if (currentLine1 != null) {
-				if (Checker.isFloatingTaskInput(currentLine1)) {
-					floatingTasksList.add(new Task(currentLine1));
-				} else if (Checker.isDeadlineTaskInput(currentLine1) || Checker.isEventTaskInput(currentLine1)) {
-					deadlineOrEventTasksList.add(new Task(currentLine1));
-				}
-			}
-		} while (currentLine1 != null);
-
-		if (reader1 != null) {
-			reader1.close();
-		}
-
-		SortAndShow.sortAllTasksByDateAndStartingTime(deadlineOrEventTasksList);
-		SortAndShow.sortAllTasksByDateAndStartingTime(floatingTasksList);
-
-		String tempDate = new String("");
-
-		if (!deadlineOrEventTasksList.isEmpty()) {
-			flexWindow.getTextArea()
-					.append("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
-							+ "\n");
-			flexWindow.getTextArea().append("\n");
-			tempDate = deadlineOrEventTasksList.get(0).getDate();
-			flexWindow.getTextArea().append("Date: " + tempDate + "\n");
-			flexWindow.getTextArea().append("\n");
-		}
-
-		for (int j = 0; j < deadlineOrEventTasksList.size(); j++) {
-			if (deadlineOrEventTasksList.get(j).getDate().equalsIgnoreCase(tempDate)) {
-				flexWindow.getTextArea().append(deadlineOrEventTasksList.get(j).getDisplayString() + "\n");
-				flexWindow.getTextArea().append("\n");
-			} else {
-				flexWindow.getTextArea()
-						.append("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
-								+ "\n");
-				flexWindow.getTextArea().append("\n");
-
-				tempDate = deadlineOrEventTasksList.get(j).getDate();
-
-				flexWindow.getTextArea().append("Date: " + tempDate + "\n");
-				flexWindow.getTextArea().append("\n");
-
-				flexWindow.getTextArea().append(deadlineOrEventTasksList.get(j).getDisplayString() + "\n");
-				flexWindow.getTextArea().append("\n");
-			}
-		}
-
-		flexWindow.getTextArea()
-				.append("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
-						+ "\n");
-		flexWindow.getTextArea().append("\n");
-
-		for (int k = 0; k < floatingTasksList.size(); k++) {
-			flexWindow.getTextArea().append(floatingTasksList.get(k).getDisplayString() + "\n");
-			flexWindow.getTextArea().append("\n");
-		}
-
-		System.out.println();
-
-		flexWindow.getTextArea().append("\n");
-
+		
 		return;
 	}
 

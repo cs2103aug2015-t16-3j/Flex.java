@@ -212,7 +212,7 @@ public class Task {
 			this.taskVariables[4] = endingTime;
 			this.taskVariables[7] = string;
 			this.taskVariables[8] = this.taskVariables[0] + ", by " + this.taskVariables[4] + " on "
-					+ this.taskVariables[1];
+					+ this.taskVariables[1] + " (deadline)";
 
 			// set the null variables
 			this.taskVariables[2] = null;
@@ -256,7 +256,7 @@ public class Task {
 			this.taskVariables[6] = DONE_STRING;
 			this.taskVariables[7] = string;
 			this.taskVariables[8] = this.taskVariables[0] + ", by " + this.taskVariables[4] + " on "
-					+ this.taskVariables[1] + " " + DONE_STRING;
+					+ this.taskVariables[1] + " " + DONE_STRING + " (deadline)";
 
 			// set the null variables
 			this.taskVariables[2] = null;
