@@ -468,7 +468,8 @@ public class Task {
 
 	// calculates and sets comparisonValue for sorting tasks by date and
 	// starting time
-	// the String parameter "string" is to be the schedule (file) String of the
+	// the String parameter "string" is to be the schedule (file) input String
+	// of the
 	// task
 	public void calculateAndSetComparisonValue(String string) {
 		if (Checker.isEventTaskInput(string)) {
@@ -732,6 +733,8 @@ public class Task {
 	// changes the task
 	public void setTaskName(String newTaskName) {
 		this.taskVariables[0] = newTaskName;
+		calculateAndSetComparisonValue(this.taskVariables[7]);
+		calculateAndSetRecurringTaskValue(this.taskVariables[7]);
 	}
 
 	// retrieves the date
@@ -742,6 +745,8 @@ public class Task {
 	// edits the date
 	public void setDate(String newDate) {
 		this.taskVariables[1] = newDate;
+		calculateAndSetComparisonValue(this.taskVariables[7]);
+		calculateAndSetRecurringTaskValue(this.taskVariables[7]);
 	}
 
 	// retrieves the day
@@ -752,6 +757,26 @@ public class Task {
 	// sets the day
 	public void setDay(String newDay) {
 		this.taskVariables[2] = newDay.toLowerCase();
+
+		if (Checker.isRecurringTaskInput(this.taskVariables[7])) {
+			this.taskVariables[7] = this.taskVariables[0] + "; " + this.taskVariables[3] + "-" + this.taskVariables[4]
+					+ " every " + this.taskVariables[2].toLowerCase() + "; " + this.taskVariables[5];
+
+			this.taskVariables[8] = this.taskVariables[0] + ", " + this.taskVariables[3] + "-" + this.taskVariables[4]
+					+ " every " + this.taskVariables[2].toLowerCase() + ", " + this.taskVariables[5];
+		} else if (Checker.isDoneRecurringTaskInput(this.taskVariables[7])) {
+			this.taskVariables[7] = this.taskVariables[0] + "; " + this.taskVariables[3] + "-" + this.taskVariables[4]
+					+ " every " + this.taskVariables[2].toLowerCase() + "; " + this.taskVariables[5] + " "
+					+ DONE_STRING;
+
+			this.taskVariables[8] = this.taskVariables[0] + ", " + this.taskVariables[3] + "-" + this.taskVariables[4]
+					+ " every " + this.taskVariables[2].toLowerCase() + ", " + this.taskVariables[5] + " "
+					+ DONE_STRING;
+			;
+		}
+
+		calculateAndSetComparisonValue(this.taskVariables[7]);
+		calculateAndSetRecurringTaskValue(this.taskVariables[7]);
 	}
 
 	// retrieves the starting time
@@ -762,6 +787,40 @@ public class Task {
 	// edits the starting time
 	public void setStart(String newStart) {
 		this.taskVariables[3] = newStart;
+
+		// event task
+		if (Checker.isEventTaskInput(this.taskVariables[7])) {
+
+			this.taskVariables[7] = this.taskVariables[0] + "; " + this.taskVariables[3] + "-" + this.taskVariables[4]
+					+ " on " + this.taskVariables[1] + "; " + this.taskVariables[5];
+			this.taskVariables[8] = this.taskVariables[0] + ", " + this.taskVariables[3] + "-" + this.taskVariables[4]
+					+ " on " + this.taskVariables[1] + ", " + this.taskVariables[5];
+			
+		} else if (Checker.isDoneEventTaskInput(this.taskVariables[7])) {
+			
+			this.taskVariables[7] = this.taskVariables[0] + "; " + this.taskVariables[3] + "-" + this.taskVariables[4]
+					+ " on " + this.taskVariables[1] + "; " + this.taskVariables[5] + " " + DONE_STRING;
+			this.taskVariables[8] = this.taskVariables[0] + ", " + this.taskVariables[3] + "-" + this.taskVariables[4]
+					+ " on " + this.taskVariables[1] + ", " + this.taskVariables[5] + " " + DONE_STRING;
+
+		} else if (Checker.isRecurringTaskInput(this.taskVariables[7])) {
+			// recurring task
+			this.taskVariables[7] = this.taskVariables[2] + "; " + this.taskVariables[3] + "-" + this.taskVariables[4]
+					+ " every " + this.taskVariables[2].toLowerCase() + "; " + this.taskVariables[5];
+
+			this.taskVariables[8] = this.taskVariables[0] + ", " + this.taskVariables[3] + "-" + this.taskVariables[4]
+					+ " every " + this.taskVariables[2].toLowerCase() + ", " + this.taskVariables[5];
+
+		} else if (Checker.isDoneRecurringTaskInput(this.taskVariables[7])) {
+			this.taskVariables[7] = this.taskVariables[2] + "; " + this.taskVariables[3] + "-" + this.taskVariables[4]
+					+ " every " + this.taskVariables[2].toLowerCase() + "; " + this.taskVariables[5] + " " + DONE_STRING;
+
+			this.taskVariables[8] = this.taskVariables[0] + ", " + this.taskVariables[3] + "-" + this.taskVariables[4]
+					+ " every " + this.taskVariables[2].toLowerCase() + ", " + this.taskVariables[5] + " " + DONE_STRING;
+		}
+
+		calculateAndSetComparisonValue(this.taskVariables[7]);
+		calculateAndSetRecurringTaskValue(this.taskVariables[7]);
 	}
 
 	// retrieves the ending time
@@ -772,6 +831,9 @@ public class Task {
 	// edits the ending time
 	public void setEnd(String newEnd) {
 		this.taskVariables[4] = newEnd;
+
+		calculateAndSetComparisonValue(this.taskVariables[7]);
+		calculateAndSetRecurringTaskValue(this.taskVariables[7]);
 	}
 
 	// retrieves the priority
@@ -782,6 +844,9 @@ public class Task {
 	// sets the priority
 	public void setPriority(String newPriority) {
 		this.taskVariables[5] = newPriority;
+
+		calculateAndSetComparisonValue(this.taskVariables[7]);
+		calculateAndSetRecurringTaskValue(this.taskVariables[7]);
 	}
 
 	// "DONE" MODIFIERS
@@ -793,6 +858,8 @@ public class Task {
 			this.taskVariables[7] = this.taskVariables[6] + " " + DONE_STRING;
 			this.taskVariables[8] = this.taskVariables[7] + " " + DONE_STRING;
 		}
+		calculateAndSetComparisonValue(this.taskVariables[7]);
+		calculateAndSetRecurringTaskValue(this.taskVariables[7]);
 	}
 
 	// String form of each task in the .txt schedule file
@@ -824,6 +891,8 @@ public class Task {
 			}
 
 		}
+		calculateAndSetComparisonValue(this.taskVariables[7]);
+		calculateAndSetRecurringTaskValue(this.taskVariables[7]);
 	}
 
 }

@@ -2,7 +2,7 @@ public class LastAction {
 
 	private String[] lastActionStrings = new String[3];
 
-	// lastActionStrings[0] will be "previousChangedTerm"
+	// lastActionStrings[0] will be "previousChangedScheduleString"
 	// this will not be null if there is at least one changed term
 	// previousChangedTerm refers to the original term before the change
 
@@ -17,7 +17,7 @@ public class LastAction {
 	// changed)
 	private Task previousTask = new Task();
 
-	public String getPreviousChangedTerm() {
+	public String getPreviousChangedScheduleString() {
 		return this.lastActionStrings[0];
 	}
 
@@ -33,8 +33,8 @@ public class LastAction {
 		return this.previousTask;
 	}
 
-	public void setPreviousChangedTerm(String tempChangedTerm) {
-		this.lastActionStrings[0] = tempChangedTerm;
+	public void setPreviousChangedScheduleString(String tempPreviousChangedScheduleString) {
+		this.lastActionStrings[0] = tempPreviousChangedScheduleString;
 	}
 
 	public void setPreviousAction(String tempAction) {

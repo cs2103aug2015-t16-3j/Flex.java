@@ -32,11 +32,12 @@ thunder
 tree
 water
 task; 0000-0001 every tuesday; prioriWy
-task; 0000-0001 every tuesday; priority [done]
-task; 0001-0002 every tuesday; prioriWy
+task; 0001-0002 every tuesday; prioriWy [done]
 task; 2359-2359 every tuesday; priworiWy
+task; 0000-0001 every wednesday; priority
 task; 0000-0001 every wednesday; prioriWy
 task; 0000-0001 every thursday; prioriWy
-task; 0000-0001 every saturday; prioriWy
-task; 0000-0001 every sunday; priority1 [done]
-task; 0000-2221 every sunday; priority1 [done]
+task; 0000-0001 every friday; prioriWy
+task; 0000-2221 every friday; priority1
+task; 0000-0001 every saturday; priority1
+task; 0001-0002 every sunday; prioriWy
