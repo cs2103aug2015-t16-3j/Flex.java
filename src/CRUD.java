@@ -221,13 +221,15 @@ public class CRUD {
 				return;
 			}
 
-			tempTask = allTasksList.get(deadlineOrEventTasksList.size() + floatingTasksList.size() + Integer.valueOf(tempNumber) - 1);
+			tempTask = allTasksList
+					.get(deadlineOrEventTasksList.size() + floatingTasksList.size() + Integer.valueOf(tempNumber) - 1);
 
 			lastAction.setPreviousTask(tempTask);
 
 			lastAction.setPreviousAction("delete");
 
-			allTasksList.remove(deadlineOrEventTasksList.size() + floatingTasksList.size() + Integer.valueOf(tempNumber) - 1);
+			allTasksList.remove(
+					deadlineOrEventTasksList.size() + floatingTasksList.size() + Integer.valueOf(tempNumber) - 1);
 
 			taskExists = true;
 
@@ -668,17 +670,18 @@ public class CRUD {
 				if (reader != null) {
 					reader.close();
 				}
-				
+
 				Task tempTask = new Task();
-				
+
 				// for exactness, equalsIgnoreCase is not used
-				for(int i=0; i<allTasksList.size(); i++){
-					if(lastAction.getPreviousTask().getScheduleString().equals(allTasksList.get(i).getScheduleString())){
+				for (int i = 0; i < allTasksList.size(); i++) {
+					if (lastAction.getPreviousTask().getScheduleString()
+							.equals(allTasksList.get(i).getScheduleString())) {
 						tempTask = allTasksList.get(i);
 						allTasksList.remove(i);
 						lastAction.setPreviousAction("delete");
 						lastAction.setPreviousTask(tempTask);
-						
+
 						BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
 
 						for (int j = 0; j < allTasksList.size(); j++) {
@@ -687,17 +690,16 @@ public class CRUD {
 						}
 
 						writer.close();
-						
+
 					}
 				}
-				
 
 			} else if (lastAction.getPreviousAction().equalsIgnoreCase("delete")) {
 
 				logger.finest(DELETE_UNDONE_MESSAGE);
 				System.out.println(DELETE_UNDONE_MESSAGE);
 				System.out.println();
-	
+
 				CRUD.addTask(filename, lastAction.getPreviousTask().getScheduleString(), lastAction, flexWindow);
 			}
 		} else {

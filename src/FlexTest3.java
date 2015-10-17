@@ -28,7 +28,8 @@ public class FlexTest3 {
 	public void testOutput() throws IOException {
 		// all these cases are in the valid date partition
 		// they are not the boundary case of 1/1/1
-		// however, if sub-boundaries exists, most of them are sub-boundary cases of at the start or end of months
+		// however, if sub-boundaries exists, most of them are sub-boundary
+		// cases of at the start or end of months
 		// for different years
 		assertEquals("generating the next date from 27/1/2014", "28/1/2014", ShowDays.generateNextDate("27/1/2014"));
 
