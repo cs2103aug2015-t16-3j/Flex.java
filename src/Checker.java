@@ -765,6 +765,9 @@ public class Checker {
 		if (!isValidTime(startingTime)) {
 			return false;
 		}
+		
+		int startingTimeHours = Integer.valueOf(startingTime.substring(0, 2));
+		int startingTimeMinutes = Integer.valueOf(startingTime.substring(2, 4));
 
 		tempString = tempString.substring(dashIndex1 + 1).trim();
 
@@ -785,6 +788,13 @@ public class Checker {
 		}
 
 		if (!isValidTime(endingTime)) {
+			return false;
+		}
+		
+		int endingTimeHours = Integer.valueOf(endingTime.substring(0, 2));
+		int endingTimeMinutes = Integer.valueOf(endingTime.substring(2, 4));
+
+		if(endingTimeHours * 60 + endingTimeMinutes < startingTimeHours * 60 + startingTimeMinutes){
 			return false;
 		}
 
@@ -915,6 +925,9 @@ public class Checker {
 
 		String startingTime = tempString.substring(0, dashIndex1).trim();
 
+		int startingTimeHours = Integer.valueOf(startingTime.substring(0, 2));
+		int startingTimeMinutes = Integer.valueOf(startingTime.substring(2, 4));
+		
 		if (startingTime.length() != 4) {
 			return false;
 		}
@@ -942,6 +955,13 @@ public class Checker {
 		}
 
 		if (!isValidTime(endingTime)) {
+			return false;
+		}
+		
+		int endingTimeHours = Integer.valueOf(endingTime.substring(0, 2));
+		int endingTimeMinutes = Integer.valueOf(endingTime.substring(2, 4));
+
+		if(endingTimeHours * 60 + endingTimeMinutes < startingTimeHours * 60 + startingTimeMinutes){
 			return false;
 		}
 
@@ -1080,6 +1100,9 @@ public class Checker {
 			return false;
 		}
 
+		int startingTimeHours = Integer.valueOf(startingTime.substring(0, 2));
+		int startingTimeMinutes = Integer.valueOf(startingTime.substring(2, 4));
+		
 		tempString = tempString.substring(dashIndex1 + 1).trim();
 
 		if (tempString.length() == 0) {
@@ -1102,6 +1125,14 @@ public class Checker {
 			return false;
 		}
 
+		int endingTimeHours = Integer.valueOf(endingTime.substring(0, 2));
+		int endingTimeMinutes = Integer.valueOf(endingTime.substring(2, 4));
+		
+
+		if(endingTimeHours * 60 + endingTimeMinutes < startingTimeHours * 60 + startingTimeMinutes){
+			return false;
+		}
+		
 		tempString = tempString.substring(whitespaceOnWhitespaceIndex1 + 4).trim();
 
 		if (tempString.length() == 0) {
@@ -1233,6 +1264,9 @@ public class Checker {
 		if (!isValidTime(startingTime)) {
 			return false;
 		}
+		
+		int startingTimeHours = Integer.valueOf(startingTime.substring(0, 2));
+		int startingTimeMinutes = Integer.valueOf(startingTime.substring(2, 4));
 
 		tempString = tempString.substring(dashIndex1 + 1).trim();
 
@@ -1253,6 +1287,14 @@ public class Checker {
 		}
 
 		if (!Checker.isValidTime(endingTime)) {
+			return false;
+		}
+		
+		int endingTimeHours = Integer.valueOf(endingTime.substring(0, 2));
+		int endingTimeMinutes = Integer.valueOf(endingTime.substring(2, 4));
+		
+
+		if(endingTimeHours * 60 + endingTimeMinutes < startingTimeHours * 60 + startingTimeMinutes){
 			return false;
 		}
 
