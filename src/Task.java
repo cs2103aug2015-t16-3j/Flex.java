@@ -515,7 +515,6 @@ public class Task {
 		} else if (Checker.isDoneEventTaskInput(string)) {
 			// e.g. 7/9/2015
 			String tempDateString = this.taskVariables[1];
-			System.out.println("calculateAndSetComparisonValue tempDateString:" + tempDateString);
 			int slashIndex1 = tempDateString.indexOf("/");
 			int day = Integer.valueOf(tempDateString.substring(0, slashIndex1).trim());
 
