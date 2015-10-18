@@ -6,7 +6,9 @@ task; by 0001 on 1/1/2
 task; by 0001 on 1/1/2 [done]
 task; 0000-0001 on 2/2/2; priority
 task; 0000-0001 on 2/2/2; priority [done]
+task; 0000-1001 on 2/2/2; priority [done]
 task; 1000-1100 on 2/2/2; priority
+task; 1000-2000 on 2/2/2; priority
 task; 1000-1100 on 2/2/2; priority
 task; 1000-1100 on 2/2/2; priority
 task; 1001-1100 on 2/2/2; priority
@@ -15,6 +17,7 @@ task; 0000-0001 on 4/4/4; priority [done]
 tasking; by 0020 on 5/5/5
 task; by 0001 on 9/9/9
 task; by 0001 on 9/9/10
+task; by 0001 on 21/9/10
 task; by 0001 on 10/10/10
 task; by 0001 on 14/12/10 [done]
 task; by 0002 on 11/11/11 [done]
@@ -23,7 +26,6 @@ task; by 0002 on 1/1/4200
 task; by 0003 on 1/1/5000
 fine
 fire
-ice
 icy
 modular
 module
@@ -31,13 +33,15 @@ node
 thunder
 tree
 water
-task; 0000-0001 every tuesday; prioriWy
-task; 0001-0002 every tuesday; prioriWy [done]
+task; 0000-0001 every monday; prioriWy
+task; 0000-0001 every monday; prioriTy
 task; 2359-2359 every tuesday; priworiWy
 task; 0000-0001 every wednesday; priority
-task; 0000-0001 every wednesday; prioriWy
+task; 0000-0001 every wednesday; priorfwefdwefewfiWy
+task; 0001-0002 every wednesday; prioriWy [done]
+task; 0001-0002 every wednesday; prioriWy [done]
 task; 0000-0001 every thursday; prioriWy
-task; 0000-0001 every friday; prioriWy
 task; 0000-2221 every friday; priority1
+task; 0000-0001 every friday; prioriWy
 task; 0000-0001 every saturday; priority1
 task; 0001-0002 every sunday; prioriWy
