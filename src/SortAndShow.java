@@ -529,7 +529,7 @@ public class SortAndShow {
 				recurringTasksList.add(allTasksList.get(j));
 			}
 		}
-		
+
 		// sort floating tasks in alphabetical order
 		int size2 = floatingTasksList.size();
 		int q, start2, min_index2 = 0;
@@ -589,15 +589,7 @@ public class SortAndShow {
 				tempTasksList.add(recurringTasksList.get(o));
 			}
 		}
-		
-		System.out.println();
-		System.out.println("allTasksList.size():" + allTasksList.size());
-		System.out.println("deadlineOrEventList.size():" + deadlineOrEventTasksList.size());
-		System.out.println("floatingTasksList.size():" + floatingTasksList.size());
-		System.out.println("recurringTasksList.size():" + recurringTasksList.size());
-		System.out.println("allTasksList.size():" + allTasksList.size());
-		System.out.println("tempTasksList.size():" + allTasksList.size());
-		System.out.println();
+
 		for (int w = 0; w < allTasksList.size(); w++) {
 			allTasksList.set(w, tempTasksList.get(w));
 		}

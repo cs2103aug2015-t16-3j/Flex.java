@@ -609,15 +609,17 @@ public class Task {
 			int numberOfAccumulatedPastDaysInCurrentYear = findNumberOfAccumulatedPastDaysInCurrentYear(month - 1,
 					day - 1);
 			;
-			
-			int endingTimeTotal = Integer.valueOf(this.taskVariables[4].substring(0, 2)) * HOUR_MINUTES + Integer.valueOf(this.taskVariables[4].substring(2, 4));
+
+			int endingTimeTotal = Integer.valueOf(this.taskVariables[4].substring(0, 2)) * HOUR_MINUTES
+					+ Integer.valueOf(this.taskVariables[4].substring(2, 4));
 
 			// e.g. this.comparisonValue = 503 * 366 + 1500 * 365 +
 			// (NOVEMBER_ACCUMULATED_DAYS + 0) * 24 * 60;
 			this.comparisonValue = -0.7 + DEADLINE_AND_EVENT_NEGATIVE_SETOFF_VALUE
 					+ numberOfPastLeapYears * LEAP_YEAR_DAYS * DAY_HOURS * HOUR_MINUTES
 					+ numberOfPastNonLeapyears * YEAR_DAYS * DAY_HOURS * HOUR_MINUTES
-					+ (numberOfAccumulatedPastDaysInCurrentYear + leapYearFebruaryDay) * DAY_HOURS * HOUR_MINUTES + endingTimeTotal * 0.0001;
+					+ (numberOfAccumulatedPastDaysInCurrentYear + leapYearFebruaryDay) * DAY_HOURS * HOUR_MINUTES
+					+ endingTimeTotal * 0.0001;
 
 		} else if (Checker.isDoneDeadlineTaskInput(string)) {
 			// e.g. 7/9/2015
@@ -654,16 +656,17 @@ public class Task {
 			int numberOfAccumulatedPastDaysInCurrentYear = findNumberOfAccumulatedPastDaysInCurrentYear(month - 1,
 					day - 1);
 			;
-			
-			int endingTimeTotal = Integer.valueOf(this.taskVariables[4].substring(0, 2)) * HOUR_MINUTES + Integer.valueOf(this.taskVariables[4].substring(2, 4));
 
+			int endingTimeTotal = Integer.valueOf(this.taskVariables[4].substring(0, 2)) * HOUR_MINUTES
+					+ Integer.valueOf(this.taskVariables[4].substring(2, 4));
 
 			// e.g. this.comparisonValue = 503 * 366 + 1500 * 365 +
 			// (NOVEMBER_ACCUMULATED_DAYS + 0) * 24 * 60;
 			this.comparisonValue = -0.7 + DEADLINE_AND_EVENT_NEGATIVE_SETOFF_VALUE
 					+ numberOfPastLeapYears * LEAP_YEAR_DAYS * DAY_HOURS * HOUR_MINUTES
 					+ numberOfPastNonLeapyears * YEAR_DAYS * DAY_HOURS * HOUR_MINUTES
-					+ (numberOfAccumulatedPastDaysInCurrentYear + leapYearFebruaryDay) * DAY_HOURS * HOUR_MINUTES + 0.1  + endingTimeTotal * 0.0001;
+					+ (numberOfAccumulatedPastDaysInCurrentYear + leapYearFebruaryDay) * DAY_HOURS * HOUR_MINUTES + 0.1
+					+ endingTimeTotal * 0.0001;
 
 		} else if (Checker.isRecurringTaskInput(string)) {
 			this.comparisonValue = RECURRING_TASK_COMPARISON_VALUE;
@@ -749,30 +752,15 @@ public class Task {
 
 	// edits the date
 	public void setDate(String newDate) {
-		System.out.println("Before SETDATE change");
-		System.out.println("this.taskVariables[0]: " + this.taskVariables[0]);
-		System.out.println("this.taskVariables[1]: " + this.taskVariables[1]);
-		System.out.println("this.taskVariables[2]: " + this.taskVariables[2]);
-		System.out.println("this.taskVariables[3]: " + this.taskVariables[3]);
-		System.out.println("this.taskVariables[4]: " + this.taskVariables[4]);
-		System.out.println("this.taskVariables[5]: " + this.taskVariables[5]);
-		System.out.println("this.taskVariables[6]: " + this.taskVariables[6]);
-		System.out.println("this.taskVariables[7]: " + this.taskVariables[7]);
-		System.out.println("this.taskVariables[8]: " + this.taskVariables[8]);
-		System.out.println("comparisonValue: " + this.comparisonValue);
-		System.out.println("recurringTaskValue: " + this.recurringTaskValue);
-		
-		
+
 		this.taskVariables[1] = newDate;
-		
-		
 
 		// event task
 		if (Checker.isEventTaskInput(this.taskVariables[7])) {
 
 			this.taskVariables[7] = this.taskVariables[0] + "; " + this.taskVariables[3] + "-" + this.taskVariables[4]
 					+ " on " + this.taskVariables[1] + "; " + this.taskVariables[5];
-			
+
 			this.taskVariables[8] = this.taskVariables[0] + ", " + this.taskVariables[3] + "-" + this.taskVariables[4]
 					+ " on " + this.taskVariables[1] + ", " + this.taskVariables[5];
 
@@ -780,7 +768,7 @@ public class Task {
 
 			this.taskVariables[7] = this.taskVariables[0] + "; " + this.taskVariables[3] + "-" + this.taskVariables[4]
 					+ " on " + this.taskVariables[1] + "; " + this.taskVariables[5] + " " + DONE_STRING;
-		
+
 			this.taskVariables[8] = this.taskVariables[0] + ", " + this.taskVariables[3] + "-" + this.taskVariables[4]
 					+ " on " + this.taskVariables[1] + ", " + this.taskVariables[5] + " " + DONE_STRING;
 
@@ -805,19 +793,7 @@ public class Task {
 
 		calculateAndSetComparisonValue(this.taskVariables[7]);
 		calculateAndSetRecurringTaskValue(this.taskVariables[7]);
-		
-		System.out.println("After SETDATE change");
-		System.out.println("this.taskVariables[0]: " + this.taskVariables[0]);
-		System.out.println("this.taskVariables[1]: " + this.taskVariables[1]);
-		System.out.println("this.taskVariables[2]: " + this.taskVariables[2]);
-		System.out.println("this.taskVariables[3]: " + this.taskVariables[3]);
-		System.out.println("this.taskVariables[4]: " + this.taskVariables[4]);
-		System.out.println("this.taskVariables[5]: " + this.taskVariables[5]);
-		System.out.println("this.taskVariables[6]: " + this.taskVariables[6]);
-		System.out.println("this.taskVariables[7]: " + this.taskVariables[7]);
-		System.out.println("this.taskVariables[8]: " + this.taskVariables[8]);
-		System.out.println("comparisonValue: " + this.comparisonValue);
-		System.out.println("recurringTaskValue: " + this.recurringTaskValue);
+
 	}
 
 	// retrieves the day
@@ -827,7 +803,7 @@ public class Task {
 
 	// sets the day
 	public void setDay(String newDay) {
-	
+
 		this.taskVariables[2] = newDay.toLowerCase();
 
 		if (Checker.isRecurringTaskInput(this.taskVariables[7])) {
@@ -859,20 +835,7 @@ public class Task {
 
 	// edits the starting time
 	public void setStart(String newStart) {
-		System.out.println("Before SETSTART change");
-		System.out.println("this.taskVariables[0]: " + this.taskVariables[0]);
-		System.out.println("this.taskVariables[1]: " + this.taskVariables[1]);
-		System.out.println("this.taskVariables[2]: " + this.taskVariables[2]);
-		System.out.println("this.taskVariables[3]: " + this.taskVariables[3]);
-		System.out.println("this.taskVariables[4]: " + this.taskVariables[4]);
-		System.out.println("this.taskVariables[5]: " + this.taskVariables[5]);
-		System.out.println("this.taskVariables[6]: " + this.taskVariables[6]);
-		System.out.println("this.taskVariables[7]: " + this.taskVariables[7]);
-		System.out.println("this.taskVariables[8]: " + this.taskVariables[8]);
-		System.out.println("comparisonValue: " + this.comparisonValue);
-		System.out.println("recurringTaskValue: " + this.recurringTaskValue);
-		
-		
+
 		this.taskVariables[3] = newStart;
 
 		// event task
@@ -910,19 +873,7 @@ public class Task {
 
 		calculateAndSetComparisonValue(this.taskVariables[7]);
 		calculateAndSetRecurringTaskValue(this.taskVariables[7]);
-		
-		System.out.println("After SETSTART change");
-		System.out.println("this.taskVariables[0]: " + this.taskVariables[0]);
-		System.out.println("this.taskVariables[1]: " + this.taskVariables[1]);
-		System.out.println("this.taskVariables[2]: " + this.taskVariables[2]);
-		System.out.println("this.taskVariables[3]: " + this.taskVariables[3]);
-		System.out.println("this.taskVariables[4]: " + this.taskVariables[4]);
-		System.out.println("this.taskVariables[5]: " + this.taskVariables[5]);
-		System.out.println("this.taskVariables[6]: " + this.taskVariables[6]);
-		System.out.println("this.taskVariables[7]: " + this.taskVariables[7]);
-		System.out.println("this.taskVariables[8]: " + this.taskVariables[8]);
-		System.out.println("comparisonValue: " + this.comparisonValue);
-		System.out.println("recurringTaskValue: " + this.recurringTaskValue);
+
 	}
 
 	// retrieves the ending time
@@ -933,19 +884,6 @@ public class Task {
 
 	// edits the ending time
 	public void setEnd(String newEnd) {
-		System.out.println("Before SETEND change");
-		System.out.println("this.taskVariables[0]: " + this.taskVariables[0]);
-		System.out.println("this.taskVariables[1]: " + this.taskVariables[1]);
-		System.out.println("this.taskVariables[2]: " + this.taskVariables[2]);
-		System.out.println("this.taskVariables[3]: " + this.taskVariables[3]);
-		System.out.println("this.taskVariables[4]: " + this.taskVariables[4]);
-		System.out.println("this.taskVariables[5]: " + this.taskVariables[5]);
-		System.out.println("this.taskVariables[6]: " + this.taskVariables[6]);
-		System.out.println("this.taskVariables[7]: " + this.taskVariables[7]);
-		System.out.println("this.taskVariables[8]: " + this.taskVariables[8]);
-		System.out.println("comparisonValue: " + this.comparisonValue);
-		System.out.println("recurringTaskValue: " + this.recurringTaskValue);
-		
 		this.taskVariables[4] = newEnd;
 
 		// event task
@@ -967,9 +905,7 @@ public class Task {
 
 		} else if (Checker.isRecurringTaskInput(this.taskVariables[7])) {
 			// recurring task
-			
-			System.out.println("SETEND isRecurringTaskInput");
-			
+
 			this.taskVariables[7] = this.taskVariables[0] + "; " + this.taskVariables[3] + "-" + this.taskVariables[4]
 					+ " every " + this.taskVariables[2].toLowerCase() + "; " + this.taskVariables[5];
 
@@ -977,9 +913,7 @@ public class Task {
 					+ " every " + this.taskVariables[2].toLowerCase() + ", " + this.taskVariables[5];
 
 		} else if (Checker.isDoneRecurringTaskInput(this.taskVariables[7])) {
-			
-			System.out.println("SETEND isDoneRecurringTaskInput");
-			
+
 			this.taskVariables[7] = this.taskVariables[0] + "; " + this.taskVariables[3] + "-" + this.taskVariables[4]
 					+ " every " + this.taskVariables[2].toLowerCase() + "; " + this.taskVariables[5] + " "
 					+ DONE_STRING;
@@ -1007,19 +941,6 @@ public class Task {
 
 		}
 
-		System.out.println("After SETEND change");
-		System.out.println("this.taskVariables[0]: " + this.taskVariables[0]);
-		System.out.println("this.taskVariables[1]: " + this.taskVariables[1]);
-		System.out.println("this.taskVariables[2]: " + this.taskVariables[2]);
-		System.out.println("this.taskVariables[3]: " + this.taskVariables[3]);
-		System.out.println("this.taskVariables[4]: " + this.taskVariables[4]);
-		System.out.println("this.taskVariables[5]: " + this.taskVariables[5]);
-		System.out.println("this.taskVariables[6]: " + this.taskVariables[6]);
-		System.out.println("this.taskVariables[7]: " + this.taskVariables[7]);
-		System.out.println("this.taskVariables[8]: " + this.taskVariables[8]);
-		System.out.println("comparisonValue: " + this.comparisonValue);
-		System.out.println("recurringTaskValue: " + this.recurringTaskValue);
-		
 		calculateAndSetComparisonValue(this.taskVariables[7]);
 		calculateAndSetRecurringTaskValue(this.taskVariables[7]);
 	}
@@ -1032,7 +953,7 @@ public class Task {
 	// sets the priority
 	public void setPriority(String newPriority) {
 		this.taskVariables[5] = newPriority;
-		
+
 		// event task
 		if (Checker.isEventTaskInput(this.taskVariables[7])) {
 
@@ -1055,9 +976,9 @@ public class Task {
 		calculateAndSetComparisonValue(this.taskVariables[7]);
 		calculateAndSetRecurringTaskValue(this.taskVariables[7]);
 	}
-	
+
 	// "DONE" GETTER
-	public String getDone(){
+	public String getDone() {
 		return this.taskVariables[6];
 	}
 
@@ -1065,13 +986,7 @@ public class Task {
 
 	// marks a task as done
 	public void setDone() {
-		System.out.println("SETDONE");
-		System.out.println("before changes");
-		System.out.println("this.taskVariables[7]:" + this.taskVariables[7]);
-		System.out.println("this.taskVariables[8]:" + this.taskVariables[8]);
-		System.out.println("this.comparisonValue:" + this.comparisonValue);
-		System.out.println();
-		
+
 		if (this.taskVariables[6] == null) {
 			this.taskVariables[6] = DONE_STRING;
 			this.taskVariables[7] = this.taskVariables[7] + " " + DONE_STRING;
@@ -1079,13 +994,7 @@ public class Task {
 		}
 		calculateAndSetComparisonValue(this.taskVariables[7]);
 		calculateAndSetRecurringTaskValue(this.taskVariables[7]);
-		
-		System.out.println("SETDONE");
-		System.out.println("after changes");
-		System.out.println("this.taskVariables[7]:" + this.taskVariables[7]);
-		System.out.println("this.taskVariables[8]:" + this.taskVariables[8]);
-		System.out.println("this.comparisonValue:" + this.comparisonValue);
-		System.out.println();
+
 	}
 
 	// String form of each task in the .txt schedule file
@@ -1101,13 +1010,7 @@ public class Task {
 
 	// marks a task as not done
 	public void setNotDone() {
-		System.out.println("SET NOT DONE");
-		System.out.println("before changes");
-		System.out.println("this.taskVariables[7]:" + this.taskVariables[7]);
-		System.out.println("this.taskVariables[8]:" + this.taskVariables[8]);
-		System.out.println("this.comparisonValue:" + this.comparisonValue);
-		System.out.println();
-		
+
 		if (this.taskVariables[6] != null) {
 			this.taskVariables[6] = null;
 
@@ -1126,13 +1029,7 @@ public class Task {
 		}
 		calculateAndSetComparisonValue(this.taskVariables[7]);
 		calculateAndSetRecurringTaskValue(this.taskVariables[7]);
-		
-		System.out.println("SET NOT DONE");
-		System.out.println("after changes");
-		System.out.println("this.taskVariables[7]:" + this.taskVariables[7]);
-		System.out.println("this.taskVariables[8]:" + this.taskVariables[8]);
-		System.out.println("this.comparisonValue:" + this.comparisonValue);
-		System.out.println();
+
 	}
 
 }

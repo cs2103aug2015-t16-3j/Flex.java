@@ -495,11 +495,6 @@ public class CRUD {
 
 			for (int i = 0; i < deadlineOrEventTasksList.size(); i++) {
 				if (allTasksList.get(i).getDate().equalsIgnoreCase(date)) {
-					System.out.println("BREAK IF FIRST MATCH FOUND");
-					System.out.println("date:" + date);
-					System.out.println("allTasksList.get(i).getDate():" + allTasksList.get(i).getDate());
-					System.out.println(
-							"allTasksList.get(i).getScheduleString():" + allTasksList.get(i).getScheduleString());
 					firstTaskForDateIndex = i;
 					break;
 				}
@@ -507,19 +502,9 @@ public class CRUD {
 
 			for (int i = 0; i < deadlineOrEventTasksList.size(); i++) {
 				if (allTasksList.get(i).getDate().equalsIgnoreCase(date)) {
-					System.out.println("date:" + date);
-					System.out.println("allTasksList.get(i).getDate():" + allTasksList.get(i).getDate());
-					System.out.println(
-							"allTasksList.get(i).getScheduleString():" + allTasksList.get(i).getScheduleString());
 					taskCountForDate += 1;
 				}
 			}
-
-			System.out.println("firstTaskForDateIndex:" + firstTaskForDateIndex);
-			System.out.println("taskCountForDate:" + taskCountForDate);
-			System.out.println("number1:" + number1);
-			System.out.println("(firstTaskForDateIndex + Integer.valueOf(number1) - 1):"
-					+ (firstTaskForDateIndex + Integer.valueOf(number1) - 1));
 
 			if (firstTaskForDateIndex < 0) {
 				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
@@ -626,13 +611,11 @@ public class CRUD {
 				lastAction.setPreviousChangedScheduleString(taskBeforeChange);
 				lastAction.setPreviousTask(new Task(
 						allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1).getScheduleString()));
-			
+
 			} else if (toIndex2 == 0) {
 				tempString = tempString.substring(toIndex2 + 2).trim();
-				
-				String newDate = tempString.trim();
-				
-				if(!Checker.isValidDate(newDate)){
+
+				if (tempString.length() == 0) {
 					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
 					flexWindow.getTextArea().append("\n");
 
@@ -641,7 +624,19 @@ public class CRUD {
 					System.out.println();
 					return;
 				}
-				
+
+				String newDate = tempString.trim();
+
+				if (!Checker.isValidDate(newDate)) {
+					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					flexWindow.getTextArea().append("\n");
+
+					logger.finest(INVALID_INPUT_MESSAGE);
+					System.out.println(INVALID_INPUT_MESSAGE);
+					System.out.println();
+					return;
+				}
+
 				String taskBeforeChange = allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1)
 						.getScheduleString();
 
@@ -651,19 +646,11 @@ public class CRUD {
 				lastAction.setPreviousChangedScheduleString(taskBeforeChange);
 				lastAction.setPreviousTask(new Task(
 						allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1).getScheduleString()));
-				
-				
-				
+
 			} else if (priorityWhitespaceToIndex2 == 0) {
 				tempString = tempString.substring(priorityWhitespaceToIndex2 + 11).trim();
-				
-				String newPriority = new String("");
-				
-				String taskBeforeChange = allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1)
-						.getScheduleString();
 
-				// the task must to be changed should be an event task
-				if(!(Checker.isEventTaskInput(taskBeforeChange)||Checker.isDoneEventTaskInput(taskBeforeChange))){
+				if (tempString.length() == 0) {
 					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
 					flexWindow.getTextArea().append("\n");
 
@@ -672,25 +659,35 @@ public class CRUD {
 					System.out.println();
 					return;
 				}
-				
-				
+
+				String newPriority = tempString;
+
+				String taskBeforeChange = allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1)
+						.getScheduleString();
+
+				// the task must to be changed should be an event task
+				if (!(Checker.isEventTaskInput(taskBeforeChange) || Checker.isDoneEventTaskInput(taskBeforeChange))) {
+					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					flexWindow.getTextArea().append("\n");
+
+					logger.finest(INVALID_INPUT_MESSAGE);
+					System.out.println(INVALID_INPUT_MESSAGE);
+					System.out.println();
+					return;
+				}
+
 				allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1).setPriority(newPriority);
 
 				lastAction.setPreviousAction("change");
 				lastAction.setPreviousChangedScheduleString(taskBeforeChange);
 				lastAction.setPreviousTask(new Task(
 						allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1).getScheduleString()));
-				
 
 			} else if (timeWhitespaceToIndex2 == 0) {
 
 				tempString = tempString.substring(timeWhitespaceToIndex2 + 7).trim();
 
-				String taskBeforeChange = allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1)
-						.getScheduleString();
-				
-				// the task must to be changed should be an event task
-				if(!(Checker.isEventTaskInput(taskBeforeChange)||Checker.isDoneEventTaskInput(taskBeforeChange))){
+				if (tempString.length() == 0) {
 					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
 					flexWindow.getTextArea().append("\n");
 
@@ -700,27 +697,101 @@ public class CRUD {
 					return;
 				}
 
-				String newEndingTime1 = new String("");
-				String newStartingTime = new String("");
-				
-				allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1).setEnd(newEndingTime1);
-				
-				allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1).setStart(newStartingTime);
+				int hyphenIndex3 = tempString.indexOf("-");
+
+				if (hyphenIndex3 < 0) {
+					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					flexWindow.getTextArea().append("\n");
+
+					logger.finest(INVALID_INPUT_MESSAGE);
+					System.out.println(INVALID_INPUT_MESSAGE);
+					System.out.println();
+					return;
+				}
+
+				String startingTime = tempString.substring(0, hyphenIndex3).trim();
+
+				if (startingTime.length() != 4) {
+					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					flexWindow.getTextArea().append("\n");
+
+					logger.finest(INVALID_INPUT_MESSAGE);
+					System.out.println(INVALID_INPUT_MESSAGE);
+					System.out.println();
+					return;
+				}
+
+				if (!Checker.isValidTime(startingTime)) {
+					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					flexWindow.getTextArea().append("\n");
+
+					logger.finest(INVALID_INPUT_MESSAGE);
+					System.out.println(INVALID_INPUT_MESSAGE);
+					System.out.println();
+					return;
+				}
+
+				String endingTime = tempString.substring(hyphenIndex3 + 1).trim();
+
+				if (endingTime.length() != 4) {
+					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					flexWindow.getTextArea().append("\n");
+
+					logger.finest(INVALID_INPUT_MESSAGE);
+					System.out.println(INVALID_INPUT_MESSAGE);
+					System.out.println();
+					return;
+				}
+
+				if (!Checker.isValidTime(endingTime)) {
+					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					flexWindow.getTextArea().append("\n");
+
+					logger.finest(INVALID_INPUT_MESSAGE);
+					System.out.println(INVALID_INPUT_MESSAGE);
+					System.out.println();
+					return;
+				}
+
+				if (Integer.valueOf(endingTime.substring(0, 2)) * HOUR_MINUTES
+						+ Integer.valueOf(endingTime.substring(2, 4)) < Integer.valueOf(startingTime.substring(0, 2))
+								* HOUR_MINUTES + Integer.valueOf(startingTime.substring(2, 4))) {
+					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					flexWindow.getTextArea().append("\n");
+
+					logger.finest(INVALID_INPUT_MESSAGE);
+					System.out.println(INVALID_INPUT_MESSAGE);
+					System.out.println();
+					return;
+				}
+
+				String taskBeforeChange = allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1)
+						.getScheduleString();
+
+				// the task must to be changed should be an event task
+				if (!(Checker.isEventTaskInput(taskBeforeChange) || Checker.isDoneEventTaskInput(taskBeforeChange))) {
+					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					flexWindow.getTextArea().append("\n");
+
+					logger.finest(INVALID_INPUT_MESSAGE);
+					System.out.println(INVALID_INPUT_MESSAGE);
+					System.out.println();
+					return;
+				}
+
+				allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1).setEnd(endingTime);
+
+				allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1).setStart(startingTime);
 
 				lastAction.setPreviousAction("change");
 				lastAction.setPreviousChangedScheduleString(taskBeforeChange);
 				lastAction.setPreviousTask(new Task(
 						allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1).getScheduleString()));
-				
-				
-		
+
 			} else if (endWhitespaceByIndex2 == 0) {
 				tempString = tempString.substring(endWhitespaceByIndex2 + 6).trim();
-				String taskBeforeChange = allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1)
-						.getScheduleString();
-				
-				// the task must to be changed should be a deadline task
-				if(!(Checker.isDeadlineTaskInput(taskBeforeChange)||Checker.isDeadlineTaskInput(taskBeforeChange))){
+
+				if (tempString.length() == 0) {
 					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
 					flexWindow.getTextArea().append("\n");
 
@@ -730,26 +801,43 @@ public class CRUD {
 					return;
 				}
 
-				String newEndingTime2 = new String("");
-				
-				allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1).setEnd(newEndingTime2);
+				String newEndingTime = tempString.trim();
+
+				if (!Checker.isValidTime(newEndingTime)) {
+					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					flexWindow.getTextArea().append("\n");
+
+					logger.finest(INVALID_INPUT_MESSAGE);
+					System.out.println(INVALID_INPUT_MESSAGE);
+					System.out.println();
+					return;
+				}
+
+				String taskBeforeChange = allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1)
+						.getScheduleString();
+
+				// the task must to be changed should be a deadline task
+				if (!(Checker.isDeadlineTaskInput(taskBeforeChange)
+						|| Checker.isDoneDeadlineTaskInput(taskBeforeChange))) {
+					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					flexWindow.getTextArea().append("\n");
+
+					logger.finest(INVALID_INPUT_MESSAGE);
+					System.out.println(INVALID_INPUT_MESSAGE);
+					System.out.println();
+					return;
+				}
+
+				allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1).setEnd(newEndingTime);
 
 				lastAction.setPreviousAction("change");
 				lastAction.setPreviousChangedScheduleString(taskBeforeChange);
 				lastAction.setPreviousTask(new Task(
 						allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1).getScheduleString()));
-				
-	
+
 			} else if (byIndex2 == 0) {
 				tempString = tempString.substring(byIndex2 + 2).trim();
-				String taskBeforeChange = allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1)
-						.getScheduleString();
-
-				String newEndingTime2 = new String("");
-				String newDate2 = new String("");
-				
-				// the task must to be changed should be a deadline task
-				if(!(Checker.isDeadlineTaskInput(taskBeforeChange)||Checker.isDeadlineTaskInput(taskBeforeChange))){
+				if (tempString.length() == 0) {
 					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
 					flexWindow.getTextArea().append("\n");
 
@@ -758,17 +846,75 @@ public class CRUD {
 					System.out.println();
 					return;
 				}
-				
-				allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1).setEnd(newEndingTime2);
-				
+
+				int whitespaceOnWhitespaceIndex1 = tempString.indexOf(" on ");
+
+				if (whitespaceOnWhitespaceIndex1 < 0) {
+					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					flexWindow.getTextArea().append("\n");
+
+					logger.finest(INVALID_INPUT_MESSAGE);
+					System.out.println(INVALID_INPUT_MESSAGE);
+					System.out.println();
+					return;
+				}
+
+				String newEndingTime6 = tempString.substring(0, whitespaceOnWhitespaceIndex1).trim();
+
+				if (newEndingTime6.length() != 4) {
+					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					flexWindow.getTextArea().append("\n");
+
+					logger.finest(INVALID_INPUT_MESSAGE);
+					System.out.println(INVALID_INPUT_MESSAGE);
+					System.out.println();
+					return;
+				}
+
+				if (!Checker.isValidTime(newEndingTime6)) {
+					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					flexWindow.getTextArea().append("\n");
+
+					logger.finest(INVALID_INPUT_MESSAGE);
+					System.out.println(INVALID_INPUT_MESSAGE);
+					System.out.println();
+					return;
+				}
+
+				String newDate2 = tempString.substring(whitespaceOnWhitespaceIndex1 + 4).trim();
+
+				if (newDate2.length() == 0) {
+					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					flexWindow.getTextArea().append("\n");
+
+					logger.finest(INVALID_INPUT_MESSAGE);
+					System.out.println(INVALID_INPUT_MESSAGE);
+					System.out.println();
+					return;
+				}
+
+				if (!Checker.isValidDate(newDate2)) {
+					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					flexWindow.getTextArea().append("\n");
+
+					logger.finest(INVALID_INPUT_MESSAGE);
+					System.out.println(INVALID_INPUT_MESSAGE);
+					System.out.println();
+					return;
+				}
+
+				String taskBeforeChange = allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1)
+						.getScheduleString();
+
+				allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1).setEnd(newEndingTime6);
+
 				allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1).setDate(newDate2);
 
 				lastAction.setPreviousAction("change");
 				lastAction.setPreviousChangedScheduleString(taskBeforeChange);
 				lastAction.setPreviousTask(new Task(
 						allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1).getScheduleString()));
-				
-	
+
 			}
 
 		} else if (firstTerm.equalsIgnoreCase("floating")) {
@@ -1145,9 +1291,6 @@ public class CRUD {
 				int endTimeMinutes = Integer.valueOf(endTime.substring(2, 4).trim());
 				int totalEndTime = endTimeHours * HOUR_MINUTES + endTimeMinutes;
 
-				System.out.println("totalStartTime:" + totalStartTime);
-				System.out.println("totalEndTime:" + totalEndTime);
-
 				if (totalEndTime < totalStartTime) {
 					logger.finest(INVALID_INPUT_MESSAGE);
 					System.out.println(INVALID_INPUT_MESSAGE);
@@ -1357,12 +1500,6 @@ public class CRUD {
 	static void undo(String filename, LastAction lastAction, FlexWindow flexWindow)
 			throws IOException, NullPointerException {
 
-		System.out.println("lastAction.getPreviousAction():" + lastAction.getPreviousAction());
-		System.out.println(
-				"lastAction.getPreviousTask().getScheduleString():" + lastAction.getPreviousTask().getScheduleString());
-		System.out.println(
-				"lastAction.getPreviousChangedScheduleString():" + lastAction.getPreviousChangedScheduleString());
-
 		if (lastAction.getPreviousAction() == null || lastAction.getPreviousTask() == null) {
 			flexWindow.getTextArea().append(NOTHING_TO_UNDO_MESSAGE + "\n");
 			flexWindow.getTextArea().append("\n");
@@ -1448,10 +1585,8 @@ public class CRUD {
 				System.out.println();
 
 				String taskBeforeChange = lastAction.getPreviousChangedScheduleString();
-				System.out.println("taskBeforeChange:" + taskBeforeChange);
 
 				String taskAfterChange = lastAction.getPreviousTask().getScheduleString();
-				System.out.println("taskAfterChange:" + taskAfterChange);
 
 				// reads in the file, line by line
 				BufferedReader reader = null;
@@ -1475,9 +1610,6 @@ public class CRUD {
 
 				Task tempTask1 = new Task();
 
-				System.out.println("allTasksListUNDOCHANGE.size() BEFORE for loop to remove task:"
-						+ allTasksListUNDOCHANGE.size());
-
 				// for exactness, equalsIgnoreCase is not used
 				for (int i = 0; i < allTasksListUNDOCHANGE.size(); i++) {
 					if (taskAfterChange.equals(allTasksListUNDOCHANGE.get(i).getScheduleString())) {
@@ -1486,9 +1618,6 @@ public class CRUD {
 						break;
 					}
 				}
-
-				System.out.println(
-						"allTasksListUNDOCHANGE.size() AFTER for loop to remove task:" + allTasksListUNDOCHANGE.size());
 
 				// sort all tasks by date and starting time
 				SortAndShow.sortAllTasksByDateAndStartingTime(allTasksListUNDOCHANGE);
@@ -1502,46 +1631,11 @@ public class CRUD {
 
 				writer.close();
 
-				System.out.println("before CRUD.addTask()");
-
-				System.out.println("lastAction.getPreviousAction():" + lastAction.getPreviousAction());
-				System.out.println("lastAction.getPreviousTask().getScheduleString():"
-						+ lastAction.getPreviousTask().getScheduleString());
-				System.out.println("lastAction.getPreviousChangedScheduleString():"
-						+ lastAction.getPreviousChangedScheduleString());
-
-				System.out
-						.println("allTasksListUNDOCHANGE.size() BEFORE CRUD.addTask:" + allTasksListUNDOCHANGE.size());
-
-				System.out.println();
-
 				CRUD.addTask(filename, taskBeforeChange, lastAction, flexWindow);
-
-				System.out.println("after CRUD.addTask()");
-
-				System.out.println("lastAction.getPreviousAction():" + lastAction.getPreviousAction());
-				System.out.println("lastAction.getPreviousTask().getScheduleString():"
-						+ lastAction.getPreviousTask().getScheduleString());
-				System.out.println("lastAction.getPreviousChangedScheduleString():"
-						+ lastAction.getPreviousChangedScheduleString());
-
-				System.out.println("allTasksListUNDOCHANGE.size() After CRUD.addtask:" + allTasksListUNDOCHANGE.size());
-
-				System.out.println();
 
 				lastAction.setPreviousAction("change");
 				lastAction.setPreviousChangedScheduleString(taskAfterChange);
 				lastAction.setPreviousTask(new Task(taskBeforeChange));
-
-				System.out.println("after setting lastAction before exiting undo()");
-
-				System.out.println("lastAction.getPreviousAction():" + lastAction.getPreviousAction());
-				System.out.println("lastAction.getPreviousTask().getScheduleString():"
-						+ lastAction.getPreviousTask().getScheduleString());
-				System.out.println("lastAction.getPreviousChangedScheduleString():"
-						+ lastAction.getPreviousChangedScheduleString());
-
-				System.out.println();
 
 			}
 
