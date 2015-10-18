@@ -2,7 +2,7 @@ task; by 0001 on 1/1/1
 task; by 0001 on 1/1/1 [done]
 task; by 0001 on 1/1/1 [done]
 task; by 0001 on 1/1/1 [done]
-testttttt; 0000-0002 on 1/1/1; prior
+testttttt; 0000-0002 on 3/2/1; prior
 task; by 0001 on 1/1/2
 task; by 0101 on 1/1/2
 task; by 1001 on 1/1/2
@@ -66,9 +66,9 @@ task; 2359-2359 every tuesday; priworiWy
 task; 0000-0001 every wednesday; priorfwefdwefewfiWy
 task; 0001-0002 every wednesday; prioriWy [done]
 task; 0001-0002 every wednesday; prioriWy [done]
-task; 0000-0001 every thursday; priority
 task; 0000-0001 every thursday; prioriWy
-task; 0000-0001 every friday; prioriWy
+task; 0000-0001 every thursday; priority
 task; 0000-2221 every friday; priority1
+task; 0000-0001 every friday; prioriWy
 task; 0000-0001 every saturday; priority1
 task; 0001-0002 every sunday; prioriWy [done]
