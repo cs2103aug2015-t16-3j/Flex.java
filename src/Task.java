@@ -1052,21 +1052,35 @@ public class Task {
 	}
 	
 	// "DONE" GETTER
-	public String getTaskDone(){
+	public String getDone(){
 		return this.taskVariables[6];
 	}
 
 	// "DONE" MODIFIERS
 
 	// marks a task as done
-	public void setTaskDone() {
+	public void setDone() {
+		System.out.println("SETDONE");
+		System.out.println("before changes");
+		System.out.println("this.taskVariables[7]" + this.taskVariables[7]);
+		System.out.println("this.taskVariables[8]" + this.taskVariables[8]);
+		System.out.println("this.comparisonValue:" + this.comparisonValue);
+		System.out.println();
+		
 		if (this.taskVariables[6] == null) {
 			this.taskVariables[6] = DONE_STRING;
-			this.taskVariables[7] = this.taskVariables[6] + " " + DONE_STRING;
-			this.taskVariables[8] = this.taskVariables[7] + " " + DONE_STRING;
+			this.taskVariables[7] = this.taskVariables[7] + " " + DONE_STRING;
+			this.taskVariables[8] = this.taskVariables[8] + " " + DONE_STRING;
 		}
 		calculateAndSetComparisonValue(this.taskVariables[7]);
 		calculateAndSetRecurringTaskValue(this.taskVariables[7]);
+		
+		System.out.println("SETDONE");
+		System.out.println("after changes");
+		System.out.println("this.taskVariables[7]" + this.taskVariables[7]);
+		System.out.println("this.taskVariables[8]" + this.taskVariables[8]);
+		System.out.println("this.comparisonValue:" + this.comparisonValue);
+		System.out.println();
 	}
 
 	// String form of each task in the .txt schedule file
@@ -1081,7 +1095,14 @@ public class Task {
 	}
 
 	// marks a task as not done
-	public void setTaskNotDone() {
+	public void setNotDone() {
+		System.out.println("SET NOT DONE");
+		System.out.println("before changes");
+		System.out.println("this.taskVariables[7]" + this.taskVariables[7]);
+		System.out.println("this.taskVariables[8]" + this.taskVariables[8]);
+		System.out.println("this.comparisonValue:" + this.comparisonValue);
+		System.out.println();
+		
 		if (this.taskVariables[6] != null) {
 			this.taskVariables[6] = null;
 
@@ -1100,6 +1121,13 @@ public class Task {
 		}
 		calculateAndSetComparisonValue(this.taskVariables[7]);
 		calculateAndSetRecurringTaskValue(this.taskVariables[7]);
+		
+		System.out.println("SET NOT DONE");
+		System.out.println("after changes");
+		System.out.println("this.taskVariables[7]" + this.taskVariables[7]);
+		System.out.println("this.taskVariables[8]" + this.taskVariables[8]);
+		System.out.println("this.comparisonValue:" + this.comparisonValue);
+		System.out.println();
 	}
 
 }
