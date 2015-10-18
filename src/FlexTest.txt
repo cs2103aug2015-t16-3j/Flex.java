@@ -44,7 +44,7 @@ task; 0000-0001 every wednesday; priorfwefdwefewfiWy
 task; 0001-0002 every wednesday; prioriWy [done]
 task; 0001-0002 every wednesday; prioriWy [done]
 task; 0000-0001 every thursday; prioriWy
-task; 0000-2221 every friday; priority1
 task; 0000-0001 every friday; prioriWy
+task; 0000-2221 every friday; priority1
 task; 0000-0001 every saturday; priority1
 task; 0001-0002 every sunday; prioriWy
