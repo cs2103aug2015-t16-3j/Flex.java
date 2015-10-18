@@ -609,13 +609,15 @@ public class Task {
 			int numberOfAccumulatedPastDaysInCurrentYear = findNumberOfAccumulatedPastDaysInCurrentYear(month - 1,
 					day - 1);
 			;
+			
+			int endingTimeTotal = Integer.valueOf(this.taskVariables[4].substring(0, 2)) * HOUR_MINUTES + Integer.valueOf(this.taskVariables[4].substring(2, 4));
 
 			// e.g. this.comparisonValue = 503 * 366 + 1500 * 365 +
 			// (NOVEMBER_ACCUMULATED_DAYS + 0) * 24 * 60;
-			this.comparisonValue = -0.5 + DEADLINE_AND_EVENT_NEGATIVE_SETOFF_VALUE
+			this.comparisonValue = -0.7 + DEADLINE_AND_EVENT_NEGATIVE_SETOFF_VALUE
 					+ numberOfPastLeapYears * LEAP_YEAR_DAYS * DAY_HOURS * HOUR_MINUTES
 					+ numberOfPastNonLeapyears * YEAR_DAYS * DAY_HOURS * HOUR_MINUTES
-					+ (numberOfAccumulatedPastDaysInCurrentYear + leapYearFebruaryDay) * DAY_HOURS * HOUR_MINUTES;
+					+ (numberOfAccumulatedPastDaysInCurrentYear + leapYearFebruaryDay) * DAY_HOURS * HOUR_MINUTES + endingTimeTotal * 0.0001;
 
 		} else if (Checker.isDoneDeadlineTaskInput(string)) {
 			// e.g. 7/9/2015
@@ -652,13 +654,16 @@ public class Task {
 			int numberOfAccumulatedPastDaysInCurrentYear = findNumberOfAccumulatedPastDaysInCurrentYear(month - 1,
 					day - 1);
 			;
+			
+			int endingTimeTotal = Integer.valueOf(this.taskVariables[4].substring(0, 2)) * HOUR_MINUTES + Integer.valueOf(this.taskVariables[4].substring(2, 4));
+
 
 			// e.g. this.comparisonValue = 503 * 366 + 1500 * 365 +
 			// (NOVEMBER_ACCUMULATED_DAYS + 0) * 24 * 60;
-			this.comparisonValue = -0.5 + DEADLINE_AND_EVENT_NEGATIVE_SETOFF_VALUE
+			this.comparisonValue = -0.7 + DEADLINE_AND_EVENT_NEGATIVE_SETOFF_VALUE
 					+ numberOfPastLeapYears * LEAP_YEAR_DAYS * DAY_HOURS * HOUR_MINUTES
 					+ numberOfPastNonLeapyears * YEAR_DAYS * DAY_HOURS * HOUR_MINUTES
-					+ (numberOfAccumulatedPastDaysInCurrentYear + leapYearFebruaryDay) * DAY_HOURS * HOUR_MINUTES + 0.1;
+					+ (numberOfAccumulatedPastDaysInCurrentYear + leapYearFebruaryDay) * DAY_HOURS * HOUR_MINUTES + 0.1  + endingTimeTotal * 0.0001;
 
 		} else if (Checker.isRecurringTaskInput(string)) {
 			this.comparisonValue = RECURRING_TASK_COMPARISON_VALUE;

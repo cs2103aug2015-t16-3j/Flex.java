@@ -529,7 +529,7 @@ public class SortAndShow {
 				recurringTasksList.add(allTasksList.get(j));
 			}
 		}
-
+		
 		// sort floating tasks in alphabetical order
 		int size2 = floatingTasksList.size();
 		int q, start2, min_index2 = 0;

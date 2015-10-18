@@ -1261,6 +1261,8 @@ public class CRUD {
 				}
 
 				Task tempTask = new Task();
+				
+				boolean isForLoopEntered = false;
 
 				// for exactness, equalsIgnoreCase is not used
 				for (int i = 0; i < allTasksListUNDOADD.size(); i++) {
