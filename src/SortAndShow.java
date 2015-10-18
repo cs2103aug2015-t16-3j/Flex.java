@@ -1,6 +1,5 @@
 import java.util.*;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.*;
@@ -9,21 +8,11 @@ public class SortAndShow {
 
 	private static final Logger logger = Logger.getLogger(SortAndShow.class.getName());
 
-	private static final String DISPLAY_SORTED_BY_STARTING_TIMES_MESSAGE = "The tasks, sorted by starting time, are displayed.";
-	private static final String DISPLAY_SORTED_BY_ENDING_TIMES_MESSAGE = "The tasks, sorted by ending time, are displayed.";
-	private static final String DISPLAY_SORTED_BY_TITLES_MESSAGE = "The tasks, sorted in alphabetical order by title, are displayed.";
-	private static final String DISPLAY_SORTED_BY_DESCRIPTIONS_MESSAGE = "The tasks, sorted in alphabetical order by task description, are displayed.";
-	private static final String DISPLAY_SORTED_BY_PRIORITY_LEVELS_MESSAGE = "The tasks, sorted in alphabetical order by priority level, is displayed.";
-	private static final String DISPLAY_SORTED_BY_CATEGORIES_MESSAGE = "The tasks, sorted in alphabetical order by category, are displayed.";
-
-	private static final String NOT_DONE_TASKS_DISPLAYED_MESSAGE = "The tasks in the schedule, which are not marked as "
-			+ "done" + " for their categories, are displayed.";
 	private static final String ALL_TASKS_DISPLAYED_MESSAGE = "All the tasks in the schedule are displayed.";
 	private static final String INVALID_INPUT_MESSAGE = "Invalid input. Please try again.";
 	// that is, it is valid only if its starting time, or ending time, are NOT
 	// between the starting
 	// and ending times of existing tasks which are NOT DONE YET
-	private static final int HOUR_MINUTES = 60;
 
 	// the form of searching for tasks without executing readAndExecuteCommand()
 	// recursively

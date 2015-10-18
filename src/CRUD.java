@@ -13,11 +13,6 @@ public class CRUD {
 	private static final String DELETED_MESSAGE = "The specified task has been deleted.";
 	private static String ADDED_MESSAGE = "The task has been successfully added.";
 
-	private static final String VALID_INPUT_WITHOUT_MATCHING_TASKS_TO_HAVE_INFORMATION_CHANGED_MESSAGE = "Valid input provided, but there are no matching tasks to have their information changed.";
-
-	private static final String STARTING_TIME_LATER_THAN_ENDING_TIME_MESSAGE = "The new starting time is later than the current ending time.";
-	private static final String ENDING_TIME_EARLIER_THAN_STARTING_TIME_MESSAGE = "The new ending time is earlier than the curent starting time.";
-
 	private static final String CHANGED_MESSAGE = "(The change to the task information is valid and processed.)";
 	private static final String CHANGE_UNDONE_MESSAGE = "The last valid change action has been undone.";
 	private static final String DELETE_UNDONE_MESSAGE = "The last valid delete action has been undone.";
@@ -369,7 +364,6 @@ public class CRUD {
 
 	static void changeTaskVariable(String filename, String remainingCommandString, LastAction lastAction,
 			FlexWindow flexWindow) throws IOException {
-		boolean atLeastOneTaskChanged = false;
 
 		String tempString = new String("");
 		tempString = remainingCommandString.trim();
@@ -412,10 +406,6 @@ public class CRUD {
 			}
 		}
 
-		Task tempTask = new Task();
-		String tempChangedTerm = new String("");
-		String previousAction = new String("");
-
 		int whitespaceIndex1 = tempString.indexOf(" ");
 		if (whitespaceIndex1 < 0) {
 			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
@@ -446,8 +436,6 @@ public class CRUD {
 			// change floating <number> done
 			// change floating <number> not done
 			String date = firstTerm.trim();
-
-			System.out.println("date:" + date);
 
 			int whitespaceIndex2 = tempString.indexOf(" ");
 			if (whitespaceIndex2 < 0) {
@@ -1543,8 +1531,6 @@ public class CRUD {
 
 				Task tempTask = new Task();
 
-				boolean isForLoopEntered = false;
-
 				// for exactness, equalsIgnoreCase is not used
 				for (int i = 0; i < allTasksListUNDOADD.size(); i++) {
 					if (lastAction.getPreviousTask().getScheduleString()
@@ -1608,12 +1594,9 @@ public class CRUD {
 					reader.close();
 				}
 
-				Task tempTask1 = new Task();
-
 				// for exactness, equalsIgnoreCase is not used
 				for (int i = 0; i < allTasksListUNDOCHANGE.size(); i++) {
 					if (taskAfterChange.equals(allTasksListUNDOCHANGE.get(i).getScheduleString())) {
-						tempTask1 = allTasksListUNDOCHANGE.get(i);
 						allTasksListUNDOCHANGE.remove(i);
 						break;
 					}

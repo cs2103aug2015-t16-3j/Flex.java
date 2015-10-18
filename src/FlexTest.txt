@@ -10,13 +10,13 @@ task; by 1201 on 1/1/2
 task; by 1300 on 1/1/2
 task; by 1301 on 1/1/2
 task; by 2301 on 1/1/2
+testttttt; 1000-1001 on 1/1/2; prior
+testttttt; 1000-1001 on 1/1/2; prior
+testttttt; 1000-1001 on 1/1/2; prior
 testttttt; 1000-1001 on 1/1/2; PRI
-testttttt; 1000-1001 on 1/1/2; prior
-testttttt; 1000-1001 on 1/1/2; prior
-testttttt; 1000-1001 on 1/1/2; prior
 testttttt; 1245-1549 on 1/1/2; prior
 testttttt; 1500-1501 on 1/1/2; prior
-task; by 2358 on 1/2/3 [done]
+task; by 2358 on 1/2/3
 tasking; by 0020 on 5/5/5
 task; by 0001 on 9/9/9
 task; by 0001 on 9/9/9
@@ -30,7 +30,7 @@ task; by 0001 on 21/9/10
 task; by 0001 on 21/9/10
 task; by 0001 on 10/10/10
 task; by 0001 on 10/10/10
-task; by 0001 on 14/12/10 [done]
+task; by 0001 on 14/12/10
 task; by 0001 on 14/12/10 [done]
 task; by 0002 on 11/11/11 [done]
 task; by 0002 on 11/11/11 [done]
@@ -66,9 +66,9 @@ task; 2359-2359 every tuesday; priworiWy
 task; 0000-0001 every wednesday; priorfwefdwefewfiWy
 task; 0001-0002 every wednesday; prioriWy [done]
 task; 0001-0002 every wednesday; prioriWy [done]
-task; 0000-0001 every thursday; priority
 task; 0000-0001 every thursday; prioriWy
-task; 0000-0001 every friday; prioriWy
+task; 0000-0001 every thursday; priority
 task; 0000-2221 every friday; priority1
+task; 0000-0001 every friday; prioriWy
 task; 0000-0001 every saturday; priority1
 task; 0001-0002 every sunday; prioriWy [done]
