@@ -608,16 +608,36 @@ public class CRUD {
 					return;
 				}
 
+				int startTimeHours = Integer.valueOf(startTime.substring(0, 2).trim());
+				int startTimeMinutes = Integer.valueOf(startTime.substring(2, 4).trim());
+				int totalStartTime = startTimeHours * HOUR_MINUTES + startTimeMinutes;
+				int endTimeHours = Integer.valueOf(endTime.substring(0, 2).trim());
+				int endTimeMinutes = Integer.valueOf(endTime.substring(2, 4).trim());
+				int totalEndTime = endTimeHours * HOUR_MINUTES + endTimeMinutes;
+				
+				System.out.println("totalStartTime:" + totalStartTime);
+				System.out.println("totalEndTime:" + totalEndTime);
+				
+				if(totalEndTime < totalStartTime){
+					logger.finest(INVALID_INPUT_MESSAGE);
+					System.out.println(INVALID_INPUT_MESSAGE);
+					System.out.println();
+					return;
+				}
+				
+				
 				String taskBeforeChange = allTasksList
 						.get(deadlineOrEventTasksList.size() + floatingTasksList.size() + Integer.valueOf(number1) - 1)
 						.getScheduleString();
 
-				allTasksList
-						.get(deadlineOrEventTasksList.size() + floatingTasksList.size() + Integer.valueOf(number1) - 1)
-						.setStart(startTime);
+				// set the end time first, then the start time, as tasks are checked for starting time
+				// being less than or equal to end time. Not following this order WILL crash the program
 				allTasksList
 						.get(deadlineOrEventTasksList.size() + floatingTasksList.size() + Integer.valueOf(number1) - 1)
 						.setEnd(endTime);
+				allTasksList
+						.get(deadlineOrEventTasksList.size() + floatingTasksList.size() + Integer.valueOf(number1) - 1)
+						.setStart(startTime);
 
 				lastAction.setPreviousAction("change");
 				lastAction.setPreviousChangedScheduleString(taskBeforeChange);
@@ -836,13 +856,13 @@ public class CRUD {
 				reader = new BufferedReader(new FileReader(filename));
 				String currentLine = null;
 
-				ArrayList<Task> allTasksList = new ArrayList<Task>();
+				ArrayList<Task> allTasksListUNDOADD = new ArrayList<Task>();
 
 				do {
 					currentLine = reader.readLine();
 					if (currentLine != null) {
 
-						allTasksList.add(new Task(currentLine));
+						allTasksListUNDOADD .add(new Task(currentLine));
 					}
 				} while (currentLine != null);
 
@@ -853,21 +873,24 @@ public class CRUD {
 				Task tempTask = new Task();
 
 				// for exactness, equalsIgnoreCase is not used
-				for (int i = 0; i < allTasksList.size(); i++) {
+				for (int i = 0; i < allTasksListUNDOADD .size(); i++) {
 					if (lastAction.getPreviousTask().getScheduleString()
-							.equals(allTasksList.get(i).getScheduleString())) {
-						tempTask = allTasksList.get(i);
-						allTasksList.remove(i);
+							.equals(allTasksListUNDOADD .get(i).getScheduleString())) {
+						tempTask = allTasksListUNDOADD .get(i);
+						allTasksListUNDOADD .remove(i);
 						lastAction.setPreviousAction("delete");
 						lastAction.setPreviousTask(tempTask);
 						lastAction.setPreviousChangedScheduleString(null);
 					}
 				}
+				
+				// sort all tasks by date and starting time
+				SortAndShow.sortAllTasksByDateAndStartingTime(allTasksListUNDOADD );
 
 				BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
 
-				for (int j = 0; j < allTasksList.size(); j++) {
-					writer.write(allTasksList.get(j).getScheduleString());
+				for (int j = 0; j < allTasksListUNDOADD .size(); j++) {
+					writer.write(allTasksListUNDOADD .get(j).getScheduleString());
 					writer.newLine();
 				}
 
@@ -888,10 +911,10 @@ public class CRUD {
 				System.out.println();
 
 				String taskBeforeChange = lastAction.getPreviousChangedScheduleString();
-				System.out.print("taskBeforeChange" + taskBeforeChange);
+				System.out.println("taskBeforeChange:" + taskBeforeChange);
 
 				String taskAfterChange = lastAction.getPreviousTask().getScheduleString();
-				System.out.print("taskAfterChange" + taskAfterChange);
+				System.out.println("taskAfterChange:" + taskAfterChange);
 
 				// reads in the file, line by line
 				BufferedReader reader = null;
@@ -899,13 +922,13 @@ public class CRUD {
 				reader = new BufferedReader(new FileReader(filename));
 				String currentLine = null;
 
-				ArrayList<Task> allTasksList = new ArrayList<Task>();
+				ArrayList<Task> allTasksListUNDOCHANGE = new ArrayList<Task>();
 
 				do {
 					currentLine = reader.readLine();
 					if (currentLine != null) {
 
-						allTasksList.add(new Task(currentLine));
+						allTasksListUNDOCHANGE.add(new Task(currentLine));
 					}
 				} while (currentLine != null);
 
@@ -913,32 +936,77 @@ public class CRUD {
 					reader.close();
 				}
 
-				Task tempTask = new Task();
+				Task tempTask1 = new Task();
 
+				System.out.println("allTasksListUNDOCHANGE.size() BEFORE for loop to remove task:" + allTasksListUNDOCHANGE.size());
+				
 				// for exactness, equalsIgnoreCase is not used
-				for (int i = 0; i < allTasksList.size(); i++) {
-					if (taskAfterChange.equals(allTasksList.get(i).getScheduleString())) {
-						tempTask = allTasksList.get(i);
-						allTasksList.remove(i);
+				for (int i = 0; i < allTasksListUNDOCHANGE.size(); i++) {
+					if (taskAfterChange.equals(allTasksListUNDOCHANGE.get(i).getScheduleString())) {
+						tempTask1 = allTasksListUNDOCHANGE.get(i);
+						allTasksListUNDOCHANGE.remove(i);
 
 					}
 				}
+				
+				System.out.println("allTasksListUNDOCHANGE.size() AFTER for loop to remove task:" + allTasksListUNDOCHANGE.size());
+				
+				// sort all tasks by date and starting time
+				SortAndShow.sortAllTasksByDateAndStartingTime(allTasksListUNDOCHANGE);
 
 				BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
 
-				for (int j = 0; j < allTasksList.size(); j++) {
-					writer.write(allTasksList.get(j).getScheduleString());
+				for (int j = 0; j < allTasksListUNDOCHANGE.size(); j++) {
+					writer.write(allTasksListUNDOCHANGE.get(j).getScheduleString());
 					writer.newLine();
 				}
 
 				writer.close();
 
-				CRUD.addTask(filename, taskBeforeChange, lastAction, flexWindow);
+				System.out.println("before CRUD.addTask()");
 
+				System.out.println("lastAction.getPreviousAction():" + lastAction.getPreviousAction());
+				System.out.println(
+						"lastAction.getPreviousTask().getScheduleString():" + lastAction.getPreviousTask().getScheduleString());
+				System.out.println(
+						"lastAction.getPreviousChangedScheduleString():" + lastAction.getPreviousChangedScheduleString());
+
+				System.out.println("allTasksListUNDOCHANGE.size() BEFORE CRUD.addTask:" + allTasksListUNDOCHANGE.size());
+				
+				
+				System.out.println();
+				
+				
+				
+				CRUD.addTask(filename, taskBeforeChange, lastAction, flexWindow);
+				
+				System.out.println("after CRUD.addTask()");
+
+				System.out.println("lastAction.getPreviousAction():" + lastAction.getPreviousAction());
+				System.out.println(
+						"lastAction.getPreviousTask().getScheduleString():" + lastAction.getPreviousTask().getScheduleString());
+				System.out.println(
+						"lastAction.getPreviousChangedScheduleString():" + lastAction.getPreviousChangedScheduleString());
+
+				System.out.println("allTasksListUNDOCHANGE.size() After CRUD.addtask:" + allTasksListUNDOCHANGE.size());
+				
+				
+				System.out.println();
+				
 				lastAction.setPreviousAction("change");
 				lastAction.setPreviousChangedScheduleString(taskAfterChange);
 				lastAction.setPreviousTask(new Task(taskBeforeChange));
+				
+				System.out.println("after setting lastAction before exiting undo()");
 
+				System.out.println("lastAction.getPreviousAction():" + lastAction.getPreviousAction());
+				System.out.println(
+						"lastAction.getPreviousTask().getScheduleString():" + lastAction.getPreviousTask().getScheduleString());
+				System.out.println(
+						"lastAction.getPreviousChangedScheduleString():" + lastAction.getPreviousChangedScheduleString());
+
+				System.out.println();
+				
 			}
 
 		}

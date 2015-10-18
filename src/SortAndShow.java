@@ -589,7 +589,15 @@ public class SortAndShow {
 				tempTasksList.add(recurringTasksList.get(o));
 			}
 		}
-
+		
+		System.out.println();
+		System.out.println("allTasksList.size():" + allTasksList.size());
+		System.out.println("deadlineOrEventList.size():" + deadlineOrEventTasksList.size());
+		System.out.println("floatingTasksList.size():" + floatingTasksList.size());
+		System.out.println("recurringTasksList.size():" + recurringTasksList.size());
+		System.out.println("allTasksList.size():" + allTasksList.size());
+		System.out.println("tempTasksList.size():" + allTasksList.size());
+		System.out.println();
 		for (int w = 0; w < allTasksList.size(); w++) {
 			allTasksList.set(w, tempTasksList.get(w));
 		}

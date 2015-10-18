@@ -261,7 +261,6 @@ public class Flex {
 				// only if input is valid
 				// Note: This method will call readAndExecuteCommand again
 				CRUD.changeTaskVariable(filename, remainingCommandString, lastAction, flexWindow);
-				SortAndShow.readAndDisplayAll(filename, flexWindow);
 
 			} else if (firstWord.equalsIgnoreCase("search")) {
 				// Case 8: Search for tasks
