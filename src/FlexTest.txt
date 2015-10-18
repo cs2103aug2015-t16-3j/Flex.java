@@ -1,21 +1,28 @@
 task; by 0001 on 1/1/1
-task; by 0001 on 1/1/1
 task; by 0001 on 1/1/1 [done]
 task; by 0001 on 1/1/1 [done]
+task; by 0001 on 1/1/1 [done]
+task; 0000-0001 on 1/1/1; pr [done]
+task; 0002-0003 on 1/1/1; pri
 task; by 0001 on 1/1/2
-task; by 0001 on 1/1/2 [done]
+task; by 0001 on 1/1/2
 task; 0000-0001 on 2/2/2; priority
-task; 0000-0001 on 2/2/2; priority [done]
+task; 0000-0001 on 2/2/2; priority
 task; 0000-1001 on 2/2/2; priority [done]
+task; 0000-0001 on 2/2/2; priority [done]
 task; 1000-1100 on 2/2/2; priority
-task; 1000-2000 on 2/2/2; priority
 task; 1000-1100 on 2/2/2; priority
-task; 1000-1100 on 2/2/2; priority
+task; 1000-2000 on 2/2/2; priority [done]
 task; 1001-1100 on 2/2/2; priority
-task; 0000-0001 on 3/3/3; priority
+task; 0000-0001 on 3/3/3; priority [done]
 task; 0000-0001 on 4/4/4; priority [done]
 tasking; by 0020 on 5/5/5
 task; by 0001 on 9/9/9
+task; by 0001 on 9/9/9 [done]
+task; by 0001 on 9/9/9 [done]
+task; 0000-0001 on 9/9/9; priority
+task; 0000-0001 on 9/9/9; priority
+task; 0000-0001 on 9/9/9; priority [done]
 task; by 0001 on 9/9/10
 task; by 0001 on 21/9/10
 task; by 0001 on 10/10/10
@@ -24,10 +31,10 @@ task; by 0002 on 11/11/11 [done]
 task; by 0001 on 9/9/12
 task; by 0001 on 1/1/4100
 task; by 0002 on 1/1/4200
-task; by 0003 on 1/1/5000
+task; by 0003 on 1/1/5000 [done]
 fine
-fire
-icy
+fire [done]
+icy [done]
 modular
 module
 node
@@ -36,15 +43,15 @@ that
 thunder
 tree
 water
-task; 0000-0001 every monday; prioriTy
+task; 0000-0001 every monday; prioriTy [done]
 task; 1236-1334 every monday; prioriwefewWy
 task; 2359-2359 every tuesday; priworiWy
-task; 0000-0001 every wednesday; priority
 task; 0000-0001 every wednesday; priorfwefdwefewfiWy
 task; 0001-0002 every wednesday; prioriWy [done]
 task; 0001-0002 every wednesday; prioriWy [done]
 task; 0000-0001 every thursday; prioriWy
-task; 0000-0001 every friday; prioriWy
+task; 0000-0001 every thursday; priority
 task; 0000-2221 every friday; priority1
+task; 0000-0001 every friday; prioriWy
 task; 0000-0001 every saturday; priority1
-task; 0001-0002 every sunday; prioriWy
+task; 0001-0002 every sunday; prioriWy [done]

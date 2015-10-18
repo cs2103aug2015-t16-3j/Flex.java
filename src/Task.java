@@ -1062,8 +1062,8 @@ public class Task {
 	public void setDone() {
 		System.out.println("SETDONE");
 		System.out.println("before changes");
-		System.out.println("this.taskVariables[7]" + this.taskVariables[7]);
-		System.out.println("this.taskVariables[8]" + this.taskVariables[8]);
+		System.out.println("this.taskVariables[7]:" + this.taskVariables[7]);
+		System.out.println("this.taskVariables[8]:" + this.taskVariables[8]);
 		System.out.println("this.comparisonValue:" + this.comparisonValue);
 		System.out.println();
 		
@@ -1077,8 +1077,8 @@ public class Task {
 		
 		System.out.println("SETDONE");
 		System.out.println("after changes");
-		System.out.println("this.taskVariables[7]" + this.taskVariables[7]);
-		System.out.println("this.taskVariables[8]" + this.taskVariables[8]);
+		System.out.println("this.taskVariables[7]:" + this.taskVariables[7]);
+		System.out.println("this.taskVariables[8]:" + this.taskVariables[8]);
 		System.out.println("this.comparisonValue:" + this.comparisonValue);
 		System.out.println();
 	}
@@ -1098,8 +1098,8 @@ public class Task {
 	public void setNotDone() {
 		System.out.println("SET NOT DONE");
 		System.out.println("before changes");
-		System.out.println("this.taskVariables[7]" + this.taskVariables[7]);
-		System.out.println("this.taskVariables[8]" + this.taskVariables[8]);
+		System.out.println("this.taskVariables[7]:" + this.taskVariables[7]);
+		System.out.println("this.taskVariables[8]:" + this.taskVariables[8]);
 		System.out.println("this.comparisonValue:" + this.comparisonValue);
 		System.out.println();
 		
@@ -1124,8 +1124,8 @@ public class Task {
 		
 		System.out.println("SET NOT DONE");
 		System.out.println("after changes");
-		System.out.println("this.taskVariables[7]" + this.taskVariables[7]);
-		System.out.println("this.taskVariables[8]" + this.taskVariables[8]);
+		System.out.println("this.taskVariables[7]:" + this.taskVariables[7]);
+		System.out.println("this.taskVariables[8]:" + this.taskVariables[8]);
 		System.out.println("this.comparisonValue:" + this.comparisonValue);
 		System.out.println();
 	}
