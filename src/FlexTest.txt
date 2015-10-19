@@ -1,4 +1,3 @@
-new task; by 2359 on 1/1/6000
 task; by 0001 on 1/1/1
 task; by 0001 on 1/1/1 [done]
 task; by 0001 on 1/1/1 [done]
@@ -46,6 +45,9 @@ task; by 0003 on 1/1/5000 [done]
 task; by 0003 on 1/1/5000 [done]
 task; by 0003 on 1/1/5000 [done]
 task; by 0003 on 1/1/5000 [done]
+testttttt; 2359-2359 on 31/12/5447; prior
+testttttt; 2359-2359 on 31/12/5447; prior [done]
+new task; by 2359 on 1/1/6000
 fine
 fire [done]
 icy [done]
