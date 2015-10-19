@@ -25,7 +25,7 @@ public class PaserSplit {
     	                       break;
 	      case COMMAND_UNDO: command = undoCommand();
 	                         break;
-	      case COMMAND_SHOW: command = displayCommand(arguments);
+	      case COMMAND_SHOW: command = showCommand(arguments);
 	                         break;
 	      case COMMAND_DISPLAY: command = displayCommand(arguments);
 	                         break;
