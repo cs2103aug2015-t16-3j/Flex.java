@@ -1,3 +1,4 @@
+new task; by 2359 on 1/1/6000
 task; by 0001 on 1/1/1
 task; by 0001 on 1/1/1 [done]
 task; by 0001 on 1/1/1 [done]
@@ -11,10 +12,9 @@ task; by 1300 on 1/1/2
 task; by 1301 on 1/1/2
 task; by 2301 on 1/1/2
 testttttt; 1000-1001 on 1/1/2; prior
+testttttt; 1000-1001 on 1/1/2; prior
 testttttt; 1000-1001 on 1/1/2; PRI
 testttttt; 1000-1001 on 1/1/2; prior
-testttttt; 1000-1001 on 1/1/2; prior
-testttttt; 1000-1001 on 1/1/2; prior [done]
 testttttt; 1245-1549 on 1/1/2; prior
 testttttt; 1500-1501 on 1/1/2; prior
 task; by 2358 on 1/2/3
@@ -46,41 +46,6 @@ task; by 0003 on 1/1/5000 [done]
 task; by 0003 on 1/1/5000 [done]
 task; by 0003 on 1/1/5000 [done]
 task; by 0003 on 1/1/5000 [done]
-t; by 0001 on 1/1/5050
-t; by 0001 on 1/1/5101
-t; by 0001 on 1/1/5200
-t; by 0001 on 1/1/5400
-t; by 0001 on 1/1/5401
-t; by 0001 on 1/1/5420
-t; by 0001 on 1/1/5430
-t; by 0001 on 1/1/5440
-t; by 0001 on 1/1/5441
-t; by 0001 on 1/1/5445
-t; by 0001 on 1/1/5447
-t; by 0001 on 15/6/5447
-t; by 0001 on 1/7/5447
-t; by 0001 on 1/8/5447
-t; by 0001 on 1/9/5447
-t; by 0001 on 1/12/5447
-t; by 0001 on 31/12/5447
-t; by 2359 on 31/12/5447
-t; by 2359 on 31/12/5447
-t; by 2359 on 31/12/5447
-t; by 0001 on 1/1/5448
-t; by 0001 on 1/1/5449
-t; by 0001 on 1/1/5450
-t; by 0001 on 1/1/5500
-t; by 0001 on 1/1/5600
-t; by 0001 on 1/1/5700
-t; by 0001 on 1/1/5800
-t; by 0001 on 1/1/5900
-t; by 0001 on 1/1/6000
-t; by 0001 on 1/1/6000 [done]
-testttttt; 1000-1001 on 1/1/6000; prior
-t; by 0001 on 1/1/5448
-t; by 0001 on 1/1/5448
-t; by 0001 on 1/1/5449
-ew
 fine
 fire [done]
 icy [done]
@@ -88,15 +53,12 @@ modular
 module
 node
 raw
-t
 testttttt, 0000-0002 on 1/1/1, prior
 testttttt, 0000-0002 on 1/1/1, prior
 testttttt, 0000-0002 on 1/1/1, prior
 that
 thunder
 tree
-w
-w
 w
 water
 task; 0000-0001 every monday; prioriTy [done]
