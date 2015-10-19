@@ -131,3 +131,8 @@ public class PaserSplit {
     	}
     	
     }
+    public Command undoCommand(){
+    	Command command = new Command(Command.Type.UNDO);
+    	return command;
+    }
+}
