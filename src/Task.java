@@ -78,6 +78,8 @@ public class Task {
 
 	private static final double DEADLINE_AND_EVENT_NEGATIVE_SETOFF_VALUE = -2129611680;
 
+	private static final double DEADLINE_AND_EVENT_TASKS_MINIMIZATION_MULTIPLIER_VALUE = 0.0000000000000000000001;
+	
 	public Task(String taskInformation) {
 		String string = new String("");
 
@@ -517,11 +519,11 @@ public class Task {
 
 			// e.g. this.comparisonValue = 503 * 366 + 1500 * 365 +
 			// (NOVEMBER_ACCUMULATED_DAYS + 0) * 24 * 60 + 8 * 60 + 59;
-			this.comparisonValue = DEADLINE_AND_EVENT_NEGATIVE_SETOFF_VALUE
+			this.comparisonValue = (DEADLINE_AND_EVENT_NEGATIVE_SETOFF_VALUE
 					+ numberOfPastLeapYears * LEAP_YEAR_DAYS * DAY_HOURS * HOUR_MINUTES
 					+ numberOfPastNonLeapyears * YEAR_DAYS * DAY_HOURS * HOUR_MINUTES
 					+ (numberOfAccumulatedPastDaysInCurrentYear + leapYearFebruaryDay) * DAY_HOURS * HOUR_MINUTES
-					+ numberOfPastHours * HOUR_MINUTES + numberOfPastMinutes;
+					+ numberOfPastHours * HOUR_MINUTES + numberOfPastMinutes) * DEADLINE_AND_EVENT_TASKS_MINIMIZATION_MULTIPLIER_VALUE;
 
 		} else if (Checker.isDoneEventTaskInput(string)) {
 			// e.g. 7/9/2015
@@ -567,11 +569,11 @@ public class Task {
 
 			// e.g. this.comparisonValue = 503 * 366 + 1500 * 365 +
 			// (NOVEMBER_ACCUMULATED_DAYS + 0) * 24 * 60 + 8 * 60 + 59;
-			this.comparisonValue = DEADLINE_AND_EVENT_NEGATIVE_SETOFF_VALUE
+			this.comparisonValue = (DEADLINE_AND_EVENT_NEGATIVE_SETOFF_VALUE
 					+ numberOfPastLeapYears * LEAP_YEAR_DAYS * DAY_HOURS * HOUR_MINUTES
 					+ numberOfPastNonLeapyears * YEAR_DAYS * DAY_HOURS * HOUR_MINUTES
 					+ (numberOfAccumulatedPastDaysInCurrentYear + leapYearFebruaryDay) * DAY_HOURS * HOUR_MINUTES
-					+ numberOfPastHours * HOUR_MINUTES + numberOfPastMinutes + 0.1;
+					+ numberOfPastHours * HOUR_MINUTES + numberOfPastMinutes + 0.1) *  DEADLINE_AND_EVENT_TASKS_MINIMIZATION_MULTIPLIER_VALUE;
 
 		}
 		if (Checker.isDeadlineTaskInput(string)) {
@@ -615,11 +617,11 @@ public class Task {
 
 			// e.g. this.comparisonValue = 503 * 366 + 1500 * 365 +
 			// (NOVEMBER_ACCUMULATED_DAYS + 0) * 24 * 60;
-			this.comparisonValue = -0.7 + DEADLINE_AND_EVENT_NEGATIVE_SETOFF_VALUE
+			this.comparisonValue = (-0.7 + DEADLINE_AND_EVENT_NEGATIVE_SETOFF_VALUE
 					+ numberOfPastLeapYears * LEAP_YEAR_DAYS * DAY_HOURS * HOUR_MINUTES
 					+ numberOfPastNonLeapyears * YEAR_DAYS * DAY_HOURS * HOUR_MINUTES
 					+ (numberOfAccumulatedPastDaysInCurrentYear + leapYearFebruaryDay) * DAY_HOURS * HOUR_MINUTES
-					+ endingTimeTotal * 0.0001;
+					+ endingTimeTotal * 0.0001) *  DEADLINE_AND_EVENT_TASKS_MINIMIZATION_MULTIPLIER_VALUE;
 
 		} else if (Checker.isDoneDeadlineTaskInput(string)) {
 			// e.g. 7/9/2015
@@ -662,11 +664,11 @@ public class Task {
 
 			// e.g. this.comparisonValue = 503 * 366 + 1500 * 365 +
 			// (NOVEMBER_ACCUMULATED_DAYS + 0) * 24 * 60;
-			this.comparisonValue = -0.7 + DEADLINE_AND_EVENT_NEGATIVE_SETOFF_VALUE
+			this.comparisonValue = (-0.7 + DEADLINE_AND_EVENT_NEGATIVE_SETOFF_VALUE
 					+ numberOfPastLeapYears * LEAP_YEAR_DAYS * DAY_HOURS * HOUR_MINUTES
 					+ numberOfPastNonLeapyears * YEAR_DAYS * DAY_HOURS * HOUR_MINUTES
 					+ (numberOfAccumulatedPastDaysInCurrentYear + leapYearFebruaryDay) * DAY_HOURS * HOUR_MINUTES + 0.1
-					+ endingTimeTotal * 0.0001;
+					+ endingTimeTotal * 0.0001) *  DEADLINE_AND_EVENT_TASKS_MINIMIZATION_MULTIPLIER_VALUE;
 
 		} else if (Checker.isRecurringTaskInput(string)) {
 			this.comparisonValue = RECURRING_TASK_COMPARISON_VALUE;
