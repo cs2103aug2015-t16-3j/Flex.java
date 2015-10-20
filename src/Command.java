@@ -12,6 +12,7 @@ public class Command {
      private String taskName;
      private String priority;
      private int number;
+     private String keyWord;
      
      public Command(Type type){
     	 this.type = type;
@@ -46,6 +47,10 @@ public class Command {
     	 return number;
      }
      
+     public String getKeyWord(){
+    	 return keyWord;
+     }
+     
      public void setTaskType(String taskType){
     	 this.taskType = taskType;
      }
@@ -71,6 +76,9 @@ public class Command {
      }
      public void setNumber(int number){
     	 this.number = number;
+     }
+     public void setKeyWord(String keyWord){
+    	 this.keyWord = keyWord;
      }
      
 }
