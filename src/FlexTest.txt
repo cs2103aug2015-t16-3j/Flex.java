@@ -11,9 +11,9 @@ testttttt; 0000-0002 on 3/2/1; prior
 task; by 0003 on 1/1/2
 task; by 0004 on 1/1/2
 task; by 0005 on 1/1/2
+task; by 0001 on 1/1/2
+task; by 0001 on 1/1/2
 task; by 0000 on 1/1/2
-task; by 0001 on 1/1/2
-task; by 0001 on 1/1/2
 task; by 0101 on 1/1/2
 task; by 1001 on 1/1/2
 task; by 1101 on 1/1/2
@@ -42,8 +42,8 @@ task; by 0001 on 21/9/10
 task; by 0001 on 21/9/10
 task; by 0001 on 10/10/10
 task; by 0001 on 10/10/10
-task; by 0001 on 14/12/10 [done]
 task; by 0001 on 14/12/10
+task; by 0001 on 14/12/10 [done]
 task; by 0002 on 11/11/11 [done]
 task; by 0002 on 11/11/11 [done]
 task; by 0001 on 9/9/12
@@ -61,9 +61,9 @@ task; by 0002 on 1/1/4200
 task; by 0002 on 1/1/4200
 task; by 0002 on 1/1/4200
 task; by 0002 on 1/1/4500
-task; by 0003 on 1/1/5000 [done]
-task; by 0003 on 1/1/5000 [done]
 task; by 0002 on 1/1/5000
+task; by 0003 on 1/1/5000 [done]
+task; by 0003 on 1/1/5000 [done]
 task; by 0003 on 1/1/5000 [done]
 task; by 0003 on 1/1/5000 [done]
 testttttt; 2359-2359 on 31/12/5447; prior [done]
@@ -73,8 +73,8 @@ ewr3f3f; by 0001 on 1/1/5448
 testttttt; 2359-2359 on 31/12/5448; prior
 testttttt; 2359-2359 on 31/12/5449; prior
 task; by 0002 on 1/1/5500
-new task; by 2359 on 1/1/6000
 task; by 0002 on 1/1/6000
+new task; by 2359 on 1/1/6000
 task; by 0002 on 1/1/6500
 task; by 0002 on 1/1/7000
 task; by 0002 on 1/1/7100

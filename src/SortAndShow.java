@@ -501,191 +501,231 @@ public class SortAndShow {
 		}
 
 		// sort all deadline and event tasks by done value
-		int size33 = deadlineOrEventTasksList.size();
-		int d, start33, min_index33 = 0;
-
-		for (start33 = 0; start33 < size33 - 1; start33++) {
-			min_index33 = start33;
-
-			for (d = start33 + 1; d < size33; d++) {
-				if (deadlineOrEventTasksList.get(d).getDoneValue() < deadlineOrEventTasksList.get(min_index33)
-						.getDoneValue()) {
-					min_index33 = d;
-				}
-			}
-
-			Task temp71 = deadlineOrEventTasksList.get(start33);
-			Task temp72 = deadlineOrEventTasksList.get(min_index33);
-			deadlineOrEventTasksList.set(start33, temp71);
-			deadlineOrEventTasksList.set(min_index33, temp72);
-		}
-
-		// sort all deadline and event tasks by time
 		int size1 = deadlineOrEventTasksList.size();
-		int i, start1, min_index1 = 0;
+		int a, start1, min_index1 = 0;
 
 		for (start1 = 0; start1 < size1 - 1; start1++) {
 			min_index1 = start1;
 
-			for (i = start1 + 1; i < size1; i++) {
-				if (deadlineOrEventTasksList.get(i).getTimeSortValue() < deadlineOrEventTasksList.get(min_index1)
-						.getTimeSortValue()) {
-					min_index1 = i;
+			for (a = start1 + 1; a < size1; a++) {
+				if (deadlineOrEventTasksList.get(a).getDoneValue() < deadlineOrEventTasksList.get(min_index1)
+						.getDoneValue()) {
+					min_index1 = a;
 				}
 			}
 
-			Task temp1 = deadlineOrEventTasksList.get(start1);
-			Task temp2 = deadlineOrEventTasksList.get(min_index1);
-			deadlineOrEventTasksList.set(start1, temp2);
-			deadlineOrEventTasksList.set(min_index1, temp1);
+			Task temp2 = deadlineOrEventTasksList.get(start1);
+			Task temp3 = deadlineOrEventTasksList.get(min_index1);
+			deadlineOrEventTasksList.set(start1, temp3);
+			deadlineOrEventTasksList.set(min_index1, temp2);
+		}
+
+		// sort all deadline and event tasks by time
+		int size4 = deadlineOrEventTasksList.size();
+		int b, start4, min_index4 = 0;
+
+		for (start4 = 0; start4 < size4 - 1; start4++) {
+			min_index4 = start4;
+
+			for (b = start4 + 1; b < size4; b++) {
+				if (deadlineOrEventTasksList.get(b).getTimeSortValue() < deadlineOrEventTasksList.get(min_index4)
+						.getTimeSortValue()) {
+					min_index4 = b;
+				}
+			}
+
+			Task temp5 = deadlineOrEventTasksList.get(start4);
+			Task temp6 = deadlineOrEventTasksList.get(min_index4);
+			deadlineOrEventTasksList.set(start4, temp6);
+			deadlineOrEventTasksList.set(min_index4, temp5);
 		}
 
 		// sort all deadline and event tasks by deadline or event tasks
-		int size55 = deadlineOrEventTasksList.size();
-		int e, start55, min_index55 = 0;
+		int size7 = deadlineOrEventTasksList.size();
+		int c, start7, min_index7 = 0;
 
-		for (start55 = 0; start55 < size55 - 1; start55++) {
-			min_index55 = start55;
+		for (start7 = 0; start7 < size7 - 1; start7++) {
+			min_index7 = start7;
 
-			for (e = start55 + 1; e < size55; e++) {
-				if (deadlineOrEventTasksList.get(e).getDeadlineOrEventTaskValue() < deadlineOrEventTasksList.get(min_index55)
-						.getDeadlineOrEventTaskValue()) {
-					min_index33 = e;
+			for (c = start7 + 1; c < size7; c++) {
+				if (deadlineOrEventTasksList.get(c).getDeadlineOrEventTaskValue() < deadlineOrEventTasksList
+						.get(min_index7).getDeadlineOrEventTaskValue()) {
+					min_index7 = c;
 				}
 			}
 
-			Task temp81 = deadlineOrEventTasksList.get(start55);
-			Task temp82 = deadlineOrEventTasksList.get(min_index55);
-			deadlineOrEventTasksList.set(start55, temp81);
-			deadlineOrEventTasksList.set(min_index55, temp82);
+			Task temp8 = deadlineOrEventTasksList.get(start7);
+			Task temp9 = deadlineOrEventTasksList.get(min_index7);
+			deadlineOrEventTasksList.set(start7, temp9);
+			deadlineOrEventTasksList.set(min_index7, temp8);
 		}
 
-		
+		// NOTE: Sorting by day, then month, then year, will keep the date(from
+		// 1/1/1) in order
+
 		// sort all deadline and event tasks by day
 
-		int size13 = deadlineOrEventTasksList.size();
-		int g, start13, min_index13 = 0;
+		int size10 = deadlineOrEventTasksList.size();
+		int d, start10, min_index10 = 0;
 
-		for (start13 = 0; start13 < size13 - 1; start13++) {
-			min_index13 = start13;
+		for (start10 = 0; start10 < size10 - 1; start10++) {
+			min_index10 = start10;
 
-			for (g = start13 + 1; g < size13; g++) {
-				if (deadlineOrEventTasksList.get(g).getActualDay() < deadlineOrEventTasksList.get(min_index13)
+			for (d = start10 + 1; d < size10; d++) {
+				if (deadlineOrEventTasksList.get(d).getActualDay() < deadlineOrEventTasksList.get(min_index10)
 						.getActualDay()) {
-					min_index13 = g;
+					min_index10 = d;
 				}
 			}
 
-			Task temp40 = deadlineOrEventTasksList.get(start13);
-			Task temp41 = deadlineOrEventTasksList.get(min_index13);
-			deadlineOrEventTasksList.set(start13, temp41);
-			deadlineOrEventTasksList.set(min_index13, temp40);
+			Task temp11 = deadlineOrEventTasksList.get(start10);
+			Task temp12 = deadlineOrEventTasksList.get(min_index10);
+			deadlineOrEventTasksList.set(start10, temp12);
+			deadlineOrEventTasksList.set(min_index10, temp11);
 		}
 
 		// sort all deadline and event tasks by their month
 
-		int size14 = deadlineOrEventTasksList.size();
-		int h, start14, min_index14 = 0;
+		int size13 = deadlineOrEventTasksList.size();
+		int e, start13, min_index13 = 0;
 
-		for (start14 = 0; start14 < size14 - 1; start14++) {
-			min_index14 = start14;
+		for (start13 = 0; start13 < size13 - 1; start13++) {
+			min_index13 = start13;
 
-			for (h = start14 + 1; h < size14; h++) {
-				if (deadlineOrEventTasksList.get(h).getActualMonth() < deadlineOrEventTasksList.get(min_index14)
+			for (e = start13 + 1; e < size13; e++) {
+				if (deadlineOrEventTasksList.get(e).getActualMonth() < deadlineOrEventTasksList.get(min_index13)
 						.getActualMonth()) {
-					min_index14 = h;
+					min_index13 = e;
 				}
 			}
 
-			Task temp50 = deadlineOrEventTasksList.get(start14);
-			Task temp51 = deadlineOrEventTasksList.get(min_index14);
-			deadlineOrEventTasksList.set(start14, temp51);
-			deadlineOrEventTasksList.set(min_index14, temp50);
+			Task temp14 = deadlineOrEventTasksList.get(start13);
+			Task temp15 = deadlineOrEventTasksList.get(min_index13);
+			deadlineOrEventTasksList.set(start13, temp15);
+			deadlineOrEventTasksList.set(min_index13, temp14);
 		}
 
 		// sort all deadline and event tasks by their year
 
-		int size15 = deadlineOrEventTasksList.size();
-		int b, start15, min_index15 = 0;
+		int size16 = deadlineOrEventTasksList.size();
+		int f, start16, min_index16 = 0;
 
-		for (start15 = 0; start15 < size15 - 1; start15++) {
-			min_index15 = start15;
+		for (start16 = 0; start16 < size16 - 1; start16++) {
+			min_index16 = start16;
 
-			for (b = start15 + 1; b < size15; b++) {
-				if (deadlineOrEventTasksList.get(b).getActualYear() < deadlineOrEventTasksList.get(min_index15)
+			for (f = start16 + 1; f < size16; f++) {
+				if (deadlineOrEventTasksList.get(f).getActualYear() < deadlineOrEventTasksList.get(min_index16)
 						.getActualYear()) {
-					min_index15 = b;
+					min_index16 = f;
 				}
 			}
 
-			Task temp60 = deadlineOrEventTasksList.get(start15);
-			Task temp61 = deadlineOrEventTasksList.get(min_index15);
-			deadlineOrEventTasksList.set(start15, temp61);
-			deadlineOrEventTasksList.set(min_index15, temp60);
+			Task temp17 = deadlineOrEventTasksList.get(start16);
+			Task temp18 = deadlineOrEventTasksList.get(min_index16);
+			deadlineOrEventTasksList.set(start16, temp18);
+			deadlineOrEventTasksList.set(min_index16, temp17);
+		}
+
+		// sort floating tasks by done value
+		int size19 = floatingTasksList.size();
+		int g, start19, min_index19 = 0;
+
+		for (start19 = 0; start19 < size19 - 1; start19++) {
+			min_index19 = start19;
+
+			for (g = start19 + 1; g < size19; g++) {
+				if (floatingTasksList.get(g).getDoneValue() < floatingTasksList.get(min_index19).getDoneValue()) {
+					min_index19 = g;
+				}
+			}
+
+			Task temp20 = floatingTasksList.get(start19);
+			Task temp21 = floatingTasksList.get(min_index19);
+			floatingTasksList.set(start19, temp21);
+			floatingTasksList.set(min_index19, temp20);
 		}
 
 		// sort floating tasks in alphabetical order
-		int size2 = floatingTasksList.size();
-		int q, start2, min_index2 = 0;
+		int size22 = floatingTasksList.size();
+		int h, start22, min_index22 = 0;
 
-		for (start2 = 0; start2 < size2 - 1; start2++) {
-			min_index2 = start2;
+		for (start22 = 0; start22 < size22 - 1; start22++) {
+			min_index22 = start22;
 
-			for (q = start2 + 1; q < size2; q++) {
-				if (floatingTasksList.get(q).getScheduleString()
-						.compareToIgnoreCase(floatingTasksList.get(min_index2).getScheduleString()) < 0) {
-					min_index2 = q;
+			for (h = start22 + 1; h < size22; h++) {
+				if (floatingTasksList.get(h).getScheduleString()
+						.compareToIgnoreCase(floatingTasksList.get(min_index22).getScheduleString()) < 0) {
+					min_index22 = h;
 				}
 			}
 
-			Task temp3 = floatingTasksList.get(start2);
-			Task temp4 = floatingTasksList.get(min_index2);
-			floatingTasksList.set(start2, temp4);
-			floatingTasksList.set(min_index2, temp3);
+			Task temp23 = floatingTasksList.get(start22);
+			Task temp24 = floatingTasksList.get(min_index22);
+			floatingTasksList.set(start22, temp24);
+			floatingTasksList.set(min_index22, temp23);
+		}
+
+		// sort recurring tasks by done value
+		int size25 = recurringTasksList.size();
+		int l, start25, min_index25 = 0;
+
+		for (start25 = 0; start25 < size25 - 1; start25++) {
+			min_index25 = start25;
+
+			for (l = start25 + 1; l < size25; l++) {
+				if (recurringTasksList.get(l).getDoneValue() < recurringTasksList.get(min_index25).getDoneValue()) {
+					min_index25 = l;
+				}
+			}
+
+			Task temp26 = recurringTasksList.get(start25);
+			Task temp27 = recurringTasksList.get(min_index25);
+			recurringTasksList.set(start25, temp27);
+			recurringTasksList.set(min_index25, temp26);
 		}
 
 		// sort recurring tasks by day and starting time
-		int size3 = recurringTasksList.size();
-		int k, start3, min_index3 = 0;
+		int size28 = recurringTasksList.size();
+		int m, start28, min_index28 = 0;
 
-		for (start3 = 0; start3 < size3 - 1; start3++) {
-			min_index3 = start3;
+		for (start28 = 0; start28 < size28 - 1; start28++) {
+			min_index28 = start28;
 
-			for (k = start3 + 1; k < size3; k++) {
-				if (recurringTasksList.get(k).getRecurringTaskValue() < recurringTasksList.get(min_index3)
+			for (m = start28 + 1; m < size28; m++) {
+				if (recurringTasksList.get(m).getRecurringTaskValue() < recurringTasksList.get(min_index28)
 						.getRecurringTaskValue()) {
-					min_index3 = k;
+					min_index28 = m;
 				}
 			}
 
-			Task temp5 = recurringTasksList.get(start3);
-			Task temp6 = recurringTasksList.get(min_index3);
-			recurringTasksList.set(start3, temp6);
-			recurringTasksList.set(min_index3, temp5);
+			Task temp29 = recurringTasksList.get(start28);
+			Task temp30 = recurringTasksList.get(min_index28);
+			recurringTasksList.set(start28, temp30);
+			recurringTasksList.set(min_index28, temp29);
 		}
 
 		ArrayList<Task> tempTasksList = new ArrayList<Task>();
 
 		if (!deadlineOrEventTasksList.isEmpty()) {
-			for (int m = 0; m < deadlineOrEventTasksList.size(); m++) {
-				tempTasksList.add(deadlineOrEventTasksList.get(m));
+			for (int n = 0; n < deadlineOrEventTasksList.size(); n++) {
+				tempTasksList.add(deadlineOrEventTasksList.get(n));
 			}
 		}
 
 		if (!floatingTasksList.isEmpty()) {
-			for (int n = 0; n < floatingTasksList.size(); n++) {
-				tempTasksList.add(floatingTasksList.get(n));
+			for (int o = 0; o < floatingTasksList.size(); o++) {
+				tempTasksList.add(floatingTasksList.get(o));
 			}
 		}
 
 		if (!recurringTasksList.isEmpty()) {
-			for (int o = 0; o < recurringTasksList.size(); o++) {
-				tempTasksList.add(recurringTasksList.get(o));
+			for (int p = 0; p < recurringTasksList.size(); p++) {
+				tempTasksList.add(recurringTasksList.get(p));
 			}
 		}
 
-		for (int w = 0; w < allTasksList.size(); w++) {
-			allTasksList.set(w, tempTasksList.get(w));
+		for (int z = 0; z < allTasksList.size(); z++) {
+			allTasksList.set(z, tempTasksList.get(z));
 		}
 	}
 
