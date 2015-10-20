@@ -11,8 +11,8 @@ task; by 1300 on 1/1/2
 task; by 1301 on 1/1/2
 task; by 2301 on 1/1/2
 testttttt; 1000-1001 on 1/1/2; prior
-testttttt; 1000-1001 on 1/1/2; prior
 testttttt; 1000-1001 on 1/1/2; PRI
+testttttt; 1000-1001 on 1/1/2; prior
 testttttt; 1000-1001 on 1/1/2; prior
 testttttt; 1245-1549 on 1/1/2; prior
 testttttt; 1500-1501 on 1/1/2; prior
@@ -48,6 +48,12 @@ task; by 0003 on 1/1/5000 [done]
 testttttt; 2359-2359 on 31/12/5447; prior
 testttttt; 2359-2359 on 31/12/5447; prior [done]
 new task; by 2359 on 1/1/6000
+testttttt; 2359-2359 on 31/12/5448; prior
+testttttt; 2359-2359 on 31/12/5449; prior
+testttttt; 2359-2359 on 31/12/21247; prior
+task; by 0003 on 1/1/31343
+task; by 0003 on 1/1/31343 [done]
+testttttt; 2359-2359 on 31/12/53437; prior
 fine
 fire [done]
 icy [done]
@@ -62,6 +68,7 @@ that
 thunder
 tree
 w
+w
 water
 task; 0000-0001 every monday; prioriTy [done]
 task; 1236-1334 every monday; prioriwefewWy
@@ -69,8 +76,8 @@ task; 2359-2359 every tuesday; priworiWy
 task; 0000-0001 every wednesday; priorfwefdwefewfiWy
 task; 0001-0002 every wednesday; prioriWy [done]
 task; 0001-0002 every wednesday; prioriWy [done]
-task; 0000-0001 every thursday; priority
 task; 0000-0001 every thursday; prioriWy
+task; 0000-0001 every thursday; priority
 task; 0000-0001 every friday; prioriWy
 task; 0000-2221 every friday; priority1
 task; 0000-0001 every saturday; priority1

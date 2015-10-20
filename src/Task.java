@@ -22,6 +22,12 @@ public class Task {
 
 	private double recurringTaskValue = 0.0;
 
+	// year within a 5447-year (date limit: 31/12/5447, start limit 2359) block
+	private int yearWithinLimitBlock = -2;
+
+	// index of 5447-year block, starting from 0
+	private int limitBlockIndex = -2;
+
 	private static final String DONE_STRING = "[done]";
 
 	// format of the different types of tasks
@@ -70,7 +76,6 @@ public class Task {
 	private static final int OCTOBER_ACCUMULATED_DAYS = YEAR_DAYS - DECEMBER_DAYS - NOVEMBER_DAYS;
 	private static final int NOVEMBER_ACCUMULATED_DAYS = YEAR_DAYS - DECEMBER_DAYS;
 	private static final int DECEMBER_ACCUMULATED_DAYS = YEAR_DAYS;
-	
 
 	// 2129611680 is the positive comparison value of 1/1/4100
 	private static final double FLOATING_TASK_COMPARISON_VALUE = (2129611680 - 0.5);
@@ -78,8 +83,6 @@ public class Task {
 	private static final double RECURRING_TASK_COMPARISON_VALUE = 2129611680;
 
 	private static final double DEADLINE_AND_EVENT_NEGATIVE_SETOFF_VALUE = -2129611680;
-	
-	private static final double DEADLINE_AND_EVENT_TASK_YEAR_AT_LEAST_FIVE_FOUR_FOUR_EIGHT_COMPARISON_VALUE = 2129611680 - 0.5;
 
 	public Task(String taskInformation) {
 		String string = new String("");
@@ -469,12 +472,34 @@ public class Task {
 		return accumulatedNumberOfDaysInPastMonths + numberOfPastDays;
 	}
 
+	// set the position(starts from 1 to 5447) of the year in the 5447-year
+	// block
+	// and set the index (starts from 0) of the 5447-year block
+	private void calculateAndSetYearWithinLimitBlockAndLimitBlockIndex(int year) {
+		this.yearWithinLimitBlock = year % 5447;
+		// this means 0 (for the 5447th year in the block), and 1 to 5446 for
+		// the
+		// 1st to 5446th years of the block
+
+		this.limitBlockIndex = year / 5447;
+
+		if (this.yearWithinLimitBlock == 0) {
+			this.yearWithinLimitBlock = 5447;
+		}
+
+		// e.g. 5447/5447 = 1;
+		// but its limitBlockIndex(starts from 0) should be 0
+		if (this.yearWithinLimitBlock == 5447) {
+			this.limitBlockIndex = this.limitBlockIndex - 1;
+		}
+	}
+
 	// calculates and sets comparisonValue for sorting tasks by date and
 	// starting time
 	// the String parameter "string" is to be the schedule (file) input String
 	// of the
 	// task
-	public void calculateAndSetComparisonValue(String string) {
+	private void calculateAndSetComparisonValue(String string) {
 		if (Checker.isEventTaskInput(string)) {
 			// e.g. 7/9/2015
 			String tempDateString = this.taskVariables[1];
@@ -493,6 +518,12 @@ public class Task {
 			// The year 2014
 			int year = Integer.valueOf(tempDateString.substring(slashIndex2 + 1).trim());
 
+			int tempYear = year % 5447;
+
+			if (tempYear == 0) {
+				tempYear = 5447;
+			}
+
 			// 8 hours
 			int startingTimeHours = Integer.valueOf(this.taskVariables[3].substring(0, 2).trim());
 
@@ -502,14 +533,14 @@ public class Task {
 			// used for sorting all tasks by date and starting time (taking year
 			// 0, 0000 hours as reference)
 			// (2014 - 1) / 4 = 2013 / 4 = 503 (not considering the remainder)
-			int numberOfPastLeapYears = (year - 1) / 4;
+			int numberOfPastLeapYears = (tempYear - 1) / 4;
 			// (2014 - 1) - 503 = 2013 - 503 = 1500
-			int numberOfPastNonLeapyears = (year - 1) - numberOfPastLeapYears;
+			int numberOfPastNonLeapyears = (tempYear - 1) - numberOfPastLeapYears;
 
 			int leapYearFebruaryDay = 0;
 
 			// 2014%4 = 1
-			if ((year % 4 == 0) && ((month - 1) >= 2)) {
+			if ((tempYear % 4 == 0) && ((month - 1) >= 2)) {
 				leapYearFebruaryDay = 1;
 			}
 
@@ -526,12 +557,8 @@ public class Task {
 					+ (numberOfAccumulatedPastDaysInCurrentYear + leapYearFebruaryDay) * DAY_HOURS * HOUR_MINUTES
 					+ numberOfPastHours * HOUR_MINUTES + numberOfPastMinutes;
 
-			
-			if(year>= 5448){
-				this.comparisonValue = DEADLINE_AND_EVENT_TASK_YEAR_AT_LEAST_FIVE_FOUR_FOUR_EIGHT_COMPARISON_VALUE;
-			}
-			
-			
+			calculateAndSetYearWithinLimitBlockAndLimitBlockIndex(year);
+
 		} else if (Checker.isDoneEventTaskInput(string)) {
 			// e.g. 7/9/2015
 			String tempDateString = this.taskVariables[1];
@@ -549,6 +576,12 @@ public class Task {
 			// The year 2014
 			int year = Integer.valueOf(tempDateString.substring(slashIndex2 + 1).trim());
 
+			int tempYear = year % 5447;
+
+			if (tempYear == 0) {
+				tempYear = 5447;
+			}
+
 			// 8 hours
 			int startingTimeHours = Integer.valueOf(this.taskVariables[3].substring(0, 2).trim());
 
@@ -558,14 +591,14 @@ public class Task {
 			// used for sorting all tasks by date and starting time (taking year
 			// 0, 0000 hours as reference)
 			// (2014 - 1) / 4 = 2013 / 4 = 503 (not considering the remainder)
-			int numberOfPastLeapYears = (year - 1) / 4;
+			int numberOfPastLeapYears = (tempYear - 1) / 4;
 			// (2014 - 1) - 503 = 2013 - 503 = 1500
-			int numberOfPastNonLeapyears = (year - 1) - numberOfPastLeapYears;
+			int numberOfPastNonLeapyears = (tempYear - 1) - numberOfPastLeapYears;
 
 			int leapYearFebruaryDay = 0;
 
 			// 2014%4 = 1
-			if ((year % 4 == 0) && ((month - 1) >= 2)) {
+			if ((tempYear % 4 == 0) && ((month - 1) >= 2)) {
 				leapYearFebruaryDay = 1;
 			}
 
@@ -582,10 +615,8 @@ public class Task {
 					+ (numberOfAccumulatedPastDaysInCurrentYear + leapYearFebruaryDay) * DAY_HOURS * HOUR_MINUTES
 					+ numberOfPastHours * HOUR_MINUTES + numberOfPastMinutes + 0.1;
 
-			if(year>= 5448){
-				this.comparisonValue = DEADLINE_AND_EVENT_TASK_YEAR_AT_LEAST_FIVE_FOUR_FOUR_EIGHT_COMPARISON_VALUE;
-			}
-			
+			calculateAndSetYearWithinLimitBlockAndLimitBlockIndex(year);
+
 		}
 		if (Checker.isDeadlineTaskInput(string)) {
 			// e.g. 7/9/2015
@@ -605,17 +636,23 @@ public class Task {
 			// The year 2014
 			int year = Integer.valueOf(tempDateString.substring(slashIndex2 + 1).trim());
 
+			int tempYear = year % 5447;
+
+			if (tempYear == 0) {
+				tempYear = 5447;
+			}
+
 			// used for sorting all tasks by date and starting time (taking year
 			// 0, 0000 hours as reference)
 			// (2014 - 1) / 4 = 2013 / 4 = 503 (not considering the remainder)
-			int numberOfPastLeapYears = (year - 1) / 4;
+			int numberOfPastLeapYears = (tempYear - 1) / 4;
 			// (2014 - 1) - 503 = 2013 - 503 = 1500
-			int numberOfPastNonLeapyears = (year - 1) - numberOfPastLeapYears;
+			int numberOfPastNonLeapyears = (tempYear - 1) - numberOfPastLeapYears;
 
 			int leapYearFebruaryDay = 0;
 
 			// 2014%4 = 1
-			if ((year % 4 == 0) && ((month - 1) >= 2)) {
+			if ((tempYear % 4 == 0) && ((month - 1) >= 2)) {
 				leapYearFebruaryDay = 1;
 			}
 
@@ -633,10 +670,8 @@ public class Task {
 					+ numberOfPastNonLeapyears * YEAR_DAYS * DAY_HOURS * HOUR_MINUTES
 					+ (numberOfAccumulatedPastDaysInCurrentYear + leapYearFebruaryDay) * DAY_HOURS * HOUR_MINUTES
 					+ endingTimeTotal * 0.0001;
-			
-			if(year>= 5448){
-				this.comparisonValue = DEADLINE_AND_EVENT_TASK_YEAR_AT_LEAST_FIVE_FOUR_FOUR_EIGHT_COMPARISON_VALUE;
-			}
+
+			calculateAndSetYearWithinLimitBlockAndLimitBlockIndex(year);
 
 		} else if (Checker.isDoneDeadlineTaskInput(string)) {
 			// e.g. 7/9/2015
@@ -656,17 +691,23 @@ public class Task {
 			// The year 2014
 			int year = Integer.valueOf(tempDateString.substring(slashIndex2 + 1).trim());
 
+			int tempYear = year % 5447;
+
+			if (tempYear == 0) {
+				tempYear = 5447;
+			}
+
 			// used for sorting all tasks by date and starting time (taking year
 			// 0, 0000 hours as reference)
 			// (2014 - 1) / 4 = 2013 / 4 = 503 (not considering the remainder)
-			int numberOfPastLeapYears = (year - 1) / 4;
+			int numberOfPastLeapYears = (tempYear - 1) / 4;
 			// (2014 - 1) - 503 = 2013 - 503 = 1500
-			int numberOfPastNonLeapyears = (year - 1) - numberOfPastLeapYears;
+			int numberOfPastNonLeapyears = (tempYear - 1) - numberOfPastLeapYears;
 
 			int leapYearFebruaryDay = 0;
 
 			// 2014%4 = 1
-			if ((year % 4 == 0) && ((month - 1) >= 2)) {
+			if ((tempYear % 4 == 0) && ((month - 1) >= 2)) {
 				leapYearFebruaryDay = 1;
 			}
 
@@ -684,10 +725,8 @@ public class Task {
 					+ numberOfPastNonLeapyears * YEAR_DAYS * DAY_HOURS * HOUR_MINUTES
 					+ (numberOfAccumulatedPastDaysInCurrentYear + leapYearFebruaryDay) * DAY_HOURS * HOUR_MINUTES + 0.1
 					+ endingTimeTotal * 0.0001;
-			
-			if(year>= 5448){
-				this.comparisonValue = DEADLINE_AND_EVENT_TASK_YEAR_AT_LEAST_FIVE_FOUR_FOUR_EIGHT_COMPARISON_VALUE;
-			}
+
+			calculateAndSetYearWithinLimitBlockAndLimitBlockIndex(year);
 
 		} else if (Checker.isRecurringTaskInput(string)) {
 			this.comparisonValue = RECURRING_TASK_COMPARISON_VALUE;
@@ -698,7 +737,7 @@ public class Task {
 		} else if (Checker.isDoneFloatingTaskInput(string)) {
 			this.comparisonValue = FLOATING_TASK_COMPARISON_VALUE + 0.1;
 		}
-		
+
 	}
 
 	// calculates and sets the recurring task's value for sorting only
@@ -743,6 +782,16 @@ public class Task {
 				+ startingTimeMinutes;
 	}
 
+	// retrieves yearWithinLimitBlock
+	public int getYearWithinLimitBlock() {
+		return this.yearWithinLimitBlock;
+	}
+
+	// retrieves limitBlockIndex
+	public int getLimitBlockIndex() {
+		return this.limitBlockIndex;
+	}
+
 	// retrieves the comparisonValue for sorting only recurring tasks by day and
 	// starting time
 	public double getRecurringTaskValue() {
@@ -762,8 +811,70 @@ public class Task {
 	// changes the task
 	public void setTaskName(String newTaskName) {
 		this.taskVariables[0] = newTaskName;
+
+		// event task
+		if (Checker.isEventTaskInput(this.taskVariables[7])) {
+
+			this.taskVariables[7] = this.taskVariables[0] + "; " + this.taskVariables[3] + "-" + this.taskVariables[4]
+					+ " on " + this.taskVariables[1] + "; " + this.taskVariables[5];
+
+			this.taskVariables[8] = this.taskVariables[0] + ", " + this.taskVariables[3] + "-" + this.taskVariables[4]
+					+ " on " + this.taskVariables[1] + ", " + this.taskVariables[5];
+
+		} else if (Checker.isDoneEventTaskInput(this.taskVariables[7])) {
+
+			this.taskVariables[7] = this.taskVariables[0] + "; " + this.taskVariables[3] + "-" + this.taskVariables[4]
+					+ " on " + this.taskVariables[1] + "; " + this.taskVariables[5] + " " + DONE_STRING;
+
+			this.taskVariables[8] = this.taskVariables[0] + ", " + this.taskVariables[3] + "-" + this.taskVariables[4]
+					+ " on " + this.taskVariables[1] + ", " + this.taskVariables[5] + " " + DONE_STRING;
+
+		} else if (Checker.isDeadlineTaskInput(this.taskVariables[7])) {
+			// deadline task
+
+			this.taskVariables[7] = this.taskVariables[0] + "; by " + this.taskVariables[4] + " on "
+					+ this.taskVariables[1];
+
+			this.taskVariables[8] = this.taskVariables[0] + ", by " + this.taskVariables[4] + " on "
+					+ this.taskVariables[1] + " (deadline)";
+
+		} else if (Checker.isDoneDeadlineTaskInput(this.taskVariables[7])) {
+
+			this.taskVariables[7] = this.taskVariables[0] + "; by " + this.taskVariables[4] + " on "
+					+ this.taskVariables[1] + " " + DONE_STRING;
+
+			this.taskVariables[8] = this.taskVariables[0] + ", by " + this.taskVariables[4] + " on "
+					+ this.taskVariables[1] + " (deadline)" + " " + DONE_STRING;
+
+		} else if (Checker.isRecurringTaskInput(this.taskVariables[7])) {
+			// recurring task
+			this.taskVariables[7] = this.taskVariables[0] + "; " + this.taskVariables[3] + "-" + this.taskVariables[4]
+					+ " every " + this.taskVariables[2].toLowerCase() + "; " + this.taskVariables[5];
+
+			this.taskVariables[8] = this.taskVariables[0] + ", " + this.taskVariables[3] + "-" + this.taskVariables[4]
+					+ " every " + this.taskVariables[2].toLowerCase() + ", " + this.taskVariables[5];
+		} else if (Checker.isDoneRecurringTaskInput(this.taskVariables[7])) {
+			this.taskVariables[7] = this.taskVariables[0] + "; " + this.taskVariables[3] + "-" + this.taskVariables[4]
+					+ " every " + this.taskVariables[2].toLowerCase() + "; " + this.taskVariables[5] + " "
+					+ DONE_STRING;
+
+			this.taskVariables[8] = this.taskVariables[0] + ", " + this.taskVariables[3] + "-" + this.taskVariables[4]
+					+ " every " + this.taskVariables[2].toLowerCase() + ", " + this.taskVariables[5] + " "
+					+ DONE_STRING;
+			;
+		} else if (Checker.isFloatingTaskInput(this.taskVariables[7])) {
+			// floating task
+			this.taskVariables[7] = this.taskVariables[0];
+			this.taskVariables[8] = this.taskVariables[0];
+
+		} else if (Checker.isDoneFloatingTaskInput(this.taskVariables[7])) {
+			this.taskVariables[7] = this.taskVariables[0] + " " + DONE_STRING;
+			this.taskVariables[7] = this.taskVariables[0] + " " + DONE_STRING;
+		}
+
 		calculateAndSetComparisonValue(this.taskVariables[7]);
 		calculateAndSetRecurringTaskValue(this.taskVariables[7]);
+
 	}
 
 	// retrieves the date

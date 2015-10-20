@@ -504,6 +504,7 @@ public class SortAndShow {
 		ArrayList<Task> floatingTasksList = new ArrayList<Task>();
 		ArrayList<Task> recurringTasksList = new ArrayList<Task>();
 
+
 		for (int j = 0; j < allTasksList.size(); j++) {
 			if (Checker.isDeadlineTaskInput(allTasksList.get(j).getScheduleString())
 					|| Checker.isDoneDeadlineTaskInput(allTasksList.get(j).getScheduleString())
@@ -519,6 +520,27 @@ public class SortAndShow {
 			}
 		}
 
+		// sort all deadline and event tasks by index of 5447-year block
+		int size11 = deadlineOrEventTasksList.size();
+		int s, start11, min_index11 = 0;
+
+		for (start11 = 0; start11 < size11 - 1; start11++) {
+			min_index11 = start11;
+
+			for (s = start11 + 1; s < size11; s++) {
+				if (deadlineOrEventTasksList.get(s).getLimitBlockIndex() < deadlineOrEventTasksList.get(min_index11)
+						.getLimitBlockIndex()) {
+					min_index11 = s;
+				}
+			}
+
+			Task temp20 = deadlineOrEventTasksList.get(start11);
+			Task temp21 = deadlineOrEventTasksList.get(min_index11);
+			deadlineOrEventTasksList.set(start11, temp21);
+			deadlineOrEventTasksList.set(min_index11, temp20);
+		}
+
+		
 		// sort floating tasks in alphabetical order
 		int size2 = floatingTasksList.size();
 		int q, start2, min_index2 = 0;
