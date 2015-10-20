@@ -1,5 +1,5 @@
 import java.util.*;
-public class PaserSplit {
+public class ParserSplit {
     private static final String COMMAND_ADD = "add";
     private static final String COMMAND_DELETE = "delete";
     private static final String COMMAND_CHANGE = "change";
@@ -9,7 +9,7 @@ public class PaserSplit {
     private static final String COMMAND_SEARCH = "search";
     private static final String COMMAND_EXIT = "exit";
     
-    public PaserSplit(){
+    public ParserSplit(){
     }
     public Command parse(String userInput){
     	Command command;
@@ -31,7 +31,7 @@ public class PaserSplit {
 	                         break;
 	      case COMMAND_SEARCH: command = searchCommand(arguments);
 	                         break;
-	      case COMMAND_EXIT: command = ecitCommand();
+	      case COMMAND_EXIT: command = exitCommand();
 	                         break;
 	      default: command = invalidCommand();
     	}

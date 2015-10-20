@@ -29,6 +29,11 @@ public class Checker {
 	static boolean isValidTime(String time) {
 
 		String tempString = new String("");
+		if(time==null){
+			return false;
+		}
+		
+		
 		tempString = time.trim();
 
 		// ENDING TIME
@@ -90,7 +95,11 @@ public class Checker {
 	// but perfectly for the month and the year
 	static boolean isValidDate(String dateString) {
 		String tempDateString = dateString;
-
+		if(dateString==null){
+			return false;
+		}
+		
+		
 		int slashIndex1 = tempDateString.indexOf("/");
 
 		// DAY IN DATE
@@ -296,6 +305,11 @@ public class Checker {
 	// format: <taskname>
 	static boolean isFloatingTaskInput(String string) {
 		String tempString = new String("");
+		if(string==null){
+			return false;
+		}
+		
+		
 		tempString = string.trim();
 
 		if (tempString.length() == 0) {
@@ -334,6 +348,11 @@ public class Checker {
 	// done floating task (user input command or file storage format)
 	static boolean isDoneFloatingTaskInput(String string) {
 		String tempString = new String("");
+		if(string==null){
+			return false;
+		}
+		
+		
 		tempString = string.trim();
 
 		int semicolonIndex = tempString.indexOf(";");
@@ -376,6 +395,11 @@ public class Checker {
 	// format: <taskname>
 	static boolean isFloatingTaskOutput(String string) {
 		String tempString = new String("");
+		if(string==null){
+			return false;
+		}
+		
+		
 		tempString = string.trim();
 
 		if (tempString.length() == 0) {
@@ -412,6 +436,11 @@ public class Checker {
 	// format: <taskname> [done]
 	static boolean isDoneFloatingTaskOutput(String string) {
 		String tempString = new String("");
+		if(string==null){
+			return false;
+		}
+		
+		
 		tempString = string.trim();
 
 		if (tempString.length() == 0) {
@@ -452,6 +481,10 @@ public class Checker {
 	// <taskname>; by <end> on <date>
 	static boolean isDeadlineTaskInput(String string) {
 		String tempString = new String("");
+		if(string==null){
+			return false;
+		}
+		
 		tempString = string.trim();
 
 		if (tempString.length() == 0) {
@@ -546,6 +579,10 @@ public class Checker {
 	// deadline task
 	static boolean isDoneDeadlineTaskInput(String string) {
 		String tempString = new String("");
+		if(string==null){
+			return false;
+		}
+		
 		tempString = string.trim();
 
 		if (tempString.length() == 0) {
@@ -580,6 +617,10 @@ public class Checker {
 	// <taskname>, by <end> on <date>
 	static boolean isDeadlineTaskOutput(String string) {
 		String tempString = new String("");
+		if(string==null){
+			return false;
+		}
+		
 		tempString = string.trim();
 
 		if (tempString.length() == 0) {
@@ -673,6 +714,10 @@ public class Checker {
 	// <taskname>, by <end> on <date> [done]
 	static boolean isDoneDeadlineTaskOutput(String string) {
 		String tempString = new String("");
+		if(string==null){
+			return false;
+		}
+		
 		tempString = string.trim();
 
 		if (tempString.length() == 0) {
@@ -708,6 +753,10 @@ public class Checker {
 	// <taskname>; <start>-<end> every <day>; priority
 	static boolean isRecurringTaskInput(String string) {
 		String tempString = new String("");
+		if(string==null){
+			return false;
+		}
+		
 		tempString = string.trim();
 
 		if (tempString.length() == 0) {
@@ -840,6 +889,10 @@ public class Checker {
 	// done recurring task (user input command or file storage format)
 	static boolean isDoneRecurringTaskInput(String string) {
 		String tempString = new String("");
+		if(string==null){
+			return false;
+		}
+		
 		tempString = string.trim();
 
 		if (tempString.length() == 0) {
@@ -875,6 +928,10 @@ public class Checker {
 	// <taskname>, <start>-<end> every <day>, priority
 	static boolean isRecurringTaskOutput(String string) {
 		String tempString = new String("");
+		if(string==null){
+			return false;
+		}
+		
 		tempString = string.trim();
 
 		if (tempString.length() == 0) {
@@ -1007,6 +1064,10 @@ public class Checker {
 	// <taskname>, <start>-<end> every <day>, priority [done]
 	static boolean isDoneRecurringTaskOutput(String string) {
 		String tempString = new String("");
+		if(string==null){
+			return false;
+		}
+		
 		tempString = string.trim();
 
 		if (tempString.length() == 0) {
@@ -1042,6 +1103,10 @@ public class Checker {
 	static boolean isEventTaskInput(String string) {
 
 		String tempString = new String("");
+		if(string==null){
+			return false;
+		}
+		
 		tempString = string.trim();
 
 		if (tempString.length() == 0) {
@@ -1171,6 +1236,10 @@ public class Checker {
 
 	static boolean isDoneEventTaskInput(String string) {
 		String tempString = new String("");
+		if(string==null){
+			return false;
+		}
+		
 		tempString = string.trim();
 
 		if (tempString.length() == 0) {
@@ -1206,6 +1275,11 @@ public class Checker {
 	static boolean isEventTaskOutput(String string) {
 
 		String tempString = new String("");
+		if(string==null){
+			return false;
+		}
+		
+		
 		tempString = string.trim();
 
 		if (tempString.length() == 0) {
@@ -1336,6 +1410,10 @@ public class Checker {
 	// <taskname>, <start>-<end> on <date>, <priority> [done]
 	static boolean isDoneEventTaskOutput(String string) {
 		String tempString = new String("");
+		if(string==null){
+			return false;
+		}
+		
 		tempString = string.trim();
 
 		if (tempString.length() == 0) {
@@ -1370,6 +1448,11 @@ public class Checker {
 	// checks if a string is the full name of a day in a week, ignoring case
 	static boolean isValidDay(String string) {
 		String tempString = new String("");
+		if(string==null){
+			return false;
+		}
+		
+		
 		tempString = string.trim();
 
 		if (tempString.length() <= 5) {
