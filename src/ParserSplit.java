@@ -131,6 +131,13 @@ public class ParserSplit {
     	}
     	
     }
+    
+    public Command searchCommand(String arguments){
+    	Command command = new Command(Command.Type.SEARCH);
+    	String keyWord = arguments.trim();
+    	command.setKeyWord(keyWord);
+    	return command;
+    }
     public Command undoCommand(){
     	Command command = new Command(Command.Type.UNDO);
     	return command;
