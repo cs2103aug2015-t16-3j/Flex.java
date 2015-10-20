@@ -246,7 +246,7 @@ public class Task {
 			this.deadlineOrEventTaskValue = -1;
 
 		} else if (Checker.isRecurringTaskInput(string)) {
-			// format: <taskname>; <start>-<end> every <day>; <priority>
+			// format: <taskname>; <start>-<end> every <day>
 			String tempString = new String("");
 			tempString = string.trim();
 
@@ -274,20 +274,16 @@ public class Task {
 
 			tempString = tempString.substring(semicolonWhitespaceIndex2 + 2);
 
-			String priority = tempString;
 
-			// format: <taskname>; <start>-<end> every <day>; <priority>
+			// format: <taskname>; <start>-<end> every <day>
 			// set the non-null attributes
 			this.taskVariables[0] = taskName;
 			this.taskVariables[2] = day.toLowerCase();
 			this.taskVariables[3] = startingTime;
 			this.taskVariables[4] = endingTime;
-			this.taskVariables[5] = priority;
-			this.taskVariables[7] = taskName + "; " + startingTime + "-" + endingTime + " every " + day.toLowerCase()
-					+ "; " + priority;
+			this.taskVariables[7] = taskName + "; " + startingTime + "-" + endingTime + " every " + day.toLowerCase();
 
-			this.taskVariables[8] = taskName + ", " + startingTime + "-" + endingTime + " every " + day.toLowerCase()
-					+ ", " + priority;
+			this.taskVariables[8] = taskName + ", " + startingTime + "-" + endingTime + " every " + day.toLowerCase();
 
 			// set the null variables
 			this.taskVariables[1] = null;
@@ -298,7 +294,7 @@ public class Task {
 			calculateAndSetRecurringTaskValue(this.taskVariables[7]);
 			this.doneValue = -1;
 		} else if (Checker.isDoneRecurringTaskInput(string)) {
-			// format: <taskname>; <start>-<end> every <day>; priority [done]
+			// format: <taskname>; <start>-<end> every <day>
 			String tempString = new String("");
 			tempString = string.trim();
 
@@ -330,20 +326,15 @@ public class Task {
 
 			tempString = tempString.substring(semicolonWhitespaceIndex2 + 2);
 
-			String priority = tempString;
-
 			// set the non-null attributes
 			this.taskVariables[0] = taskName;
 			this.taskVariables[2] = day.toLowerCase();
 			this.taskVariables[3] = startingTime;
 			this.taskVariables[4] = endingTime;
-			this.taskVariables[5] = priority;
-			this.taskVariables[6] = DONE_STRING;
-			this.taskVariables[7] = taskName + "; " + startingTime + "-" + endingTime + " every " + day.toLowerCase()
-					+ "; " + priority + " " + DONE_STRING;
-			;
-			this.taskVariables[8] = taskName + ", " + startingTime + "-" + endingTime + " every " + day.toLowerCase()
-					+ ", " + priority + " " + DONE_STRING;
+
+			this.taskVariables[7] = taskName + "; " + startingTime + "-" + endingTime + " every " + day.toLowerCase();
+			
+			this.taskVariables[8] = taskName + ", " + startingTime + "-" + endingTime + " every " + day.toLowerCase();
 
 			// set the null variables
 			this.taskVariables[1] = null;
