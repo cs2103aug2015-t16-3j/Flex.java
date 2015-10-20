@@ -22,12 +22,6 @@ public class Task {
 
 	private double recurringTaskValue = 0.0;
 
-	// year within a 5447-year (date limit: 31/12/5447, start limit 2359) block
-	private int yearWithinLimitBlock = -2;
-
-	// index of 5447-year block, starting from 0
-	private int limitBlockIndex = -2;
-
 	private int timeSortValue = -3;
 	private int actualDay = -3;
 	private int actualMonth = -3;
@@ -499,15 +493,14 @@ public class Task {
 
 			int endingTimeTotal = Integer.valueOf(this.taskVariables[4].substring(0, 2)) * HOUR_MINUTES
 					+ Integer.valueOf(this.taskVariables[4].substring(2, 4));
+
 			this.timeSortValue = -DEADLINE_TASK_TIME_OFFSET_VALUE + endingTimeTotal;
-
 			this.deadlineOrEventTaskValue = -1;
-
 			this.actualDay = day;
 			this.actualMonth = month;
 			this.actualYear = year;
-
 			this.doneValue = -1;
+
 		} else if (Checker.isDoneDeadlineTaskInput(string)) {
 			// e.g. 7/9/2015
 			String tempDateString = this.taskVariables[1];
@@ -531,21 +524,27 @@ public class Task {
 
 			this.doneValue = 1;
 			this.timeSortValue = -DEADLINE_TASK_TIME_OFFSET_VALUE + endingTimeTotal;
-
 			this.actualDay = day;
 			this.actualMonth = month;
 			this.actualYear = year;
-
 			this.deadlineOrEventTaskValue = -1;
 
 		} else if (Checker.isRecurringTaskInput(string)) {
+
 			this.doneValue = -1;
+
 		} else if (Checker.isDoneRecurringTaskInput(string)) {
+
 			this.doneValue = 1;
+
 		} else if (Checker.isFloatingTaskInput(string)) {
+
 			this.doneValue = -1;
+
 		} else if (Checker.isDoneFloatingTaskInput(string)) {
+
 			this.doneValue = 1;
+
 		}
 
 	}
@@ -590,16 +589,6 @@ public class Task {
 
 		this.recurringTaskValue = dayValue * DAY_HOURS * HOUR_MINUTES + startingTimeHours * HOUR_MINUTES
 				+ startingTimeMinutes;
-	}
-
-	// retrieves yearWithinLimitBlock
-	public int getYearWithinLimitBlock() {
-		return this.yearWithinLimitBlock;
-	}
-
-	// retrieves limitBlockIndex
-	public int getLimitBlockIndex() {
-		return this.limitBlockIndex;
 	}
 
 	// retrieves the comparisonValue for sorting only recurring tasks by day and
