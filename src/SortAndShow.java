@@ -675,10 +675,7 @@ public class SortAndShow {
 			}
 		}
 
-		for (int z = 0; z < allTasksList.size(); z++) {
-			allTasksList.set(z, tempTasksList.get(z));
-		}
-
+		allTasksList = tempTasksList;
 	}
 
 	// shows event tasks in the schedule
