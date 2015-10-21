@@ -1,5 +1,6 @@
 import java.util.*;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.*;
@@ -13,6 +14,8 @@ public class SortAndShow {
 	// that is, it is valid only if its starting time, or ending time, are NOT
 	// between the starting
 	// and ending times of existing tasks which are NOT DONE YET
+
+	private static final int HOUR_MINUTES = 60;
 
 	// the form of searching for tasks without executing readAndExecuteCommand()
 	// recursively
@@ -803,8 +806,8 @@ public class SortAndShow {
 			min_index22 = start22;
 
 			for (h = start22 + 1; h < size22; h++) {
-				if (floatingTasksList.get(h).getScheduleString()
-						.compareToIgnoreCase(floatingTasksList.get(min_index22).getScheduleString()) < 0) {
+				if (floatingTasksList.get(h).getTaskName()
+						.compareToIgnoreCase(floatingTasksList.get(min_index22).getTaskName()) < 0) {
 					min_index22 = h;
 				}
 			}
@@ -1060,5 +1063,329 @@ public class SortAndShow {
 
 		SortAndShow.readAndDisplayArrayListTasks(allTasksList, flexWindow);
 
+	}
+
+	// all tasks sorted by task name
+	static void showByTaskName(String filename, FlexWindow flexWindow) throws IOException {
+		BufferedReader reader = null;
+
+		reader = new BufferedReader(new FileReader(filename));
+		String currentLine = null;
+
+		ArrayList<Task> floatingTasksList = new ArrayList<Task>();
+		ArrayList<Task> recurringTasksList = new ArrayList<Task>();
+		ArrayList<Task> deadlineOrEventTasksList = new ArrayList<Task>();
+
+		do {
+			currentLine = reader.readLine();
+			if (currentLine != null) {
+				if (Checker.isFloatingTaskInput(currentLine) || Checker.isDoneFloatingTaskInput(currentLine)) {
+					floatingTasksList.add(new Task(currentLine));
+				} else if (Checker.isDeadlineTaskInput(currentLine) || Checker.isDoneDeadlineTaskInput(currentLine)
+						|| Checker.isEventTaskInput(currentLine) || Checker.isDoneEventTaskInput(currentLine)) {
+					deadlineOrEventTasksList.add(new Task(currentLine));
+				} else if (Checker.isRecurringTaskInput(currentLine) || Checker.isRecurringTaskInput(currentLine)) {
+					recurringTasksList.add(new Task(currentLine));
+				}
+			}
+		} while (currentLine != null);
+
+		if (reader != null) {
+			reader.close();
+		}
+
+		ArrayList<Task> allTasksList = new ArrayList<Task>();
+
+		// sort deadline tasks in alphabetical order
+		int size11 = deadlineOrEventTasksList.size();
+		int g, start11, min_index11 = 0;
+
+		for (start11 = 0; start11 < size11 - 1; start11++) {
+			min_index11 = start11;
+
+			for (g = start11 + 1; g < size11; g++) {
+				if (deadlineOrEventTasksList.get(g).getTaskName()
+						.compareToIgnoreCase(deadlineOrEventTasksList.get(min_index11).getTaskName()) < 0) {
+					min_index11 = g;
+				}
+			}
+
+			Task temp12 = deadlineOrEventTasksList.get(start11);
+			Task temp13 = deadlineOrEventTasksList.get(min_index11);
+			deadlineOrEventTasksList.set(start11, temp13);
+			deadlineOrEventTasksList.set(min_index11, temp12);
+		}
+
+		for (int i = 0; i < deadlineOrEventTasksList.size(); i++) {
+			allTasksList.add(deadlineOrEventTasksList.get(i));
+		}
+
+		// sort floating tasks in alphabetical order
+		int size22 = floatingTasksList.size();
+		int h, start22, min_index22 = 0;
+
+		for (start22 = 0; start22 < size22 - 1; start22++) {
+			min_index22 = start22;
+
+			for (h = start22 + 1; h < size22; h++) {
+				if (floatingTasksList.get(h).getTaskName()
+						.compareToIgnoreCase(floatingTasksList.get(min_index22).getTaskName()) < 0) {
+					min_index22 = h;
+				}
+			}
+
+			Task temp23 = floatingTasksList.get(start22);
+			Task temp24 = floatingTasksList.get(min_index22);
+			floatingTasksList.set(start22, temp24);
+			floatingTasksList.set(min_index22, temp23);
+		}
+
+		for (int j = 0; j < floatingTasksList.size(); j++) {
+			allTasksList.add(floatingTasksList.get(j));
+		}
+
+		// sort recurring tasks in alphabetical order
+		int size33 = recurringTasksList.size();
+		int j, start33, min_index33 = 0;
+
+		for (start33 = 0; start33 < size33 - 1; start33++) {
+			min_index33 = start33;
+
+			for (j = start33 + 1; j < size33; j++) {
+				if (recurringTasksList.get(j).getTaskName()
+						.compareToIgnoreCase(recurringTasksList.get(min_index33).getTaskName()) < 0) {
+					min_index33 = j;
+				}
+			}
+
+			Task temp34 = recurringTasksList.get(start33);
+			Task temp35 = recurringTasksList.get(min_index33);
+			recurringTasksList.set(start33, temp35);
+			recurringTasksList.set(min_index33, temp34);
+		}
+
+		for (int k = 0; k < recurringTasksList.size(); k++) {
+			allTasksList.add(recurringTasksList.get(k));
+		}
+
+		SortAndShow.readAndDisplayArrayListTasks(allTasksList, flexWindow);
+	}
+
+	// show event, and recurring tasks by starting time
+	static void showByTaskStartingTime(String filename, FlexWindow flexWindow) throws IOException {
+		BufferedReader reader = null;
+
+		reader = new BufferedReader(new FileReader(filename));
+		String currentLine = null;
+
+		ArrayList<Task> recurringTasksList = new ArrayList<Task>();
+		ArrayList<Task> deadlineOrEventTasksList = new ArrayList<Task>();
+
+		do {
+			currentLine = reader.readLine();
+			if (currentLine != null) {
+				if (Checker.isEventTaskInput(currentLine) || Checker.isDoneEventTaskInput(currentLine)) {
+					deadlineOrEventTasksList.add(new Task(currentLine));
+				} else if (Checker.isRecurringTaskInput(currentLine) || Checker.isRecurringTaskInput(currentLine)) {
+					recurringTasksList.add(new Task(currentLine));
+				}
+			}
+		} while (currentLine != null);
+
+		if (reader != null) {
+			reader.close();
+		}
+
+		ArrayList<Task> allTasksList = new ArrayList<Task>();
+
+		// sort deadline tasks in alphabetical order
+		int size11 = deadlineOrEventTasksList.size();
+		int g, start11, min_index11 = 0;
+
+		for (start11 = 0; start11 < size11 - 1; start11++) {
+			min_index11 = start11;
+
+			for (g = start11 + 1; g < size11; g++) {
+				if (Integer.valueOf(deadlineOrEventTasksList.get(g).getStart().substring(0, 2)) * HOUR_MINUTES
+						+ Integer.valueOf(deadlineOrEventTasksList.get(g).getStart().substring(2, 4)) < Integer.valueOf(
+								deadlineOrEventTasksList.get(min_index11).getStart().substring(0, 2)) * HOUR_MINUTES
+								+ Integer.valueOf(
+										deadlineOrEventTasksList.get(min_index11).getStart().substring(2, 4))) {
+					min_index11 = g;
+				}
+			}
+
+			Task temp12 = deadlineOrEventTasksList.get(start11);
+			Task temp13 = deadlineOrEventTasksList.get(min_index11);
+			deadlineOrEventTasksList.set(start11, temp13);
+			deadlineOrEventTasksList.set(min_index11, temp12);
+		}
+
+		for (int i = 0; i < deadlineOrEventTasksList.size(); i++) {
+			allTasksList.add(deadlineOrEventTasksList.get(i));
+		}
+
+		// sort recurring tasks in alphabetical order
+		int size33 = recurringTasksList.size();
+		int j, start33, min_index33 = 0;
+
+		for (start33 = 0; start33 < size33 - 1; start33++) {
+			min_index33 = start33;
+
+			for (j = start33 + 1; j < size33; j++) {
+				if (Integer.valueOf(recurringTasksList.get(j).getStart().substring(0, 2)) * HOUR_MINUTES
+						+ Integer.valueOf(recurringTasksList.get(j).getStart().substring(2, 4)) < Integer
+								.valueOf(recurringTasksList.get(min_index33).getStart().substring(0, 2)) * HOUR_MINUTES
+								+ Integer.valueOf(recurringTasksList.get(min_index33).getStart().substring(2, 4))) {
+					min_index33 = j;
+				}
+			}
+
+			Task temp34 = recurringTasksList.get(start33);
+			Task temp35 = recurringTasksList.get(min_index33);
+			recurringTasksList.set(start33, temp35);
+			recurringTasksList.set(min_index33, temp34);
+		}
+
+		for (int k = 0; k < recurringTasksList.size(); k++) {
+			allTasksList.add(recurringTasksList.get(k));
+		}
+
+		SortAndShow.readAndDisplayArrayListTasks(allTasksList, flexWindow);
+	}
+
+	// sorts deadline, event and recurring tasks by ending time
+	static void showByTaskEndingTime(String filename, FlexWindow flexWindow) throws IOException {
+		BufferedReader reader = null;
+
+		reader = new BufferedReader(new FileReader(filename));
+		String currentLine = null;
+
+		ArrayList<Task> recurringTasksList = new ArrayList<Task>();
+		ArrayList<Task> deadlineOrEventTasksList = new ArrayList<Task>();
+
+		do {
+			currentLine = reader.readLine();
+			if (currentLine != null) {
+				if (Checker.isDeadlineTaskInput(currentLine) || Checker.isDoneDeadlineTaskInput(currentLine)
+						|| Checker.isEventTaskInput(currentLine) || Checker.isDoneEventTaskInput(currentLine)) {
+					deadlineOrEventTasksList.add(new Task(currentLine));
+				} else if (Checker.isRecurringTaskInput(currentLine) || Checker.isRecurringTaskInput(currentLine)) {
+					recurringTasksList.add(new Task(currentLine));
+				}
+			}
+		} while (currentLine != null);
+
+		if (reader != null) {
+			reader.close();
+		}
+
+		ArrayList<Task> allTasksList = new ArrayList<Task>();
+
+		// sort deadline tasks in alphabetical order
+		int size11 = deadlineOrEventTasksList.size();
+		int g, start11, min_index11 = 0;
+
+		for (start11 = 0; start11 < size11 - 1; start11++) {
+			min_index11 = start11;
+
+			for (g = start11 + 1; g < size11; g++) {
+				if (Integer.valueOf(deadlineOrEventTasksList.get(g).getEnd().substring(0, 2)) * HOUR_MINUTES
+						+ Integer.valueOf(deadlineOrEventTasksList.get(g).getEnd().substring(2, 4)) < Integer.valueOf(
+								deadlineOrEventTasksList.get(min_index11).getEnd().substring(0, 2)) * HOUR_MINUTES
+								+ Integer.valueOf(deadlineOrEventTasksList.get(min_index11).getEnd().substring(2, 4))) {
+					min_index11 = g;
+				}
+			}
+
+			Task temp12 = deadlineOrEventTasksList.get(start11);
+			Task temp13 = deadlineOrEventTasksList.get(min_index11);
+			deadlineOrEventTasksList.set(start11, temp13);
+			deadlineOrEventTasksList.set(min_index11, temp12);
+		}
+
+		for (int i = 0; i < deadlineOrEventTasksList.size(); i++) {
+			allTasksList.add(deadlineOrEventTasksList.get(i));
+		}
+
+		// sort recurring tasks in alphabetical order
+		int size33 = recurringTasksList.size();
+		int j, start33, min_index33 = 0;
+
+		for (start33 = 0; start33 < size33 - 1; start33++) {
+			min_index33 = start33;
+
+			for (j = start33 + 1; j < size33; j++) {
+				if (Integer.valueOf(recurringTasksList.get(j).getEnd().substring(0, 2)) * HOUR_MINUTES
+						+ Integer.valueOf(recurringTasksList.get(j).getEnd().substring(2, 4)) < Integer
+								.valueOf(recurringTasksList.get(min_index33).getEnd().substring(0, 2)) * HOUR_MINUTES
+								+ Integer.valueOf(recurringTasksList.get(min_index33).getEnd().substring(2, 4))) {
+					min_index33 = j;
+				}
+			}
+
+			Task temp34 = recurringTasksList.get(start33);
+			Task temp35 = recurringTasksList.get(min_index33);
+			recurringTasksList.set(start33, temp35);
+			recurringTasksList.set(min_index33, temp34);
+		}
+
+		for (int k = 0; k < recurringTasksList.size(); k++) {
+			allTasksList.add(recurringTasksList.get(k));
+		}
+
+		SortAndShow.readAndDisplayArrayListTasks(allTasksList, flexWindow);
+	}
+
+	// show event tasks by priority
+	static void showByTaskPriority(String filename, FlexWindow flexWindow) throws IOException {
+		BufferedReader reader = null;
+
+		reader = new BufferedReader(new FileReader(filename));
+		String currentLine = null;
+
+		ArrayList<Task> recurringTasksList = new ArrayList<Task>();
+		ArrayList<Task> eventTasksList = new ArrayList<Task>();
+
+		do {
+			currentLine = reader.readLine();
+			if (currentLine != null) {
+				if (Checker.isEventTaskInput(currentLine) || Checker.isDoneEventTaskInput(currentLine)) {
+					eventTasksList.add(new Task(currentLine));
+				}
+			}
+		} while (currentLine != null);
+
+		if (reader != null) {
+			reader.close();
+		}
+
+		ArrayList<Task> allTasksList = new ArrayList<Task>();
+
+		// sort deadline tasks in alphabetical order
+		int size11 = eventTasksList.size();
+		int g, start11, min_index11 = 0;
+
+		for (start11 = 0; start11 < size11 - 1; start11++) {
+			min_index11 = start11;
+
+			for (g = start11 + 1; g < size11; g++) {
+				if (eventTasksList.get(g).getPriority()
+						.compareToIgnoreCase(eventTasksList.get(min_index11).getPriority()) < 0) {
+					min_index11 = g;
+				}
+			}
+
+			Task temp12 = eventTasksList.get(start11);
+			Task temp13 = eventTasksList.get(min_index11);
+			eventTasksList.set(start11, temp13);
+			eventTasksList.set(min_index11, temp12);
+		}
+
+		for (int i = 0; i < eventTasksList.size(); i++) {
+			allTasksList.add(eventTasksList.get(i));
+		}
+
+		SortAndShow.readAndDisplayArrayListTasks(allTasksList, flexWindow);
 	}
 }

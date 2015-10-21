@@ -300,6 +300,21 @@ public class Flex {
 
 					SortAndShow.readAndDisplayAll(filename, flexWindow);
 
+				} else if (remainingString.equalsIgnoreCase("by day")) {
+					logger.finest(FLOATING_TASKS_DISPLAYED_MESSAGE);
+					System.out.println(FLOATING_TASKS_DISPLAYED_MESSAGE);
+					System.out.println();
+
+					SortAndShow.showFloatingTasks(filename, flexWindow);
+				} else if (remainingString.equalsIgnoreCase("by taskname")
+						|| remainingString.equalsIgnoreCase("by task")) {
+					SortAndShow.showByTaskName(filename, flexWindow);
+				} else if (remainingString.equalsIgnoreCase("by start")) {
+					SortAndShow.showByTaskStartingTime(filename, flexWindow);
+				} else if (remainingString.equalsIgnoreCase("by end")) {
+					SortAndShow.showByTaskEndingTime(filename, flexWindow);
+				} else if (remainingString.equalsIgnoreCase("by priority")) {
+					SortAndShow.showByTaskPriority(filename, flexWindow);
 				} else if (remainingString.equalsIgnoreCase("done")) {
 
 					logger.finest(DONE_TASKS_DISPLAYED_MESSAGE);
@@ -320,7 +335,7 @@ public class Flex {
 					System.out.println();
 
 					SortAndShow.showDeadlineTasks(filename, flexWindow);
-				} else if (remainingString.equalsIgnoreCase("floating")) {
+				} else if (remainingString.equalsIgnoreCase("floating") || remainingString.equalsIgnoreCase("by day")) {
 					logger.finest(FLOATING_TASKS_DISPLAYED_MESSAGE);
 					System.out.println(FLOATING_TASKS_DISPLAYED_MESSAGE);
 					System.out.println();
