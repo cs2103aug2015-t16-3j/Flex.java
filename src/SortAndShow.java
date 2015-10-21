@@ -545,6 +545,16 @@ public class SortAndShow {
 			deadlineOrEventTasksList.add(eventTasksList.get(s));
 		}
 
+		// add the deadline tasks into deadlineOrEventTasksList
+		for (int t = 0; t < deadlineTasksList.size(); t++) {
+			deadlineOrEventTasksList.set(t, deadlineTasksList.get(t));
+		}
+
+		// then, add the deadline tasks into deadlineOrEventTasksList
+		for (int u = 0; u < eventTasksList.size(); u++) {
+			deadlineOrEventTasksList.set(u + deadlineTasksList.size(), eventTasksList.get(u));
+		}
+
 		// NOTE: Sorting by day, then month, then year, will keep the date(from
 		// 1/1/1) in order
 
@@ -671,9 +681,9 @@ public class SortAndShow {
 			}
 		}
 
-	    for(int z=0; z<tempTasksList.size(); z++){
-	    	allTasksList.set(z, tempTasksList.get(z));
-	    }
+		for (int z = 0; z < tempTasksList.size(); z++) {
+			allTasksList.set(z, tempTasksList.get(z));
+		}
 	}
 
 	// shows event tasks in the schedule
