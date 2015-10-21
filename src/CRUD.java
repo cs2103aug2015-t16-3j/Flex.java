@@ -1059,6 +1059,14 @@ public class CRUD {
 				lastAction.setPreviousChangedScheduleString(taskBeforeChange);
 				lastAction.setPreviousTask(new Task(allTasksList
 						.get(deadlineOrEventTasksList.size() + Integer.valueOf(number2) - 1).getScheduleString()));
+			} else {
+				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				flexWindow.getTextArea().append("\n");
+
+				logger.finest(INVALID_INPUT_MESSAGE);
+				System.out.println(INVALID_INPUT_MESSAGE);
+				System.out.println();
+				return;
 			}
 
 		} else if (firstTerm.equalsIgnoreCase("rec")) {

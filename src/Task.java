@@ -251,11 +251,11 @@ public class Task {
 
 			tempString = tempString.substring(dashIndex1 + 1).trim();
 
-			int whitespaceEveryIndex = tempString.toLowerCase().indexOf(" every ");
+			int whitespaceEveryWhitespaceIndex = tempString.toLowerCase().indexOf(" every ");
 
-			String endingTime = tempString.substring(0, whitespaceEveryIndex);
+			String endingTime = tempString.substring(0, whitespaceEveryWhitespaceIndex);
 
-			tempString = tempString.substring(whitespaceEveryIndex + 7).trim();
+			tempString = tempString.substring(whitespaceEveryWhitespaceIndex + 7).trim();
 
 			String day = tempString.trim();
 
@@ -266,7 +266,6 @@ public class Task {
 			this.taskVariables[3] = startingTime;
 			this.taskVariables[4] = endingTime;
 			this.taskVariables[7] = taskName + "; " + startingTime + "-" + endingTime + " every " + day.toLowerCase();
-
 			this.taskVariables[8] = taskName + ", " + startingTime + "-" + endingTime + " every " + day.toLowerCase();
 
 			// set the null variables
@@ -560,10 +559,10 @@ public class Task {
 		} else if (Checker.isRecurringTaskInput(this.taskVariables[7])) {
 			// recurring task
 			this.taskVariables[7] = this.taskVariables[0] + "; " + this.taskVariables[3] + "-" + this.taskVariables[4]
-					+ " every " + this.taskVariables[2].toLowerCase() + "; " + this.taskVariables[5];
+					+ " every " + this.taskVariables[2].toLowerCase();
 
 			this.taskVariables[8] = this.taskVariables[0] + ", " + this.taskVariables[3] + "-" + this.taskVariables[4]
-					+ " every " + this.taskVariables[2].toLowerCase() + ", " + this.taskVariables[5];
+					+ " every " + this.taskVariables[2].toLowerCase();
 
 		} else if (Checker.isFloatingTaskInput(this.taskVariables[7])) {
 			// floating task
@@ -644,10 +643,10 @@ public class Task {
 
 		if (Checker.isRecurringTaskInput(this.taskVariables[7])) {
 			this.taskVariables[7] = this.taskVariables[0] + "; " + this.taskVariables[3] + "-" + this.taskVariables[4]
-					+ " every " + this.taskVariables[2].toLowerCase() + "; " + this.taskVariables[5];
+					+ " every " + this.taskVariables[2].toLowerCase();
 
 			this.taskVariables[8] = this.taskVariables[0] + ", " + this.taskVariables[3] + "-" + this.taskVariables[4]
-					+ " every " + this.taskVariables[2].toLowerCase() + ", " + this.taskVariables[5];
+					+ " every " + this.taskVariables[2].toLowerCase();
 
 		}
 
@@ -684,10 +683,10 @@ public class Task {
 		} else if (Checker.isRecurringTaskInput(this.taskVariables[7])) {
 			// recurring task
 			this.taskVariables[7] = this.taskVariables[0] + "; " + this.taskVariables[3] + "-" + this.taskVariables[4]
-					+ " every " + this.taskVariables[2].toLowerCase() + "; " + this.taskVariables[5];
+					+ " every " + this.taskVariables[2].toLowerCase();
 
 			this.taskVariables[8] = this.taskVariables[0] + ", " + this.taskVariables[3] + "-" + this.taskVariables[4]
-					+ " every " + this.taskVariables[2].toLowerCase() + ", " + this.taskVariables[5];
+					+ " every " + this.taskVariables[2].toLowerCase();
 
 		}
 		calculateAndSetComparisonValue(this.taskVariables[7]);
@@ -726,10 +725,10 @@ public class Task {
 			// recurring task
 
 			this.taskVariables[7] = this.taskVariables[0] + "; " + this.taskVariables[3] + "-" + this.taskVariables[4]
-					+ " every " + this.taskVariables[2].toLowerCase() + "; " + this.taskVariables[5];
+					+ " every " + this.taskVariables[2].toLowerCase();
 
 			this.taskVariables[8] = this.taskVariables[0] + ", " + this.taskVariables[3] + "-" + this.taskVariables[4]
-					+ " every " + this.taskVariables[2].toLowerCase() + ", " + this.taskVariables[5];
+					+ " every " + this.taskVariables[2].toLowerCase();
 
 		} else if (Checker.isDeadlineTaskInput(this.taskVariables[7])) {
 			// deadline task

@@ -125,7 +125,7 @@ public class FlexTest4 {
 		// recurring task output
 		assertTrue(Checker.isRecurringTaskOutput("task name, 0002-0003 every tuesday"));
 
-		assertTrue(Checker.isRecurringTaskOutput("task name, 0002-0003 every tuesday"));
+		assertTrue(Checker.isRecurringTaskOutput("task name, 0002-0003 every tuesday "));
 
 		assertTrue(!Checker.isRecurringTaskOutput("task name, 0002-0003 every tuesday ,"));
 
