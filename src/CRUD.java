@@ -348,27 +348,25 @@ public class CRUD {
 	// each change/edit command starts with the hyphen on the far left
 
 	// For Editing An Event Task
+	// change <date> <number> done
+	// change <date> <number> not done
 	// change <date> <number> to <newdate>
 	// change <date> <number> priority to <newpriority>
 	// change <date> <number> time to <newstart>-<newend>
 	// change <date> <number> taskname to <newtaskname>
-	// change <date> <number> done
-	// change <date> <number> not done
 
 	// For Editing A Deadline Task
+	// change <date> <number> done
+	// change <date> <number> not done
 	// change <date> <number> to <newdate>
 	// change <date> <number> end by <new end>
 	// change <date> <number> by <newend> on <newdate>
 	// change <date> <number> taskname to <newtaskname>
-	// change <date> <number> done
-	// change <date> <number> not done
 
 	// For Editing A Recurring Task
 	// change rec <number> to every <newday>
 	// change rec <number> time to <newstart>-<newend>
 	// change rec <number> taskname to <newtaskname>
-	// change rec <number> done
-	// change rec <number> not done
 
 	// For Editing A Floating Task
 	// change floating <number> done
