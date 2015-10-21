@@ -790,9 +790,7 @@ public class SortAndShow {
 					deadlineOrEventTasksList.add(subTaskList.get(bb));
 				}
 
-				for (int cc = 0; cc < subTaskList.size(); cc++) {
-					subTaskList.remove(0);
-				}
+				subTaskList.clear();
 			}
 
 		}

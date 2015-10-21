@@ -1,6 +1,6 @@
+task; by 0001 on 1/1/1 [done]
+task; by 0001 on 1/1/1 [done]
 task; by 0001 on 1/1/1
-task; by 0001 on 1/1/1 [done]
-task; by 0001 on 1/1/1 [done]
 task; by 0006 on 1/1/1
 task; by 0008 on 1/1/1
 task; by 0009 on 1/1/1
@@ -30,12 +30,12 @@ testttttt; 1245-1549 on 1/1/2; prior
 testttttt; 1500-1501 on 1/1/2; prior
 task; by 2358 on 1/2/3
 tasking; by 0020 on 5/5/5
-task; by 0001 on 9/9/9
 task; by 0001 on 9/9/9 [done]
 task; by 0001 on 9/9/9 [done]
 task; by 0001 on 9/9/9
 task; by 0001 on 9/9/9 [done]
 task; by 0001 on 9/9/9 [done]
+task; by 0001 on 9/9/9
 task; by 0001 on 9/9/10
 task; by 0001 on 9/9/10
 task; by 0001 on 21/9/10
