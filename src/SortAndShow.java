@@ -469,6 +469,117 @@ public class SortAndShow {
 		flexWindow.getTextArea().append("\n");
 	}
 
+	// used to display tasks given an ArrayList of Tasks
+	static void readAndDisplayArrayListTasks(ArrayList<Task> taskList, FlexWindow flexWindow) {
+
+		ArrayList<Task> deadlineOrEventTasksList = new ArrayList<Task>();
+		ArrayList<Task> recurringTasksList = new ArrayList<Task>();
+		ArrayList<Task> floatingTasksList = new ArrayList<Task>();
+
+		for (int i = 0; i < taskList.size(); i++) {
+			if (Checker.isDeadlineTaskInput(taskList.get(i).getScheduleString())
+					|| Checker.isDoneDeadlineTaskInput(taskList.get(i).getScheduleString())
+					|| Checker.isEventTaskInput(taskList.get(i).getScheduleString())
+					|| Checker.isDoneEventTaskInput(taskList.get(i).getScheduleString())) {
+				deadlineOrEventTasksList.add(taskList.get(i));
+			} else if (Checker.isFloatingTaskInput(taskList.get(i).getScheduleString())
+					|| Checker.isDoneFloatingTaskInput(taskList.get(i).getScheduleString())) {
+				floatingTasksList.add(taskList.get(i));
+			} else if (Checker.isRecurringTaskInput(taskList.get(i).getScheduleString())) {
+				recurringTasksList.add(taskList.get(i));
+			}
+		}
+
+		String tempDate = new String("");
+
+		if (!deadlineOrEventTasksList.isEmpty()) {
+			flexWindow.getTextArea()
+					.append("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+							+ "\n");
+			flexWindow.getTextArea().append("\n");
+			tempDate = deadlineOrEventTasksList.get(0).getDate();
+			flexWindow.getTextArea().append("Date: " + tempDate + "\n");
+			flexWindow.getTextArea().append("\n");
+		}
+
+		int deadlineOrEventTasksListCount = 0;
+
+		for (int j = 0; j < deadlineOrEventTasksList.size(); j++) {
+			deadlineOrEventTasksListCount += 1;
+			if (deadlineOrEventTasksList.get(j).getDate().equalsIgnoreCase(tempDate)) {
+				flexWindow.getTextArea().append(deadlineOrEventTasksListCount + ". "
+						+ deadlineOrEventTasksList.get(j).getDisplayString() + "\n");
+				flexWindow.getTextArea().append("\n");
+			} else {
+				deadlineOrEventTasksListCount = 1;
+				flexWindow.getTextArea()
+						.append("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+								+ "\n");
+				flexWindow.getTextArea().append("\n");
+
+				tempDate = deadlineOrEventTasksList.get(j).getDate();
+
+				flexWindow.getTextArea().append("Date: " + tempDate + "\n");
+				flexWindow.getTextArea().append("\n");
+
+				flexWindow.getTextArea().append(deadlineOrEventTasksListCount + ". "
+						+ deadlineOrEventTasksList.get(j).getDisplayString() + "\n");
+				flexWindow.getTextArea().append("\n");
+			}
+		}
+		if (!floatingTasksList.isEmpty()) {
+			flexWindow.getTextArea()
+					.append("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+							+ "\n");
+			flexWindow.getTextArea().append("\n");
+
+			flexWindow.getTextArea()
+					.append("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+							+ "\n");
+			flexWindow.getTextArea().append("\n");
+
+			// floating header "Floating"
+
+			flexWindow.getTextArea().append("Floating" + "\n");
+			flexWindow.getTextArea().append("\n");
+
+			int floatingTasksListCount = 0;
+			for (int k = 0; k < floatingTasksList.size(); k++) {
+				floatingTasksListCount += 1;
+				flexWindow.getTextArea()
+						.append(floatingTasksListCount + ". " + floatingTasksList.get(k).getDisplayString() + "\n");
+				flexWindow.getTextArea().append("\n");
+			}
+
+		}
+
+		// recurring task header "Recurring"
+		if (!recurringTasksList.isEmpty()) {
+			flexWindow.getTextArea()
+					.append("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+							+ "\n");
+			flexWindow.getTextArea().append("\n");
+
+			flexWindow.getTextArea()
+					.append("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+							+ "\n");
+
+			flexWindow.getTextArea().append("Recurring" + "\n");
+			flexWindow.getTextArea().append("\n");
+
+			int recurringTasksListCount = 0;
+
+			for (int l = 0; l < recurringTasksList.size(); l++) {
+				recurringTasksListCount += 1;
+				flexWindow.getTextArea()
+						.append(recurringTasksListCount + ". " + recurringTasksList.get(l).getDisplayString() + "\n");
+				flexWindow.getTextArea().append("\n");
+			}
+		}
+
+		flexWindow.getTextArea().append("\n");
+	}
+
 	// used to sort tasks by starting date and starting time
 	static void sortAllTasksByDateAndStartingTime(ArrayList<Task> allTasksList) {
 
@@ -533,26 +644,16 @@ public class SortAndShow {
 			eventTasksList.set(min_index4, temp5);
 		}
 
-		ArrayList<Task> deadlineOrEventTasksList = new ArrayList<Task>();
+		ArrayList<Task> tempDeadlineOrEventTasksList = new ArrayList<Task>();
 
 		// add the deadline tasks into deadlineOrEventTasksList
 		for (int r = 0; r < deadlineTasksList.size(); r++) {
-			deadlineOrEventTasksList.add(deadlineTasksList.get(r));
+			tempDeadlineOrEventTasksList.add(deadlineTasksList.get(r));
 		}
 
-		// then, add the deadline tasks into deadlineOrEventTasksList
+		// then, add the event tasks into deadlineOrEventTasksList
 		for (int s = 0; s < eventTasksList.size(); s++) {
-			deadlineOrEventTasksList.add(eventTasksList.get(s));
-		}
-
-		// add the deadline tasks into deadlineOrEventTasksList
-		for (int t = 0; t < deadlineTasksList.size(); t++) {
-			deadlineOrEventTasksList.set(t, deadlineTasksList.get(t));
-		}
-
-		// then, add the deadline tasks into deadlineOrEventTasksList
-		for (int u = 0; u < eventTasksList.size(); u++) {
-			deadlineOrEventTasksList.set(u + deadlineTasksList.size(), eventTasksList.get(u));
+			tempDeadlineOrEventTasksList.add(eventTasksList.get(s));
 		}
 
 		// NOTE: Sorting by day, then month, then year, will keep the date(from
@@ -560,65 +661,140 @@ public class SortAndShow {
 
 		// sort all deadline and event tasks by day
 
-		int size10 = deadlineOrEventTasksList.size();
+		int size10 = tempDeadlineOrEventTasksList.size();
 		int d, start10, min_index10 = 0;
 
 		for (start10 = 0; start10 < size10 - 1; start10++) {
 			min_index10 = start10;
 
 			for (d = start10 + 1; d < size10; d++) {
-				if (deadlineOrEventTasksList.get(d).getActualDay() < deadlineOrEventTasksList.get(min_index10)
+				if (tempDeadlineOrEventTasksList.get(d).getActualDay() < tempDeadlineOrEventTasksList.get(min_index10)
 						.getActualDay()) {
 					min_index10 = d;
 				}
 			}
 
-			Task temp11 = deadlineOrEventTasksList.get(start10);
-			Task temp12 = deadlineOrEventTasksList.get(min_index10);
-			deadlineOrEventTasksList.set(start10, temp12);
-			deadlineOrEventTasksList.set(min_index10, temp11);
+			Task temp11 = tempDeadlineOrEventTasksList.get(start10);
+			Task temp12 = tempDeadlineOrEventTasksList.get(min_index10);
+			tempDeadlineOrEventTasksList.set(start10, temp12);
+			tempDeadlineOrEventTasksList.set(min_index10, temp11);
 		}
 
 		// sort all deadline and event tasks by their month
 
-		int size13 = deadlineOrEventTasksList.size();
+		int size13 = tempDeadlineOrEventTasksList.size();
 		int e, start13, min_index13 = 0;
 
 		for (start13 = 0; start13 < size13 - 1; start13++) {
 			min_index13 = start13;
 
 			for (e = start13 + 1; e < size13; e++) {
-				if (deadlineOrEventTasksList.get(e).getActualMonth() < deadlineOrEventTasksList.get(min_index13)
+				if (tempDeadlineOrEventTasksList.get(e).getActualMonth() < tempDeadlineOrEventTasksList.get(min_index13)
 						.getActualMonth()) {
 					min_index13 = e;
 				}
 			}
 
-			Task temp14 = deadlineOrEventTasksList.get(start13);
-			Task temp15 = deadlineOrEventTasksList.get(min_index13);
-			deadlineOrEventTasksList.set(start13, temp15);
-			deadlineOrEventTasksList.set(min_index13, temp14);
+			Task temp14 = tempDeadlineOrEventTasksList.get(start13);
+			Task temp15 = tempDeadlineOrEventTasksList.get(min_index13);
+			tempDeadlineOrEventTasksList.set(start13, temp15);
+			tempDeadlineOrEventTasksList.set(min_index13, temp14);
 		}
 
 		// sort all deadline and event tasks by their year
 
-		int size16 = deadlineOrEventTasksList.size();
+		int size16 = tempDeadlineOrEventTasksList.size();
 		int f, start16, min_index16 = 0;
 
 		for (start16 = 0; start16 < size16 - 1; start16++) {
 			min_index16 = start16;
 
 			for (f = start16 + 1; f < size16; f++) {
-				if (deadlineOrEventTasksList.get(f).getActualYear() < deadlineOrEventTasksList.get(min_index16)
+				if (tempDeadlineOrEventTasksList.get(f).getActualYear() < tempDeadlineOrEventTasksList.get(min_index16)
 						.getActualYear()) {
 					min_index16 = f;
 				}
 			}
 
-			Task temp17 = deadlineOrEventTasksList.get(start16);
-			Task temp18 = deadlineOrEventTasksList.get(min_index16);
-			deadlineOrEventTasksList.set(start16, temp18);
-			deadlineOrEventTasksList.set(min_index16, temp17);
+			Task temp17 = tempDeadlineOrEventTasksList.get(start16);
+			Task temp18 = tempDeadlineOrEventTasksList.get(min_index16);
+			tempDeadlineOrEventTasksList.set(start16, temp18);
+			tempDeadlineOrEventTasksList.set(min_index16, temp17);
+		}
+
+		ArrayList<Task> deadlineOrEventTasksList = new ArrayList<Task>();
+
+		if (!tempDeadlineOrEventTasksList.isEmpty()) {
+			ArrayList<Task> subTaskList = new ArrayList<Task>();
+
+			String date = tempDeadlineOrEventTasksList.get(0).getDate();
+
+			for (int t = 0; t < tempDeadlineOrEventTasksList.size(); t++) {
+				if (tempDeadlineOrEventTasksList.get(t).getDate().equalsIgnoreCase(date)) {
+					subTaskList.add(tempDeadlineOrEventTasksList.get(t));
+				} else {
+					// sort subTaskList
+					int size46 = subTaskList.size();
+					int aa, start46, min_index46 = 0;
+
+					for (start46 = 0; start46 < size46 - 1; start46++) {
+						min_index46 = start46;
+
+						for (aa = start46 + 1; aa < size46; aa++) {
+							if (subTaskList.get(aa).getDeadlineOrEventTimeValue() < subTaskList.get(min_index46)
+									.getDeadlineOrEventTimeValue()) {
+								min_index46 = aa;
+							}
+						}
+
+						Task temp47 = subTaskList.get(start46);
+						Task temp48 = subTaskList.get(min_index46);
+						subTaskList.set(start46, temp48);
+						subTaskList.set(min_index46, temp47);
+					}
+
+					for (int u = 0; u < subTaskList.size(); u++) {
+						deadlineOrEventTasksList.add(subTaskList.get(u));
+					}
+
+					subTaskList.clear();
+
+					date = tempDeadlineOrEventTasksList.get(t).getDate();
+
+					subTaskList.add(tempDeadlineOrEventTasksList.get(t));
+
+				}
+			}
+
+			if (!subTaskList.isEmpty()) {
+				int size49 = subTaskList.size();
+				int dd, start49, min_index49 = 0;
+
+				for (start49 = 0; start49 < size49 - 1; start49++) {
+					min_index49 = start49;
+
+					for (dd = start49 + 1; dd < size49; dd++) {
+						if (subTaskList.get(dd).getDeadlineOrEventTimeValue() < subTaskList.get(min_index49)
+								.getDeadlineOrEventTimeValue()) {
+							min_index49 = dd;
+						}
+					}
+
+					Task temp50 = subTaskList.get(start49);
+					Task temp51 = subTaskList.get(min_index49);
+					subTaskList.set(start49, temp51);
+					subTaskList.set(min_index49, temp50);
+				}
+
+				for (int bb = 0; bb < subTaskList.size(); bb++) {
+					deadlineOrEventTasksList.add(subTaskList.get(bb));
+				}
+
+				for (int cc = 0; cc < subTaskList.size(); cc++) {
+					subTaskList.remove(0);
+				}
+			}
+
 		}
 
 		// sort floating tasks in alphabetical order
@@ -694,13 +870,13 @@ public class SortAndShow {
 		reader = new BufferedReader(new FileReader(filename));
 		String currentLine = null;
 
-		ArrayList<Task> showEventTasks = new ArrayList<Task>();
+		ArrayList<Task> eventTasksList = new ArrayList<Task>();
 
 		do {
 			currentLine = reader.readLine();
 			if (currentLine != null) {
 				if (Checker.isEventTaskInput(currentLine) || Checker.isDoneEventTaskInput(currentLine)) {
-					showEventTasks.add(new Task(currentLine));
+					eventTasksList.add(new Task(currentLine));
 				}
 			}
 		} while (currentLine != null);
@@ -709,50 +885,10 @@ public class SortAndShow {
 			reader.close();
 		}
 
-		SortAndShow.sortAllTasksByDateAndStartingTime(showEventTasks);
+		SortAndShow.sortAllTasksByDateAndStartingTime(eventTasksList);
 
-		String tempDate = new String("");
+		SortAndShow.readAndDisplayArrayListTasks(eventTasksList, flexWindow);
 
-		if (!showEventTasks.isEmpty()) {
-			flexWindow.getTextArea()
-					.append("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
-							+ "\n");
-			flexWindow.getTextArea().append("\n");
-			tempDate = showEventTasks.get(0).getDate();
-			flexWindow.getTextArea().append("Date: " + tempDate + "\n");
-			flexWindow.getTextArea().append("\n");
-		}
-
-		for (int j = 0; j < showEventTasks.size(); j++) {
-			if (showEventTasks.get(j).getDate().equalsIgnoreCase(tempDate)) {
-				flexWindow.getTextArea().append(showEventTasks.get(j).getDisplayString() + "\n");
-				flexWindow.getTextArea().append("\n");
-			} else {
-				flexWindow.getTextArea()
-						.append("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
-								+ "\n");
-				flexWindow.getTextArea().append("\n");
-
-				tempDate = showEventTasks.get(j).getDate();
-
-				flexWindow.getTextArea().append("Date: " + tempDate + "\n");
-				flexWindow.getTextArea().append("\n");
-
-				flexWindow.getTextArea().append(showEventTasks.get(j).getDisplayString() + "\n");
-				flexWindow.getTextArea().append("\n");
-			}
-		}
-
-		flexWindow.getTextArea()
-				.append("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
-						+ "\n");
-		flexWindow.getTextArea().append("\n");
-
-		logger.finest(ALL_TASKS_DISPLAYED_MESSAGE);
-		System.out.println(ALL_TASKS_DISPLAYED_MESSAGE);
-		System.out.println();
-
-		flexWindow.getTextArea().append("\n");
 	}
 
 	// shows deadline tasks in the schedule
@@ -779,48 +915,7 @@ public class SortAndShow {
 
 		SortAndShow.sortAllTasksByDateAndStartingTime(deadlineTasksList);
 
-		String tempDate = new String("");
-
-		if (!deadlineTasksList.isEmpty()) {
-			flexWindow.getTextArea()
-					.append("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
-							+ "\n");
-			flexWindow.getTextArea().append("\n");
-			tempDate = deadlineTasksList.get(0).getDate();
-			flexWindow.getTextArea().append("Date: " + tempDate + "\n");
-			flexWindow.getTextArea().append("\n");
-		}
-
-		for (int j = 0; j < deadlineTasksList.size(); j++) {
-			if (deadlineTasksList.get(j).getDate().equalsIgnoreCase(tempDate)) {
-				flexWindow.getTextArea().append(deadlineTasksList.get(j).getDisplayString() + "\n");
-				flexWindow.getTextArea().append("\n");
-			} else {
-				flexWindow.getTextArea()
-						.append("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
-								+ "\n");
-				flexWindow.getTextArea().append("\n");
-
-				tempDate = deadlineTasksList.get(j).getDate();
-
-				flexWindow.getTextArea().append("Date: " + tempDate + "\n");
-				flexWindow.getTextArea().append("\n");
-
-				flexWindow.getTextArea().append(deadlineTasksList.get(j).getDisplayString() + "\n");
-				flexWindow.getTextArea().append("\n");
-			}
-		}
-
-		flexWindow.getTextArea()
-				.append("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
-						+ "\n");
-		flexWindow.getTextArea().append("\n");
-
-		logger.finest(ALL_TASKS_DISPLAYED_MESSAGE);
-		System.out.println(ALL_TASKS_DISPLAYED_MESSAGE);
-		System.out.println();
-
-		flexWindow.getTextArea().append("\n");
+		SortAndShow.readAndDisplayArrayListTasks(deadlineTasksList, flexWindow);
 
 	}
 
@@ -848,16 +943,7 @@ public class SortAndShow {
 
 		SortAndShow.sortAllTasksByDateAndStartingTime(recurringTasksList);
 
-		for (int k = 0; k < recurringTasksList.size(); k++) {
-			flexWindow.getTextArea().append(recurringTasksList.get(k).getDisplayString() + "\n");
-			flexWindow.getTextArea().append("\n");
-		}
-
-		logger.finest(ALL_TASKS_DISPLAYED_MESSAGE);
-		System.out.println(ALL_TASKS_DISPLAYED_MESSAGE);
-		System.out.println();
-
-		flexWindow.getTextArea().append("\n");
+		readAndDisplayArrayListTasks(recurringTasksList, flexWindow);
 
 	}
 
@@ -885,16 +971,7 @@ public class SortAndShow {
 
 		SortAndShow.sortAllTasksByDateAndStartingTime(floatingTasksList);
 
-		for (int k = 0; k < floatingTasksList.size(); k++) {
-			flexWindow.getTextArea().append(floatingTasksList.get(k).getDisplayString() + "\n");
-			flexWindow.getTextArea().append("\n");
-		}
-
-		logger.finest(ALL_TASKS_DISPLAYED_MESSAGE);
-		System.out.println(ALL_TASKS_DISPLAYED_MESSAGE);
-		System.out.println();
-
-		flexWindow.getTextArea().append("\n");
+		SortAndShow.readAndDisplayArrayListTasks(floatingTasksList, flexWindow);
 
 	}
 
@@ -905,7 +982,6 @@ public class SortAndShow {
 		reader = new BufferedReader(new FileReader(filename));
 		String currentLine = null;
 
-		ArrayList<Task> doneRecurringTasksList = new ArrayList<Task>();
 		ArrayList<Task> doneFloatingTasksList = new ArrayList<Task>();
 		ArrayList<Task> doneDeadlineOrEventTasksList = new ArrayList<Task>();
 
@@ -923,98 +999,21 @@ public class SortAndShow {
 		if (reader != null) {
 			reader.close();
 		}
-		String tempDate = new String("");
 
-		if (!doneDeadlineOrEventTasksList.isEmpty()) {
-			flexWindow.getTextArea()
-					.append("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
-							+ "\n");
-			flexWindow.getTextArea().append("\n");
-			tempDate = doneDeadlineOrEventTasksList.get(0).getDate();
-			flexWindow.getTextArea().append("Date: " + tempDate + "\n");
-			flexWindow.getTextArea().append("\n");
+		ArrayList<Task> allTasksList = new ArrayList<Task>();
+
+		for (int i = 0; i < doneDeadlineOrEventTasksList.size(); i++) {
+			allTasksList.add(doneDeadlineOrEventTasksList.get(i));
 		}
 
-		int doneDeadlineOrEventTasksListCount = 0;
-
-		for (int j = 0; j < doneDeadlineOrEventTasksList.size(); j++) {
-			doneDeadlineOrEventTasksListCount += 1;
-			if (doneDeadlineOrEventTasksList.get(j).getDate().equalsIgnoreCase(tempDate)) {
-				flexWindow.getTextArea().append(doneDeadlineOrEventTasksListCount + ". "
-						+ doneDeadlineOrEventTasksList.get(j).getDisplayString() + "\n");
-				flexWindow.getTextArea().append("\n");
-			} else {
-				doneDeadlineOrEventTasksListCount = 1;
-				flexWindow.getTextArea()
-						.append("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
-								+ "\n");
-				flexWindow.getTextArea().append("\n");
-
-				tempDate = doneDeadlineOrEventTasksList.get(j).getDate();
-
-				flexWindow.getTextArea().append("Date: " + tempDate + "\n");
-				flexWindow.getTextArea().append("\n");
-
-				flexWindow.getTextArea().append(doneDeadlineOrEventTasksListCount + ". "
-						+ doneDeadlineOrEventTasksList.get(j).getDisplayString() + "\n");
-				flexWindow.getTextArea().append("\n");
-			}
-		}
-		if (!doneFloatingTasksList.isEmpty()) {
-			flexWindow.getTextArea()
-					.append("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
-							+ "\n");
-			flexWindow.getTextArea().append("\n");
-
-			flexWindow.getTextArea()
-					.append("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
-							+ "\n");
-			flexWindow.getTextArea().append("\n");
-
-			// floating header "Floating"
-
-			flexWindow.getTextArea().append("Floating" + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			int floatingTasksListCount = 0;
-			for (int k = 0; k < doneFloatingTasksList.size(); k++) {
-				floatingTasksListCount += 1;
-				flexWindow.getTextArea()
-						.append(floatingTasksListCount + ". " + doneFloatingTasksList.get(k).getDisplayString() + "\n");
-				flexWindow.getTextArea().append("\n");
-			}
+		for (int j = 0; j < doneFloatingTasksList.size(); j++) {
+			allTasksList.add(doneFloatingTasksList.get(j));
 		}
 
-		if (!doneRecurringTasksList.isEmpty()) {
-			flexWindow.getTextArea()
-					.append("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
-							+ "\n");
-			flexWindow.getTextArea().append("\n");
+		SortAndShow.sortAllTasksByDateAndStartingTime(allTasksList);
 
-			flexWindow.getTextArea()
-					.append("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
-							+ "\n");
-			flexWindow.getTextArea().append("\n");
+		SortAndShow.readAndDisplayArrayListTasks(allTasksList, flexWindow);
 
-			// recurring task header "Recurring"
-
-			flexWindow.getTextArea().append("Recurring" + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			int recurringTasksListCount = 0;
-
-			for (int l = 0; l < doneRecurringTasksList.size(); l++) {
-				recurringTasksListCount += 1;
-				flexWindow.getTextArea().append(
-						recurringTasksListCount + ". " + doneRecurringTasksList.get(l).getDisplayString() + "\n");
-				flexWindow.getTextArea().append("\n");
-			}
-		}
-		logger.finest(ALL_TASKS_DISPLAYED_MESSAGE);
-		System.out.println(ALL_TASKS_DISPLAYED_MESSAGE);
-		System.out.println();
-
-		flexWindow.getTextArea().append("\n");
 	}
 
 	// show tasks which are not marked as done by the user
@@ -1045,101 +1044,23 @@ public class SortAndShow {
 			reader.close();
 		}
 
-		SortAndShow.sortAllTasksByDateAndStartingTime(deadlineOrEventTasksList);
+		ArrayList<Task> allTasksList = new ArrayList<Task>();
 
-		String tempDate = new String("");
-
-		if (!deadlineOrEventTasksList.isEmpty()) {
-			flexWindow.getTextArea()
-					.append("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
-							+ "\n");
-			flexWindow.getTextArea().append("\n");
-			tempDate = deadlineOrEventTasksList.get(0).getDate();
-			flexWindow.getTextArea().append("Date: " + tempDate + "\n");
-			flexWindow.getTextArea().append("\n");
+		for (int i = 0; i < deadlineOrEventTasksList.size(); i++) {
+			allTasksList.add(deadlineOrEventTasksList.get(i));
 		}
 
-		int deadlineOrEventTasksListCount = 0;
-
-		for (int j = 0; j < deadlineOrEventTasksList.size(); j++) {
-			deadlineOrEventTasksListCount += 1;
-			if (deadlineOrEventTasksList.get(j).getDate().equalsIgnoreCase(tempDate)) {
-				flexWindow.getTextArea().append(deadlineOrEventTasksListCount + ". "
-						+ deadlineOrEventTasksList.get(j).getDisplayString() + "\n");
-				flexWindow.getTextArea().append("\n");
-			} else {
-				deadlineOrEventTasksListCount = 1;
-				flexWindow.getTextArea()
-						.append("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
-								+ "\n");
-				flexWindow.getTextArea().append("\n");
-
-				tempDate = deadlineOrEventTasksList.get(j).getDate();
-
-				flexWindow.getTextArea().append("Date: " + tempDate + "\n");
-				flexWindow.getTextArea().append("\n");
-
-				flexWindow.getTextArea().append(deadlineOrEventTasksListCount + ". "
-						+ deadlineOrEventTasksList.get(j).getDisplayString() + "\n");
-				flexWindow.getTextArea().append("\n");
-			}
+		for (int j = 0; j < floatingTasksList.size(); j++) {
+			allTasksList.add(floatingTasksList.get(j));
 		}
 
-		if (!floatingTasksList.isEmpty()) {
-
-			flexWindow.getTextArea()
-					.append("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
-							+ "\n");
-			flexWindow.getTextArea().append("\n");
-
-			flexWindow.getTextArea()
-					.append("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
-							+ "\n");
-			flexWindow.getTextArea().append("\n");
-
-			// floating header "Floating"
-			flexWindow.getTextArea().append("Floating" + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			int floatingTasksListCount = 0;
-			for (int k = 0; k < floatingTasksList.size(); k++) {
-				floatingTasksListCount += 1;
-				flexWindow.getTextArea()
-						.append(floatingTasksListCount + ". " + floatingTasksList.get(k).getDisplayString() + "\n");
-				flexWindow.getTextArea().append("\n");
-			}
+		for (int k = 0; k < recurringTasksList.size(); k++) {
+			allTasksList.add(recurringTasksList.get(k));
 		}
 
-		if (!recurringTasksList.isEmpty()) {
-			flexWindow.getTextArea()
-					.append("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
-							+ "\n");
-			flexWindow.getTextArea().append("\n");
+		SortAndShow.sortAllTasksByDateAndStartingTime(allTasksList);
 
-			flexWindow.getTextArea()
-					.append("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
-							+ "\n");
-			flexWindow.getTextArea().append("\n");
-
-			// recurring task header "Recurring"
-			flexWindow.getTextArea().append("Recurring" + "\n");
-			flexWindow.getTextArea().append("\n");
-
-			int recurringTasksListCount = 0;
-
-			for (int l = 0; l < recurringTasksList.size(); l++) {
-				recurringTasksListCount += 1;
-				flexWindow.getTextArea()
-						.append(recurringTasksListCount + ". " + recurringTasksList.get(l).getDisplayString() + "\n");
-				flexWindow.getTextArea().append("\n");
-			}
-		}
-		logger.finest(ALL_TASKS_DISPLAYED_MESSAGE);
-		System.out.println(ALL_TASKS_DISPLAYED_MESSAGE);
-		System.out.println();
-
-		flexWindow.getTextArea().append("\n");
+		SortAndShow.readAndDisplayArrayListTasks(allTasksList, flexWindow);
 
 	}
-
 }

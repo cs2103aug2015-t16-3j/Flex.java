@@ -18,7 +18,7 @@ public class Task {
 	// GUI display window "Flex")
 	private String[] taskVariables = new String[9];
 	// this is used for sorting the tasks in the schedule file
-	private double comparisonValue = 0.0;
+	private int deadlineOrEventTimeValue = -3;
 
 	private double recurringTaskValue = 0.0;
 
@@ -29,6 +29,9 @@ public class Task {
 	private int actualYear = -3;
 
 	private static final String DONE_STRING = "[done]";
+	private static final int DAY_HOURS = 24;
+	private static final int HOUR_MINUTES = 60;
+	private static final int EVENT_TASK_STARTING_TIME_OFFSET_VALUE = DAY_HOURS * HOUR_MINUTES;
 
 	// format of the different types of tasks
 
@@ -40,9 +43,6 @@ public class Task {
 
 	// normal task:
 	// "task, date, starting time, ending time, priority"
-
-	private static final int DAY_HOURS = 24;
-	private static final int HOUR_MINUTES = 60;
 
 	public Task(String taskInformation) {
 		String string = new String("");
@@ -362,7 +362,8 @@ public class Task {
 			int startingTimeMinutes = Integer.valueOf(this.taskVariables[3].substring(2).trim());
 
 			this.eventStartingTime = startingTimeHours * HOUR_MINUTES + startingTimeMinutes;
-
+			this.deadlineOrEventTimeValue = EVENT_TASK_STARTING_TIME_OFFSET_VALUE + startingTimeHours * HOUR_MINUTES
+					+ startingTimeMinutes;
 			this.actualDay = day;
 			this.actualMonth = month;
 			this.actualYear = year;
@@ -390,6 +391,8 @@ public class Task {
 			// 59 minutes
 			int startingTimeMinutes = Integer.valueOf(this.taskVariables[3].substring(2).trim());
 
+			this.deadlineOrEventTimeValue = EVENT_TASK_STARTING_TIME_OFFSET_VALUE + startingTimeHours * HOUR_MINUTES
+					+ startingTimeMinutes;
 			this.eventStartingTime = startingTimeHours * HOUR_MINUTES + startingTimeMinutes;
 			this.actualDay = day;
 			this.actualMonth = month;
@@ -417,8 +420,8 @@ public class Task {
 			int endingTimeTotal = Integer.valueOf(this.taskVariables[4].substring(0, 2)) * HOUR_MINUTES
 					+ Integer.valueOf(this.taskVariables[4].substring(2, 4));
 
+			this.deadlineOrEventTimeValue = endingTimeTotal;
 			this.deadlineEndingTime = endingTimeTotal;
-
 			this.actualDay = day;
 			this.actualMonth = month;
 			this.actualYear = year;
@@ -444,8 +447,8 @@ public class Task {
 			int endingTimeTotal = Integer.valueOf(this.taskVariables[4].substring(0, 2)) * HOUR_MINUTES
 					+ Integer.valueOf(this.taskVariables[4].substring(2, 4));
 
+			this.deadlineOrEventTimeValue = endingTimeTotal;
 			this.deadlineEndingTime = endingTimeTotal;
-
 			this.actualDay = day;
 			this.actualMonth = month;
 			this.actualYear = year;
@@ -508,9 +511,9 @@ public class Task {
 		return this.recurringTaskValue;
 	}
 
-	// retrieves the comparisonValue for sorting tasks by date and starting time
-	public double getComparisonValue() {
-		return this.comparisonValue;
+	// retrieves the deadlineOrEventTimeValue
+	public int getDeadlineOrEventTimeValue() {
+		return this.deadlineOrEventTimeValue;
 	}
 
 	// retrieves the task
