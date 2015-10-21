@@ -376,10 +376,6 @@ public class SortAndShow {
 			reader.close();
 		}
 
-		SortAndShow.sortAllTasksByDateAndStartingTime(deadlineOrEventTasksList);
-		SortAndShow.sortAllTasksByDateAndStartingTime(floatingTasksList);
-		SortAndShow.sortAllTasksByDateAndStartingTime(recurringTasksList);
-
 		String tempDate = new String("");
 
 		if (!deadlineOrEventTasksList.isEmpty()) {
@@ -675,7 +671,9 @@ public class SortAndShow {
 			}
 		}
 
-		allTasksList = tempTasksList;
+	    for(int z=0; z<tempTasksList.size(); z++){
+	    	allTasksList.set(z, tempTasksList.get(z));
+	    }
 	}
 
 	// shows event tasks in the schedule

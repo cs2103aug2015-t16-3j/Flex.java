@@ -1,6 +1,6 @@
 task; by 0001 on 1/1/1 [done]
-task; by 0001 on 1/1/1
 task; by 0001 on 1/1/1 [done]
+task; by 0001 on 1/1/1
 task; by 0006 on 1/1/1
 task; by 0008 on 1/1/1
 task; by 0009 on 1/1/1
@@ -8,12 +8,11 @@ task; by 0010 on 1/1/1
 task; by 0011 on 1/1/1
 task; by 0012 on 1/1/1
 testttttt; 0000-0002 on 3/2/1; prior
-task; by 0002 on 1/1/2
 task; by 0003 on 1/1/2
 task; by 0004 on 1/1/2
 task; by 0005 on 1/1/2
-task; by 0001 on 1/1/2
 task; by 0000 on 1/1/2
+task; by 0001 on 1/1/2
 task; by 0001 on 1/1/2
 task; by 0101 on 1/1/2
 task; by 1001 on 1/1/2
@@ -28,13 +27,14 @@ testttttt; 1000-1001 on 1/1/2; prior
 testttttt; 1000-1001 on 1/1/2; prior
 testttttt; 1245-1549 on 1/1/2; prior
 testttttt; 1500-1501 on 1/1/2; prior
+task; by 0002 on 1/1/2
 task; by 2358 on 1/2/3
 tasking; by 0020 on 5/5/5
+task; by 0001 on 9/9/9
+task; by 0001 on 9/9/9 [done]
 task; by 0001 on 9/9/9 [done]
 task; by 0001 on 9/9/9 [done]
 task; by 0001 on 9/9/9
-task; by 0001 on 9/9/9
-task; by 0001 on 9/9/9 [done]
 task; by 0001 on 9/9/9 [done]
 task; by 0001 on 9/9/10
 task; by 0001 on 9/9/10
@@ -48,6 +48,7 @@ task; by 0002 on 11/11/11 [done]
 task; by 0002 on 11/11/11 [done]
 task; by 0001 on 9/9/12
 task; by 0001 on 9/9/12
+task; by 0000 on 1/2/15
 task; by 0002 on 1/1/500
 task; by 0002 on 1/1/1000
 task; by 0002 on 1/1/1500
@@ -61,15 +62,15 @@ task; by 0002 on 1/1/4200
 task; by 0002 on 1/1/4200
 task; by 0002 on 1/1/4200
 task; by 0002 on 1/1/4500
-task; by 0002 on 1/1/5000
 task; by 0003 on 1/1/5000 [done]
+task; by 0002 on 1/1/5000
 task; by 0003 on 1/1/5000 [done]
 task; by 0003 on 1/1/5000 [done]
 task; by 0003 on 1/1/5000 [done]
 testttttt; 2359-2359 on 31/12/5447; prior [done]
 testttttt; 2359-2359 on 31/12/5447; prior
-ewr3f3f; by 0001 on 1/1/5448
 rfewe; 0000-0000 on 1/1/5448; p
+ewr3f3f; by 0001 on 1/1/5448
 testttttt; 2359-2359 on 31/12/5448; prior
 testttttt; 2359-2359 on 31/12/5449; prior
 task; by 0002 on 1/1/5500
@@ -81,8 +82,8 @@ task; by 0002 on 1/1/7100
 task; by 0002 on 1/1/7200
 task; by 0002 on 1/1/10000
 testttttt; 2359-2359 on 31/12/21247; prior
-task; by 0003 on 1/1/31343 [done]
 task; by 0003 on 1/1/31343
+task; by 0003 on 1/1/31343 [done]
 testttttt; 2359-2359 on 31/12/53437; prior
 3ew [done]
 fine [done]
@@ -91,12 +92,15 @@ modular
 module
 node
 raw
+t
 testttttt, 0000-0002 on 1/1/1, prior
 testttttt, 0000-0002 on 1/1/1, prior
 testttttt, 0000-0002 on 1/1/1, prior
 that
 thunder
 tree
+w
+w
 w
 water
 task; 1000-1001 every monday
@@ -111,5 +115,3 @@ task; 0000-2221 every friday
 task; 0000-0001 every friday
 task; 0000-0001 every saturday
 task; 0001-0002 every sunday
-w
-w
