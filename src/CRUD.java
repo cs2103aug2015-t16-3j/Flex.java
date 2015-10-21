@@ -1067,8 +1067,6 @@ public class CRUD {
 			// For Editing A Recurring Task
 			// change rec <number> to every <newday>
 			// change rec <number> time to <newstart>-<newend>
-			// change rec <number> done
-			// change rec <number> not done
 			// change rec <number> taskname to <newtaskname>
 
 			int whitespaceIndex2 = tempString.indexOf(" ");
