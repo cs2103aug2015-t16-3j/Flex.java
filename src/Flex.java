@@ -206,8 +206,7 @@ public class Flex {
 						|| Checker.isDoneDeadlineTaskInput(remainingCommandString)
 						|| Checker.isEventTaskInput(remainingCommandString)
 						|| Checker.isDoneEventTaskInput(remainingCommandString)
-						|| Checker.isRecurringTaskInput(remainingCommandString))
-						|| Checker.isDoneRecurringTaskInput(remainingCommandString);
+						|| Checker.isRecurringTaskInput(remainingCommandString));
 
 				// Only if the task is a floating task, a deadline task, or a
 				// normal task, then it will be attempted to be added to the

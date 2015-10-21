@@ -61,8 +61,7 @@ public class CRUD {
 			} else if (Checker.isFloatingTaskInput(allTasksList.get(j).getScheduleString())
 					|| Checker.isDoneFloatingTaskInput(allTasksList.get(j).getScheduleString())) {
 				floatingTasksList.add(allTasksList.get(j));
-			} else if (Checker.isRecurringTaskInput(allTasksList.get(j).getScheduleString())
-					|| Checker.isDoneRecurringTaskInput(allTasksList.get(j).getScheduleString())) {
+			} else if (Checker.isRecurringTaskInput(allTasksList.get(j).getScheduleString())) {
 				recurringTasksList.add(allTasksList.get(j));
 			}
 		}
@@ -414,8 +413,7 @@ public class CRUD {
 			} else if (Checker.isFloatingTaskInput(allTasksList.get(j).getScheduleString())
 					|| Checker.isDoneFloatingTaskInput(allTasksList.get(j).getScheduleString())) {
 				floatingTasksList.add(allTasksList.get(j));
-			} else if (Checker.isRecurringTaskInput(allTasksList.get(j).getScheduleString())
-					|| Checker.isDoneRecurringTaskInput(allTasksList.get(j).getScheduleString())) {
+			} else if (Checker.isRecurringTaskInput(allTasksList.get(j).getScheduleString())) {
 				recurringTasksList.add(allTasksList.get(j));
 			}
 		}
@@ -543,7 +541,6 @@ public class CRUD {
 			int notWhitespaceDoneIndex2 = tempString.indexOf("not done");
 			int doneIndex2 = tempString.indexOf("done");
 			int dateWhitespaceToIndex2 = tempString.indexOf("date to");
-			int priorityWhitespaceToIndex2 = tempString.indexOf("priority to");
 			int timeWhitespaceToIndex2 = tempString.indexOf("time to");
 			int endWhitespaceByIndex2 = tempString.indexOf("end by");
 			int byIndex2 = tempString.indexOf("by");
@@ -667,42 +664,6 @@ public class CRUD {
 						.getScheduleString();
 
 				allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1).setDate(newDate);
-
-				lastAction.setPreviousAction("change");
-				lastAction.setPreviousChangedScheduleString(taskBeforeChange);
-				lastAction.setPreviousTask(new Task(
-						allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1).getScheduleString()));
-
-			} else if (priorityWhitespaceToIndex2 == 0) {
-				tempString = tempString.substring(priorityWhitespaceToIndex2 + 11).trim();
-
-				if (tempString.length() == 0) {
-					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-					flexWindow.getTextArea().append("\n");
-
-					logger.finest(INVALID_INPUT_MESSAGE);
-					System.out.println(INVALID_INPUT_MESSAGE);
-					System.out.println();
-					return;
-				}
-
-				String newPriority = tempString;
-
-				String taskBeforeChange = allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1)
-						.getScheduleString();
-
-				// the task must to be changed should be an event task
-				if (!(Checker.isEventTaskInput(taskBeforeChange) || Checker.isDoneEventTaskInput(taskBeforeChange))) {
-					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-					flexWindow.getTextArea().append("\n");
-
-					logger.finest(INVALID_INPUT_MESSAGE);
-					System.out.println(INVALID_INPUT_MESSAGE);
-					System.out.println();
-					return;
-				}
-
-				allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1).setPriority(newPriority);
 
 				lastAction.setPreviousAction("change");
 				lastAction.setPreviousChangedScheduleString(taskBeforeChange);
@@ -1168,8 +1129,6 @@ public class CRUD {
 			int tasknameWhitespaceToIndex5 = tempString.indexOf("taskname to");
 			int toWhitespaceEveryWhitespaceIndex1 = tempString.indexOf("to every ");
 			int timeWhitespaceToWhitespaceIndex1 = tempString.indexOf("time to ");
-			int notWhitespaceDoneIndex1 = tempString.indexOf("not done");
-			int doneIndex1 = tempString.indexOf("done");
 
 			if (tasknameWhitespaceToIndex5 == 0) {
 				tempString = tempString.substring(tasknameWhitespaceToIndex5 + 11).trim();
@@ -1192,84 +1151,6 @@ public class CRUD {
 				allTasksList
 						.get(deadlineOrEventTasksList.size() + floatingTasksList.size() + Integer.valueOf(number1) - 1)
 						.setTaskName(newTaskName);
-
-				lastAction.setPreviousAction("change");
-				lastAction.setPreviousChangedScheduleString(taskBeforeChange);
-				lastAction.setPreviousTask(new Task(allTasksList
-						.get(deadlineOrEventTasksList.size() + floatingTasksList.size() + Integer.valueOf(number1) - 1)
-						.getScheduleString()));
-
-			} else if (notWhitespaceDoneIndex1 == 0) {
-				tempString = tempString.substring(notWhitespaceDoneIndex1 + 8).trim();
-
-				if (tempString.length() != 0) {
-					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-					flexWindow.getTextArea().append("\n");
-
-					logger.finest(INVALID_INPUT_MESSAGE);
-					System.out.println(INVALID_INPUT_MESSAGE);
-					System.out.println();
-					return;
-				}
-
-				if (allTasksList
-						.get(deadlineOrEventTasksList.size() + floatingTasksList.size() + Integer.valueOf(number1) - 1)
-						.getDone() == null) {
-					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-					flexWindow.getTextArea().append("\n");
-
-					logger.finest(INVALID_INPUT_MESSAGE);
-					System.out.println(INVALID_INPUT_MESSAGE);
-					System.out.println();
-					return;
-				}
-
-				String taskBeforeChange = allTasksList
-						.get(deadlineOrEventTasksList.size() + floatingTasksList.size() + Integer.valueOf(number1) - 1)
-						.getScheduleString();
-
-				allTasksList
-						.get(deadlineOrEventTasksList.size() + floatingTasksList.size() + Integer.valueOf(number1) - 1)
-						.setNotDone();
-
-				lastAction.setPreviousAction("change");
-				lastAction.setPreviousChangedScheduleString(taskBeforeChange);
-				lastAction.setPreviousTask(new Task(allTasksList
-						.get(deadlineOrEventTasksList.size() + floatingTasksList.size() + Integer.valueOf(number1) - 1)
-						.getScheduleString()));
-
-			} else if (doneIndex1 == 0) {
-				tempString = tempString.substring(doneIndex1 + 4).trim();
-
-				if (tempString.length() != 0) {
-					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-					flexWindow.getTextArea().append("\n");
-
-					logger.finest(INVALID_INPUT_MESSAGE);
-					System.out.println(INVALID_INPUT_MESSAGE);
-					System.out.println();
-					return;
-				}
-
-				if (allTasksList
-						.get(deadlineOrEventTasksList.size() + floatingTasksList.size() + Integer.valueOf(number1) - 1)
-						.getDone() != null) {
-					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-					flexWindow.getTextArea().append("\n");
-
-					logger.finest(INVALID_INPUT_MESSAGE);
-					System.out.println(INVALID_INPUT_MESSAGE);
-					System.out.println();
-					return;
-				}
-
-				String taskBeforeChange = allTasksList
-						.get(deadlineOrEventTasksList.size() + floatingTasksList.size() + Integer.valueOf(number1) - 1)
-						.getScheduleString();
-
-				allTasksList
-						.get(deadlineOrEventTasksList.size() + floatingTasksList.size() + Integer.valueOf(number1) - 1)
-						.setDone();
 
 				lastAction.setPreviousAction("change");
 				lastAction.setPreviousChangedScheduleString(taskBeforeChange);
@@ -1473,8 +1354,7 @@ public class CRUD {
 				|| Checker.isDoneDeadlineTaskInput(remainingCommandString1)
 				|| Checker.isEventTaskInput(remainingCommandString1)
 				|| Checker.isDoneEventTaskInput(remainingCommandString1)
-				|| Checker.isRecurringTaskInput(remainingCommandString1))
-				|| Checker.isDoneRecurringTaskInput(remainingCommandString1);
+				|| Checker.isRecurringTaskInput(remainingCommandString1));
 
 		// if the task is not valid, do not continue the process of adding a
 		// task

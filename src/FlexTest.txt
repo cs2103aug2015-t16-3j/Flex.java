@@ -1,6 +1,6 @@
+task; by 0001 on 1/1/1 [done]
+task; by 0001 on 1/1/1 [done]
 task; by 0001 on 1/1/1
-task; by 0001 on 1/1/1 [done]
-task; by 0001 on 1/1/1 [done]
 task; by 0006 on 1/1/1
 task; by 0008 on 1/1/1
 task; by 0009 on 1/1/1
@@ -31,8 +31,8 @@ task; by 0002 on 1/1/2
 task; by 2358 on 1/2/3
 tasking; by 0020 on 5/5/5
 task; by 0001 on 9/9/9
-task; by 0001 on 9/9/9
 task; by 0001 on 9/9/9 [done]
+task; by 0001 on 9/9/9
 task; by 0001 on 9/9/9 [done]
 task; by 0001 on 9/9/9 [done]
 task; by 0001 on 9/9/9 [done]
@@ -61,8 +61,8 @@ task; by 0002 on 1/1/4200
 task; by 0002 on 1/1/4200
 task; by 0002 on 1/1/4200
 task; by 0002 on 1/1/4500
-task; by 0002 on 1/1/5000
 task; by 0003 on 1/1/5000 [done]
+task; by 0002 on 1/1/5000
 task; by 0003 on 1/1/5000 [done]
 task; by 0003 on 1/1/5000 [done]
 task; by 0003 on 1/1/5000 [done]
@@ -73,8 +73,8 @@ ewr3f3f; by 0001 on 1/1/5448
 testttttt; 2359-2359 on 31/12/5448; prior
 testttttt; 2359-2359 on 31/12/5449; prior
 task; by 0002 on 1/1/5500
-task; by 0002 on 1/1/6000
 new task; by 2359 on 1/1/6000
+task; by 0002 on 1/1/6000
 task; by 0002 on 1/1/6500
 task; by 0002 on 1/1/7000
 task; by 0002 on 1/1/7100
@@ -100,15 +100,15 @@ tree
 w
 w
 water
-task; 0000-0001 every monday; prioriTy [done]
-task; 1236-1334 every monday; prioriwefewWy
-task; 2359-2359 every tuesday; priworiWy
-task; 0000-0001 every wednesday; priorfwefdwefewfiWy
-task; 0001-0002 every wednesday; prioriWy [done]
-task; 0001-0002 every wednesday; prioriWy [done]
-task; 0000-0001 every thursday; prioriWy
-task; 0000-0001 every thursday; priority
-task; 0000-0001 every friday; prioriWy
-task; 0000-2221 every friday; priority1
-task; 0000-0001 every saturday; priority1
-task; 0001-0002 every sunday; prioriWy [done]
+task; 0000-0001 every monday
+task; 1236-1334 every monday
+task; 2359-2359 every tuesday
+task; 0000-0001 every wednesday
+task; 0001-0002 every wednesday
+task; 0001-0002 every wednesday
+task; 0000-0001 every thursday
+task; 0000-0001 every thursday
+task; 0000-0001 every friday
+task; 0000-2221 every friday
+task; 0000-0001 every saturday
+task; 0001-0002 every sunday

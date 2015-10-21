@@ -98,7 +98,19 @@ public class FlexTest4 {
 		assertTrue(!Checker.isDoneFloatingTaskOutput("task [don], a"));
 
 		// recurring task input
-		assertTrue(Checker.isRecurringTaskInput("task; 1258-1259 every monday; priority priority1"));
+		assertTrue(Checker.isRecurringTaskInput("task; 1258-1259 every monday"));
+
+		assertTrue(Checker.isRecurringTaskInput("task; 1258-1259 every monday "));
+
+		assertTrue(!Checker.isRecurringTaskInput("task; 1258-1259 every monday a"));
+
+		assertTrue(!Checker.isRecurringTaskInput("task; 1258-1259 every monday1"));
+
+		assertTrue(!Checker.isRecurringTaskInput("task; 1258-1259 every monday ; "));
+
+		assertTrue(!Checker.isRecurringTaskInput("task; 1258-1259 every monday,"));
+
+		assertTrue(!Checker.isRecurringTaskInput("task; 1258-1259 every mondayds"));
 
 		assertTrue(!Checker.isRecurringTaskInput("task; 1358-1259 every monday; priority priority1"));
 
@@ -111,7 +123,17 @@ public class FlexTest4 {
 		assertTrue(!Checker.isRecurringTaskInput("task; 1258 1259 every monday; priority priority1"));
 
 		// recurring task output
-		assertTrue(Checker.isRecurringTaskOutput("task name, 0002-0003 every tuesday, priority"));
+		assertTrue(Checker.isRecurringTaskOutput("task name, 0002-0003 every tuesday"));
+
+		assertTrue(Checker.isRecurringTaskOutput("task name, 0002-0003 every tuesday"));
+
+		assertTrue(!Checker.isRecurringTaskOutput("task name, 0002-0003 every tuesday ,"));
+
+		assertTrue(!Checker.isRecurringTaskOutput("task name, 0002-0003 every tuesday;"));
+
+		assertTrue(!Checker.isRecurringTaskOutput("task name, 0002-0003 every tuesday a"));
+
+		assertTrue(!Checker.isRecurringTaskOutput("task name, 0002-0003 every tuesday1"));
 
 		assertTrue(!Checker.isRecurringTaskOutput("task name, 0102-0003 every tuesday, priority"));
 
@@ -122,44 +144,6 @@ public class FlexTest4 {
 		assertTrue(!Checker.isRecurringTaskOutput("task name, 0002-0003 every tuesday, priority done]"));
 
 		assertTrue(!Checker.isRecurringTaskOutput("task name, 0002-0003 evry tuesday, priority"));
-
-		// done recurring task input (user input command or file storage)
-		assertTrue(Checker.isDoneRecurringTaskInput("tasker; 0001-2359 every wednesday; priority [done]"));
-
-		assertTrue(!Checker.isDoneRecurringTaskInput("tasker; 2359-2358 every wednesday; priority [done]"));
-
-		assertTrue(!Checker.isDoneRecurringTaskInput("tasker; 0001-2359 every wednesday; priority[done]"));
-
-		assertTrue(!Checker.isDoneRecurringTaskInput("tasker; 0001-2359 every wednesday; priority [done"));
-
-		assertTrue(!Checker.isDoneRecurringTaskInput("tasker; 0001-2359 every wednesday; priority done]"));
-
-		assertTrue(!Checker.isDoneRecurringTaskInput("tasker; 0001-2359 every wednesday; priority [done]w"));
-
-		assertTrue(!Checker.isDoneRecurringTaskInput("tasker; 0001-2359 every wednesday, priority"));
-
-		// done recurring task output(GUI display)
-		assertTrue(Checker.isDoneRecurringTaskOutput("tasker, 0001-2359 every wednesday, priority [done]"));
-
-		assertTrue(Checker.isDoneRecurringTaskOutput("tasker, 0001-0001 every wednesday, priority [done]"));
-
-		assertTrue(Checker.isDoneRecurringTaskOutput("tasker, 2359-2359 every wednesday, priority [done]"));
-
-		assertTrue(!Checker.isDoneRecurringTaskOutput("tasker, 2359-0001 every wednesday, priority [done]"));
-
-		assertTrue(!Checker.isDoneRecurringTaskOutput("tasker, 2359-2301 every wednesday, priority [done]"));
-
-		assertTrue(!Checker.isDoneRecurringTaskOutput("tasker, 2300-2201 every wednesday, priority [done]"));
-
-		assertTrue(!Checker.isDoneRecurringTaskOutput("tasker, 0001-2359 every wednesday, priority[done]"));
-
-		assertTrue(!Checker.isDoneRecurringTaskOutput("tasker, 0001-2359 every wednesday, priority [done"));
-
-		assertTrue(!Checker.isDoneRecurringTaskOutput("tasker, 0001-2359 every wednesday, priority done]"));
-
-		assertTrue(!Checker.isDoneRecurringTaskOutput("tasker, 0001-2359 every wednesday, priority [done]x"));
-
-		assertTrue(!Checker.isDoneRecurringTaskOutput("tasker; 0001-2359 every wednesday; priority"));
 
 	}
 

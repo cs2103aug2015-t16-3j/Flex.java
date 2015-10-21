@@ -88,8 +88,7 @@ public class SortAndShow {
 				}
 
 				// a recurring task will also have a task name
-				if (Checker.isRecurringTaskInput(allTasksList.get(i).getScheduleString())
-						|| Checker.isDoneRecurringTaskInput(allTasksList.get(i).getScheduleString())) {
+				if (Checker.isRecurringTaskInput(allTasksList.get(i).getScheduleString())) {
 					if (allTasksList.get(i).getTaskName().indexOf(searchTerm) >= 0) {
 						recurringTasksList.add(allTasksList.get(i));
 					}
@@ -148,8 +147,7 @@ public class SortAndShow {
 			for (int i = 0; i < allTasksList.size(); i++) {
 				// only a recurring task
 				// will have a day e.g. monday
-				if (Checker.isRecurringTaskInput(allTasksList.get(i).getScheduleString())
-						|| Checker.isDoneRecurringTaskInput(allTasksList.get(i).getScheduleString())) {
+				if (Checker.isRecurringTaskInput(allTasksList.get(i).getScheduleString())) {
 					if (allTasksList.get(i).getDay().equalsIgnoreCase(searchTerm)) {
 						recurringTasksList.add(allTasksList.get(i));
 					}
@@ -182,8 +180,7 @@ public class SortAndShow {
 				}
 
 				// a recurring task will also have a starting time
-				if (Checker.isRecurringTaskInput(allTasksList.get(i).getScheduleString())
-						|| Checker.isDoneRecurringTaskInput(allTasksList.get(i).getScheduleString())) {
+				if (Checker.isRecurringTaskInput(allTasksList.get(i).getScheduleString())) {
 					if (allTasksList.get(i).getStart().equalsIgnoreCase(searchTerm)) {
 						recurringTasksList.add(allTasksList.get(i));
 					}
@@ -217,8 +214,7 @@ public class SortAndShow {
 				}
 
 				// recurring tasks also have an ending time
-				if (Checker.isRecurringTaskInput(allTasksList.get(i).getScheduleString())
-						|| Checker.isDoneRecurringTaskInput(allTasksList.get(i).getScheduleString())) {
+				if (Checker.isRecurringTaskInput(allTasksList.get(i).getScheduleString())) {
 					if (allTasksList.get(i).getEnd().equalsIgnoreCase(searchTerm)) {
 						recurringTasksList.add(allTasksList.get(i));
 					}
@@ -240,8 +236,7 @@ public class SortAndShow {
 				}
 
 				// recurring tasks also have a priority (level)
-				if (Checker.isRecurringTaskInput(allTasksList.get(i).getScheduleString())
-						|| Checker.isDoneRecurringTaskInput(allTasksList.get(i).getScheduleString())) {
+				if (Checker.isRecurringTaskInput(allTasksList.get(i).getScheduleString())) {
 					if (allTasksList.get(i).getPriority().toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0) {
 						recurringTasksList.add(allTasksList.get(i));
 					}
@@ -371,7 +366,7 @@ public class SortAndShow {
 					deadlineOrEventTasksList.add(new Task(currentLine));
 				} else if (Checker.isFloatingTaskInput(currentLine) || Checker.isDoneFloatingTaskInput(currentLine)) {
 					floatingTasksList.add(new Task(currentLine));
-				} else if (Checker.isRecurringTaskInput(currentLine) || Checker.isDoneRecurringTaskInput(currentLine)) {
+				} else if (Checker.isRecurringTaskInput(currentLine)) {
 					recurringTasksList.add(new Task(currentLine));
 				}
 			}
@@ -481,83 +476,77 @@ public class SortAndShow {
 	// used to sort tasks by starting date and starting time
 	static void sortAllTasksByDateAndStartingTime(ArrayList<Task> allTasksList) {
 
-		ArrayList<Task> deadlineOrEventTasksList = new ArrayList<Task>();
+		ArrayList<Task> deadlineTasksList = new ArrayList<Task>();
+		ArrayList<Task> eventTasksList = new ArrayList<Task>();
+
 		ArrayList<Task> floatingTasksList = new ArrayList<Task>();
 		ArrayList<Task> recurringTasksList = new ArrayList<Task>();
 
 		for (int j = 0; j < allTasksList.size(); j++) {
 			if (Checker.isDeadlineTaskInput(allTasksList.get(j).getScheduleString())
-					|| Checker.isDoneDeadlineTaskInput(allTasksList.get(j).getScheduleString())
-					|| Checker.isEventTaskInput(allTasksList.get(j).getScheduleString())
+					|| Checker.isDoneDeadlineTaskInput(allTasksList.get(j).getScheduleString())) {
+				deadlineTasksList.add(allTasksList.get(j));
+			} else if (Checker.isEventTaskInput(allTasksList.get(j).getScheduleString())
 					|| Checker.isDoneEventTaskInput(allTasksList.get(j).getScheduleString())) {
-				deadlineOrEventTasksList.add(allTasksList.get(j));
+				eventTasksList.add(allTasksList.get(j));
 			} else if (Checker.isFloatingTaskInput(allTasksList.get(j).getScheduleString())
 					|| Checker.isDoneFloatingTaskInput(allTasksList.get(j).getScheduleString())) {
 				floatingTasksList.add(allTasksList.get(j));
-			} else if (Checker.isRecurringTaskInput(allTasksList.get(j).getScheduleString())
-					|| Checker.isDoneRecurringTaskInput(allTasksList.get(j).getScheduleString())) {
+			} else if (Checker.isRecurringTaskInput(allTasksList.get(j).getScheduleString())) {
 				recurringTasksList.add(allTasksList.get(j));
 			}
 		}
 
-		// sort all deadline and event tasks by done value
-		int size1 = deadlineOrEventTasksList.size();
+		// sort deadline tasks by ending time
+		int size1 = deadlineTasksList.size();
 		int a, start1, min_index1 = 0;
 
 		for (start1 = 0; start1 < size1 - 1; start1++) {
 			min_index1 = start1;
 
 			for (a = start1 + 1; a < size1; a++) {
-				if (deadlineOrEventTasksList.get(a).getDoneValue() < deadlineOrEventTasksList.get(min_index1)
-						.getDoneValue()) {
+				if (deadlineTasksList.get(a).getDeadlineEndingTime() < deadlineTasksList.get(min_index1)
+						.getDeadlineEndingTime()) {
 					min_index1 = a;
 				}
 			}
 
-			Task temp2 = deadlineOrEventTasksList.get(start1);
-			Task temp3 = deadlineOrEventTasksList.get(min_index1);
-			deadlineOrEventTasksList.set(start1, temp3);
-			deadlineOrEventTasksList.set(min_index1, temp2);
+			Task temp2 = deadlineTasksList.get(start1);
+			Task temp3 = deadlineTasksList.get(min_index1);
+			deadlineTasksList.set(start1, temp3);
+			deadlineTasksList.set(min_index1, temp2);
 		}
 
-		// sort all deadline and event tasks by time
-		int size4 = deadlineOrEventTasksList.size();
+		// sort event tasks by starting time
+		int size4 = eventTasksList.size();
 		int b, start4, min_index4 = 0;
 
 		for (start4 = 0; start4 < size4 - 1; start4++) {
 			min_index4 = start4;
 
 			for (b = start4 + 1; b < size4; b++) {
-				if (deadlineOrEventTasksList.get(b).getTimeSortValue() < deadlineOrEventTasksList.get(min_index4)
-						.getTimeSortValue()) {
+				if (eventTasksList.get(b).getEventStartingTime() < eventTasksList.get(min_index4)
+						.getEventStartingTime()) {
 					min_index4 = b;
 				}
 			}
 
-			Task temp5 = deadlineOrEventTasksList.get(start4);
-			Task temp6 = deadlineOrEventTasksList.get(min_index4);
-			deadlineOrEventTasksList.set(start4, temp6);
-			deadlineOrEventTasksList.set(min_index4, temp5);
+			Task temp5 = eventTasksList.get(start4);
+			Task temp6 = eventTasksList.get(min_index4);
+			eventTasksList.set(start4, temp6);
+			eventTasksList.set(min_index4, temp5);
 		}
 
-		// sort all deadline and event tasks by deadline or event tasks
-		int size7 = deadlineOrEventTasksList.size();
-		int c, start7, min_index7 = 0;
+		ArrayList<Task> deadlineOrEventTasksList = new ArrayList<Task>();
 
-		for (start7 = 0; start7 < size7 - 1; start7++) {
-			min_index7 = start7;
+		// add the deadline tasks into deadlineOrEventTasksList
+		for (int r = 0; r < deadlineTasksList.size(); r++) {
+			deadlineOrEventTasksList.add(deadlineTasksList.get(r));
+		}
 
-			for (c = start7 + 1; c < size7; c++) {
-				if (deadlineOrEventTasksList.get(c).getDeadlineOrEventTaskValue() < deadlineOrEventTasksList
-						.get(min_index7).getDeadlineOrEventTaskValue()) {
-					min_index7 = c;
-				}
-			}
-
-			Task temp8 = deadlineOrEventTasksList.get(start7);
-			Task temp9 = deadlineOrEventTasksList.get(min_index7);
-			deadlineOrEventTasksList.set(start7, temp9);
-			deadlineOrEventTasksList.set(min_index7, temp8);
+		// then, add the deadline tasks into deadlineOrEventTasksList
+		for (int s = 0; s < eventTasksList.size(); s++) {
+			deadlineOrEventTasksList.add(eventTasksList.get(s));
 		}
 
 		// NOTE: Sorting by day, then month, then year, will keep the date(from
@@ -626,25 +615,6 @@ public class SortAndShow {
 			deadlineOrEventTasksList.set(min_index16, temp17);
 		}
 
-		// sort floating tasks by done value
-		int size19 = floatingTasksList.size();
-		int g, start19, min_index19 = 0;
-
-		for (start19 = 0; start19 < size19 - 1; start19++) {
-			min_index19 = start19;
-
-			for (g = start19 + 1; g < size19; g++) {
-				if (floatingTasksList.get(g).getDoneValue() < floatingTasksList.get(min_index19).getDoneValue()) {
-					min_index19 = g;
-				}
-			}
-
-			Task temp20 = floatingTasksList.get(start19);
-			Task temp21 = floatingTasksList.get(min_index19);
-			floatingTasksList.set(start19, temp21);
-			floatingTasksList.set(min_index19, temp20);
-		}
-
 		// sort floating tasks in alphabetical order
 		int size22 = floatingTasksList.size();
 		int h, start22, min_index22 = 0;
@@ -663,25 +633,6 @@ public class SortAndShow {
 			Task temp24 = floatingTasksList.get(min_index22);
 			floatingTasksList.set(start22, temp24);
 			floatingTasksList.set(min_index22, temp23);
-		}
-
-		// sort recurring tasks by done value
-		int size25 = recurringTasksList.size();
-		int l, start25, min_index25 = 0;
-
-		for (start25 = 0; start25 < size25 - 1; start25++) {
-			min_index25 = start25;
-
-			for (l = start25 + 1; l < size25; l++) {
-				if (recurringTasksList.get(l).getDoneValue() < recurringTasksList.get(min_index25).getDoneValue()) {
-					min_index25 = l;
-				}
-			}
-
-			Task temp26 = recurringTasksList.get(start25);
-			Task temp27 = recurringTasksList.get(min_index25);
-			recurringTasksList.set(start25, temp27);
-			recurringTasksList.set(min_index25, temp26);
 		}
 
 		// sort recurring tasks by day and starting time
@@ -727,6 +678,7 @@ public class SortAndShow {
 		for (int z = 0; z < allTasksList.size(); z++) {
 			allTasksList.set(z, tempTasksList.get(z));
 		}
+
 	}
 
 	// shows event tasks in the schedule
@@ -879,7 +831,7 @@ public class SortAndShow {
 		do {
 			currentLine = reader.readLine();
 			if (currentLine != null) {
-				if (Checker.isRecurringTaskInput(currentLine) || Checker.isDoneRecurringTaskInput(currentLine)) {
+				if (Checker.isRecurringTaskInput(currentLine)) {
 					recurringTasksList.add(new Task(currentLine));
 				}
 			}
@@ -959,8 +911,6 @@ public class SortAndShow {
 					doneFloatingTasksList.add(new Task(currentLine));
 				} else if (Checker.isDoneDeadlineTaskInput(currentLine) || Checker.isDoneEventTaskInput(currentLine)) {
 					doneDeadlineOrEventTasksList.add(new Task(currentLine));
-				} else if (Checker.isDoneRecurringTaskInput(currentLine)) {
-					doneRecurringTasksList.add(new Task(currentLine));
 				}
 			}
 		} while (currentLine != null);

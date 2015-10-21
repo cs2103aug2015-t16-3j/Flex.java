@@ -29,11 +29,10 @@ public class Checker {
 	static boolean isValidTime(String time) {
 
 		String tempString = new String("");
-		if(time==null){
+		if (time == null) {
 			return false;
 		}
-		
-		
+
 		tempString = time.trim();
 
 		// ENDING TIME
@@ -95,11 +94,10 @@ public class Checker {
 	// but perfectly for the month and the year
 	static boolean isValidDate(String dateString) {
 		String tempDateString = dateString;
-		if(dateString==null){
+		if (dateString == null) {
 			return false;
 		}
-		
-		
+
 		int slashIndex1 = tempDateString.indexOf("/");
 
 		// DAY IN DATE
@@ -305,11 +303,10 @@ public class Checker {
 	// format: <taskname>
 	static boolean isFloatingTaskInput(String string) {
 		String tempString = new String("");
-		if(string==null){
+		if (string == null) {
 			return false;
 		}
-		
-		
+
 		tempString = string.trim();
 
 		if (tempString.length() == 0) {
@@ -348,11 +345,10 @@ public class Checker {
 	// done floating task (user input command or file storage format)
 	static boolean isDoneFloatingTaskInput(String string) {
 		String tempString = new String("");
-		if(string==null){
+		if (string == null) {
 			return false;
 		}
-		
-		
+
 		tempString = string.trim();
 
 		int semicolonIndex = tempString.indexOf(";");
@@ -395,11 +391,10 @@ public class Checker {
 	// format: <taskname>
 	static boolean isFloatingTaskOutput(String string) {
 		String tempString = new String("");
-		if(string==null){
+		if (string == null) {
 			return false;
 		}
-		
-		
+
 		tempString = string.trim();
 
 		if (tempString.length() == 0) {
@@ -436,11 +431,10 @@ public class Checker {
 	// format: <taskname> [done]
 	static boolean isDoneFloatingTaskOutput(String string) {
 		String tempString = new String("");
-		if(string==null){
+		if (string == null) {
 			return false;
 		}
-		
-		
+
 		tempString = string.trim();
 
 		if (tempString.length() == 0) {
@@ -481,10 +475,10 @@ public class Checker {
 	// <taskname>; by <end> on <date>
 	static boolean isDeadlineTaskInput(String string) {
 		String tempString = new String("");
-		if(string==null){
+		if (string == null) {
 			return false;
 		}
-		
+
 		tempString = string.trim();
 
 		if (tempString.length() == 0) {
@@ -579,10 +573,10 @@ public class Checker {
 	// deadline task
 	static boolean isDoneDeadlineTaskInput(String string) {
 		String tempString = new String("");
-		if(string==null){
+		if (string == null) {
 			return false;
 		}
-		
+
 		tempString = string.trim();
 
 		if (tempString.length() == 0) {
@@ -617,10 +611,10 @@ public class Checker {
 	// <taskname>, by <end> on <date>
 	static boolean isDeadlineTaskOutput(String string) {
 		String tempString = new String("");
-		if(string==null){
+		if (string == null) {
 			return false;
 		}
-		
+
 		tempString = string.trim();
 
 		if (tempString.length() == 0) {
@@ -714,10 +708,10 @@ public class Checker {
 	// <taskname>, by <end> on <date> [done]
 	static boolean isDoneDeadlineTaskOutput(String string) {
 		String tempString = new String("");
-		if(string==null){
+		if (string == null) {
 			return false;
 		}
-		
+
 		tempString = string.trim();
 
 		if (tempString.length() == 0) {
@@ -753,10 +747,10 @@ public class Checker {
 	// <taskname>; <start>-<end> every <day>; priority
 	static boolean isRecurringTaskInput(String string) {
 		String tempString = new String("");
-		if(string==null){
+		if (string == null) {
 			return false;
 		}
-		
+
 		tempString = string.trim();
 
 		if (tempString.length() == 0) {
@@ -824,13 +818,13 @@ public class Checker {
 			return false;
 		}
 
-		int whitespaceEveryIndex = tempString.toLowerCase().indexOf(" every");
+		int whitespaceEveryWhitespaceIndex = tempString.toLowerCase().indexOf(" every ");
 
-		if (whitespaceEveryIndex < 0) {
+		if (whitespaceEveryWhitespaceIndex < 0) {
 			return false;
 		}
 
-		String endingTime = tempString.substring(0, whitespaceEveryIndex);
+		String endingTime = tempString.substring(0, whitespaceEveryWhitespaceIndex);
 
 		if (endingTime.length() != 4) {
 			return false;
@@ -847,19 +841,13 @@ public class Checker {
 			return false;
 		}
 
-		tempString = tempString.substring(whitespaceEveryIndex + 6).trim();
+		tempString = tempString.substring(whitespaceEveryWhitespaceIndex + 7).trim();
 
 		if (tempString.length() == 0) {
 			return false;
 		}
-
-		int semicolonWhitespaceIndex2 = tempString.indexOf("; ");
-
-		if (semicolonWhitespaceIndex2 < 0) {
-			return false;
-		}
-
-		String day = tempString.substring(0, semicolonWhitespaceIndex2).trim();
+		
+		String day = tempString.trim();
 
 		// monday, tuesday, wednesday, thursday, friday, saturday, sunday
 		if (day.length() == 0) {
@@ -870,57 +858,6 @@ public class Checker {
 			return false;
 		}
 
-		tempString = tempString.substring(semicolonWhitespaceIndex2 + 2);
-
-		if (tempString.length() == 0) {
-			return false;
-		}
-
-		String priority = tempString;
-
-		if (priority.length() == 0) {
-			return false;
-		}
-
-		return true;
-
-	}
-
-	// done recurring task (user input command or file storage format)
-	static boolean isDoneRecurringTaskInput(String string) {
-		String tempString = new String("");
-		if(string==null){
-			return false;
-		}
-		
-		tempString = string.trim();
-
-		if (tempString.length() == 0) {
-			return false;
-		}
-
-		int whitespaceDoneStringIndex = tempString.indexOf(" [done]");
-
-		if (whitespaceDoneStringIndex < 0) {
-			return false;
-		}
-
-		String afterDoneString = tempString.substring(whitespaceDoneStringIndex + 7).trim();
-
-		if (afterDoneString.length() != 0) {
-			return false;
-		}
-
-		tempString = tempString.substring(0, whitespaceDoneStringIndex).trim();
-
-		if (tempString.length() == 0) {
-			return false;
-		}
-
-		if (!Checker.isRecurringTaskInput(tempString)) {
-			return false;
-		}
-
 		return true;
 	}
 
@@ -928,10 +865,10 @@ public class Checker {
 	// <taskname>, <start>-<end> every <day>, priority
 	static boolean isRecurringTaskOutput(String string) {
 		String tempString = new String("");
-		if(string==null){
+		if (string == null) {
 			return false;
 		}
-		
+
 		tempString = string.trim();
 
 		if (tempString.length() == 0) {
@@ -999,13 +936,13 @@ public class Checker {
 			return false;
 		}
 
-		int whitespaceEveryIndex = tempString.toLowerCase().indexOf(" every");
+		int whitespaceEveryWhitespaceIndex = tempString.toLowerCase().indexOf(" every ");
 
-		if (whitespaceEveryIndex < 0) {
+		if (whitespaceEveryWhitespaceIndex < 0) {
 			return false;
 		}
 
-		String endingTime = tempString.substring(0, whitespaceEveryIndex).trim();
+		String endingTime = tempString.substring(0, whitespaceEveryWhitespaceIndex).trim();
 
 		if (endingTime.length() != 4) {
 			return false;
@@ -1022,19 +959,13 @@ public class Checker {
 			return false;
 		}
 
-		tempString = tempString.substring(whitespaceEveryIndex + 6).trim();
+		tempString = tempString.substring(whitespaceEveryWhitespaceIndex + 7).trim();
 
 		if (tempString.length() == 0) {
 			return false;
 		}
 
-		int commaWhitespaceIndex2 = tempString.indexOf(", ");
-
-		if (commaWhitespaceIndex2 < 0) {
-			return false;
-		}
-
-		String day = tempString.substring(0, commaWhitespaceIndex2).trim();
+		String day = tempString.trim();
 
 		// monday, tuesday, wednesday, thursday, friday, saturday, sunday
 		if (day.length() == 0) {
@@ -1045,57 +976,6 @@ public class Checker {
 			return false;
 		}
 
-		tempString = tempString.substring(commaWhitespaceIndex2 + 2);
-
-		if (tempString.length() == 0) {
-			return false;
-		}
-
-		String priority = tempString;
-
-		if (priority.length() == 0) {
-			return false;
-		}
-
-		return true;
-	}
-
-	// done recurring task (GUI Display) format
-	// <taskname>, <start>-<end> every <day>, priority [done]
-	static boolean isDoneRecurringTaskOutput(String string) {
-		String tempString = new String("");
-		if(string==null){
-			return false;
-		}
-		
-		tempString = string.trim();
-
-		if (tempString.length() == 0) {
-			return false;
-		}
-
-		int whitespaceDoneStringIndex = tempString.indexOf(" [done]");
-
-		if (whitespaceDoneStringIndex < 0) {
-			return false;
-		}
-
-		String afterDoneString = tempString.substring(whitespaceDoneStringIndex + 7).trim();
-
-		if (afterDoneString.length() != 0) {
-			return false;
-		}
-
-		tempString = tempString.substring(0, whitespaceDoneStringIndex).trim();
-
-		if (tempString.length() == 0) {
-			return false;
-		}
-
-		if (!Checker.isRecurringTaskOutput(tempString)) {
-			return false;
-		}
-
 		return true;
 	}
 
@@ -1103,10 +983,10 @@ public class Checker {
 	static boolean isEventTaskInput(String string) {
 
 		String tempString = new String("");
-		if(string==null){
+		if (string == null) {
 			return false;
 		}
-		
+
 		tempString = string.trim();
 
 		if (tempString.length() == 0) {
