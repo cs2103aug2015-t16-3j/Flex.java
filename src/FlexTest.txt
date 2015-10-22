@@ -8,3 +8,4 @@ Task6; by 1200 on 1/12/2015
 Go for run
 Task7; 1000-1200 every monday
 Task8; 1600-1800 every wednesday
+Task9; 2000-2200 every friday
