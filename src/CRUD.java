@@ -1341,6 +1341,7 @@ public class CRUD {
 			if (currentLine != null) {
 
 				allTasksList.add(new Task(currentLine));
+
 			}
 		} while (currentLine != null);
 
@@ -1389,7 +1390,7 @@ public class CRUD {
 			int totalEndingTime = endingTimeHours * HOUR_MINUTES + endingTimeMinutes;
 
 			for (int w = 0; w < allTasksList.size(); w++) {
-				if (Checker.isEventTaskInput(allTasksList.get(w).getScheduleString())) {
+				if (Checker.isEventTaskInput(allTasksList.get(w).getScheduleString())||Checker.isDoneEventTaskInput(allTasksList.get(w).getScheduleString())) {
 
 					int existingStartingTimeHours = Integer
 							.valueOf(allTasksList.get(w).getStart().substring(0, 2).trim());
