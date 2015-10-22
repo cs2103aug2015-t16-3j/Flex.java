@@ -1343,7 +1343,6 @@ public class SortAndShow {
 		reader = new BufferedReader(new FileReader(filename));
 		String currentLine = null;
 
-		ArrayList<Task> recurringTasksList = new ArrayList<Task>();
 		ArrayList<Task> eventTasksList = new ArrayList<Task>();
 
 		do {
