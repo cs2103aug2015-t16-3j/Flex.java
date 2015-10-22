@@ -2,10 +2,10 @@ import java.util.*;
 public class ParserSplit {
     private static final String COMMAND_ADD = "add";
     private static final String COMMAND_DELETE = "delete";
-    private static final String COMMAND_CHANGE = "change";
+    //private static final String COMMAND_CHANGE = "change";
     private static final String COMMAND_UNDO = "undo";
-    private static final String COMMAND_SHOW = "show";
-    private static final String COMMAND_DISPLAY = "display";
+    //private static final String COMMAND_SHOW = "show";
+    //private static final String COMMAND_DISPLAY = "display";
     private static final String COMMAND_SEARCH = "search";
     private static final String COMMAND_EXIT = "exit";
     
@@ -21,14 +21,14 @@ public class ParserSplit {
 	                         break;
 	      case COMMAND_DELETE: command = deleteCommand(arguments);
 	                           break;
-	      case COMMAND_CHANGE: command = changeCommand(arguments);
-    	                       break;
+	      //case COMMAND_CHANGE: command = changeCommand(arguments);
+    	                       //break;
 	      case COMMAND_UNDO: command = undoCommand();
 	                         break;
-	      case COMMAND_SHOW: command = showCommand(arguments);
-	                         break;
-	      case COMMAND_DISPLAY: command = displayCommand(arguments);
-	                         break;
+	      //case COMMAND_SHOW: command = showCommand(arguments);
+	                         //break;
+	      //case COMMAND_DISPLAY: command = displayCommand(arguments);
+	                         //break;
 	      case COMMAND_SEARCH: command = searchCommand(arguments);
 	                         break;
 	      case COMMAND_EXIT: command = exitCommand();
@@ -37,19 +37,19 @@ public class ParserSplit {
     	}
     	return command;
     	} 
-    public ArrayList<String> splitString(String userInput){
+    private ArrayList<String> splitString(String userInput){
     	String[] temp = userInput.trim().split(" ", 2);
     	return new ArrayList<String>(Arrays.asList(temp));
     }
-    public String getCommandType(ArrayList<String> parameters){
+    private String getCommandType(ArrayList<String> parameters){
     	return parameters.get(0);
     }
-    public String getArguments(ArrayList<String> parameters){
+    private String getArguments(ArrayList<String> parameters){
     	String temp = parameters.get(1);
     	return temp;
         }
     
-    public Command addCommand(String arguments){
+    private Command addCommand(String arguments){
     	Command command = new Command(Command.Type.ADD);
     	if(arguments.contains("by")&&arguments.contains("on")){
     		command.setTaskType("Deadline");
@@ -104,7 +104,7 @@ public class ParserSplit {
     		return command;
     	}
     }
-    public Command deleteCommand(String arguments){
+    private Command deleteCommand(String arguments){
     	Command command = new Command(Command.Type.DELETE);
     	if(arguments.contains("floating")){
     		command.setTaskType("floating");
@@ -132,14 +132,25 @@ public class ParserSplit {
     	
     }
     
-    public Command searchCommand(String arguments){
+    private Command searchCommand(String arguments){
     	Command command = new Command(Command.Type.SEARCH);
     	String keyWord = arguments.trim();
     	command.setKeyWord(keyWord);
     	return command;
     }
-    public Command undoCommand(){
+    
+    private Command undoCommand(){
     	Command command = new Command(Command.Type.UNDO);
+    	return command;
+    }
+    
+    private Command  exitCommand(){
+    	Command command = new Command(Command.Type.EXIT);
+    	return command;
+    }
+    
+    private Command invalidCommand(){
+    	Command command = new Command(Command.Type.INVALID);
     	return command;
     }
 }
