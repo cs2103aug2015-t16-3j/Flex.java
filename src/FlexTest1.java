@@ -24,6 +24,15 @@ public class FlexTest1 {
 		assertTrue(Checker.isValidDate("1/1/2012"));
 
 		assertTrue(Checker.isValidDate("1/1/2011"));
+		
+		// the following are in the invalid partitions for a valid date
+		assertTrue(!Checker.isValidDate("0/1/2012"));
+		
+		assertTrue(!Checker.isValidDate("1/-1/2012"));
+		
+		assertTrue(!Checker.isValidDate("32/1/2012"));
+		
+		assertTrue(!Checker.isValidDate("1/13/2012"));
 
 	}
 }

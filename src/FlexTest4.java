@@ -121,6 +121,13 @@ public class FlexTest4 {
 		assertTrue(!Checker.isRecurringTaskInput("task; 1258-1259 every monday; priority priority1 done]"));
 
 		assertTrue(!Checker.isRecurringTaskInput("task; 1258 1259 every monday; priority priority1"));
+		
+		// the following serve as boundary cases the invalid partition for SortAndShow.isValidTime(), which is called in isRecurringTaskInput (only the time fields are changed)
+		assertTrue(!Checker.isRecurringTaskInput("task; 00000-1259 every monday"));
+		
+		assertTrue(!Checker.isRecurringTaskInput("task; 1258-2400 every monday"));
+		
+		assertTrue(!Checker.isRecurringTaskInput("task; 1258-02359 every monday"));
 
 		// recurring task output
 		assertTrue(Checker.isRecurringTaskOutput("task name, 0002-0003 every tuesday"));
