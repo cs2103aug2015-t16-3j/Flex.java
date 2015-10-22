@@ -1,6 +1,6 @@
 public class Command {
      public enum Type{
-    	 ADD,DELETE,CHANGE,UNDO,DISPLAY,SEARCH,EXIT
+    	 ADD,DELETE,CHANGE,UNDO,DISPLAY,SEARCH,EXIT,INVALID
      }
     
      private Type type;
