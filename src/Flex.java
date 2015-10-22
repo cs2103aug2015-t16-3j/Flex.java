@@ -364,6 +364,25 @@ public class Flex {
 					System.out.println();
 
 				}
+			} else if (firstWord.equalsIgnoreCase("mark")){
+				// Case 10:
+				// Mark deadline, event or floating tasks as done or not done
+
+				String remainingCommandString = command.substring(whitespaceIndex + 1).trim();
+				remainingCommandString.trim();
+
+				if (remainingCommandString.length() == 0) {
+					// INVALID if the remaining command string is empty
+					flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					flexWindow.getTextArea().append("\n");
+
+					logger.finest(INVALID_INPUT_MESSAGE);
+					System.out.println(INVALID_INPUT_MESSAGE);
+					System.out.println();
+				}
+				
+				CRUD.markAsDone(filename, remainingCommandString, lastAction, flexWindow);
+				
 			} else {
 				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
 				flexWindow.getTextArea().append("\n");
