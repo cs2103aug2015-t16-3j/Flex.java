@@ -9,9 +9,8 @@ public class ParserSplit {
     private static final String COMMAND_SEARCH = "search";
     private static final String COMMAND_EXIT = "exit";
     
-    public ParserSplit(){
-    }
-    public Command parse(String userInput){
+    
+    public static Command parse(String userInput){
     	Command command;
     	ArrayList<String> parameters = splitString(userInput);
     	String commandType = getCommandType(parameters);
@@ -22,7 +21,7 @@ public class ParserSplit {
 	      case COMMAND_DELETE: command = deleteCommand(arguments);
 	                           break;
 	      //case COMMAND_CHANGE: command = changeCommand(arguments);
-    	                       //break;
+    	                      // break;
 	      case COMMAND_UNDO: command = undoCommand();
 	                         break;
 	      //case COMMAND_SHOW: command = showCommand(arguments);
@@ -37,19 +36,19 @@ public class ParserSplit {
     	}
     	return command;
     	} 
-    private ArrayList<String> splitString(String userInput){
+    private static ArrayList<String> splitString(String userInput){
     	String[] temp = userInput.trim().split(" ", 2);
     	return new ArrayList<String>(Arrays.asList(temp));
     }
-    private String getCommandType(ArrayList<String> parameters){
+    private static String getCommandType(ArrayList<String> parameters){
     	return parameters.get(0);
     }
-    private String getArguments(ArrayList<String> parameters){
+    private static String getArguments(ArrayList<String> parameters){
     	String temp = parameters.get(1);
     	return temp;
         }
     
-    private Command addCommand(String arguments){
+    private static Command addCommand(String arguments){
     	Command command = new Command(Command.Type.ADD);
     	if(arguments.contains("by")&&arguments.contains("on")){
     		command.setTaskType("Deadline");
@@ -104,7 +103,7 @@ public class ParserSplit {
     		return command;
     	}
     }
-    private Command deleteCommand(String arguments){
+    private static Command deleteCommand(String arguments){
     	Command command = new Command(Command.Type.DELETE);
     	if(arguments.contains("floating")){
     		command.setTaskType("floating");
@@ -132,24 +131,22 @@ public class ParserSplit {
     	
     }
     
-    private Command searchCommand(String arguments){
+    private static Command searchCommand(String arguments){
     	Command command = new Command(Command.Type.SEARCH);
     	String keyWord = arguments.trim();
     	command.setKeyWord(keyWord);
     	return command;
     }
-    
-    private Command undoCommand(){
+    private static Command undoCommand(){
     	Command command = new Command(Command.Type.UNDO);
     	return command;
     }
     
-    private Command  exitCommand(){
+    private static Command  exitCommand(){
     	Command command = new Command(Command.Type.EXIT);
     	return command;
     }
-    
-    private Command invalidCommand(){
+    private static Command invalidCommand(){
     	Command command = new Command(Command.Type.INVALID);
     	return command;
     }
