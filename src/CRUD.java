@@ -1244,7 +1244,8 @@ public class CRUD {
 		// This means that there is a clash between an existing event task which
 		// is NOT marked as done
 		// and a NEW task which is an event task which is NOT marked as done
-		if (Checker.isEventTaskInput(remainingCommandString1)) {
+		if (Checker.isEventTaskInput(remainingCommandString1)
+				|| Checker.isDoneEventTaskInput(remainingCommandString1)) {
 
 			int startingTimeHours = Integer.valueOf(temporaryTask.getStart().substring(0, 2).trim());
 			int startingTimeMinutes = Integer.valueOf(temporaryTask.getStart().substring(2, 4).trim());
