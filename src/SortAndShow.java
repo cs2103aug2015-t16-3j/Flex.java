@@ -626,6 +626,66 @@ public class SortAndShow {
 			deadlineTasksList.set(min_index1, temp2);
 		}
 
+		// sort all deadline tasks by day
+
+		int size100 = deadlineTasksList.size();
+		int jj, start100, min_index100 = 0;
+
+		for (start100 = 0; start100 < size100 - 1; start100++) {
+			min_index100 = start100;
+
+			for (jj = start100 + 1; jj < size100; jj++) {
+				if (deadlineTasksList.get(jj).getActualDay() < deadlineTasksList.get(min_index100).getActualDay()) {
+					min_index100 = jj;
+				}
+			}
+
+			Task temp101 = deadlineTasksList.get(start100);
+			Task temp102 = deadlineTasksList.get(min_index100);
+			deadlineTasksList.set(start100, temp102);
+			deadlineTasksList.set(min_index100, temp101);
+		}
+
+		// sort all deadline tasks by their month
+
+		int size103 = deadlineTasksList.size();
+		int kk, start103, min_index103 = 0;
+
+		for (start103 = 0; start103 < size103 - 1; start103++) {
+			min_index103 = start103;
+
+			for (kk = start103 + 1; kk < size103; kk++) {
+				if (deadlineTasksList.get(kk).getActualMonth() < deadlineTasksList.get(min_index103).getActualMonth()) {
+					min_index103 = kk;
+				}
+			}
+
+			Task temp104 = deadlineTasksList.get(start103);
+			Task temp105 = deadlineTasksList.get(min_index103);
+			deadlineTasksList.set(start103, temp105);
+			deadlineTasksList.set(min_index103, temp104);
+		}
+
+		// sort all deadline tasks by their year
+
+		int size106 = deadlineTasksList.size();
+		int ll, start106, min_index106 = 0;
+
+		for (start106 = 0; start106 < size106 - 1; start106++) {
+			min_index106 = start106;
+
+			for (ll = start106 + 1; ll < size106; ll++) {
+				if (deadlineTasksList.get(ll).getActualYear() < deadlineTasksList.get(min_index106).getActualYear()) {
+					min_index106 = ll;
+				}
+			}
+
+			Task temp107 = deadlineTasksList.get(start106);
+			Task temp108 = deadlineTasksList.get(min_index106);
+			deadlineTasksList.set(start106, temp108);
+			deadlineTasksList.set(min_index106, temp107);
+		}
+
 		// sort event tasks by starting time
 		int size4 = eventTasksList.size();
 		int b, start4, min_index4 = 0;
@@ -644,6 +704,66 @@ public class SortAndShow {
 			Task temp6 = eventTasksList.get(min_index4);
 			eventTasksList.set(start4, temp6);
 			eventTasksList.set(min_index4, temp5);
+		}
+
+		// sort all event tasks by day
+
+		int size109 = eventTasksList.size();
+		int mm, start109, min_index109 = 0;
+
+		for (start109 = 0; start109 < size109 - 1; start109++) {
+			min_index109 = start109;
+
+			for (mm = start109 + 1; mm < size109; mm++) {
+				if (eventTasksList.get(mm).getActualDay() < eventTasksList.get(min_index109).getActualDay()) {
+					min_index109 = mm;
+				}
+			}
+
+			Task temp110 = eventTasksList.get(start109);
+			Task temp111 = eventTasksList.get(min_index109);
+			eventTasksList.set(start109, temp111);
+			eventTasksList.set(min_index109, temp110);
+		}
+
+		// sort all event tasks by their month
+
+		int size112 = eventTasksList.size();
+		int nn, start112, min_index112 = 0;
+
+		for (start112 = 0; start112 < size112 - 1; start112++) {
+			min_index112 = start112;
+
+			for (nn = start112 + 1; nn < size112; nn++) {
+				if (eventTasksList.get(nn).getActualMonth() < eventTasksList.get(min_index112).getActualMonth()) {
+					min_index112 = nn;
+				}
+			}
+
+			Task temp113 = eventTasksList.get(start112);
+			Task temp114 = eventTasksList.get(min_index112);
+			eventTasksList.set(start112, temp114);
+			eventTasksList.set(min_index112, temp113);
+		}
+
+		// sort all event tasks by their year
+
+		int size115 = eventTasksList.size();
+		int oo, start115, min_index115 = 0;
+
+		for (start115 = 0; start115 < size115 - 1; start115++) {
+			min_index115 = start115;
+
+			for (oo = start115 + 1; oo < size115; oo++) {
+				if (eventTasksList.get(oo).getActualYear() < eventTasksList.get(min_index115).getActualYear()) {
+					min_index115 = oo;
+				}
+			}
+
+			Task temp116 = eventTasksList.get(start115);
+			Task temp117 = eventTasksList.get(min_index115);
+			eventTasksList.set(start115, temp117);
+			eventTasksList.set(min_index115, temp116);
 		}
 
 		ArrayList<Task> tempDeadlineOrEventTasksList = new ArrayList<Task>();

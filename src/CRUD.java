@@ -1258,7 +1258,7 @@ public class CRUD {
 			for (int w = 0; w < allTasksList.size(); w++) {
 				if ((Checker.isEventTaskInput(allTasksList.get(w).getScheduleString())
 						|| Checker.isDoneEventTaskInput(allTasksList.get(w).getScheduleString()))
-						&& (allTasksList.get(w).getDate() != null)
+						&& (allTasksList.get(w).getDate() != null) 
 						&& (allTasksList.get(w).getDate().equalsIgnoreCase(temporaryTask.getDate()))) {
 
 					int existingStartingTimeHours = Integer
