@@ -4,10 +4,20 @@ Task3; by 1800 on 2/11/2015
 Task4; by 1300 on 3/11/2015
 Task5; 1300-1500 on 3/11/2015; high [done]
 Task5; 1300-1500 on 3/11/2015; high
-Task7; 1200-1300 on 1/12/2015; priority
-task; 1201-1301 on 3/12/2015; priority
 Task6; by 1200 on 1/12/2015
+Task7; 1200-1300 on 1/12/2015; priority
 task; 1201-1301 on 2/12/2015; priority
+task; 1201-1301 on 3/12/2015; priority
+task; 1201-1301 on 3/12/2015; priority
+task; 1201-1301 on 6/12/2015; priority
+task; 1201-1301 on 15/12/2015; priority
+Task6; by 1200 on 31/12/2015
+task; 1201-1301 on 31/12/2015; priority
+task; 1210-1311 on 1/1/2016; pr
+task; 1201-1301 on 3/1/2016; priority
+task; 1201-1301 on 3/12/2016; priority
+task; 1201-1301 on 1/1/2017; priority
+task; 1201-1301 on 1/1/2018; priority
 Go for run [done]
 Task7; 1000-1200 every monday
 Task8; 1600-1800 every wednesday

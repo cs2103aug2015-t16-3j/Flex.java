@@ -844,16 +844,101 @@ public class SortAndShow {
 			tempDeadlineOrEventTasksList.set(min_index16, temp17);
 		}
 
-		ArrayList<Task> deadlineOrEventTasksList = new ArrayList<Task>();
+		
 
+		// sort the deadline and event tasks for each YEAR
+		// to make the date for each year in ORDER
+
+		ArrayList<Task> dateSortedDeadlineOrEventTasksList = new ArrayList<Task>();
+		
 		if (!tempDeadlineOrEventTasksList.isEmpty()) {
+			ArrayList<Task> subTaskListt = new ArrayList<Task>();
+
+			int year = tempDeadlineOrEventTasksList.get(0).getActualYear();
+
+			for (int tt = 0; tt < tempDeadlineOrEventTasksList.size(); tt++) {
+				if (tempDeadlineOrEventTasksList.get(tt).getActualYear() == year) {
+					subTaskListt.add(tempDeadlineOrEventTasksList.get(tt));
+				} else {
+					// sort subTaskList
+					int size460 = subTaskListt.size();
+					int aa, start460, min_index460 = 0;
+
+					for (start460 = 0; start460 < size460 - 1; start460++) {
+						min_index460 = start460;
+
+						for (aa = start460 + 1; aa < size460; aa++) {
+							if (subTaskListt.get(aa).getDayAndMonthValue() < subTaskListt.get(min_index460)
+									.getDayAndMonthValue()) {
+								min_index460 = aa;
+							}
+						}
+
+						Task temp470 = subTaskListt.get(start460);
+						Task temp480 = subTaskListt.get(min_index460);
+						subTaskListt.set(start460, temp480);
+						subTaskListt.set(min_index460, temp470);
+					}
+
+					for (int uu = 0; uu < subTaskListt.size(); uu++) {
+						dateSortedDeadlineOrEventTasksList.add(subTaskListt.get(uu));
+					}
+
+					subTaskListt.clear();
+
+					year = tempDeadlineOrEventTasksList.get(tt).getActualYear();
+
+					subTaskListt.add(tempDeadlineOrEventTasksList.get(tt));
+
+				}
+			}
+
+			if (!subTaskListt.isEmpty()) {
+				int size490 = subTaskListt.size();
+				int ddd, start490, min_index490 = 0;
+
+				for (start490 = 0; start490 < size490 - 1; start490++) {
+					min_index490 = start490;
+
+					for (ddd = start490 + 1; ddd < size490; ddd++) {
+						if (subTaskListt.get(ddd).getDayAndMonthValue() < subTaskListt.get(min_index490)
+								.getDayAndMonthValue()) {
+							min_index490 = ddd;
+						}
+					}
+
+					Task temp500 = subTaskListt.get(start490);
+					Task temp510 = subTaskListt.get(min_index490);
+					subTaskListt.set(start490, temp510);
+					subTaskListt.set(min_index490, temp500);
+				}
+
+				for (int bbb = 0; bbb < subTaskListt.size(); bbb++) {
+					dateSortedDeadlineOrEventTasksList.add(subTaskListt.get(bbb));
+				}
+
+				subTaskListt.clear();
+			}
+
+		}
+		
+		// sort the deadline and event tasks for each date
+		// such that for each date, deadline tasks (sorted by ending time)
+		// are displayed first
+		// followed by event tasks sorted by starting time
+		// displayed after that, 
+		// PER DATE
+		
+		ArrayList<Task> deadlineOrEventTasksList = new ArrayList<Task>();
+		
+		if (!dateSortedDeadlineOrEventTasksList.isEmpty()) {
 			ArrayList<Task> subTaskList = new ArrayList<Task>();
 
-			String date = tempDeadlineOrEventTasksList.get(0).getDate();
+			String date = dateSortedDeadlineOrEventTasksList.get(0).getDate();
 
-			for (int t = 0; t < tempDeadlineOrEventTasksList.size(); t++) {
-				if (tempDeadlineOrEventTasksList.get(t).getDate().equalsIgnoreCase(date)) {
-					subTaskList.add(tempDeadlineOrEventTasksList.get(t));
+			for (int t = 0; t < dateSortedDeadlineOrEventTasksList.size(); t++) {
+				if (dateSortedDeadlineOrEventTasksList.get(t).getDate().equalsIgnoreCase(date)) {
+					subTaskList.add(dateSortedDeadlineOrEventTasksList.get(t));
 				} else {
 					// sort subTaskList
 					int size46 = subTaskList.size();
@@ -881,9 +966,9 @@ public class SortAndShow {
 
 					subTaskList.clear();
 
-					date = tempDeadlineOrEventTasksList.get(t).getDate();
+					date = dateSortedDeadlineOrEventTasksList.get(t).getDate();
 
-					subTaskList.add(tempDeadlineOrEventTasksList.get(t));
+					subTaskList.add(dateSortedDeadlineOrEventTasksList.get(t));
 
 				}
 			}

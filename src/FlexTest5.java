@@ -32,7 +32,7 @@ public class FlexTest5 {
 
 		// deadline task output
 		assertTrue(Checker.isDeadlineTaskOutput("task test tester, bY 2300 on 12/1/2015"));
-
+		
 		assertTrue(!Checker.isDeadlineTaskOutput("task test tester, bY 2300 on 12/1/2015 [done]"));
 
 		assertTrue(!Checker.isDeadlineTaskOutput("task test tester, bY 2300 on 12/1/2015 done]"));

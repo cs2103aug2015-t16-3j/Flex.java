@@ -20,6 +20,8 @@ public class Task {
 	// this is used for sorting the tasks in the schedule file
 	private int deadlineOrEventTimeValue = -3;
 
+	
+	
 	private double recurringTaskValue = 0.0;
 
 	private int deadlineEndingTime = -3;
@@ -28,7 +30,11 @@ public class Task {
 	private int actualMonth = -3;
 	private int actualYear = -3;
 
+	private double dayAndMonthValue = -3.0;
+	
+	
 	private static final String DONE_STRING = "[done]";
+	private static final int DAY_AND_MONTH_VALUE_MONTH_MULTIPLIER = 60;
 	private static final int DAY_HOURS = 24;
 	private static final int HOUR_MINUTES = 60;
 	private static final int EVENT_TASK_STARTING_TIME_OFFSET_VALUE = DAY_HOURS * HOUR_MINUTES;
@@ -368,6 +374,9 @@ public class Task {
 			this.actualMonth = month;
 			this.actualYear = year;
 
+			this.dayAndMonthValue = this.actualMonth * DAY_AND_MONTH_VALUE_MONTH_MULTIPLIER + this.actualDay;
+			
+			
 		} else if (Checker.isDoneEventTaskInput(string)) {
 			// e.g. 7/9/2015
 			String tempDateString = this.taskVariables[1];
@@ -398,6 +407,9 @@ public class Task {
 			this.actualMonth = month;
 			this.actualYear = year;
 
+			this.dayAndMonthValue = this.actualMonth * DAY_AND_MONTH_VALUE_MONTH_MULTIPLIER + this.actualDay;
+			
+			
 		}
 		if (Checker.isDeadlineTaskInput(string)) {
 			// e.g. 7/9/2015
@@ -426,6 +438,9 @@ public class Task {
 			this.actualMonth = month;
 			this.actualYear = year;
 
+			this.dayAndMonthValue = this.actualMonth * DAY_AND_MONTH_VALUE_MONTH_MULTIPLIER + this.actualDay;
+			
+			
 		} else if (Checker.isDoneDeadlineTaskInput(string)) {
 			// e.g. 7/9/2015
 			String tempDateString = this.taskVariables[1];
@@ -453,6 +468,8 @@ public class Task {
 			this.actualMonth = month;
 			this.actualYear = year;
 
+			this.dayAndMonthValue = this.actualMonth * DAY_AND_MONTH_VALUE_MONTH_MULTIPLIER + this.actualDay;
+			
 		} else if (Checker.isRecurringTaskInput(string)) {
 
 		} else if (Checker.isFloatingTaskInput(string)) {
@@ -862,5 +879,10 @@ public class Task {
 	public int getEventStartingTime() {
 		return this.eventStartingTime;
 	}
+	
+	public double getDayAndMonthValue(){
+		return this.dayAndMonthValue;
+	}
+	
 
 }
