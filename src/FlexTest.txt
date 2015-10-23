@@ -1,14 +1,14 @@
 Meeting with CS2103/T group member(s); 1100-1300 on 26/10/2015; important
 Revise for EE2020 test; by 2359 on 1/11/2015
-Revise for EE2021 test; by 2359 on 23/11/2015
+Revise for EE2021 test; by 2358 on 23/11/2015
 Revise for CS2103/T test; by 2359 on 23/11/2015
 Revise for SSD1203 test; by 2359 on 30/11/2015
 Check CS2103/T for errors using exploratory testing
 Check with CS2103/T if own committed code needs to be changed/integrated and exactly how to do so
 Eat at least three main meals everyday
-Go to school on weekdays
-Go to the market
 Go for school lessons
+Go to school on weekdays
+Go to the market to buy groceries
 Go to the school website to check for uploaded assignments
 Save a backup copy of every school-related assignment on laptop, and in thumbdrive
 Sleep for 7 hours if possible for every night unless there is work that is not yet done
