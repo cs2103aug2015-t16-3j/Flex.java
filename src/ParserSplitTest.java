@@ -46,7 +46,10 @@ public class ParserSplitTest {
 		System.out.println(change.getCommandType() +" "+change.getTaskType());
 		System.out.println(change.getDate() + " "+ change.getNumber()+" "+ change.getChangedTaskName());
 		
-		
+		//show not done
+		Command showNotDone = ParserSplit.parse("show not done");
+		System.out.println(showNotDone.getCommandType());
+		System.out.println(showNotDone.getShowKeyword());
 		
 	}
 }
