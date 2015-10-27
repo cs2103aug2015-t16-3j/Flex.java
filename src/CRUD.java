@@ -127,7 +127,8 @@ public class CRUD {
 			}
 
 			if (!isNumberValid) {
-				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+				// "\n");
 				// flexWindow.getTextArea().append("\n");
 
 				logger.finest(INVALID_INPUT_MESSAGE);
@@ -138,7 +139,8 @@ public class CRUD {
 			}
 
 			if (Integer.valueOf(tempNumber) <= 0) {
-				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+				// "\n");
 				// flexWindow.getTextArea().append("\n");
 
 				logger.finest(INVALID_INPUT_MESSAGE);
@@ -149,7 +151,8 @@ public class CRUD {
 			}
 
 			if (Integer.valueOf(tempNumber) > floatingTasksList.size()) {
-				// flexWindow.getTextArea().append(TASK_DOES_NOT_EXIST_MESSAGE + "\n");
+				// flexWindow.getTextArea().append(TASK_DOES_NOT_EXIST_MESSAGE +
+				// "\n");
 				// flexWindow.getTextArea().append("\n");
 
 				logger.finest(TASK_DOES_NOT_EXIST_MESSAGE);
@@ -187,7 +190,8 @@ public class CRUD {
 			}
 
 			if (!isNumberValid) {
-				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+				// "\n");
 				// flexWindow.getTextArea().append("\n");
 
 				logger.finest(INVALID_INPUT_MESSAGE);
@@ -198,7 +202,8 @@ public class CRUD {
 			}
 
 			if (Integer.valueOf(tempNumber) <= 0) {
-				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+				// "\n");
 				// flexWindow.getTextArea().append("\n");
 
 				logger.finest(INVALID_INPUT_MESSAGE);
@@ -209,7 +214,8 @@ public class CRUD {
 			}
 
 			if (Integer.valueOf(tempNumber) > recurringTasksList.size()) {
-				// flexWindow.getTextArea().append(TASK_DOES_NOT_EXIST_MESSAGE + "\n");
+				// flexWindow.getTextArea().append(TASK_DOES_NOT_EXIST_MESSAGE +
+				// "\n");
 				// flexWindow.getTextArea().append("\n");
 
 				logger.finest(TASK_DOES_NOT_EXIST_MESSAGE);
@@ -251,7 +257,8 @@ public class CRUD {
 			}
 
 			if (!isNumberValid) {
-				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+				// "\n");
 				// flexWindow.getTextArea().append("\n");
 
 				logger.finest(INVALID_INPUT_MESSAGE);
@@ -262,7 +269,8 @@ public class CRUD {
 			}
 
 			if (Integer.valueOf(tempNumber) <= 0) {
-				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+				// "\n");
 				// flexWindow.getTextArea().append("\n");
 
 				logger.finest(INVALID_INPUT_MESSAGE);
@@ -273,7 +281,8 @@ public class CRUD {
 			}
 
 			if (Integer.valueOf(tempNumber) > deadlineOrEventTasksList.size()) {
-				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+				// "\n");
 				// flexWindow.getTextArea().append("\n");
 
 				logger.finest(TASK_DOES_NOT_EXIST_MESSAGE);
@@ -317,7 +326,8 @@ public class CRUD {
 		}
 
 		if (taskExists == false) {
-			// flexWindow.getTextArea().append(TASK_DOES_NOT_EXIST_MESSAGE + "\n");
+			// flexWindow.getTextArea().append(TASK_DOES_NOT_EXIST_MESSAGE +
+			// "\n");
 			// flexWindow.getTextArea().append("\n");
 
 			logger.finest(TASK_DOES_NOT_EXIST_MESSAGE);
@@ -448,7 +458,8 @@ public class CRUD {
 
 			int whitespaceIndex2 = tempString.indexOf(" ");
 			if (whitespaceIndex2 < 0) {
-				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+				// "\n");
 				// flexWindow.getTextArea().append("\n");
 
 				logger.finest(INVALID_INPUT_MESSAGE);
@@ -470,7 +481,8 @@ public class CRUD {
 			}
 
 			if (!isNumber4) {
-				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+				// "\n");
 				// flexWindow.getTextArea().append("\n");
 
 				logger.finest(INVALID_INPUT_MESSAGE);
@@ -504,7 +516,8 @@ public class CRUD {
 			}
 
 			if (firstTaskForDateIndex < 0) {
-				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+				// "\n");
 				// flexWindow.getTextArea().append("\n");
 
 				logger.finest(INVALID_INPUT_MESSAGE);
@@ -514,7 +527,8 @@ public class CRUD {
 			}
 
 			if ((Integer.valueOf(number1) <= 0) || (Integer.valueOf(number1) > taskCountForDate)) {
-				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+				// "\n");
 				// flexWindow.getTextArea().append("\n");
 
 				logger.finest(INVALID_INPUT_MESSAGE);
@@ -526,7 +540,8 @@ public class CRUD {
 			tempString = tempString.substring(whitespaceIndex2 + 1).trim();
 
 			if (tempString.length() == 0) {
-				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+				// "\n");
 				// flexWindow.getTextArea().append("\n");
 
 				logger.finest(INVALID_INPUT_MESSAGE);
@@ -539,13 +554,14 @@ public class CRUD {
 			int dateWhitespaceToIndex2 = tempString.indexOf("date to ");
 			int timeWhitespaceToIndex2 = tempString.indexOf("time to ");
 			int endWhitespaceByIndex2 = tempString.indexOf("end by ");
-			int byIndex2 = tempString.indexOf("by");
+			int byIndex2 = tempString.indexOf("by ");
 
 			if (tasknameWhitespaceToIndex2 == 0) {
 				tempString = tempString.substring(tasknameWhitespaceToIndex2 + 12).trim();
 
 				if (tempString.length() == 0) {
-					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+					// "\n");
 					// flexWindow.getTextArea().append("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
@@ -569,7 +585,8 @@ public class CRUD {
 				tempString = tempString.substring(dateWhitespaceToIndex2 + 8).trim();
 
 				if (tempString.length() == 0) {
-					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+					// "\n");
 					// flexWindow.getTextArea().append("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
@@ -581,7 +598,8 @@ public class CRUD {
 				String newDate = tempString.trim();
 
 				if (!Checker.isValidDate(newDate)) {
-					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+					// "\n");
 					// flexWindow.getTextArea().append("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
@@ -605,7 +623,8 @@ public class CRUD {
 				tempString = tempString.substring(timeWhitespaceToIndex2 + 8).trim();
 
 				if (tempString.length() == 0) {
-					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+					// "\n");
 					// flexWindow.getTextArea().append("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
@@ -617,7 +636,8 @@ public class CRUD {
 				int hyphenIndex3 = tempString.indexOf("-");
 
 				if (hyphenIndex3 < 0) {
-					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+					// "\n");
 					// flexWindow.getTextArea().append("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
@@ -629,7 +649,8 @@ public class CRUD {
 				String startingTime = tempString.substring(0, hyphenIndex3).trim();
 
 				if (startingTime.length() != 4) {
-					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+					// "\n");
 					// flexWindow.getTextArea().append("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
@@ -639,7 +660,8 @@ public class CRUD {
 				}
 
 				if (!Checker.isValidTime(startingTime)) {
-					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+					// "\n");
 					// flexWindow.getTextArea().append("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
@@ -651,7 +673,8 @@ public class CRUD {
 				String endingTime = tempString.substring(hyphenIndex3 + 1).trim();
 
 				if (endingTime.length() != 4) {
-					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+					// "\n");
 					// flexWindow.getTextArea().append("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
@@ -661,7 +684,8 @@ public class CRUD {
 				}
 
 				if (!Checker.isValidTime(endingTime)) {
-					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+					// "\n");
 					// flexWindow.getTextArea().append("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
@@ -673,7 +697,8 @@ public class CRUD {
 				if (Integer.valueOf(endingTime.substring(0, 2)) * HOUR_MINUTES
 						+ Integer.valueOf(endingTime.substring(2, 4)) < Integer.valueOf(startingTime.substring(0, 2))
 								* HOUR_MINUTES + Integer.valueOf(startingTime.substring(2, 4))) {
-					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+					// "\n");
 					// flexWindow.getTextArea().append("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
@@ -687,7 +712,8 @@ public class CRUD {
 
 				// the task must to be changed should be an event task
 				if (!(Checker.isEventTaskInput(taskBeforeChange) || Checker.isDoneEventTaskInput(taskBeforeChange))) {
-					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+					// "\n");
 					// flexWindow.getTextArea().append("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
@@ -709,7 +735,8 @@ public class CRUD {
 				tempString = tempString.substring(endWhitespaceByIndex2 + 7).trim();
 
 				if (tempString.length() == 0) {
-					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+					// "\n");
 					// flexWindow.getTextArea().append("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
@@ -721,7 +748,8 @@ public class CRUD {
 				String newEndingTime = tempString.trim();
 
 				if (!Checker.isValidTime(newEndingTime)) {
-					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+					// "\n");
 					// flexWindow.getTextArea().append("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
@@ -736,7 +764,8 @@ public class CRUD {
 				// the task to be changed should be a deadline task
 				if (!(Checker.isDeadlineTaskInput(taskBeforeChange)
 						|| Checker.isDoneDeadlineTaskInput(taskBeforeChange))) {
-					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+					// "\n");
 					// flexWindow.getTextArea().append("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
@@ -753,9 +782,10 @@ public class CRUD {
 						allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1).getScheduleString()));
 
 			} else if (byIndex2 == 0) {
-				tempString = tempString.substring(byIndex2 + 2).trim();
+				tempString = tempString.substring(byIndex2 + 3).trim();
 				if (tempString.length() == 0) {
-					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+					// "\n");
 					// flexWindow.getTextArea().append("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
@@ -767,7 +797,8 @@ public class CRUD {
 				int whitespaceOnWhitespaceIndex1 = tempString.indexOf(" on ");
 
 				if (whitespaceOnWhitespaceIndex1 < 0) {
-					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+					// "\n");
 					// flexWindow.getTextArea().append("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
@@ -779,7 +810,8 @@ public class CRUD {
 				String newEndingTime6 = tempString.substring(0, whitespaceOnWhitespaceIndex1).trim();
 
 				if (newEndingTime6.length() != 4) {
-					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+					// "\n");
 					// flexWindow.getTextArea().append("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
@@ -789,7 +821,8 @@ public class CRUD {
 				}
 
 				if (!Checker.isValidTime(newEndingTime6)) {
-					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+					// "\n");
 					// flexWindow.getTextArea().append("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
@@ -801,7 +834,8 @@ public class CRUD {
 				String newDate2 = tempString.substring(whitespaceOnWhitespaceIndex1 + 4).trim();
 
 				if (newDate2.length() == 0) {
-					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+					// "\n");
 					// flexWindow.getTextArea().append("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
@@ -811,7 +845,8 @@ public class CRUD {
 				}
 
 				if (!Checker.isValidDate(newDate2)) {
-					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+					// "\n");
 					// flexWindow.getTextArea().append("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
@@ -832,15 +867,24 @@ public class CRUD {
 				lastAction.setPreviousTask(new Task(
 						allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1).getScheduleString()));
 
-			}
+			} else {
+				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+				// "\n");
+				// flexWindow.getTextArea().append("\n");
 
+				logger.finest(INVALID_INPUT_MESSAGE);
+				System.out.println(INVALID_INPUT_MESSAGE);
+				System.out.println();
+				return INVALID_INPUT_MESSAGE;
+			}
 		} else if (firstTerm.equalsIgnoreCase("floating")) {
 			// For editing a floating task
 			// change floating <number> done
 
 			int whitespaceIndex3 = tempString.indexOf(" ");
 			if (whitespaceIndex3 < 0) {
-				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+				// "\n");
 				// flexWindow.getTextArea().append("\n");
 
 				logger.finest(INVALID_INPUT_MESSAGE);
@@ -862,7 +906,8 @@ public class CRUD {
 			}
 
 			if (!isNumber2) {
-				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+				// "\n");
 				// flexWindow.getTextArea().append("\n");
 
 				logger.finest(INVALID_INPUT_MESSAGE);
@@ -872,7 +917,8 @@ public class CRUD {
 			}
 
 			if ((Integer.valueOf(number2) <= 0) || (Integer.valueOf(number2) > floatingTasksList.size())) {
-				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+				// "\n");
 				// flexWindow.getTextArea().append("\n");
 
 				logger.finest(INVALID_INPUT_MESSAGE);
@@ -884,7 +930,8 @@ public class CRUD {
 			tempString = tempString.substring(whitespaceIndex3 + 1).trim();
 
 			if (tempString.length() == 0) {
-				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+				// "\n");
 				// flexWindow.getTextArea().append("\n");
 
 				logger.finest(INVALID_INPUT_MESSAGE);
@@ -899,7 +946,8 @@ public class CRUD {
 				tempString = tempString.substring(tasknameWhitespaceToIndex3 + 12).trim();
 
 				if (tempString.length() == 0) {
-					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+					// "\n");
 					// flexWindow.getTextArea().append("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
@@ -921,7 +969,8 @@ public class CRUD {
 						.get(deadlineOrEventTasksList.size() + Integer.valueOf(number2) - 1).getScheduleString()));
 
 			} else {
-				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+				// "\n");
 				// flexWindow.getTextArea().append("\n");
 
 				logger.finest(INVALID_INPUT_MESSAGE);
@@ -938,7 +987,8 @@ public class CRUD {
 
 			int whitespaceIndex2 = tempString.indexOf(" ");
 			if (whitespaceIndex2 < 0) {
-				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+				// "\n");
 				// flexWindow.getTextArea().append("\n");
 
 				logger.finest(INVALID_INPUT_MESSAGE);
@@ -960,7 +1010,8 @@ public class CRUD {
 			}
 
 			if (!isNumber1) {
-				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+				// "\n");
 				// flexWindow.getTextArea().append("\n");
 
 				logger.finest(INVALID_INPUT_MESSAGE);
@@ -970,7 +1021,8 @@ public class CRUD {
 			}
 
 			if ((Integer.valueOf(number1) <= 0) || (Integer.valueOf(number1) > recurringTasksList.size())) {
-				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+				// "\n");
 				// flexWindow.getTextArea().append("\n");
 
 				logger.finest(INVALID_INPUT_MESSAGE);
@@ -982,7 +1034,8 @@ public class CRUD {
 			tempString = tempString.substring(whitespaceIndex2 + 1).trim();
 
 			if (tempString.length() == 0) {
-				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+				// "\n");
 				// flexWindow.getTextArea().append("\n");
 
 				logger.finest(INVALID_INPUT_MESSAGE);
@@ -999,7 +1052,8 @@ public class CRUD {
 				tempString = tempString.substring(tasknameWhitespaceToIndex5 + 12).trim();
 
 				if (tempString.length() == 0) {
-					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+					// "\n");
 					// flexWindow.getTextArea().append("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
@@ -1026,7 +1080,8 @@ public class CRUD {
 			} else if (toWhitespaceEveryWhitespaceIndex1 == 0) {
 				tempString = tempString.substring(toWhitespaceEveryWhitespaceIndex1 + 9).trim();
 				if (tempString.length() == 0) {
-					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+					// "\n");
 					// flexWindow.getTextArea().append("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
@@ -1036,7 +1091,8 @@ public class CRUD {
 				}
 
 				if (!Checker.isValidDay(tempString)) {
-					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+					// "\n");
 					// flexWindow.getTextArea().append("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
@@ -1066,7 +1122,8 @@ public class CRUD {
 				tempString = tempString.substring(timeWhitespaceToWhitespaceIndex1 + 8).trim();
 
 				if (tempString.length() == 0) {
-					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+					// "\n");
 					// flexWindow.getTextArea().append("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
@@ -1149,7 +1206,8 @@ public class CRUD {
 						.get(deadlineOrEventTasksList.size() + floatingTasksList.size() + Integer.valueOf(number1) - 1)
 						.getScheduleString()));
 			} else {
-				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+				// "\n");
 				// flexWindow.getTextArea().append("\n");
 
 				logger.finest(INVALID_INPUT_MESSAGE);
@@ -1280,14 +1338,16 @@ public class CRUD {
 					if ((totalStartingTime > existingTotalStartingTime) && (totalStartingTime < existingTotalEndingTime)
 							|| ((totalEndingTime > existingTotalStartingTime)
 									&& (totalEndingTime < existingTotalEndingTime))) {
-						// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+						// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE
+						// + "\n");
 						// flexWindow.getTextArea().append("\n");
 
 						logger.finest(INVALID_INPUT_MESSAGE);
 						System.out.println(INVALID_INPUT_MESSAGE);
 						System.out.println();
 
-						// flexWindow.getTextArea().append(BLOCKED_MESSAGE + "\n");
+						// flexWindow.getTextArea().append(BLOCKED_MESSAGE +
+						// "\n");
 						// flexWindow.getTextArea().append("\n");
 
 						logger.finest(BLOCKED_MESSAGE);
@@ -1328,7 +1388,8 @@ public class CRUD {
 		lastAction.setPreviousChangedScheduleString(null);
 
 		// flexWindow.getTextArea()
-		//		.append("The task " + "\"" + tempTask.getDisplayString() + "\"" + " has been added." + "\n");
+		// .append("The task " + "\"" + tempTask.getDisplayString() + "\"" + "
+		// has been added." + "\n");
 		// flexWindow.getTextArea().append("\n");
 
 		return "The task " + "\"" + tempTask.getDisplayString() + "\"" + " has been added." + "\n";
@@ -1565,7 +1626,8 @@ public class CRUD {
 
 			int whitespaceIndex2 = tempString.indexOf(" ");
 			if (whitespaceIndex2 < 0) {
-				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+				// "\n");
 				// flexWindow.getTextArea().append("\n");
 
 				logger.finest(INVALID_INPUT_MESSAGE);
@@ -1587,7 +1649,8 @@ public class CRUD {
 			}
 
 			if (!isNumber4) {
-				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+				// "\n");
 				// flexWindow.getTextArea().append("\n");
 
 				logger.finest(INVALID_INPUT_MESSAGE);
@@ -1621,7 +1684,8 @@ public class CRUD {
 			}
 
 			if (firstTaskForDateIndex < 0) {
-				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+				// "\n");
 				// flexWindow.getTextArea().append("\n");
 
 				logger.finest(INVALID_INPUT_MESSAGE);
@@ -1631,7 +1695,8 @@ public class CRUD {
 			}
 
 			if ((Integer.valueOf(number1) <= 0) || (Integer.valueOf(number1) > taskCountForDate)) {
-				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+				// "\n");
 				// flexWindow.getTextArea().append("\n");
 
 				logger.finest(INVALID_INPUT_MESSAGE);
@@ -1643,7 +1708,8 @@ public class CRUD {
 			tempString = tempString.substring(whitespaceIndex2 + 1).trim();
 
 			if (tempString.length() == 0) {
-				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+				// "\n");
 				// flexWindow.getTextArea().append("\n");
 
 				logger.finest(INVALID_INPUT_MESSAGE);
@@ -1659,7 +1725,8 @@ public class CRUD {
 				tempString = tempString.substring(notWhitespaceDoneIndex2 + 8).trim();
 
 				if (tempString.length() != 0) {
-					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+					// "\n");
 					// flexWindow.getTextArea().append("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
@@ -1669,7 +1736,8 @@ public class CRUD {
 				}
 
 				if (allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1).getDone() == null) {
-					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+					// "\n");
 					// flexWindow.getTextArea().append("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
@@ -1692,7 +1760,8 @@ public class CRUD {
 				tempString = tempString.substring(doneIndex2 + 4).trim();
 
 				if (tempString.length() != 0) {
-					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+					// "\n");
 					// flexWindow.getTextArea().append("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
@@ -1702,7 +1771,8 @@ public class CRUD {
 				}
 
 				if (allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1).getDone() != null) {
-					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+					// "\n");
 					// flexWindow.getTextArea().append("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
@@ -1730,7 +1800,8 @@ public class CRUD {
 
 			int whitespaceIndex3 = tempString.indexOf(" ");
 			if (whitespaceIndex3 < 0) {
-				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+				// "\n");
 				// flexWindow.getTextArea().append("\n");
 
 				logger.finest(INVALID_INPUT_MESSAGE);
@@ -1752,7 +1823,8 @@ public class CRUD {
 			}
 
 			if (!isNumber2) {
-				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+				// "\n");
 				// flexWindow.getTextArea().append("\n");
 
 				logger.finest(INVALID_INPUT_MESSAGE);
@@ -1762,7 +1834,8 @@ public class CRUD {
 			}
 
 			if ((Integer.valueOf(number2) <= 0) || (Integer.valueOf(number2) > floatingTasksList.size())) {
-				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+				// "\n");
 				// flexWindow.getTextArea().append("\n");
 
 				logger.finest(INVALID_INPUT_MESSAGE);
@@ -1774,7 +1847,8 @@ public class CRUD {
 			tempString = tempString.substring(whitespaceIndex3 + 1).trim();
 
 			if (tempString.length() == 0) {
-				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+				// "\n");
 				// flexWindow.getTextArea().append("\n");
 
 				logger.finest(INVALID_INPUT_MESSAGE);
@@ -1790,7 +1864,8 @@ public class CRUD {
 				tempString = tempString.substring(notWhitespaceDoneIndex2 + 8).trim();
 
 				if (tempString.length() != 0) {
-					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+					// "\n");
 					// flexWindow.getTextArea().append("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
@@ -1801,7 +1876,8 @@ public class CRUD {
 
 				if (allTasksList.get(deadlineOrEventTasksList.size() + Integer.valueOf(number2) - 1)
 						.getDone() == null) {
-					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+					// "\n");
 					// flexWindow.getTextArea().append("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
@@ -1824,7 +1900,8 @@ public class CRUD {
 				tempString = tempString.substring(doneIndex2 + 4).trim();
 
 				if (tempString.length() != 0) {
-					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+					// "\n");
 					// flexWindow.getTextArea().append("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
@@ -1835,7 +1912,8 @@ public class CRUD {
 
 				if (allTasksList.get(deadlineOrEventTasksList.size() + Integer.valueOf(number2) - 1)
 						.getDone() != null) {
-					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+					// "\n");
 					// flexWindow.getTextArea().append("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
@@ -1854,7 +1932,8 @@ public class CRUD {
 				lastAction.setPreviousTask(new Task(allTasksList
 						.get(deadlineOrEventTasksList.size() + Integer.valueOf(number2) - 1).getScheduleString()));
 			} else {
-				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE +
+				// "\n");
 				// flexWindow.getTextArea().append("\n");
 
 				logger.finest(INVALID_INPUT_MESSAGE);
@@ -1885,7 +1964,8 @@ public class CRUD {
 
 		writer.close();
 
-		// flexWindow.getTextArea().append(MARKED_DONE_OR_NOT_DONE_MESSAGE + "\n");
+		// flexWindow.getTextArea().append(MARKED_DONE_OR_NOT_DONE_MESSAGE +
+		// "\n");
 		// flexWindow.getTextArea().append("\n");
 
 		logger.finest(MARKED_DONE_OR_NOT_DONE_MESSAGE);
