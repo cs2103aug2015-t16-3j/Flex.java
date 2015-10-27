@@ -535,14 +535,14 @@ public class CRUD {
 				return INVALID_INPUT_MESSAGE;
 			}
 
-			int tasknameWhitespaceToIndex2 = tempString.indexOf("taskname to");
-			int dateWhitespaceToIndex2 = tempString.indexOf("date to");
-			int timeWhitespaceToIndex2 = tempString.indexOf("time to");
-			int endWhitespaceByIndex2 = tempString.indexOf("end by");
+			int tasknameWhitespaceToIndex2 = tempString.indexOf("taskname to ");
+			int dateWhitespaceToIndex2 = tempString.indexOf("date to ");
+			int timeWhitespaceToIndex2 = tempString.indexOf("time to ");
+			int endWhitespaceByIndex2 = tempString.indexOf("end by ");
 			int byIndex2 = tempString.indexOf("by");
 
 			if (tasknameWhitespaceToIndex2 == 0) {
-				tempString = tempString.substring(tasknameWhitespaceToIndex2 + 11).trim();
+				tempString = tempString.substring(tasknameWhitespaceToIndex2 + 12).trim();
 
 				if (tempString.length() == 0) {
 					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
@@ -566,7 +566,7 @@ public class CRUD {
 						allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1).getScheduleString()));
 
 			} else if (dateWhitespaceToIndex2 == 0) {
-				tempString = tempString.substring(dateWhitespaceToIndex2 + 7).trim();
+				tempString = tempString.substring(dateWhitespaceToIndex2 + 8).trim();
 
 				if (tempString.length() == 0) {
 					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
@@ -602,7 +602,7 @@ public class CRUD {
 
 			} else if (timeWhitespaceToIndex2 == 0) {
 
-				tempString = tempString.substring(timeWhitespaceToIndex2 + 7).trim();
+				tempString = tempString.substring(timeWhitespaceToIndex2 + 8).trim();
 
 				if (tempString.length() == 0) {
 					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
@@ -706,7 +706,7 @@ public class CRUD {
 						allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1).getScheduleString()));
 
 			} else if (endWhitespaceByIndex2 == 0) {
-				tempString = tempString.substring(endWhitespaceByIndex2 + 6).trim();
+				tempString = tempString.substring(endWhitespaceByIndex2 + 7).trim();
 
 				if (tempString.length() == 0) {
 					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
@@ -893,10 +893,10 @@ public class CRUD {
 				return INVALID_INPUT_MESSAGE;
 			}
 
-			int tasknameWhitespaceToIndex3 = tempString.indexOf("taskname to");
+			int tasknameWhitespaceToIndex3 = tempString.indexOf("taskname to ");
 
 			if (tasknameWhitespaceToIndex3 == 0) {
-				tempString = tempString.substring(tasknameWhitespaceToIndex3 + 11).trim();
+				tempString = tempString.substring(tasknameWhitespaceToIndex3 + 12).trim();
 
 				if (tempString.length() == 0) {
 					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
@@ -991,12 +991,12 @@ public class CRUD {
 				return INVALID_INPUT_MESSAGE;
 			}
 
-			int tasknameWhitespaceToIndex5 = tempString.indexOf("taskname to");
+			int tasknameWhitespaceToIndex5 = tempString.indexOf("taskname to ");
 			int toWhitespaceEveryWhitespaceIndex1 = tempString.indexOf("to every ");
 			int timeWhitespaceToWhitespaceIndex1 = tempString.indexOf("time to ");
 
 			if (tasknameWhitespaceToIndex5 == 0) {
-				tempString = tempString.substring(tasknameWhitespaceToIndex5 + 11).trim();
+				tempString = tempString.substring(tasknameWhitespaceToIndex5 + 12).trim();
 
 				if (tempString.length() == 0) {
 					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
