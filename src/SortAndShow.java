@@ -29,8 +29,8 @@ public class SortAndShow {
 		int whitespaceIndex1 = remainingCommandString.indexOf(" ");
 
 		if (whitespaceIndex1 < 0) {
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
+		//	flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+		//	flexWindow.getTextArea().append("\n");
 
 			System.out.println();
 			logger.finest(INVALID_INPUT_MESSAGE);
@@ -104,8 +104,8 @@ public class SortAndShow {
 
 			// check if the date used for searching, is valid
 			if (!Checker.isValidDate(tempDate)) {
-				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-				flexWindow.getTextArea().append("\n");
+				//flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+				//flexWindow.getTextArea().append("\n");
 
 				logger.finest(INVALID_INPUT_MESSAGE);
 				System.out.println(INVALID_INPUT_MESSAGE);
@@ -162,8 +162,8 @@ public class SortAndShow {
 
 			// check if the starting time used for searching, is valid
 			if (!Checker.isValidTime(tempStartTime)) {
-				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-				flexWindow.getTextArea().append("\n");
+			//	flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+			//	flexWindow.getTextArea().append("\n");
 
 				logger.finest(INVALID_INPUT_MESSAGE);
 				System.out.println(INVALID_INPUT_MESSAGE);
@@ -194,8 +194,8 @@ public class SortAndShow {
 			String tempEndTime = searchTerm;
 
 			if (!Checker.isValidTime(tempEndTime)) {
-				flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-				flexWindow.getTextArea().append("\n");
+			//	flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+			//	flexWindow.getTextArea().append("\n");
 
 				logger.finest(INVALID_INPUT_MESSAGE);
 				System.out.println(INVALID_INPUT_MESSAGE);
@@ -246,8 +246,8 @@ public class SortAndShow {
 			}
 		} else {
 			// invalid input case
-			flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			flexWindow.getTextArea().append("\n");
+		//	flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
+		//	flexWindow.getTextArea().append("\n");
 
 			logger.finest(INVALID_INPUT_MESSAGE);
 			System.out.println(INVALID_INPUT_MESSAGE);
