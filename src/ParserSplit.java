@@ -4,7 +4,7 @@ public class ParserSplit {
     private static final String COMMAND_DELETE = "delete";
     private static final String COMMAND_CHANGE = "change";
     private static final String COMMAND_UNDO = "undo";
-    //private static final String COMMAND_SHOW = "show";
+    private static final String COMMAND_SHOW = "show";
     //private static final String COMMAND_DISPLAY = "display";
     private static final String COMMAND_SEARCH = "search";
     private static final String COMMAND_EXIT = "exit";
@@ -26,8 +26,8 @@ public class ParserSplit {
     	                       break;
 	      case COMMAND_UNDO: command = undoCommand();
 	                         break;
-	      //case COMMAND_SHOW: command = showCommand(arguments);
-	                         //break;
+	      case COMMAND_SHOW: command = showCommand(arguments);
+	                         break;
 	      //case COMMAND_DISPLAY: command = displayCommand(arguments);
 	                         //break;
 	      case COMMAND_SEARCH: command = searchCommand(arguments);
@@ -240,7 +240,20 @@ public class ParserSplit {
     	return command;
      
  }
-
+    // show
+    private static Command showCommand(String arguments){
+    	Command command = new Command(Command.Type.SHOW);
+    	if(arguments.contains("by")){
+    		String[] splitString = arguments.split(" ");
+    		String splitKeyword = splitString[1].trim();
+    		command.setShowKeyword(splitKeyword);
+    	}
+    	else if(!arguments.trim().equals("")){
+    		String showKeyword = arguments.trim();
+    		command.setShowKeyword(showKeyword);
+    	}
+    	return command;
+    }
     // search
     private static Command searchCommand(String arguments){
     	Command command = new Command(Command.Type.SEARCH);
