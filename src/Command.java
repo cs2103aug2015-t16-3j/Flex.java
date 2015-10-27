@@ -1,6 +1,6 @@
 public class Command {
      public enum Type{
-    	 ADD,DELETE,CHANGE,UNDO,DISPLAY,SEARCH,EXIT,INVALID
+    	 ADD,DELETE,CHANGE,UNDO,SHOW,DISPLAY,SEARCH,EXIT,INVALID
      }
     
      private Type type;
@@ -20,6 +20,7 @@ public class Command {
      private String changedEndTime;
      private String changedDay;
      private String changedPriority;
+     private String showKeyword;
      
      public Command(Type type){
     	 this.type = type;
@@ -77,6 +78,9 @@ public class Command {
      public String getChangedPriority(){
     	 return changedPriority;
      }
+     public String getShowKeyword(){
+    	 return showKeyword;
+     }
      
      
      public void setTaskType(String taskType){
@@ -128,5 +132,8 @@ public class Command {
      }
      public void setChangedPriority(String changedPriority){
     	 this.changedPriority = changedPriority;
+     }
+     public void setShowKeyword(String showKeyword){
+    	 this.showKeyword = showKeyword;
      }
 }
