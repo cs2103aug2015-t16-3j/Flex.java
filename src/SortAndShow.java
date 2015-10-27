@@ -350,7 +350,7 @@ public class SortAndShow {
 	// each date, followed by each date's deadline tasks, then event tasks are
 	// displayed
 	// followed by floating tasks after each date
-	static void readAndDisplayAll(String filename, FlexWindow flexWindow) throws IOException {
+	static String readAndDisplayAll(String filename, FlexWindow flexWindow) throws IOException {
 		BufferedReader reader = null;
 
 		reader = new BufferedReader(new FileReader(filename));
@@ -469,6 +469,8 @@ public class SortAndShow {
 		System.out.println();
 
 		flexWindow.getTextArea().append("\n");
+		
+		return ALL_TASKS_DISPLAYED_MESSAGE;
 	}
 
 	// used to display tasks given an ArrayList of Tasks
