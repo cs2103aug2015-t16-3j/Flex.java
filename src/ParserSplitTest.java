@@ -41,6 +41,11 @@ public class ParserSplitTest {
 		System.out.println(search.getCommandType());
 		System.out.println(search.getKeyWord());
 		
+		//change normal task
+		Command change = ParserSplit.parse("change 01/01/2015 1 taskName to TaskName");
+		System.out.println(change.getCommandType() +" "+change.getTaskType());
+		System.out.println(change.getDate() + " "+ change.getNumber()+" "+ change.getChangedTaskName());
+		
 		
 		
 	}
