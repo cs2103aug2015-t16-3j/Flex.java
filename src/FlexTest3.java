@@ -37,7 +37,7 @@ public class FlexTest3 {
 				ShowDays.generateNextDate("31/1/2014"));
 
 		// leap year case
-		assertEquals("generating the next date from " + (FEBRUARY_DAYS + 1) + " /2/2012", "1/3/2012",
+		assertEquals("generating the next date from " + (FEBRUARY_DAYS + 1) + "29/2/2012", "1/3/2012",
 				ShowDays.generateNextDate("29/2/2012"));
 
 		// leap year case

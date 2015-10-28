@@ -22,6 +22,10 @@ public class FlexTest2 {
 		// event task input
 		assertTrue(Checker.isEventTaskInput("task; 0000-0001 on 1/1/1; priority"));
 
+		assertTrue(Checker.isEventTaskInput("task; 1201-1301 on 2/12/2015; priority"));
+		
+		assertTrue(Checker.isEventTaskInput("task; 1201-1301 on 3/12/2015; priority"));
+		
 		assertTrue(!Checker.isEventTaskInput("task; 0002-0001 on 1/1/1; priority"));
 
 		assertTrue(!Checker.isEventTaskInput("task; 0000-0001 on 22/11/1111; priority [done]"));
