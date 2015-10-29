@@ -138,7 +138,7 @@ public class Flex {
 
 		// Note: clear the output display area after the user input command line
 		// has been entered
-		// flexWindow.getTextArea().setText("");
+		flexWindow.getTextArea().setText("");
 
 		if (whitespaceIndex < 0) {
 
@@ -160,7 +160,7 @@ public class Flex {
 				// Case 2: undo the last action
 				// Note: This method will call readAndExecuteCommand again
 				CRUD.undo(filename, lastAction, flexWindow);
-				SortAndShow.readAndDisplayAll(filename, flexWindow);
+				
 			} else {
 				// Case 3: invalid input
 				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
@@ -224,7 +224,7 @@ public class Flex {
 						System.out.println();
 					}
 				}
-				SortAndShow.readAndDisplayAll(filename, flexWindow);
+				
 				
 			} else if (firstWord.equalsIgnoreCase("delete")) {
 				// Case 6: Deleting a task
@@ -243,7 +243,7 @@ public class Flex {
 					// only if input is valid
 					CRUD.deleteTask(filename, remainingCommandString, lastAction, flexWindow);
 				}
-				SortAndShow.readAndDisplayAll(filename, flexWindow);
+				
 				
 			} else if (firstWord.equalsIgnoreCase("change")) {
 				// Case 7: changing a task's variable
@@ -266,7 +266,7 @@ public class Flex {
 					// Note: This method will call readAndExecuteCommand again
 					CRUD.changeTaskVariable(filename, remainingCommandString, lastAction, flexWindow);
 				}
-				SortAndShow.readAndDisplayAll(filename, flexWindow);
+				
 				
 			} else if (firstWord.equalsIgnoreCase("search")) {
 				// Case 8: Search for tasks
@@ -305,7 +305,7 @@ public class Flex {
 
 				if ((remainingString.equalsIgnoreCase("by date")) || (remainingString.equalsIgnoreCase("all"))) {
 
-					SortAndShow.readAndDisplayAll(filename, flexWindow);
+					
 
 				} else if (remainingString.equalsIgnoreCase("by day")) {
 					logger.finest(FLOATING_TASKS_DISPLAYED_MESSAGE);
@@ -390,7 +390,7 @@ public class Flex {
 				
 					CRUD.markAsDone(filename, remainingCommandString, lastAction, flexWindow);
 				}
-				SortAndShow.readAndDisplayAll(filename, flexWindow);
+				
 				
 			} else {
 				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
@@ -402,6 +402,9 @@ public class Flex {
 
 			}
 		}
+		
+		SortAndShow.readAndDisplayAll(filename, flexWindow);
+		
 		readAndExecuteCommand(filename, lastAction, flexWindow);
 	}
 
