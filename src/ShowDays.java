@@ -35,7 +35,7 @@ public class ShowDays {
 
 	// used to show tasks which are in 7 consecutive days
 	// starting from the date the user indicates
-	static void showWeek(String filename, FlexWindow flexWindow) throws IOException {
+	static void showWeek(String filename) throws IOException {
 		sc = new Scanner(System.in);
 
 		BufferedReader reader = null;
@@ -88,21 +88,21 @@ public class ShowDays {
 
 		date1.trim();
 
-		SortAndShow.searchAndShowTask(filename, "date " + date1, flexWindow);
+		SortAndShow.searchAndShowTask(filename, "date " + date1);
 
 		// day 2
 		String date2 = generateNextDate(date1);
 
 		date2.trim();
 
-		SortAndShow.searchAndShowTask(filename, "date " + date2, flexWindow);
+		SortAndShow.searchAndShowTask(filename, "date " + date2);
 
 		// day 3
 		String date3 = generateNextDate(date2);
 
 		date3.trim();
 
-		SortAndShow.searchAndShowTask(filename, "date " + date3, flexWindow);
+		SortAndShow.searchAndShowTask(filename, "date " + date3);
 
 		// day 4
 
@@ -110,28 +110,28 @@ public class ShowDays {
 
 		date4.trim();
 
-		SortAndShow.searchAndShowTask(filename, "date " + date4, flexWindow);
+		SortAndShow.searchAndShowTask(filename, "date " + date4);
 
 		// day 5
 		String date5 = generateNextDate(date4);
 
 		date5.trim();
 
-		SortAndShow.searchAndShowTask(filename, "date " + date5, flexWindow);
+		SortAndShow.searchAndShowTask(filename, "date " + date5);
 
 		// day 6
 		String date6 = generateNextDate(date5);
 
 		date6.trim();
 
-		SortAndShow.searchAndShowTask(filename, "date " + date6, flexWindow);
+		SortAndShow.searchAndShowTask(filename, "date " + date6);
 
 		// day 7
 		String date7 = generateNextDate(date6);
 
 		date7.trim();
 
-		SortAndShow.searchAndShowTask(filename, "date " + date7, flexWindow);
+		SortAndShow.searchAndShowTask(filename, "date " + date7);
 
 		logger.finest(TASKS_FOR_WEEK_DISPLAYED_FRONT_MESSAGE + date1 + TASKS_FOR_WEEK_DISLAYED_BACK_MESSAGE);
 		System.out.println(TASKS_FOR_WEEK_DISPLAYED_FRONT_MESSAGE + date1 + TASKS_FOR_WEEK_DISLAYED_BACK_MESSAGE);
