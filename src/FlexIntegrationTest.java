@@ -22,13 +22,15 @@ public class FlexIntegrationTest {
 	private static final String MARKED_DONE_OR_NOT_DONE_MESSAGE = "The task has been marked as 1) done, or 2) not done. This is possible because it was previously 1) not done, or 2) done, respectively.";
 	private static final String TASK_DOES_NOT_EXIST_MESSAGE = "Task does not exist, so no such task can be deleted.";
 	private static final String BLOCKED_MESSAGE = "Unable to add the new event task (which is not done), because the new task (which is not done) clashes with existing event tasks  (which are not done) (on the same date).";
-
 	
 	@Test
 	public void test() throws IOException {
 		String filename = "FlexIntegrationTestDocument.txt";
-
-
+	
+		String[] args = new String[100];
+		
+		FlexWindow.main(args);
+		
 		LastAction lastAction = new LastAction();
 
 		String remainingCommandString = new String("");
