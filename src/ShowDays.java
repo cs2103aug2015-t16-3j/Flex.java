@@ -8,8 +8,6 @@ public class ShowDays {
 
 	private static final Logger logger = Logger.getLogger(ShowDays.class.getName());
 
-	private static Scanner sc;
-
 	private static final String STARTING_DATE_REQUEST_MESSAGE = "Please enter the starting date (format: dd/mm/yyyy): "
 			+ "\n";
 
@@ -36,7 +34,7 @@ public class ShowDays {
 	// used to show tasks which are in 7 consecutive days
 	// starting from the date the user indicates
 	static void showWeek(String filename, String date) throws IOException {
-		
+
 		BufferedReader reader = null;
 
 		reader = new BufferedReader(new FileReader(filename));
@@ -56,7 +54,8 @@ public class ShowDays {
 			reader.close();
 		}
 
-		// flexWindow.getTextArea().append(STARTING_DATE_REQUEST_MESSAGE + "\n");
+		// flexWindow.getTextArea().append(STARTING_DATE_REQUEST_MESSAGE +
+		// "\n");
 		// flexWindow.getTextArea().append("\n");
 
 		logger.finest(STARTING_DATE_REQUEST_MESSAGE);
