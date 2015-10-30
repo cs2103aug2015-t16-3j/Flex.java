@@ -13,13 +13,8 @@
 // 7. Undo the very last VALID action done for 1. , 2. and 3. - searching and showing(displaying) commands will not have their last VALID action saved 
 // 8. Able to show tasks which has priority levels not being numbers (not all characters in the priority level string are numerical digits)
 
-import java.util.*;
-import java.io.File;
+
 import java.io.IOException;
-import javax.swing.JFrame;
-
-import javafx.stage.Stage;
-
 import java.util.logging.*;
 
 public class Flex {
@@ -52,7 +47,6 @@ public class Flex {
 		try {
 			readAndExecuteCommand(filename, lastAction);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -289,8 +283,17 @@ public class Flex {
 					System.out.println();
 
 					SortAndShow.showRecurringTasks(filename);
-				} else if (remainingString.equalsIgnoreCase("week")) {
-					ShowDays.showWeek(filename);
+				} else if (remainingString.indexOf("week ") == 0) {
+					String date = remainingString.substring(5);
+					if(date.length()==0){
+						FlexWindow.getTextArea().appendText(INVALID_INPUT_MESSAGE + "\n");
+						FlexWindow.getTextArea().appendText("\n");
+
+						logger.finest(INVALID_INPUT_MESSAGE);
+						System.out.println(INVALID_INPUT_MESSAGE);
+						System.out.println();
+					}
+					ShowDays.showWeek(filename, date);
 				} else {
 					FlexWindow.getTextArea().appendText(INVALID_INPUT_MESSAGE + "\n");
 					FlexWindow.getTextArea().appendText("\n");
