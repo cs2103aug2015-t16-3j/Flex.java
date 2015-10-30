@@ -1,0 +1,158 @@
+---------------------------------------------------------------
+
+Deadline task:
+
+1) Add a deadline task:
+add <taskname>; by <end> on <date>
+
+2) Add a done deadline task:
+add <taskname>; by <end> on <date> [done]
+
+3) Mark deadline task as done:
+mark <date> <number> done
+
+4) Mark deadline task as not done:
+mark <date> <number> not done
+
+5) Change the taskname of a deadline task:
+change <date> <number> taskname to <newtaskname>
+
+6) Change the date of a deadline task:
+change <date> <number> date to <newdate>
+
+7) Change the ending time of the deadline task:
+change <date> <number> end by <new end>
+
+8) Change the ending time and date of the deadline task:
+change <date> <number> by <newend> on <newdate>
+
+---------------------------------------------------------------
+
+Event task:
+
+1) Add an event task:
+add <taskname>; <start>-<end> on <date>; <priority>
+
+2) Add a done event task:
+add <taskname>; <start>-<end> on <date>; <priority> [done]
+
+3) Mark an event task as done:
+mark <date> <number> done
+
+4) Mark an event task as not done:
+mark <date> <number> not done
+
+5) Change the taskname of an event task:
+change <date> <number> taskname to <newtaskname>
+
+6) Change the date of an event task:
+change <date> <number> date to <newdate>
+
+7) Change the priority of an event task:
+change <date> <number> priority to <newpriority>
+
+8) Change the start and end times of an event task
+change <date> <number> time to <newstart>-<newend> 
+
+---------------------------------------------------------------
+
+Floating tasks:
+
+1) Add a floating task:
+add <taskname>
+
+2) Add a done floating task:
+add <taskname> [done]
+
+3) Mark a floating task as done:
+mark floating <number> done
+
+4) Mark a floating task as not done:
+mark floating <number> not done
+
+5) Change the taskname of a floating task
+change floating <number> taskname to <newtaskname>
+
+---------------------------------------------------------------
+
+Recurring tasks:
+
+1) Add a recurring task
+add <taskname>; <start>-<end> every <day>; priority
+
+2) Change the taskname of a recurring task:
+change rec <number> taskname to <newtaskname>
+
+3) Change the day of a recurring task:
+change rec <number> to every <newday> 
+
+4) Change the start and end times of a recurring task:
+<start>-<end>: change rec <number> time to <newstart>-<newend>
+
+---------------------------------------------------------------
+
+Search functions:
+
+
+1) Search for a task using a matching string in the taskname: 
+search taskname <tasknamematchingstring>
+
+2) Search for a task using an exact date: 
+search date <exactdate>
+
+3) Search for a task using an exact day:
+search day <exactday>
+
+4) Search for a task using an exact start time:
+search start <exactstartingtime>
+      
+5) Search for a task using an exact ending time:
+search end <exactendingtime>
+
+6) Search for a task using a matching string in the task priority:
+search priority <prioritymatchingstring>
+
+---------------------------------------------------------------
+
+Show functions:
+
+1) Show all tasks: 
+show all
+
+2) Show all done tasks:
+show done
+
+3) Show all tasks which are not done: 
+show not done
+
+4) Show all deadline tasks: 
+show deadline
+
+5) Show all event tasks:
+show event
+
+6) Show all recurring tasks: 
+show recurring
+
+7) Show all floating tasks: 
+show floating
+
+8) Show all tasks by taskname: 
+show by taskname
+
+9) Show all deadline and event tasks by date: 
+show by date
+
+10) Show all recurring tasks by day: 
+show by day
+
+11) Show all event tasks by start time: 
+show by start
+
+12) Show all deadline and event tasks by end time: 
+show by end
+
+13) Show all event tasks by priority: 
+show by priority
+
+-----------------------------------------------------
