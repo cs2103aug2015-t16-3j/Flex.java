@@ -1,4 +1,3 @@
-
 // Flex.java
 // Uses Task objects from Task.java
 // Able to
@@ -18,16 +17,18 @@ import java.util.*;
 import java.io.File;
 import java.io.IOException;
 import javax.swing.JFrame;
+
+import javafx.stage.Stage;
+
 import java.util.logging.*;
 
 public class Flex {
 
 	private static final Logger logger = Logger.getLogger(Flex.class.getName());
-
-	private static FlexWindow flexWindow;
-	private static Scanner sc;
-	private static String filename = new String("");
-
+	
+	private static String command;
+	private static LastAction lastAction = new LastAction();
+	
 	private static final String DONE_TASKS_DISPLAYED_MESSAGE = "The tasks in the schedule, which are marked as "
 			+ "done" + " for their categories, are displayed.";
 	private static final String NOT_DONE_TASKS_DISPLAYED_MESSAGE = "The tasks in the schedule, which are not marked as "
@@ -40,91 +41,26 @@ public class Flex {
 	private static final String INVALID_INPUT_MESSAGE = "Invalid input. Please try again.";
 
 	private static final String EXIT_MESSAGE = "Exiting the program.";
-	private static final String FILENAME_ACCEPTED_MESSAGE = "The filename is accepted.";
-	private static final String PROCEED_MESSAGE = "Please proceed with the user input commands.";
-	private static final String FILENAME_INPUT_MESSAGE = "Please enter the full path name of the .txt schedule file, including its name. For example: C:"
-			+ "\\" + "Users" + "\\" + "Owner" + "\\" + "Documents" + "\\" + "Flex" + "." + "java" + "\\" + "src" + "\\"
-			+ "FlexTest" + "." + "txt";
+
 
 	// Note: The programs starts by typing "java Flex" in command line prompt.
 
-	public static void main(String[] args) throws IOException {
-		flexWindow = new FlexWindow();
-		flexWindow.setTitle("Flex");
-		flexWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		flexWindow.setBounds(100, 100, 450, 300);
-		flexWindow.setVisible(true);
 
-		logger.finest(FILENAME_INPUT_MESSAGE);
-		System.out.println(FILENAME_INPUT_MESSAGE);
-		System.out.println();
-
-		// flexWindow.getTextArea().setText(FILENAME_INPUT_MESSAGE + "\n");
-		// flexWindow.getTextArea().append("\n");
-
-		filename = new String("");
-		sc = new Scanner(System.in);
-		filename = sc.nextLine();
-		filename.trim();
-
-		// flexWindow.getTextArea().setText("");
-
-		File tempFile = new File(filename);
-
-		while ((!tempFile.exists()) || (filename.length() <= 4)
-				|| (!filename.substring(filename.length() - 4, filename.length()).equalsIgnoreCase(".txt"))) {
-			System.out.println();
-
-			// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			// flexWindow.getTextArea().append("\n");
-
-			logger.finest(INVALID_INPUT_MESSAGE);
-			System.out.println(INVALID_INPUT_MESSAGE);
-			System.out.println();
-
-			// flexWindow.getTextArea().append(FILENAME_INPUT_MESSAGE + "\n");
-			// flexWindow.getTextArea().append("\n");
-
-			logger.finest(FILENAME_INPUT_MESSAGE);
-			System.out.println(FILENAME_INPUT_MESSAGE);
-			System.out.println();
-
-			filename = sc.nextLine();
-			tempFile = new File(filename);
-
-			// flexWindow.getTextArea().setText("");
-
+	public static void processCommand(String input, String filename) {
+		command = input;
+		
+		try {
+			readAndExecuteCommand(filename, lastAction);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-
-		System.out.println();
-		logger.finest(FILENAME_ACCEPTED_MESSAGE);
-		System.out.println(FILENAME_ACCEPTED_MESSAGE);
-		System.out.println();
-
-		// flexWindow.getTextArea().append(FILENAME_ACCEPTED_MESSAGE + "\n");
-		// flexWindow.getTextArea().append("\n");
-
-		logger.finest(PROCEED_MESSAGE);
-		System.out.println(PROCEED_MESSAGE);
-		System.out.println();
-
-		// flexWindow.getTextArea().append(PROCEED_MESSAGE + "\n");
-		// flexWindow.getTextArea().append("\n");
-
-		LastAction lastAction = new LastAction();
-
-		// this method takes care of the manipulation to be done, as well as the
-		// operation for exiting the program
-		readAndExecuteCommand(filename, lastAction, flexWindow);
 	}
 
-	static void readAndExecuteCommand(String filename, LastAction lastAction, FlexWindow flexWindow)
+		
+	static void readAndExecuteCommand(String filename, LastAction lastAction)
 			throws IOException {
 		System.out.println();
-
-		sc = new Scanner(System.in);
-
-		String command = sc.nextLine();
 
 		command.trim();
 
@@ -138,7 +74,7 @@ public class Flex {
 
 		// Note: clear the output display area after the user input command line
 		// has been entered
-		flexWindow.getTextArea().setText("");
+		FlexWindow.getTextArea().setText("");
 
 		if (whitespaceIndex < 0) {
 
@@ -147,24 +83,22 @@ public class Flex {
 			// Case 1: The program Flex.java will exit itself in Command Line
 			// Prompt (cmd).
 			if (firstWord.equalsIgnoreCase("exit")) {
-				// flexWindow.getTextArea().append(EXIT_MESSAGE + "\n");
-				// flexWindow.getTextArea().append("\n");
+				FlexWindow.getTextArea().appendText(EXIT_MESSAGE + "\n");
+				FlexWindow.getTextArea().appendText("\n");
 
 				logger.finest(EXIT_MESSAGE);
 				System.out.println(EXIT_MESSAGE);
 				System.out.println();
 
-				// the program is exited
 				System.exit(1);
 			} else if (firstWord.equalsIgnoreCase("undo")) {
 				// Case 2: undo the last action
 				// Note: This method will call readAndExecuteCommand again
-				CRUD.undo(filename, lastAction, flexWindow);
-				
+				CRUD.undo(filename, lastAction);
 			} else {
 				// Case 3: invalid input
-				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-				// flexWindow.getTextArea().append("\n");
+				FlexWindow.getTextArea().appendText(INVALID_INPUT_MESSAGE + "\n");
+				FlexWindow.getTextArea().appendText("\n");
 
 				logger.finest(INVALID_INPUT_MESSAGE);
 				System.out.println(INVALID_INPUT_MESSAGE);
@@ -180,8 +114,8 @@ public class Flex {
 			// Case 4: invalid input
 			if (firstWord.substring(0, 1).equalsIgnoreCase("")) {
 
-				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-				// flexWindow.getTextArea().append("\n");
+				FlexWindow.getTextArea().appendText(INVALID_INPUT_MESSAGE + "\n");
+				FlexWindow.getTextArea().appendText("\n");
 
 				logger.finest(INVALID_INPUT_MESSAGE);
 				System.out.println(INVALID_INPUT_MESSAGE);
@@ -194,38 +128,35 @@ public class Flex {
 
 				if (remainingCommandString.length() == 0) {
 					// INVALID if the remaining command string is empty
-					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-					// flexWindow.getTextArea().append("\n");
+					FlexWindow.getTextArea().appendText(INVALID_INPUT_MESSAGE + "\n");
+					FlexWindow.getTextArea().appendText("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
 					System.out.println(INVALID_INPUT_MESSAGE);
 					System.out.println();
-				} else {
-
-					boolean isAddedTaskValid = (Checker.isFloatingTaskInput(remainingCommandString)
-							|| Checker.isDoneFloatingTaskInput(remainingCommandString)
-							|| Checker.isDeadlineTaskInput(remainingCommandString)
-							|| Checker.isDoneDeadlineTaskInput(remainingCommandString)
-							|| Checker.isEventTaskInput(remainingCommandString)
-							|| Checker.isDoneEventTaskInput(remainingCommandString)
-							|| Checker.isRecurringTaskInput(remainingCommandString));
-
-					// Only if the task is a floating task, a deadline task, or a
-					// normal task, then it will be attempted to be added to the
-					// .txt schedule file (i.e. tasks which are not done) yet
-					if (isAddedTaskValid) {
-						CRUD.addTask(filename, remainingCommandString, lastAction, flexWindow);
-					} else {
-						// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-						// flexWindow.getTextArea().append("\n");
-
-						logger.finest(INVALID_INPUT_MESSAGE);
-						System.out.println(INVALID_INPUT_MESSAGE);
-						System.out.println();
-					}
 				}
-				
-				
+
+				boolean isAddedTaskValid = (Checker.isFloatingTaskInput(remainingCommandString)
+						|| Checker.isDoneFloatingTaskInput(remainingCommandString)
+						|| Checker.isDeadlineTaskInput(remainingCommandString)
+						|| Checker.isDoneDeadlineTaskInput(remainingCommandString)
+						|| Checker.isEventTaskInput(remainingCommandString)
+						|| Checker.isDoneEventTaskInput(remainingCommandString)
+						|| Checker.isRecurringTaskInput(remainingCommandString));
+
+				// Only if the task is a floating task, a deadline task, or a
+				// normal task, then it will be attempted to be added to the
+				// .txt schedule file (i.e. tasks which are not done) yet
+				if (isAddedTaskValid) {
+					CRUD.addTask(filename, remainingCommandString, lastAction);
+				} else {
+					FlexWindow.getTextArea().appendText(INVALID_INPUT_MESSAGE + "\n");
+					FlexWindow.getTextArea().appendText("\n");
+
+					logger.finest(INVALID_INPUT_MESSAGE);
+					System.out.println(INVALID_INPUT_MESSAGE);
+					System.out.println();
+				}
 			} else if (firstWord.equalsIgnoreCase("delete")) {
 				// Case 6: Deleting a task
 				String remainingCommandString = command.substring(whitespaceIndex + 1);
@@ -233,18 +164,17 @@ public class Flex {
 
 				if (remainingCommandString.length() == 0) {
 					// INVALID if the remaining command string is empty
-					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-					// flexWindow.getTextArea().append("\n");
+					FlexWindow.getTextArea().appendText(INVALID_INPUT_MESSAGE + "\n");
+					FlexWindow.getTextArea().appendText("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
 					System.out.println(INVALID_INPUT_MESSAGE);
 					System.out.println();
-				} else{
-					// only if input is valid
-					CRUD.deleteTask(filename, remainingCommandString, lastAction, flexWindow);
 				}
-				
-				
+
+				// only if input is valid
+				CRUD.deleteTask(filename, remainingCommandString, lastAction);
+
 			} else if (firstWord.equalsIgnoreCase("change")) {
 				// Case 7: changing a task's variable
 				// each change/edit command starts with the hyphen on the far
@@ -255,19 +185,18 @@ public class Flex {
 
 				if (remainingCommandString.length() == 0) {
 					// INVALID if the remaining command string is empty
-					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-					// flexWindow.getTextArea().append("\n");
+					FlexWindow.getTextArea().appendText(INVALID_INPUT_MESSAGE + "\n");
+					FlexWindow.getTextArea().appendText("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
 					System.out.println(INVALID_INPUT_MESSAGE);
 					System.out.println();
-				} else{
-					// only if input is valid
-					// Note: This method will call readAndExecuteCommand again
-					CRUD.changeTaskVariable(filename, remainingCommandString, lastAction, flexWindow);
 				}
-				
-				
+
+				// only if input is valid
+				// Note: This method will call readAndExecuteCommand again
+				CRUD.changeTaskVariable(filename, remainingCommandString, lastAction);
+
 			} else if (firstWord.equalsIgnoreCase("search")) {
 				// Case 8: Search for tasks
 				// (ignoring upper and lower cases),
@@ -278,8 +207,8 @@ public class Flex {
 
 				if (remainingCommandString.length() == 0) {
 					// INVALID if the remaining command string is empty
-					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-					// flexWindow.getTextArea().append("\n");
+					FlexWindow.getTextArea().appendText(INVALID_INPUT_MESSAGE + "\n");
+					FlexWindow.getTextArea().appendText("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
 					System.out.println(INVALID_INPUT_MESSAGE);
@@ -288,7 +217,7 @@ public class Flex {
 
 				// only if the input is valid
 				// Note: This method will call readAndExecuteCommand again
-				SortAndShow.searchAndShowTask(filename, remainingCommandString, flexWindow);
+				SortAndShow.searchAndShowTask(filename, remainingCommandString);
 
 			} else if ((firstWord.equalsIgnoreCase("show")) || (firstWord.equalsIgnoreCase("display"))) {
 				// Case 9:
@@ -305,66 +234,66 @@ public class Flex {
 
 				if ((remainingString.equalsIgnoreCase("by date")) || (remainingString.equalsIgnoreCase("all"))) {
 
-					
+					SortAndShow.readAndDisplayAll(filename);
 
 				} else if (remainingString.equalsIgnoreCase("by day")) {
 					logger.finest(FLOATING_TASKS_DISPLAYED_MESSAGE);
 					System.out.println(FLOATING_TASKS_DISPLAYED_MESSAGE);
 					System.out.println();
 
-					SortAndShow.showFloatingTasks(filename, flexWindow);
+					SortAndShow.showFloatingTasks(filename);
 				} else if (remainingString.equalsIgnoreCase("by taskname")
 						|| remainingString.equalsIgnoreCase("by task")) {
-					SortAndShow.showByTaskName(filename, flexWindow);
+					SortAndShow.showByTaskName(filename);
 				} else if (remainingString.equalsIgnoreCase("by start")) {
-					SortAndShow.showByTaskStartingTime(filename, flexWindow);
+					SortAndShow.showByTaskStartingTime(filename);
 				} else if (remainingString.equalsIgnoreCase("by end")) {
-					SortAndShow.showByTaskEndingTime(filename, flexWindow);
+					SortAndShow.showByTaskEndingTime(filename);
 				} else if (remainingString.equalsIgnoreCase("by priority")) {
-					SortAndShow.showByTaskPriority(filename, flexWindow);
+					SortAndShow.showByTaskPriority(filename);
 				} else if (remainingString.equalsIgnoreCase("done")) {
 
 					logger.finest(DONE_TASKS_DISPLAYED_MESSAGE);
 					System.out.println(DONE_TASKS_DISPLAYED_MESSAGE);
 					System.out.println();
 
-					SortAndShow.showDoneTasks(filename, flexWindow);
+					SortAndShow.showDoneTasks(filename);
 				} else if (remainingString.equalsIgnoreCase("not done")) {
 
 					logger.finest(NOT_DONE_TASKS_DISPLAYED_MESSAGE);
 					System.out.println(NOT_DONE_TASKS_DISPLAYED_MESSAGE);
 					System.out.println();
 
-					SortAndShow.showNotDoneTasks(filename, flexWindow);
+					SortAndShow.showNotDoneTasks(filename);
 				} else if (remainingString.equalsIgnoreCase("deadline")) {
 					logger.finest(DEADLINE_TASKS_DISPLAYED_MESSAGE);
 					System.out.println(DEADLINE_TASKS_DISPLAYED_MESSAGE);
 					System.out.println();
 
-					SortAndShow.showDeadlineTasks(filename, flexWindow);
+					SortAndShow.showDeadlineTasks(filename);
 				} else if (remainingString.equalsIgnoreCase("floating") || remainingString.equalsIgnoreCase("by day")) {
 					logger.finest(FLOATING_TASKS_DISPLAYED_MESSAGE);
 					System.out.println(FLOATING_TASKS_DISPLAYED_MESSAGE);
 					System.out.println();
 
-					SortAndShow.showFloatingTasks(filename, flexWindow);
+					SortAndShow.showFloatingTasks(filename);
 				} else if (remainingString.equalsIgnoreCase("event") || remainingString.equalsIgnoreCase("events")) {
 					logger.finest(EVENT_TASKS_DISPLAYED_MESSAGE);
 					System.out.println(EVENT_TASKS_DISPLAYED_MESSAGE);
 					System.out.println();
 
-					SortAndShow.showEventTasks(filename, flexWindow);
+					SortAndShow.showEventTasks(filename);
 				} else if (remainingString.equalsIgnoreCase("recurring")) {
 					logger.finest(RECURRING_TASKS_DISPLAYED_MESSAGE);
 					System.out.println(RECURRING_TASKS_DISPLAYED_MESSAGE);
 					System.out.println();
 
-					SortAndShow.showRecurringTasks(filename, flexWindow);
+					SortAndShow.showRecurringTasks(filename);
 				} else if (remainingString.equalsIgnoreCase("week")) {
-					ShowDays.showWeek(filename, flexWindow);
+					ShowDays.showWeek(filename);
 				} else {
-					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-					// flexWindow.getTextArea().append("\n");
+					FlexWindow.getTextArea().appendText(INVALID_INPUT_MESSAGE + "\n");
+					FlexWindow.getTextArea().appendText("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
 					System.out.println(INVALID_INPUT_MESSAGE);
@@ -380,21 +309,19 @@ public class Flex {
 
 				if (remainingCommandString.length() == 0) {
 					// INVALID if the remaining command string is empty
-					// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-					// flexWindow.getTextArea().append("\n");
+					FlexWindow.getTextArea().appendText(INVALID_INPUT_MESSAGE + "\n");
+					FlexWindow.getTextArea().appendText("\n");
 
 					logger.finest(INVALID_INPUT_MESSAGE);
 					System.out.println(INVALID_INPUT_MESSAGE);
 					System.out.println();
-				} else {
-				
-					CRUD.markAsDone(filename, remainingCommandString, lastAction, flexWindow);
 				}
 				
+				CRUD.markAsDone(filename, remainingCommandString, lastAction);
 				
 			} else {
-				// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-				// flexWindow.getTextArea().append("\n");
+				FlexWindow.getTextArea().appendText(INVALID_INPUT_MESSAGE + "\n");
+				FlexWindow.getTextArea().appendText("\n");
 
 				logger.finest(INVALID_INPUT_MESSAGE);
 				System.out.println(INVALID_INPUT_MESSAGE);
@@ -402,10 +329,6 @@ public class Flex {
 
 			}
 		}
-		
-		SortAndShow.readAndDisplayAll(filename, flexWindow);
-		
-		readAndExecuteCommand(filename, lastAction, flexWindow);
 	}
-
 }
+
