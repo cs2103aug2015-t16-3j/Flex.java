@@ -20,8 +20,6 @@ public class Task {
 	// this is used for sorting the tasks in the schedule file
 	private int deadlineOrEventTimeValue = -3;
 
-	
-	
 	private double recurringTaskValue = 0.0;
 
 	private int deadlineEndingTime = -3;
@@ -31,8 +29,7 @@ public class Task {
 	private int actualYear = -3;
 
 	private double dayAndMonthValue = -3.0;
-	
-	
+
 	private static final String DONE_STRING = "[done]";
 	private static final int DAY_AND_MONTH_VALUE_MONTH_MULTIPLIER = 60;
 	private static final int DAY_HOURS = 24;
@@ -95,7 +92,7 @@ public class Task {
 			this.taskVariables[5] = priority;
 			this.taskVariables[7] = string;
 			// <taskname>; <start>-<end> on <date>, <priority>
-			this.taskVariables[8] = taskName + ", " + startingTime + "-" + endingTime + " on " + date + ", " + priority;
+			this.taskVariables[8] = taskName + ", " + startingTime + "-" + endingTime + ", " + priority;
 
 			// set the null variables
 			this.taskVariables[2] = null;
@@ -148,8 +145,8 @@ public class Task {
 			this.taskVariables[6] = DONE_STRING;
 			this.taskVariables[7] = string;
 			// <taskname>; <start>-<end> on <date>, <priority>
-			this.taskVariables[8] = taskName + ", " + startingTime + "-" + endingTime + " on " + date + ", " + priority
-					+ " " + DONE_STRING;
+			this.taskVariables[8] = taskName + ", " + startingTime + "-" + endingTime + ", " + priority + " "
+					+ DONE_STRING;
 
 			// set the null variables
 			this.taskVariables[2] = null;
@@ -186,8 +183,7 @@ public class Task {
 			this.taskVariables[1] = date;
 			this.taskVariables[4] = endingTime;
 			this.taskVariables[7] = string;
-			this.taskVariables[8] = this.taskVariables[0] + ", by " + this.taskVariables[4] + " on "
-					+ this.taskVariables[1] + " (deadline)";
+			this.taskVariables[8] = this.taskVariables[0] + ", by " + this.taskVariables[4] + " (deadline)";
 
 			// set the null variables
 			this.taskVariables[2] = null;
@@ -230,8 +226,8 @@ public class Task {
 			this.taskVariables[4] = endingTime;
 			this.taskVariables[6] = DONE_STRING;
 			this.taskVariables[7] = string;
-			this.taskVariables[8] = this.taskVariables[0] + ", by " + this.taskVariables[4] + " on "
-					+ this.taskVariables[1] + " (deadline) " + DONE_STRING;
+			this.taskVariables[8] = this.taskVariables[0] + ", by " + this.taskVariables[4] + " (deadline) "
+					+ DONE_STRING;
 
 			// set the null variables
 			this.taskVariables[2] = null;
@@ -375,8 +371,7 @@ public class Task {
 			this.actualYear = year;
 
 			this.dayAndMonthValue = this.actualMonth * DAY_AND_MONTH_VALUE_MONTH_MULTIPLIER + this.actualDay;
-			
-			
+
 		} else if (Checker.isDoneEventTaskInput(string)) {
 			// e.g. 7/9/2015
 			String tempDateString = this.taskVariables[1];
@@ -408,8 +403,7 @@ public class Task {
 			this.actualYear = year;
 
 			this.dayAndMonthValue = this.actualMonth * DAY_AND_MONTH_VALUE_MONTH_MULTIPLIER + this.actualDay;
-			
-			
+
 		}
 		if (Checker.isDeadlineTaskInput(string)) {
 			// e.g. 7/9/2015
@@ -439,8 +433,7 @@ public class Task {
 			this.actualYear = year;
 
 			this.dayAndMonthValue = this.actualMonth * DAY_AND_MONTH_VALUE_MONTH_MULTIPLIER + this.actualDay;
-			
-			
+
 		} else if (Checker.isDoneDeadlineTaskInput(string)) {
 			// e.g. 7/9/2015
 			String tempDateString = this.taskVariables[1];
@@ -469,7 +462,7 @@ public class Task {
 			this.actualYear = year;
 
 			this.dayAndMonthValue = this.actualMonth * DAY_AND_MONTH_VALUE_MONTH_MULTIPLIER + this.actualDay;
-			
+
 		} else if (Checker.isRecurringTaskInput(string)) {
 
 		} else if (Checker.isFloatingTaskInput(string)) {
@@ -549,7 +542,7 @@ public class Task {
 					+ " on " + this.taskVariables[1] + "; " + this.taskVariables[5];
 
 			this.taskVariables[8] = this.taskVariables[0] + ", " + this.taskVariables[3] + "-" + this.taskVariables[4]
-					+ " on " + this.taskVariables[1] + ", " + this.taskVariables[5];
+					+ ", " + this.taskVariables[5];
 
 		} else if (Checker.isDoneEventTaskInput(this.taskVariables[7])) {
 
@@ -557,7 +550,7 @@ public class Task {
 					+ " on " + this.taskVariables[1] + "; " + this.taskVariables[5] + " " + DONE_STRING;
 
 			this.taskVariables[8] = this.taskVariables[0] + ", " + this.taskVariables[3] + "-" + this.taskVariables[4]
-					+ " on " + this.taskVariables[1] + ", " + this.taskVariables[5] + " " + DONE_STRING;
+					+ ", " + this.taskVariables[5] + " " + DONE_STRING;
 
 		} else if (Checker.isDeadlineTaskInput(this.taskVariables[7])) {
 			// deadline task
@@ -565,16 +558,15 @@ public class Task {
 			this.taskVariables[7] = this.taskVariables[0] + "; by " + this.taskVariables[4] + " on "
 					+ this.taskVariables[1];
 
-			this.taskVariables[8] = this.taskVariables[0] + ", by " + this.taskVariables[4] + " on "
-					+ this.taskVariables[1] + " (deadline)";
+			this.taskVariables[8] = this.taskVariables[0] + ", by " + this.taskVariables[4] + " (deadline)";
 
 		} else if (Checker.isDoneDeadlineTaskInput(this.taskVariables[7])) {
 
 			this.taskVariables[7] = this.taskVariables[0] + "; by " + this.taskVariables[4] + " on "
 					+ this.taskVariables[1] + " " + DONE_STRING;
 
-			this.taskVariables[8] = this.taskVariables[0] + ", by " + this.taskVariables[4] + " on "
-					+ this.taskVariables[1] + " (deadline)" + " " + DONE_STRING;
+			this.taskVariables[8] = this.taskVariables[0] + ", by " + this.taskVariables[4] + " (deadline)" + " "
+					+ DONE_STRING;
 
 		} else if (Checker.isRecurringTaskInput(this.taskVariables[7])) {
 			// recurring task
@@ -617,7 +609,7 @@ public class Task {
 					+ " on " + this.taskVariables[1] + "; " + this.taskVariables[5];
 
 			this.taskVariables[8] = this.taskVariables[0] + ", " + this.taskVariables[3] + "-" + this.taskVariables[4]
-					+ " on " + this.taskVariables[1] + ", " + this.taskVariables[5];
+					+ ", " + this.taskVariables[5];
 
 		} else if (Checker.isDoneEventTaskInput(this.taskVariables[7])) {
 
@@ -625,7 +617,7 @@ public class Task {
 					+ " on " + this.taskVariables[1] + "; " + this.taskVariables[5] + " " + DONE_STRING;
 
 			this.taskVariables[8] = this.taskVariables[0] + ", " + this.taskVariables[3] + "-" + this.taskVariables[4]
-					+ " on " + this.taskVariables[1] + ", " + this.taskVariables[5] + " " + DONE_STRING;
+					+ ", " + this.taskVariables[5] + " " + DONE_STRING;
 
 		} else if (Checker.isDeadlineTaskInput(this.taskVariables[7])) {
 			// deadline task
@@ -633,16 +625,15 @@ public class Task {
 			this.taskVariables[7] = this.taskVariables[0] + "; by " + this.taskVariables[4] + " on "
 					+ this.taskVariables[1];
 
-			this.taskVariables[8] = this.taskVariables[0] + ", by " + this.taskVariables[4] + " on "
-					+ this.taskVariables[1] + " (deadline)";
+			this.taskVariables[8] = this.taskVariables[0] + ", by " + this.taskVariables[4] + " (deadline)";
 
 		} else if (Checker.isDoneDeadlineTaskInput(this.taskVariables[7])) {
 
 			this.taskVariables[7] = this.taskVariables[0] + "; by " + this.taskVariables[4] + " on "
 					+ this.taskVariables[1] + " " + DONE_STRING;
 
-			this.taskVariables[8] = this.taskVariables[0] + ", by " + this.taskVariables[4] + " on "
-					+ this.taskVariables[1] + " (deadline)" + " " + DONE_STRING;
+			this.taskVariables[8] = this.taskVariables[0] + ", by " + this.taskVariables[4] + " (deadline)" + " "
+					+ DONE_STRING;
 
 		}
 
@@ -691,14 +682,14 @@ public class Task {
 			this.taskVariables[7] = this.taskVariables[0] + "; " + this.taskVariables[3] + "-" + this.taskVariables[4]
 					+ " on " + this.taskVariables[1] + "; " + this.taskVariables[5];
 			this.taskVariables[8] = this.taskVariables[0] + ", " + this.taskVariables[3] + "-" + this.taskVariables[4]
-					+ " on " + this.taskVariables[1] + ", " + this.taskVariables[5];
+					+ ", " + this.taskVariables[5];
 
 		} else if (Checker.isDoneEventTaskInput(this.taskVariables[7])) {
 
 			this.taskVariables[7] = this.taskVariables[0] + "; " + this.taskVariables[3] + "-" + this.taskVariables[4]
 					+ " on " + this.taskVariables[1] + "; " + this.taskVariables[5] + " " + DONE_STRING;
 			this.taskVariables[8] = this.taskVariables[0] + ", " + this.taskVariables[3] + "-" + this.taskVariables[4]
-					+ " on " + this.taskVariables[1] + ", " + this.taskVariables[5] + " " + DONE_STRING;
+					+ ", " + this.taskVariables[5] + " " + DONE_STRING;
 
 		} else if (Checker.isRecurringTaskInput(this.taskVariables[7])) {
 			// recurring task
@@ -731,7 +722,7 @@ public class Task {
 					+ " on " + this.taskVariables[1] + "; " + this.taskVariables[5];
 
 			this.taskVariables[8] = this.taskVariables[0] + ", " + this.taskVariables[3] + "-" + this.taskVariables[4]
-					+ " on " + this.taskVariables[1] + ", " + this.taskVariables[5];
+					+ ", " + this.taskVariables[5];
 
 		} else if (Checker.isDoneEventTaskInput(this.taskVariables[7])) {
 
@@ -739,7 +730,7 @@ public class Task {
 					+ " on " + this.taskVariables[1] + "; " + this.taskVariables[5] + " " + DONE_STRING;
 
 			this.taskVariables[8] = this.taskVariables[0] + ", " + this.taskVariables[3] + "-" + this.taskVariables[4]
-					+ " on " + this.taskVariables[1] + ", " + this.taskVariables[5] + " " + DONE_STRING;
+					+ ", " + this.taskVariables[5] + " " + DONE_STRING;
 
 		} else if (Checker.isRecurringTaskInput(this.taskVariables[7])) {
 			// recurring task
@@ -756,16 +747,15 @@ public class Task {
 			this.taskVariables[7] = this.taskVariables[0] + "; by " + this.taskVariables[4] + " on "
 					+ this.taskVariables[1];
 
-			this.taskVariables[8] = this.taskVariables[0] + ", by " + this.taskVariables[4] + " on "
-					+ this.taskVariables[1] + " (deadline)";
+			this.taskVariables[8] = this.taskVariables[0] + ", by " + this.taskVariables[4] + " (deadline)";
 
 		} else if (Checker.isDoneDeadlineTaskInput(this.taskVariables[7])) {
 
 			this.taskVariables[7] = this.taskVariables[0] + "; by " + this.taskVariables[4] + " on "
 					+ this.taskVariables[1] + " " + DONE_STRING;
 
-			this.taskVariables[8] = this.taskVariables[0] + ", by " + this.taskVariables[4] + " on "
-					+ this.taskVariables[1] + " (deadline)" + " " + DONE_STRING;
+			this.taskVariables[8] = this.taskVariables[0] + ", by " + this.taskVariables[4] + " (deadline)" + " "
+					+ DONE_STRING;
 
 		}
 
@@ -789,7 +779,7 @@ public class Task {
 					+ " on " + this.taskVariables[1] + "; " + this.taskVariables[5];
 
 			this.taskVariables[8] = this.taskVariables[0] + ", " + this.taskVariables[3] + "-" + this.taskVariables[4]
-					+ " on " + this.taskVariables[1] + ", " + this.taskVariables[5];
+					+ ", " + this.taskVariables[5];
 
 		} else if (Checker.isDoneEventTaskInput(this.taskVariables[7])) {
 
@@ -797,7 +787,7 @@ public class Task {
 					+ " on " + this.taskVariables[1] + "; " + this.taskVariables[5] + " " + DONE_STRING;
 
 			this.taskVariables[8] = this.taskVariables[0] + ", " + this.taskVariables[3] + "-" + this.taskVariables[4]
-					+ " on " + this.taskVariables[1] + ", " + this.taskVariables[5] + " " + DONE_STRING;
+					+ ", " + this.taskVariables[5] + " " + DONE_STRING;
 
 		}
 
@@ -879,10 +869,9 @@ public class Task {
 	public int getEventStartingTime() {
 		return this.eventStartingTime;
 	}
-	
-	public double getDayAndMonthValue(){
+
+	public double getDayAndMonthValue() {
 		return this.dayAndMonthValue;
 	}
-	
 
 }
