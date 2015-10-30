@@ -35,9 +35,8 @@ public class ShowDays {
 
 	// used to show tasks which are in 7 consecutive days
 	// starting from the date the user indicates
-	static void showWeek(String filename) throws IOException {
-		sc = new Scanner(System.in);
-
+	static void showWeek(String filename, String date) throws IOException {
+		
 		BufferedReader reader = null;
 
 		reader = new BufferedReader(new FileReader(filename));
@@ -66,7 +65,7 @@ public class ShowDays {
 
 		// day 1
 
-		String date1 = sc.nextLine();
+		String date1 = date.trim();
 
 		// check if this input by the user is valid
 		String tempDate = date1;

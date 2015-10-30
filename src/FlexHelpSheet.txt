@@ -155,4 +155,6 @@ show by end
 13) Show all event tasks by priority: 
 show by priority
 
+14) show the tasks for a given week (of seven days), given the starting(first) date of that week:
+show week <exactstartingdate>
 -----------------------------------------------------
