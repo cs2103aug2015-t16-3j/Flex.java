@@ -78,7 +78,7 @@ change floating <number> taskname to <newtaskname>
 Recurring tasks:
 
 1) Add a recurring task
-add <taskname>; <start>-<end> every <day>; priority
+add <taskname>; <start>-<end> every <day>;
 
 2) Change the taskname of a recurring task:
 change rec <number> taskname to <newtaskname>
