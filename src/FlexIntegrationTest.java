@@ -28,7 +28,6 @@ public class FlexIntegrationTest {
 	public void test() throws IOException {
 		String filename = "FlexIntegrationTestDocument.txt";
 
-		FlexWindow flexWindow = new FlexWindow();
 
 		LastAction lastAction = new LastAction();
 
@@ -38,51 +37,51 @@ public class FlexIntegrationTest {
 
 		// CRUD.undo() - undoing nothing
 
-		assertEquals("undoing nothing", NOTHING_TO_UNDO_MESSAGE, CRUD.undo(filename, lastAction, flexWindow));
+		assertEquals("undoing nothing", NOTHING_TO_UNDO_MESSAGE, CRUD.undo(filename, lastAction));
 
-		assertEquals("undoing nothing", NOTHING_TO_UNDO_MESSAGE, CRUD.undo(filename, lastAction, flexWindow));
+		assertEquals("undoing nothing", NOTHING_TO_UNDO_MESSAGE, CRUD.undo(filename, lastAction));
 
 		// CRUD.changeTaskVariable();
 		assertEquals("changing a task", INVALID_INPUT_MESSAGE,
-				CRUD.changeTaskVariable(filename, remainingCommandString, lastAction, flexWindow));
+				CRUD.changeTaskVariable(filename, remainingCommandString, lastAction));
 
 		remainingCommandString = "floating 1 taskname to Go to school on every weekday";
 
 		assertEquals("changing a task", CHANGED_MESSAGE,
-				CRUD.changeTaskVariable(filename, remainingCommandString, lastAction, flexWindow));
+				CRUD.changeTaskVariable(filename, remainingCommandString, lastAction));
 
 		// CRUD.deleteTask();
 		remainingCommandString = "floating ";
 
 		assertEquals("deleting a task", INVALID_INPUT_MESSAGE,
-				CRUD.deleteTask(filename, remainingCommandString, lastAction, flexWindow));
+				CRUD.deleteTask(filename, remainingCommandString, lastAction));
 		
 		remainingCommandString = "floating 8";
 
 		assertEquals("deleting a task", TASK_DOES_NOT_EXIST_MESSAGE,
-				CRUD.deleteTask(filename, remainingCommandString, lastAction, flexWindow));
+				CRUD.deleteTask(filename, remainingCommandString, lastAction));
 		
 		remainingCommandString = "26/10/2015 2";
 
 		assertEquals("deleting a task", TASK_DOES_NOT_EXIST_MESSAGE,
-				CRUD.deleteTask(filename, remainingCommandString, lastAction, flexWindow));
+				CRUD.deleteTask(filename, remainingCommandString, lastAction));
 		
 		remainingCommandString = "rec 6";
 
 		assertEquals("deleting a task", TASK_DOES_NOT_EXIST_MESSAGE,
-				CRUD.deleteTask(filename, remainingCommandString, lastAction, flexWindow));
+				CRUD.deleteTask(filename, remainingCommandString, lastAction));
 
 		remainingCommandString = "floating 1";
 
 		assertEquals("deleting a task", DELETED_MESSAGE,
-				CRUD.deleteTask(filename, remainingCommandString, lastAction, flexWindow));
+				CRUD.deleteTask(filename, remainingCommandString, lastAction));
 
 		// CRUD.addTask();
 
 		remainingCommandString = "Go to school on weekdays;";
 
 		assertEquals("adding a task", INVALID_INPUT_MESSAGE,
-				CRUD.addTask(filename, remainingCommandString, lastAction, flexWindow));
+				CRUD.addTask(filename, remainingCommandString, lastAction));
 
 		// 1100-1300 on 26/10/2015 (event task) exists
 		
@@ -97,46 +96,46 @@ public class FlexIntegrationTest {
 		remainingCommandString = "Meeting with CS2103/T group member(s); 1101-1300 on 26/10/2015; important;";
 
 		assertEquals("adding a task", BLOCKED_MESSAGE,
-				CRUD.addTask(filename, remainingCommandString, lastAction, flexWindow));
+				CRUD.addTask(filename, remainingCommandString, lastAction));
 		
 		remainingCommandString = "Meeting with CS2103/T group member(s); 1100-1259 on 26/10/2015; important;";
 
 		assertEquals("adding a task", BLOCKED_MESSAGE,
-				CRUD.addTask(filename, remainingCommandString, lastAction, flexWindow));	
+				CRUD.addTask(filename, remainingCommandString, lastAction));	
 		
 		remainingCommandString = "Go to school on weekdays";
 
 		assertEquals("adding a task", "The task " + "\"" + remainingCommandString + "\"" + " has been added." + "\n",
-				CRUD.addTask(filename, remainingCommandString, lastAction, flexWindow));
+				CRUD.addTask(filename, remainingCommandString, lastAction));
 
 		// CRUD.undo() - undoing something
 
-		assertEquals("undoing something", ADD_UNDONE_MESSAGE, CRUD.undo(filename, lastAction, flexWindow));
+		assertEquals("undoing something", ADD_UNDONE_MESSAGE, CRUD.undo(filename, lastAction));
 
-		assertEquals("undoing something", DELETE_UNDONE_MESSAGE, CRUD.undo(filename, lastAction, flexWindow));
+		assertEquals("undoing something", DELETE_UNDONE_MESSAGE, CRUD.undo(filename, lastAction));
 		
 		// CRUD.markAsDone();
 		
 		remainingCommandString = "floating 1 not done";
 		
-		assertEquals("mark a task as not done, when it is already not done", INVALID_INPUT_MESSAGE, CRUD.markAsDone(filename, remainingCommandString, lastAction, flexWindow));
+		assertEquals("mark a task as not done, when it is already not done", INVALID_INPUT_MESSAGE, CRUD.markAsDone(filename, remainingCommandString, lastAction));
 		
 		remainingCommandString = "floating 1 done";
 		
-		assertEquals("mark a task as done, after it is done", MARKED_DONE_OR_NOT_DONE_MESSAGE, CRUD.markAsDone(filename, remainingCommandString, lastAction, flexWindow));
+		assertEquals("mark a task as done, after it is done", MARKED_DONE_OR_NOT_DONE_MESSAGE, CRUD.markAsDone(filename, remainingCommandString, lastAction));
 		
 		remainingCommandString = "floating 1 done";
 		
-		assertEquals("mark a task as done, after it was already done", INVALID_INPUT_MESSAGE, CRUD.markAsDone(filename, remainingCommandString, lastAction, flexWindow));
+		assertEquals("mark a task as done, after it was already done", INVALID_INPUT_MESSAGE, CRUD.markAsDone(filename, remainingCommandString, lastAction));
 		
 		// CRUD.undo()
 		
-		assertEquals("undo the marking of a task as done", CHANGE_UNDONE_MESSAGE, CRUD.undo(filename, lastAction, flexWindow));
+		assertEquals("undo the marking of a task as done", CHANGE_UNDONE_MESSAGE, CRUD.undo(filename, lastAction));
 
 		// SortAndShow.readAndDisplayAll()
 
 		assertEquals("show all tasks successfully i.e. reach the end of the method", ALL_TASKS_DISPLAYED_MESSAGE,
-				SortAndShow.readAndDisplayAll(filename, flexWindow));
+				SortAndShow.readAndDisplayAll(filename));
 
 	}
 
