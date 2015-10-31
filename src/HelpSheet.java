@@ -36,6 +36,7 @@ public class HelpSheet {
         TableView<Method> table = new TableView<>();
         table.setItems(getMethod());
         table.getColumns().addAll(functionColumn, howToUseColumn);
+        table.setMinHeight(500);
         GridPane.setConstraints(table, 0, 0);
         
         GridPane grid = new GridPane();
