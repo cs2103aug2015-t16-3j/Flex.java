@@ -44,13 +44,15 @@ public class FlexWindow extends Application {
 		haveFilename = false;
 		help = new Button("Help");
 		
+		//Set GridPane
 		GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
         grid.setVgap(8);
         grid.setPadding(new Insets(10, 10, 10, 10));
         Scene scene = new Scene(grid, 800, 600);
-
+        
+        //Set textArea
         textArea.setPrefColumnCount(40);
         textArea.setPrefRowCount(20);
         setWidthAndLength();
@@ -61,7 +63,18 @@ public class FlexWindow extends Application {
         grid.add(input, 0, 5);
         grid.add(textArea, 0, 1);
 		input.setPromptText("command");
+
+		help.setOnAction(new EventHandler<ActionEvent>(){
+
+			@Override
+			public void handle(ActionEvent event) {
+				// TODO Auto-generated method stub
+				HelpSheet.showHelpSheet();
+			}
+			
+		});
 		
+		//Action when enter is pressed
 		scene.setOnKeyPressed(new EventHandler<KeyEvent>(){
 
 			@Override
@@ -84,6 +97,7 @@ public class FlexWindow extends Application {
 			
 		});
 		
+		//Request for closing
 		window.setOnCloseRequest(new EventHandler<WindowEvent>(){
 
 			@Override
@@ -107,6 +121,10 @@ public class FlexWindow extends Application {
 		textArea.setPrefHeight(600);
 		input.setPrefWidth(800);
 		feedback.setPrefHeight(20);
+	}
+	
+	public static TextArea getFeedback(){
+		return feedback;
 	}
 	
 	public static TextArea getTextArea(){
