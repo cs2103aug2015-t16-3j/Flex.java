@@ -23,7 +23,7 @@ public class HelpSheet {
         window.setWidth(950);
         
         //Function column for Deadline
-        TableColumn<Method, Double> functionColumn = new TableColumn<>("Function for Deadline task");
+        TableColumn<Method, Double> functionColumn = new TableColumn<>("Function");
         functionColumn.setMinWidth(400);
         functionColumn.setCellValueFactory(new PropertyValueFactory<>("function"));
 
