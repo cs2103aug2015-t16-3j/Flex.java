@@ -25,7 +25,7 @@ public class FlexWindow extends Application {
 	private static boolean haveFilename;
 	private static Button help;
 	private static final String FILENAME_INPUT_MESSAGE = "Please enter the full path name of the .txt schedule file, including its name. For example: C:"
-			+ "\\" + "Users" + "\\" + "Owner" + "\\" + "Documents" + "\\" + "Flex" + "." + "java" + "\\" + "src" + "\\"
+			+ "\\" + "Users" + "\\" + "Owner" + "\\" + "Documents" + "\n" + "\\" + "Flex" + "." + "java" + "\\" + "src" + "\\"
 			+ "FlexTest" + "." + "txt";
 	
 	public static void main(String[] args) {
