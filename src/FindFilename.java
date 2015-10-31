@@ -5,7 +5,7 @@ public class FindFilename {
 	private static final String FILENAME_ACCEPTED_MESSAGE = "The filename is accepted.";
 	private static final String PROCEED_MESSAGE = "Please proceed with the user input commands.";
 	private static final String FILENAME_INPUT_MESSAGE = "Please enter the full path name of the .txt schedule file, including its name. For example: C:"
-			+ "\\" + "Users" + "\\" + "Owner" + "\\" + "Documents" + "\\" + "Flex" + "." + "java" + "\\" + "src" + "\\"
+			+ "\\" + "Users" + "\\" + "Owner" + "\\" + "Documents" + "\n" + "\\" + "Flex" + "." + "java" + "\\" + "src" + "\\"
 			+ "FlexTest" + "." + "txt";
 	private static final String INVALID_INPUT_MESSAGE = "Invalid input. Please try again.";
 
