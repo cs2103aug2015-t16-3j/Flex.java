@@ -1,4 +1,6 @@
 
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -93,7 +95,12 @@ public class FlexWindow extends Application {
 						command = input.getText().trim();
 						feedback.setText("");
 						textArea.setText("");
-						haveFilename = FindFilename.find(command);
+						try {
+							haveFilename = FindFilename.find(command);
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}
 					input.setText("");
 				}
