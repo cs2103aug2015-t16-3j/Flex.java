@@ -1,3 +1,4 @@
+
 // Flex.java
 // Uses Task objects from Task.java
 // Able to
@@ -25,10 +26,10 @@ import java.util.logging.*;
 public class Flex {
 
 	private static final Logger logger = Logger.getLogger(Flex.class.getName());
-	
+
 	private static String command;
 	private static LastAction lastAction = new LastAction();
-	
+
 	private static final String DONE_TASKS_DISPLAYED_MESSAGE = "The tasks in the schedule, which are marked as "
 			+ "done" + " for their categories, are displayed.";
 	private static final String NOT_DONE_TASKS_DISPLAYED_MESSAGE = "The tasks in the schedule, which are not marked as "
@@ -42,13 +43,11 @@ public class Flex {
 
 	private static final String EXIT_MESSAGE = "Exiting the program.";
 
-
 	// Note: The programs starts by typing "java Flex" in command line prompt.
-
 
 	public static void processCommand(String input, String filename) {
 		command = input;
-		
+
 		try {
 			readAndExecuteCommand(filename, lastAction);
 		} catch (IOException e) {
@@ -56,9 +55,9 @@ public class Flex {
 		}
 	}
 
-		
-	static void readAndExecuteCommand(String filename, LastAction lastAction)
-			throws IOException {
+	static void readAndExecuteCommand(String filename, LastAction lastAction) throws IOException {
+		FlexWindow.getTextArea().setText("");
+
 		System.out.println();
 
 		command.trim();
@@ -94,6 +93,9 @@ public class Flex {
 				// Case 2: undo the last action
 				// Note: This method will call readAndExecuteCommand again
 				CRUD.undo(filename, lastAction);
+
+				SortAndShow.readAndDisplayAll(filename);
+
 			} else {
 				// Case 3: invalid input
 				FlexWindow.getFeedback().appendText(INVALID_INPUT_MESSAGE + "\n");
@@ -133,29 +135,34 @@ public class Flex {
 					logger.finest(INVALID_INPUT_MESSAGE);
 					System.out.println(INVALID_INPUT_MESSAGE);
 					System.out.println();
-				}
-
-				boolean isAddedTaskValid = (Checker.isFloatingTaskInput(remainingCommandString)
-						|| Checker.isDoneFloatingTaskInput(remainingCommandString)
-						|| Checker.isDeadlineTaskInput(remainingCommandString)
-						|| Checker.isDoneDeadlineTaskInput(remainingCommandString)
-						|| Checker.isEventTaskInput(remainingCommandString)
-						|| Checker.isDoneEventTaskInput(remainingCommandString)
-						|| Checker.isRecurringTaskInput(remainingCommandString));
-
-				// Only if the task is a floating task, a deadline task, or a
-				// normal task, then it will be attempted to be added to the
-				// .txt schedule file (i.e. tasks which are not done) yet
-				if (isAddedTaskValid) {
-					CRUD.addTask(filename, remainingCommandString, lastAction);
 				} else {
-					FlexWindow.getFeedback().appendText(INVALID_INPUT_MESSAGE + "\n");
-					FlexWindow.getFeedback().appendText("\n");
 
-					logger.finest(INVALID_INPUT_MESSAGE);
-					System.out.println(INVALID_INPUT_MESSAGE);
-					System.out.println();
+					boolean isAddedTaskValid = (Checker.isFloatingTaskInput(remainingCommandString)
+							|| Checker.isDoneFloatingTaskInput(remainingCommandString)
+							|| Checker.isDeadlineTaskInput(remainingCommandString)
+							|| Checker.isDoneDeadlineTaskInput(remainingCommandString)
+							|| Checker.isEventTaskInput(remainingCommandString)
+							|| Checker.isDoneEventTaskInput(remainingCommandString)
+							|| Checker.isRecurringTaskInput(remainingCommandString));
+
+					// Only if the task is a floating task, a deadline task, or
+					// a
+					// normal task, then it will be attempted to be added to the
+					// .txt schedule file (i.e. tasks which are not done) yet
+					if (isAddedTaskValid) {
+						CRUD.addTask(filename, remainingCommandString, lastAction);
+					} else {
+						FlexWindow.getFeedback().appendText(INVALID_INPUT_MESSAGE + "\n");
+						FlexWindow.getFeedback().appendText("\n");
+
+						logger.finest(INVALID_INPUT_MESSAGE);
+						System.out.println(INVALID_INPUT_MESSAGE);
+						System.out.println();
+					}
 				}
+
+				SortAndShow.readAndDisplayAll(filename);
+
 			} else if (firstWord.equalsIgnoreCase("delete")) {
 				// Case 6: Deleting a task
 				String remainingCommandString = command.substring(whitespaceIndex + 1);
@@ -169,10 +176,13 @@ public class Flex {
 					logger.finest(INVALID_INPUT_MESSAGE);
 					System.out.println(INVALID_INPUT_MESSAGE);
 					System.out.println();
+				} else {
+
+					// only if input is valid
+					CRUD.deleteTask(filename, remainingCommandString, lastAction);
 				}
 
-				// only if input is valid
-				CRUD.deleteTask(filename, remainingCommandString, lastAction);
+				SortAndShow.readAndDisplayAll(filename);
 
 			} else if (firstWord.equalsIgnoreCase("change")) {
 				// Case 7: changing a task's variable
@@ -190,11 +200,14 @@ public class Flex {
 					logger.finest(INVALID_INPUT_MESSAGE);
 					System.out.println(INVALID_INPUT_MESSAGE);
 					System.out.println();
+				} else {
+
+					// only if input is valid
+					// Note: This method will call readAndExecuteCommand again
+					CRUD.changeTaskVariable(filename, remainingCommandString, lastAction);
 				}
 
-				// only if input is valid
-				// Note: This method will call readAndExecuteCommand again
-				CRUD.changeTaskVariable(filename, remainingCommandString, lastAction);
+				SortAndShow.readAndDisplayAll(filename);
 
 			} else if (firstWord.equalsIgnoreCase("search")) {
 				// Case 8: Search for tasks
@@ -290,15 +303,17 @@ public class Flex {
 					SortAndShow.showRecurringTasks(filename);
 				} else if (remainingString.indexOf("week ") == 0) {
 					String date = remainingString.substring(5);
-					if(date.length()==0){
+					if (date.length() == 0) {
 						FlexWindow.getTextArea().appendText(INVALID_INPUT_MESSAGE + "\n");
 						FlexWindow.getTextArea().appendText("\n");
 
 						logger.finest(INVALID_INPUT_MESSAGE);
 						System.out.println(INVALID_INPUT_MESSAGE);
 						System.out.println();
+					} else {
+						ShowDays.showWeek(filename, date);
+						SortAndShow.showRecurringTasks(filename);
 					}
-					ShowDays.showWeek(filename, date);
 				} else {
 					FlexWindow.getFeedback().appendText(INVALID_INPUT_MESSAGE + "\n");
 					FlexWindow.getFeedback().appendText("\n");
@@ -308,7 +323,7 @@ public class Flex {
 					System.out.println();
 
 				}
-			} else if (firstWord.equalsIgnoreCase("mark")){
+			} else if (firstWord.equalsIgnoreCase("mark")) {
 				// Case 10:
 				// Mark deadline, event or floating tasks as done or not done
 
@@ -323,10 +338,13 @@ public class Flex {
 					logger.finest(INVALID_INPUT_MESSAGE);
 					System.out.println(INVALID_INPUT_MESSAGE);
 					System.out.println();
+				} else {
+
+					CRUD.markAsDone(filename, remainingCommandString, lastAction);
 				}
-				
-				CRUD.markAsDone(filename, remainingCommandString, lastAction);
-				
+
+				SortAndShow.readAndDisplayAll(filename);
+
 			} else {
 				FlexWindow.getFeedback().appendText(INVALID_INPUT_MESSAGE + "\n");
 				FlexWindow.getFeedback().appendText("\n");
@@ -339,4 +357,3 @@ public class Flex {
 		}
 	}
 }
-
