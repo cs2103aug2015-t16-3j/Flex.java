@@ -37,8 +37,8 @@ public class FlexWindow extends Application {
 		window.setTitle("Flex");
 
 		input = new TextField();
-		textArea = new TextArea();
-		feedback = new TextArea(FILENAME_INPUT_MESSAGE);
+		textArea = new TextArea(FILENAME_INPUT_MESSAGE);
+		feedback = new TextArea();
 		command = new String();
 		haveFilename = false;
 		help = new Button("Help");
