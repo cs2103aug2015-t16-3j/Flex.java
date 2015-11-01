@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -11,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -18,6 +20,8 @@ public class FlexWindow extends Application {
 	private static TextField input;
 	private static TextArea textArea;
 	private static TextArea feedback;
+	private double width;
+	private double height;
 	private static String command;
 	private static Stage window;
 	private static String filename;
@@ -35,6 +39,7 @@ public class FlexWindow extends Application {
 	public void start(Stage primaryStage){
 		window = primaryStage;
 		window.setTitle("Flex");
+		setSceneSize();
 
 		input = new TextField();
 		textArea = new TextArea(FILENAME_INPUT_MESSAGE);
@@ -49,12 +54,12 @@ public class FlexWindow extends Application {
         grid.setHgap(10);
         grid.setVgap(8);
         grid.setPadding(new Insets(10, 10, 10, 10));
-        Scene scene = new Scene(grid, 1024, 768);
+        Scene scene = new Scene(grid, width, height);
         
         //Set textArea
         textArea.setPrefColumnCount(40);
         textArea.setPrefRowCount(20);
-        setWidthAndLength();
+        setTextAreaSize();
         setEditability();
         
         grid.add(help, 0, 0);
@@ -116,13 +121,6 @@ public class FlexWindow extends Application {
 		feedback.setEditable(false);
 	}
 	
-	public void setWidthAndLength(){
-		textArea.setPrefHeight(560);
-		input.setPrefWidth(1024);
-		feedback.setMinHeight(130);
-		feedback.setMaxHeight(130);
-	}
-	
 	public static TextArea getFeedback(){
 		return feedback;
 	}
@@ -135,5 +133,22 @@ public class FlexWindow extends Application {
 		boolean result = ConfirmBox.display();
 		if(result)
 			window.close();
+	}
+	
+	public void setTextAreaSize(){
+		textArea.setPrefHeight((height-50) *7 /9);
+		textArea.setMaxHeight(height *7 /9);
+		input.setPrefWidth(width);
+		feedback.setPrefHeight((height-50) /9);
+		feedback.setMaxHeight(height /9);
+	}
+	
+	private void setSceneSize(){
+	    Screen screen = Screen.getPrimary();
+	    Rectangle2D bounds = screen.getVisualBounds();
+	    window.setX(0);
+	    window.setY(0);
+	    width = bounds.getWidth();
+	    height = bounds.getHeight()-50;
 	}
 }
