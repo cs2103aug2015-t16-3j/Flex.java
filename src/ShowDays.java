@@ -54,9 +54,9 @@ public class ShowDays {
 			reader.close();
 		}
 
-		// flexWindow.getTextArea().append(STARTING_DATE_REQUEST_MESSAGE +
-		// "\n");
-		// flexWindow.getTextArea().append("\n");
+		FlexWindow.getFeedback().appendText(STARTING_DATE_REQUEST_MESSAGE +
+		 "\n");
+		FlexWindow.getFeedback().appendText("\n");
 
 		logger.finest(STARTING_DATE_REQUEST_MESSAGE);
 		System.out.println(STARTING_DATE_REQUEST_MESSAGE);
@@ -69,11 +69,11 @@ public class ShowDays {
 		// check if this input by the user is valid
 		String tempDate = date1;
 
-		// flexWindow.getTextArea().setText("");
+		// flexWindow.getFeedback().setText("");
 
 		if (!Checker.isValidDate(tempDate)) {
-			// flexWindow.getTextArea().append(INVALID_INPUT_MESSAGE + "\n");
-			// flexWindow.getTextArea().append("\n");
+			FlexWindow.getFeedback().appendText(INVALID_INPUT_MESSAGE + "\n");
+			FlexWindow.getFeedback().appendText("\n");
 
 			logger.finest(INVALID_INPUT_MESSAGE);
 			System.out.println(INVALID_INPUT_MESSAGE);
