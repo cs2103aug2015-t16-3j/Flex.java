@@ -49,7 +49,7 @@ public class FlexWindow extends Application {
         grid.setHgap(10);
         grid.setVgap(8);
         grid.setPadding(new Insets(10, 10, 10, 10));
-        Scene scene = new Scene(grid, 800, 600);
+        Scene scene = new Scene(grid, 1024, 768);
         
         //Set textArea
         textArea.setPrefColumnCount(40);
@@ -117,10 +117,10 @@ public class FlexWindow extends Application {
 	}
 	
 	public void setWidthAndLength(){
-		textArea.setPrefHeight(450);
-		input.setPrefWidth(800);
-		feedback.setMinHeight(80);
-		feedback.setMaxHeight(80);
+		textArea.setPrefHeight(560);
+		input.setPrefWidth(1024);
+		feedback.setMinHeight(130);
+		feedback.setMaxHeight(130);
 	}
 	
 	public static TextArea getFeedback(){
