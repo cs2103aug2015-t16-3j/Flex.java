@@ -1,5 +1,4 @@
 
-
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -82,12 +81,14 @@ public class FlexWindow extends Application {
 				// TODO Auto-generated method stub
 				if(event.getCode().equals(KeyCode.ENTER)){
 					if(haveFilename){
+						feedback.setText("");
 						textArea.setText("");
 						command = input.getText();
 						filename = FindFilename.getFilename();
 						Flex.processCommand(command, filename);
 					}else{
 						command = input.getText();
+						feedback.setText("");
 						textArea.setText("");
 						haveFilename = FindFilename.find(command);
 					}
