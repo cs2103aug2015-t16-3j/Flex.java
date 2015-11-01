@@ -117,9 +117,10 @@ public class FlexWindow extends Application {
 	}
 	
 	public void setWidthAndLength(){
-		textArea.setPrefHeight(600);
+		textArea.setPrefHeight(450);
 		input.setPrefWidth(800);
-		feedback.setPrefHeight(20);
+		feedback.setMinHeight(80);
+		feedback.setMaxHeight(80);
 	}
 	
 	public static TextArea getFeedback(){
