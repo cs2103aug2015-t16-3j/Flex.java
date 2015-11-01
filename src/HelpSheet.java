@@ -17,7 +17,6 @@ public class HelpSheet {
 	}
 	public static void showHelpSheet(){
         Stage window = new Stage();
-        window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Help Sheet");
         window.setHeight(600);
         window.setWidth(950);

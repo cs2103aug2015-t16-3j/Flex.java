@@ -349,6 +349,10 @@ public class CRUD {
 
 		writer.close();
 
+		FlexWindow.getFeedback().appendText(DELETED_MESSAGE +
+		 "\n");
+		FlexWindow.getFeedback().appendText("\n");
+		
 		logger.finest(DELETED_MESSAGE);
 		System.out.println(DELETED_MESSAGE);
 		System.out.println();
