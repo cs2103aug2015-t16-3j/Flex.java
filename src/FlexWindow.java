@@ -80,12 +80,14 @@ public class FlexWindow extends Application {
 				if(event.getCode().equals(KeyCode.ENTER)){
 					if(haveFilename){
 						feedback.setText("");
+						textArea.setText("");
 						command = input.getText().trim();
 						filename = FindFilename.getFilename();
 						Flex.processCommand(command, filename);
 					}else{
 						command = input.getText().trim();
 						feedback.setText("");
+						textArea.setText("");
 						haveFilename = FindFilename.find(command);
 					}
 					input.setText("");
