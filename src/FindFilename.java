@@ -21,9 +21,9 @@ public class FindFilename {
 		if ((!tempFile.exists()) || (filename.length() <= 4)
 				|| (!filename.substring(filename.length() - 4, filename.length()).equalsIgnoreCase(".txt"))) {
 
-			FlexWindow.getTextArea().appendText(INVALID_INPUT_MESSAGE + "\n" +
+			FlexWindow.getFeedback().appendText(INVALID_INPUT_MESSAGE + "\n" +
 			FILENAME_INPUT_MESSAGE + "\n");
-			FlexWindow.getTextArea().appendText("\n");
+			FlexWindow.getFeedback().appendText("\n");
 
 			System.out.println(INVALID_INPUT_MESSAGE + FILENAME_INPUT_MESSAGE);
 			System.out.println();
@@ -35,9 +35,9 @@ public class FindFilename {
 		System.out.println(FILENAME_ACCEPTED_MESSAGE + PROCEED_MESSAGE);
 		System.out.println();
 
-		FlexWindow.getTextArea().appendText(FILENAME_ACCEPTED_MESSAGE + "\n" + 
+		FlexWindow.getFeedback().appendText(FILENAME_ACCEPTED_MESSAGE + "\n" + 
 				PROCEED_MESSAGE + "\n");
-		FlexWindow.getTextArea().appendText("\n");
+		FlexWindow.getFeedback().appendText("\n");
 
 		return true;
 
