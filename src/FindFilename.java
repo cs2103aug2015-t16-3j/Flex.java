@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.IOException;
 
 public class FindFilename {
 	private static String filename;
@@ -10,7 +11,7 @@ public class FindFilename {
 	private static final String INVALID_INPUT_MESSAGE = "Invalid input. Please try again.";
 
 	
-	public static boolean find(String input){
+	public static boolean find(String input) throws IOException{
 
 		filename = input;
 		filename.trim();
@@ -35,9 +36,11 @@ public class FindFilename {
 		System.out.println(FILENAME_ACCEPTED_MESSAGE + PROCEED_MESSAGE);
 		System.out.println();
 
-		FlexWindow.getTextArea().appendText(FILENAME_ACCEPTED_MESSAGE + "\n" + 
+		FlexWindow.getFeedback().appendText(FILENAME_ACCEPTED_MESSAGE + "\n" + 
 				PROCEED_MESSAGE + "\n");
 		FlexWindow.getTextArea().appendText("\n");
+		
+		SortAndShow.readAndDisplayAll(input);
 
 		return true;
 
