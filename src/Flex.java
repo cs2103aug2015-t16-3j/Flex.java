@@ -14,12 +14,7 @@
 // 7. Undo the very last VALID action done for 1. , 2. and 3. - searching and showing(displaying) commands will not have their last VALID action saved 
 // 8. Able to show tasks which has priority levels not being numbers (not all characters in the priority level string are numerical digits)
 
-import java.util.*;
-import java.io.File;
 import java.io.IOException;
-import javax.swing.JFrame;
-
-import javafx.stage.Stage;
 
 import java.util.logging.*;
 
