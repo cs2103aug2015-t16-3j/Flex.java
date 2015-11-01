@@ -52,7 +52,6 @@ public class Flex {
 		try {
 			readAndExecuteCommand(filename, lastAction);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -78,7 +77,7 @@ public class Flex {
 
 		if (whitespaceIndex < 0) {
 
-			firstWord = command;
+			firstWord = command.trim();
 
 			// Case 1: The program Flex.java will exit itself in Command Line
 			// Prompt (cmd).
@@ -108,7 +107,7 @@ public class Flex {
 
 			// first word in the user's input, if there is a whitespace
 			// character in it
-			firstWord = command.substring(0, whitespaceIndex);
+			firstWord = command.substring(0, whitespaceIndex).trim();
 			firstWord.trim();
 
 			// Case 4: invalid input
@@ -289,8 +288,17 @@ public class Flex {
 					System.out.println();
 
 					SortAndShow.showRecurringTasks(filename);
-				} else if (remainingString.equalsIgnoreCase("week")) {
-					ShowDays.showWeek(filename);
+				} else if (remainingString.indexOf("week ") == 0) {
+					String date = remainingString.substring(5);
+					if(date.length()==0){
+						FlexWindow.getTextArea().appendText(INVALID_INPUT_MESSAGE + "\n");
+						FlexWindow.getTextArea().appendText("\n");
+
+						logger.finest(INVALID_INPUT_MESSAGE);
+						System.out.println(INVALID_INPUT_MESSAGE);
+						System.out.println();
+					}
+					ShowDays.showWeek(filename, date);
 				} else {
 					FlexWindow.getFeedback().appendText(INVALID_INPUT_MESSAGE + "\n");
 					FlexWindow.getFeedback().appendText("\n");
