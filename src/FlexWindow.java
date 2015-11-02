@@ -56,7 +56,7 @@ public class FlexWindow extends Application {
         grid.setHgap(10);
         grid.setVgap(8);
         grid.setPadding(new Insets(10, 10, 10, 10));
-        Scene scene = new Scene(grid, width, height);
+        Scene scene = new Scene(grid, width/2, height/1.5);
         
         //Set textArea
         textArea.setPrefColumnCount(40);
@@ -153,9 +153,9 @@ public class FlexWindow extends Application {
 	private void setSceneSize(){
 	    Screen screen = Screen.getPrimary();
 	    Rectangle2D bounds = screen.getVisualBounds();
-	    window.setX(0);
-	    window.setY(0);
 	    width = bounds.getWidth();
 	    height = bounds.getHeight()-50;
+	    window.setX(width/4);
+	    window.setY(height/6);
 	}
 }
