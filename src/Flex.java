@@ -91,8 +91,11 @@ public class Flex {
 
 				SortAndShow.readAndDisplayAll(filename);
 
+			} else if (firstWord.equalsIgnoreCase("clear")) {
+				// Case 3: Clear the entire .txt file
+				CRUD.clear(filename, lastAction);
 			} else {
-				// Case 3: invalid input
+				// Case 4: invalid input
 				FlexWindow.getFeedback().appendText(INVALID_INPUT_MESSAGE + "\n");
 				FlexWindow.getFeedback().appendText("\n");
 

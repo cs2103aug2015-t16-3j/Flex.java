@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class LastAction {
 
 	private String[] lastActionStrings = new String[3];
@@ -16,6 +18,22 @@ public class LastAction {
 	// 3. A task which has been changed (the state of the task AFTER it has been
 	// changed)
 	private Task previousTask = new Task();
+
+	private ArrayList<Task> clearTaskList = new ArrayList<Task>();
+
+	public ArrayList<Task> getClearTaskList() {
+		return this.clearTaskList;
+	}
+
+	public void setClearTaskList(ArrayList<Task> tempList) {
+
+		this.clearTaskList.clear();
+
+		for (int i = 0; i < tempList.size(); i++) {
+			this.clearTaskList.add(tempList.get(i));
+		}
+
+	}
 
 	public String getPreviousChangedScheduleString() {
 		return this.lastActionStrings[0];
