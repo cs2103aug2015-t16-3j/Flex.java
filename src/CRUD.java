@@ -237,6 +237,8 @@ public class CRUD {
 		} else if (Checker.isValidDate(deleteVariableType)) {
 			// delete <date> <number>
 			// for deadline and event tasks
+			
+			assert(Checker.isValidDate(deleteVariableType));
 
 			String date = deleteVariableType.trim();
 
@@ -449,7 +451,10 @@ public class CRUD {
 
 		if (Checker.isValidDate(firstTerm)) {
 			// CASE 1: for a deadline task or an event task
-
+			
+			
+			assert(Checker.isValidDate(firstTerm));
+			
 			String date = firstTerm.trim();
 
 			int whitespaceIndex2 = tempString.indexOf(" ");
@@ -587,6 +592,9 @@ public class CRUD {
 				String newDate = tempString.trim();
 
 				if (!Checker.isValidDate(newDate)) {
+					
+					assert(!Checker.isValidDate(newDate));
+					
 					FlexWindow.getFeedback().appendText(INVALID_INPUT_MESSAGE + "\n");
 					FlexWindow.getFeedback().appendText("\n");
 
@@ -645,6 +653,8 @@ public class CRUD {
 				}
 
 				if (!Checker.isValidTime(startingTime)) {
+					assert(!Checker.isValidDate(startingTime));
+					
 					FlexWindow.getFeedback().appendText(INVALID_INPUT_MESSAGE + "\n");
 					FlexWindow.getFeedback().appendText("\n");
 
@@ -1630,6 +1640,8 @@ public class CRUD {
 			// mark <date> <number> done
 			// mark <date> <number> not done
 
+			assert(Checker.isValidDate(firstTerm));
+			
 			String date = firstTerm.trim();
 
 			int whitespaceIndex2 = tempString.indexOf(" ");
