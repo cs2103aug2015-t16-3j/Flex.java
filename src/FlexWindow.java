@@ -29,7 +29,7 @@ public class FlexWindow extends Application {
 	private static String filename;
 	private static boolean haveFilename;
 	private static Button help;
-	private static final String FILENAME_INPUT_MESSAGE = "Please enter the full path name of the .txt schedule file, including its name. For example: C:"
+	private static final String FILENAME_INPUT_MESSAGE = "Welcome to Flex! Please enter the full path name of the .txt schedule file. E.g.: C:"
 			+ "\\" + "Users" + "\\" + "Owner" + "\\" + "Documents" + "\n" + "\\" + "Flex" + "." + "java" + "\\" + "src" + "\\"
 			+ "FlexTest" + "." + "txt";
 	

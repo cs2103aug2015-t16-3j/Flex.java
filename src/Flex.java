@@ -34,7 +34,7 @@ public class Flex {
 	private static final String EVENT_TASKS_DISPLAYED_MESSAGE = "Event tasks in the schedule are displayed.";
 	private static final String RECURRING_TASKS_DISPLAYED_MESSAGE = "Recurring tasks in the schedule are displayed.";
 
-	private static final String INVALID_INPUT_MESSAGE = "Invalid input. Please try again.";
+	private static final String INVALID_INPUT_MESSAGE = "Invalid command. Please try again.";
 
 	private static final String EXIT_MESSAGE = "Exiting the program.";
 
