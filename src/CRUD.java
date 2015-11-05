@@ -12,17 +12,17 @@ import java.util.logging.*;
 public class CRUD {
 	private static final Logger logger = Logger.getLogger(CRUD.class.getName());
 
-	private static final String NOTHING_TO_UNDO_MESSAGE = "Nothing to undo as no valid 1) adding of a task, 2) deleting of a task, OR 3) Changing a task variable, has been carried out by the user during this program run.";
+	private static final String NOTHING_TO_UNDO_MESSAGE = "Nothing to undo as no valid previous command.";
 	private static final String DELETED_MESSAGE = "The specified task has been deleted.";
 	private static final String ADDED_MESSAGE = "The task has been successfully added.";
 	private static final String CHANGED_MESSAGE = "(The change to the task information is valid and processed.)";
 	private static final String CHANGE_UNDONE_MESSAGE = "The last valid change action has been undone.";
 	private static final String DELETE_UNDONE_MESSAGE = "The last valid delete action has been undone.";
 	private static final String ADD_UNDONE_MESSAGE = "The last valid add action has been undone.";
-	private static final String INVALID_INPUT_MESSAGE = "Invalid input. Please try again.";
-	private static final String MARKED_DONE_OR_NOT_DONE_MESSAGE = "The task has been marked as 1) done, or 2) not done. This is possible because it was previously 1) not done, or 2) done, respectively.";
-	private static final String TASK_DOES_NOT_EXIST_MESSAGE = "Task does not exist, so no such task can be deleted.";
-	private static final String BLOCKED_MESSAGE = "Unable to add the new event task (which is not done), because the new task (which is not done) clashes with existing event tasks  (which are not done) (on the same date).";
+	private static final String INVALID_INPUT_MESSAGE = "Invalid command. Please try again.";
+	private static final String MARKED_DONE_OR_NOT_DONE_MESSAGE = "The task has been marked as done/not done.";
+	private static final String TASK_DOES_NOT_EXIST_MESSAGE = "Task does not exist.";
+	private static final String BLOCKED_MESSAGE = "Unable to add the new event task, because of clashes with existing event tasks.";
 	private static final String CLEAR_UNDONE_MESSAGE = "The clearing of the file has been undone.";
 	private static final String UNCLEAR_UNDONE_MESSAGE = "The unclearing of the file has been undone.";
 	private static final String CLEAR_MESSAGE = "The file has been cleared.";

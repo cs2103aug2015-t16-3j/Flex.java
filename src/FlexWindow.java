@@ -1,4 +1,4 @@
-
+//@@
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -57,7 +57,7 @@ public class FlexWindow extends Application {
         grid.setVgap(8);
         grid.setPadding(new Insets(10, 10, 10, 10));
         Scene scene = new Scene(grid, width/2, height/1.5);
-        
+ 
         //Set textArea
         textArea.setPrefColumnCount(40);
         textArea.setPrefRowCount(20);
