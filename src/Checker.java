@@ -1,3 +1,5 @@
+//@@author A0124512W
+
 // Checker.java contains the original checkTask() and checkDate() methods.
 // Both methods return boolean values.
 // checkTask() uses checkDate()

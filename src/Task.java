@@ -1,3 +1,5 @@
+//@@author A0124512W
+
 // Task.java
 // Contains the variables (attributes) in a Task
 // Flex.java should NOT allow the attribute "comparisonValue" to be edited
