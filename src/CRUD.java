@@ -1,3 +1,4 @@
+
 //@@author A0124512W
 
 import java.util.*;
@@ -239,8 +240,8 @@ public class CRUD {
 		} else if (Checker.isValidDate(deleteVariableType)) {
 			// delete <date> <number>
 			// for deadline and event tasks
-			
-			assert(Checker.isValidDate(deleteVariableType));
+
+			assert (Checker.isValidDate(deleteVariableType));
 
 			String date = deleteVariableType.trim();
 
@@ -453,10 +454,9 @@ public class CRUD {
 
 		if (Checker.isValidDate(firstTerm)) {
 			// CASE 1: for a deadline task or an event task
-			
-			
-			assert(Checker.isValidDate(firstTerm));
-			
+
+			assert (Checker.isValidDate(firstTerm));
+
 			String date = firstTerm.trim();
 
 			int whitespaceIndex2 = tempString.indexOf(" ");
@@ -594,9 +594,9 @@ public class CRUD {
 				String newDate = tempString.trim();
 
 				if (!Checker.isValidDate(newDate)) {
-					
-					assert(!Checker.isValidDate(newDate));
-					
+
+					assert (!Checker.isValidDate(newDate));
+
 					FlexWindow.getFeedback().appendText(INVALID_INPUT_MESSAGE + "\n");
 					FlexWindow.getFeedback().appendText("\n");
 
@@ -655,8 +655,9 @@ public class CRUD {
 				}
 
 				if (!Checker.isValidTime(startingTime)) {
-					assert(!Checker.isValidDate(startingTime));
-					
+
+					assert (!Checker.isValidTime(startingTime));
+
 					FlexWindow.getFeedback().appendText(INVALID_INPUT_MESSAGE + "\n");
 					FlexWindow.getFeedback().appendText("\n");
 
@@ -679,6 +680,9 @@ public class CRUD {
 				}
 
 				if (!Checker.isValidTime(endingTime)) {
+
+					assert (!Checker.isValidTime(endingTime));
+
 					FlexWindow.getFeedback().appendText(INVALID_INPUT_MESSAGE + "\n");
 					FlexWindow.getFeedback().appendText("\n");
 
@@ -739,6 +743,9 @@ public class CRUD {
 				String newEndingTime = tempString.trim();
 
 				if (!Checker.isValidTime(newEndingTime)) {
+
+					assert (!Checker.isValidTime(newEndingTime));
+
 					FlexWindow.getFeedback().appendText(INVALID_INPUT_MESSAGE + "\n");
 					FlexWindow.getFeedback().appendText("\n");
 
@@ -807,6 +814,9 @@ public class CRUD {
 				}
 
 				if (!Checker.isValidTime(newEndingTime6)) {
+
+					assert (!Checker.isValidTime(newEndingTime6));
+
 					FlexWindow.getFeedback().appendText(INVALID_INPUT_MESSAGE + "\n");
 					FlexWindow.getFeedback().appendText("\n");
 
@@ -829,6 +839,9 @@ public class CRUD {
 				}
 
 				if (!Checker.isValidDate(newDate2)) {
+
+					assert (!Checker.isValidDate(newDate2));
+
 					FlexWindow.getFeedback().appendText(INVALID_INPUT_MESSAGE + "\n");
 					FlexWindow.getFeedback().appendText("\n");
 
@@ -1123,6 +1136,9 @@ public class CRUD {
 				}
 
 				if (!Checker.isValidTime(startTime)) {
+
+					assert (!Checker.isValidTime(startTime));
+
 					FlexWindow.getFeedback().appendText(INVALID_INPUT_MESSAGE + "\n");
 					FlexWindow.getFeedback().appendText("\n");
 
@@ -1144,6 +1160,9 @@ public class CRUD {
 				}
 
 				if (!Checker.isValidTime(endTime)) {
+
+					assert (!Checker.isValidTime(endTime));
+
 					FlexWindow.getFeedback().appendText(INVALID_INPUT_MESSAGE + "\n");
 					FlexWindow.getFeedback().appendText("\n");
 
@@ -1284,10 +1303,11 @@ public class CRUD {
 			return INVALID_INPUT_MESSAGE;
 		}
 		Task temporaryTask = new Task(remainingCommandString1);
-		
+
 		// Checks for clashes between new event task which is added,
 		// and existing tasks
-		// Multi-tasking is still allowed - same date, same starting time and same ending time.
+		// Multi-tasking is still allowed - same date, same starting time and
+		// same ending time.
 		if (Checker.isEventTaskInput(remainingCommandString1)
 				|| Checker.isDoneEventTaskInput(remainingCommandString1)) {
 
@@ -1531,7 +1551,7 @@ public class CRUD {
 
 			} else if (lastAction.getPreviousAction().trim().equalsIgnoreCase("clear")) {
 				// undo clear
-				
+
 				BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
 
 				for (int z = 0; z < lastAction.getClearTaskList().size(); z++) {
@@ -1555,7 +1575,7 @@ public class CRUD {
 
 			} else if (lastAction.getPreviousAction().trim().equalsIgnoreCase("unclear")) {
 				// undo an undone clear
-				
+
 				CRUD.clear(filename, lastAction);
 
 				FlexWindow.getFeedback().appendText(UNCLEAR_UNDONE_MESSAGE);
@@ -1642,8 +1662,8 @@ public class CRUD {
 			// mark <date> <number> done
 			// mark <date> <number> not done
 
-			assert(Checker.isValidDate(firstTerm));
-			
+			assert (Checker.isValidDate(firstTerm));
+
 			String date = firstTerm.trim();
 
 			int whitespaceIndex2 = tempString.indexOf(" ");
