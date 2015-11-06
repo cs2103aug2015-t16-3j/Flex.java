@@ -249,8 +249,8 @@ public class Flex {
 					SortAndShow.readAndDisplayAll(filename);
 
 				} else if (remainingString.equalsIgnoreCase("by day")) {
-					logger.finest(FLOATING_TASKS_DISPLAYED_MESSAGE);
-					System.out.println(FLOATING_TASKS_DISPLAYED_MESSAGE);
+					logger.finest(RECURRING_TASKS_DISPLAYED_MESSAGE);
+					System.out.println(RECURRING_TASKS_DISPLAYED_MESSAGE);
 					System.out.println();
 
 					SortAndShow.showRecurringTasks(filename);
