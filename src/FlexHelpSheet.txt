@@ -87,7 +87,7 @@ change rec <number> taskname to <newtaskname>
 change rec <number> to every <newday> 
 
 4) Change the start and end times of a recurring task:
-<start>-<end>: change rec <number> time to <newstart>-<newend>
+change rec <number> time to <newstart>-<newend>
 
 ---------------------------------------------------------------
 
