@@ -239,7 +239,7 @@ public class SortAndShow {
 		} else if (searchVariableType.equalsIgnoreCase("priority")) {
 			// CASE 6: search for tasks using a matching String in the priority
 			// (level)
-			// recuring tasks and event tasks have a priority (level)
+			// Only event tasks have a priority (level)
 
 			for (int i = 0; i < allTasksList.size(); i++) {
 
@@ -251,12 +251,6 @@ public class SortAndShow {
 					}
 				}
 
-				// recurring tasks also have a priority (level)
-				if (Checker.isRecurringTaskInput(allTasksList.get(i).getScheduleString())) {
-					if (allTasksList.get(i).getPriority().toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0) {
-						recurringTasksList.add(allTasksList.get(i));
-					}
-				}
 			}
 		} else {
 			// invalid input case
