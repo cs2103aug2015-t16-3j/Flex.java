@@ -118,7 +118,7 @@ public class HelpSheet {
 				new Method("Change the taskname of a recurring task", "change rec <number> taskname to <newtaskname>"));
 		methods.add(new Method("Change the day of a recurring task", "change rec <number> to every <newday>"));
 		methods.add(new Method("Change the start and end times of a recurring task",
-				"<start>-<end>: change rec <number> time to <newstart>-<newend>"));
+				"change rec <number> time to <newstart>-<newend>"));
 
 		methods.add(new Method("", ""));
 
