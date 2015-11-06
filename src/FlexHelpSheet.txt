@@ -8,22 +8,25 @@ add <taskname>; by <end> on <date>
 2) Add a done deadline task:
 add <taskname>; by <end> on <date> [done]
 
-3) Mark deadline task as done:
+3) Delete a deadline task:
+delete <date> number>
+
+4) Mark deadline task as done:
 mark <date> <number> done
 
-4) Mark deadline task as not done:
+5) Mark deadline task as not done:
 mark <date> <number> not done
 
-5) Change the taskname of a deadline task:
+6) Change the taskname of a deadline task:
 change <date> <number> taskname to <newtaskname>
 
-6) Change the date of a deadline task:
+7) Change the date of a deadline task:
 change <date> <number> date to <newdate>
 
-7) Change the ending time of the deadline task:
+8) Change the ending time of the deadline task:
 change <date> <number> end by <new end>
 
-8) Change the ending time and date of the deadline task:
+9) Change the ending time and date of the deadline task:
 change <date> <number> by <newend> on <newdate>
 
 ---------------------------------------------------------------
@@ -36,22 +39,25 @@ add <taskname>; <start>-<end> on <date>; <priority>
 2) Add a done event task:
 add <taskname>; <start>-<end> on <date>; <priority> [done]
 
-3) Mark an event task as done:
+3) Delete an event task:
+delete <date> number
+
+4) Mark an event task as done:
 mark <date> <number> done
 
-4) Mark an event task as not done:
+5) Mark an event task as not done:
 mark <date> <number> not done
 
-5) Change the taskname of an event task:
+6) Change the taskname of an event task:
 change <date> <number> taskname to <newtaskname>
 
-6) Change the date of an event task:
+7) Change the date of an event task:
 change <date> <number> date to <newdate>
 
-7) Change the priority of an event task:
+8) Change the priority of an event task:
 change <date> <number> priority to <newpriority>
 
-8) Change the start and end times of an event task
+9) Change the start and end times of an event task
 change <date> <number> time to <newstart>-<newend> 
 
 ---------------------------------------------------------------
@@ -61,16 +67,19 @@ Floating tasks:
 1) Add a floating task:
 add <taskname>
 
-2) Add a done floating task:
+2) Delete a floating task:
+delete floating <nunber>
+
+3) Add a done floating task:
 add <taskname> [done]
 
-3) Mark a floating task as done:
+4) Mark a floating task as done:
 mark floating <number> done
 
-4) Mark a floating task as not done:
+5) Mark a floating task as not done:
 mark floating <number> not done
 
-5) Change the taskname of a floating task
+6) Change the taskname of a floating task
 change floating <number> taskname to <newtaskname>
 
 ---------------------------------------------------------------
@@ -80,13 +89,16 @@ Recurring tasks:
 1) Add a recurring task
 add <taskname>; <start>-<end> every <day>;
 
-2) Change the taskname of a recurring task:
+2) Delete a recurring task
+delete rec <number>
+
+3) Change the taskname of a recurring task:
 change rec <number> taskname to <newtaskname>
 
-3) Change the day of a recurring task:
+4) Change the day of a recurring task:
 change rec <number> to every <newday> 
 
-4) Change the start and end times of a recurring task:
+5) Change the start and end times of a recurring task:
 change rec <number> time to <newstart>-<newend>
 
 ---------------------------------------------------------------

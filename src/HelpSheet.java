@@ -57,7 +57,8 @@ public class HelpSheet {
 		methods.add(new Method("", ""));
 
 		// Undo
-		methods.add(new Method("For undoing the latest valid add, delete, edit(change)," + "\n" + "mark done/not done, or clear action:", "undo"));
+		methods.add(new Method("For undoing the latest valid add, delete, edit(change)," + "\n"
+				+ "mark done/not done, or clear action:", "undo"));
 
 		methods.add(new Method("", ""));
 
@@ -71,6 +72,7 @@ public class HelpSheet {
 		methods.add(new Method("For deadlines:", ""));
 		methods.add(new Method("Add a deadline task", "add <taskname>; by <end> on <date>"));
 		methods.add(new Method("Add a done deadline task", "add <taskname>; by <end> on <date> [done]"));
+		methods.add(new Method("Delete a deadline task", "delete <date> <number>"));
 		methods.add(new Method("Mark deadline task as done", "mark <date> <number> done"));
 		methods.add(new Method("Mark deadline task as not done", "mark <date> <number> not done"));
 		methods.add(new Method("Change the taskname of a deadline task",
@@ -87,6 +89,7 @@ public class HelpSheet {
 		methods.add(new Method("For events:", ""));
 		methods.add(new Method("Add an event task", "add <taskname>; <start>-<end> on <date>; <priority>"));
 		methods.add(new Method("Add a done event task", "add <taskname>; <start>-<end> on <date>; <priority> [done]"));
+		methods.add(new Method("Delete an event task", "delete <date> <number>"));
 		methods.add(new Method("Mark an event task as done", "mark <date> <number> done"));
 		methods.add(new Method("Mark an event task as not done", "mark <date> <number> not done"));
 		methods.add(
@@ -103,6 +106,7 @@ public class HelpSheet {
 		methods.add(new Method("For floating tasks:", ""));
 		methods.add(new Method("Add a floating task", "add <taskname>"));
 		methods.add(new Method("Add a done floating task", "add <taskname> [done]"));
+		methods.add(new Method("Delete a floating task", "delete floating <number>"));
 		methods.add(new Method("Mark a floating task as done", "mark floating <number> done"));
 		methods.add(new Method("Mark a floating task as not done", "mark floating <number> not done"));
 		methods.add(new Method("Change the taskname of a floating task",
@@ -113,6 +117,7 @@ public class HelpSheet {
 		// Recurring task
 		methods.add(new Method("For recurring tasks:", ""));
 		methods.add(new Method("Add a recurring task", "add <taskname>; <start>-<end> every <day>"));
+		methods.add(new Method("Delete a recurring task", "delete rec <number>"));
 		methods.add(
 				new Method("Change the taskname of a recurring task", "change rec <number> taskname to <newtaskname>"));
 		methods.add(new Method("Change the day of a recurring task", "change rec <number> to every <newday>"));
