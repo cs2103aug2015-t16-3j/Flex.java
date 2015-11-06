@@ -1284,11 +1284,10 @@ public class CRUD {
 			return INVALID_INPUT_MESSAGE;
 		}
 		Task temporaryTask = new Task(remainingCommandString1);
-		// ***TO CHECK FOR CLASH IN START AND END FOR EVENT TASK INPUT***
-
-		// This means that there is a clash between an existing event task which
-		// is NOT marked as done
-		// and a NEW task which is an event task which is NOT marked as done
+		
+		// Checks for clashes between new event task which is added,
+		// and existing tasks
+		// Multi-tasking is still allowed - same date, same starting time and same ending time.
 		if (Checker.isEventTaskInput(remainingCommandString1)
 				|| Checker.isDoneEventTaskInput(remainingCommandString1)) {
 
@@ -1400,7 +1399,6 @@ public class CRUD {
 			if (lastAction.getPreviousAction().equalsIgnoreCase("add")) {
 				// undo add
 
-				// reads in the file, line by line
 				BufferedReader reader = null;
 
 				reader = new BufferedReader(new FileReader(filename));
@@ -1505,7 +1503,6 @@ public class CRUD {
 					}
 				}
 
-				// sort all tasks by date and starting time
 				SortAndShow.sortAllTasksByDateAndStartingTime(allTasksListUNDOCHANGE);
 
 				BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
@@ -1533,7 +1530,8 @@ public class CRUD {
 				return CHANGE_UNDONE_MESSAGE;
 
 			} else if (lastAction.getPreviousAction().trim().equalsIgnoreCase("clear")) {
-
+				// undo clear
+				
 				BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
 
 				for (int z = 0; z < lastAction.getClearTaskList().size(); z++) {
@@ -1556,6 +1554,8 @@ public class CRUD {
 				return CLEAR_UNDONE_MESSAGE;
 
 			} else if (lastAction.getPreviousAction().trim().equalsIgnoreCase("unclear")) {
+				// undo an undone clear
+				
 				CRUD.clear(filename, lastAction);
 
 				FlexWindow.getFeedback().appendText(UNCLEAR_UNDONE_MESSAGE);
