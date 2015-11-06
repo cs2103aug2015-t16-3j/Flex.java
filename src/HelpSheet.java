@@ -57,8 +57,7 @@ public class HelpSheet {
 		methods.add(new Method("", ""));
 
 		// Undo
-		methods.add(new Method("For undoing the latest valid add, delete, edit(change),", "undo"));
-		methods.add(new Method("mark done/not done, or clear action:", ""));
+		methods.add(new Method("For undoing the latest valid add, delete, edit(change)," + "\n" + "mark done/not done, or clear action:", "undo"));
 
 		methods.add(new Method("", ""));
 
