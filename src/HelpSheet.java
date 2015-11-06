@@ -149,7 +149,7 @@ public class HelpSheet {
 		methods.add(new Method("Show all event tasks by start time", "show by start"));
 		methods.add(new Method("Show all deadline and event tasks by end time", "show by end"));
 		methods.add(new Method("Show all event tasks by priority", "show by priority"));
-		methods.add(new Method("show the tasks for a given week (of seven days), given" + "\n"
+		methods.add(new Method("Show the tasks for a given week (of seven days), given" + "\n"
 				+ "the starting(first) date of that week", "show week <exactstartingdate>"));
 
 		return methods;
