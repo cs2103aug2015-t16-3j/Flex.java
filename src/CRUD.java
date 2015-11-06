@@ -1074,6 +1074,9 @@ public class CRUD {
 				}
 
 				if (!Checker.isValidDay(tempString)) {
+
+					assert (!Checker.isValidDay(tempString));
+
 					FlexWindow.getFeedback().appendText(INVALID_INPUT_MESSAGE + "\n");
 					FlexWindow.getFeedback().appendText("\n");
 

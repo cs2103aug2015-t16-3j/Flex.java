@@ -1,3 +1,4 @@
+
 //@@author A0124512W
 
 import java.util.*;
@@ -56,8 +57,7 @@ public class ShowDays {
 			reader.close();
 		}
 
-		FlexWindow.getFeedback().appendText(STARTING_DATE_REQUEST_MESSAGE +
-		 "\n");
+		FlexWindow.getFeedback().appendText(STARTING_DATE_REQUEST_MESSAGE + "\n");
 		FlexWindow.getFeedback().appendText("\n");
 
 		logger.finest(STARTING_DATE_REQUEST_MESSAGE);
@@ -71,9 +71,10 @@ public class ShowDays {
 		// check if this input by the user is valid
 		String tempDate = date1;
 
-		// flexWindow.getFeedback().setText("");
-
 		if (!Checker.isValidDate(tempDate)) {
+
+			assert (!Checker.isValidDate(tempDate));
+
 			FlexWindow.getFeedback().appendText(INVALID_INPUT_MESSAGE + "\n");
 			FlexWindow.getFeedback().appendText("\n");
 
