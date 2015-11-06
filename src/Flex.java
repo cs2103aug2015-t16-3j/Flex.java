@@ -253,7 +253,7 @@ public class Flex {
 					System.out.println(FLOATING_TASKS_DISPLAYED_MESSAGE);
 					System.out.println();
 
-					SortAndShow.showFloatingTasks(filename);
+					SortAndShow.showRecurringTasks(filename);
 				} else if (remainingString.equalsIgnoreCase("by taskname")
 						|| remainingString.equalsIgnoreCase("by task")) {
 					SortAndShow.showByTaskName(filename);
