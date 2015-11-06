@@ -553,8 +553,45 @@ public class CRUD {
 			int timeWhitespaceToIndex2 = tempString.indexOf("time to ");
 			int endWhitespaceByIndex2 = tempString.indexOf("end by ");
 			int byIndex2 = tempString.indexOf("by ");
+			int priorityToIndex2 = tempString.indexOf("priority to ");
 
-			if (tasknameWhitespaceToIndex2 == 0) {
+			if (priorityToIndex2 == 0) {
+				tempString = tempString.substring(priorityToIndex2 + 12).trim();
+
+				if (tempString.length() == 0) {
+					FlexWindow.getFeedback().appendText(INVALID_INPUT_MESSAGE + "\n");
+					FlexWindow.getFeedback().appendText("\n");
+
+					logger.finest(INVALID_INPUT_MESSAGE);
+					System.out.println(INVALID_INPUT_MESSAGE);
+					System.out.println();
+					return INVALID_INPUT_MESSAGE;
+				}
+
+				String newPriority = tempString.trim();
+
+				String taskBeforeChange = allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1)
+						.getScheduleString();
+
+				// the task must to be changed should be an event task
+				if (!(Checker.isEventTaskInput(taskBeforeChange) || Checker.isDoneEventTaskInput(taskBeforeChange))) {
+					FlexWindow.getFeedback().appendText(INVALID_INPUT_MESSAGE + "\n");
+					FlexWindow.getFeedback().appendText("\n");
+
+					logger.finest(INVALID_INPUT_MESSAGE);
+					System.out.println(INVALID_INPUT_MESSAGE);
+					System.out.println();
+					return INVALID_INPUT_MESSAGE;
+				}
+
+				allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1).setPriority(newPriority);
+
+				lastAction.setPreviousAction("change");
+				lastAction.setPreviousChangedScheduleString(taskBeforeChange);
+				lastAction.setPreviousTask(new Task(
+						allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1).getScheduleString()));
+
+			} else if (tasknameWhitespaceToIndex2 == 0) {
 				tempString = tempString.substring(tasknameWhitespaceToIndex2 + 12).trim();
 
 				if (tempString.length() == 0) {
