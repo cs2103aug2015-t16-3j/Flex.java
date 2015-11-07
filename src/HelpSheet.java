@@ -57,19 +57,17 @@ public class HelpSheet {
 		methods.add(new Method("", ""));
 
 		// Undo
-		methods.add(new Method("For undoing the latest valid add, delete, edit(change)," + "\n"
-				+ "mark done/not done, or clear action:", "undo"));
+		methods.add(new Method("To undo the last action/command input:", "undo"));
 
 		methods.add(new Method("", ""));
 
 		// Clear function
-		methods.add(new Method("For clearing the file:", ""));
-		methods.add(new Method("Clear the file", "clear"));
+		methods.add(new Method("To clear entire .txt storage file:", "clear"));
 
 		methods.add(new Method("", ""));
 
 		// Deadline task
-		methods.add(new Method("For deadlines:", ""));
+		methods.add(new Method("Deadlines tasks commands:", ""));
 		methods.add(new Method("Add a deadline task", "add <taskname>; by <end> on <date>"));
 		methods.add(new Method("Add a done deadline task", "add <taskname>; by <end> on <date> [done]"));
 		methods.add(new Method("Delete a deadline task", "delete <date> <number>"));
@@ -86,7 +84,7 @@ public class HelpSheet {
 		methods.add(new Method("", ""));
 
 		// Event task
-		methods.add(new Method("For events:", ""));
+		methods.add(new Method("Event tasks commands:", ""));
 		methods.add(new Method("Add an event task", "add <taskname>; <start>-<end> on <date>; <priority>"));
 		methods.add(new Method("Add a done event task", "add <taskname>; <start>-<end> on <date>; <priority> [done]"));
 		methods.add(new Method("Delete an event task", "delete <date> <number>"));
@@ -103,7 +101,7 @@ public class HelpSheet {
 		methods.add(new Method("", ""));
 
 		// Floating task
-		methods.add(new Method("For floating tasks:", ""));
+		methods.add(new Method("Floating tasks commands:", ""));
 		methods.add(new Method("Add a floating task", "add <taskname>"));
 		methods.add(new Method("Add a done floating task", "add <taskname> [done]"));
 		methods.add(new Method("Delete a floating task", "delete floating <number>"));
@@ -115,7 +113,7 @@ public class HelpSheet {
 		methods.add(new Method("", ""));
 
 		// Recurring task
-		methods.add(new Method("For recurring tasks:", ""));
+		methods.add(new Method("Recurring tasks commands:", ""));
 		methods.add(new Method("Add a recurring task", "add <taskname>; <start>-<end> every <day>"));
 		methods.add(new Method("Delete a recurring task", "delete rec <number>"));
 		methods.add(
@@ -127,20 +125,20 @@ public class HelpSheet {
 		methods.add(new Method("", ""));
 
 		// Search functions
-		methods.add(new Method("For function Search:", ""));
+		methods.add(new Method("Search commands:", ""));
 		methods.add(new Method("Search for a task using a matching string in the taskname",
-				"search taskname <tasknamematchingstring>"));
+				"search taskname <taskname>"));
 		methods.add(new Method("Search for a task using an exact date", "search date <exactdate>"));
 		methods.add(new Method("Search for a task using an exact day", "search day <exactday>"));
 		methods.add(new Method("Search for a task using an exact start time", "search start <exactstartingtime>"));
 		methods.add(new Method("Search for a task using an exact ending time", "search end <exactendingtime>"));
 		methods.add(new Method("Search for a task using a matching string in the task" + "\n" + "priority",
-				"search priority <prioritymatchingstring>"));
+				"search priority <priority>"));
 
 		methods.add(new Method("", ""));
 
 		// Show functions
-		methods.add(new Method("For function Show:", ""));
+		methods.add(new Method("Show commands:", ""));
 		methods.add(new Method("Show all tasks", "show all"));
 		methods.add(new Method("Show all done tasks", "show done"));
 		methods.add(new Method("Show all tasks which are not done", "show not done"));
