@@ -122,14 +122,13 @@ public class HelpSheet {
 
 		// Search functions
 		methods.add(new Method("Search commands:", ""));
-		methods.add(new Method("Search for a task using a matching string in the taskname",
-				"search taskname <taskname>"));
+		methods.add(new Method("Search for a task using a keyword in the taskname",
+				"search taskname <keyword>"));
 		methods.add(new Method("Search for a task using an exact date", "search date <exactdate>"));
 		methods.add(new Method("Search for a task using an exact day", "search day <exactday>"));
 		methods.add(new Method("Search for a task using an exact start time", "search start <exactstartingtime>"));
 		methods.add(new Method("Search for a task using an exact ending time", "search end <exactendingtime>"));
-		methods.add(new Method("Search for a task using a matching string in the task" + "\n" + "priority",
-				"search priority <priority>"));
+		methods.add(new Method("Search for a task by priority", "search priority <priority>"));
 
 		methods.add(new Method("", ""));
 
