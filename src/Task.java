@@ -694,6 +694,7 @@ public class Task {
 					+ ", " + this.taskVariables[5] + " " + DONE_STRING;
 
 		} else if (Checker.isRecurringTaskInput(this.taskVariables[7])) {
+
 			// recurring task
 			this.taskVariables[7] = this.taskVariables[0] + "; " + this.taskVariables[3] + "-" + this.taskVariables[4]
 					+ " every " + this.taskVariables[2].toLowerCase();

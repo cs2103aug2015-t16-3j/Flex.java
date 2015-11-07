@@ -729,9 +729,14 @@ public class CRUD {
 					return INVALID_INPUT_MESSAGE;
 				}
 
-				if (Integer.valueOf(endingTime.substring(0, 2)) * HOUR_MINUTES
-						+ Integer.valueOf(endingTime.substring(2, 4)) < Integer.valueOf(startingTime.substring(0, 2))
-								* HOUR_MINUTES + Integer.valueOf(startingTime.substring(2, 4))) {
+				int endTimeHours = Integer.valueOf(endingTime.substring(0, 2));
+				int endTimeMinutes = Integer.valueOf(endingTime.substring(2, 4));
+				int totalEndTime = endTimeHours + endTimeMinutes;
+				int startTimeHours = Integer.valueOf(startingTime.substring(0, 2));
+				int startTimeMinutes = Integer.valueOf(startingTime.substring(2, 4));
+				int totalStartTime = startTimeHours + startTimeMinutes;
+
+				if (totalEndTime < totalStartTime) {
 					FlexWindow.getFeedback().appendText(INVALID_INPUT_MESSAGE + "\n");
 					FlexWindow.getFeedback().appendText("\n");
 
@@ -754,6 +759,8 @@ public class CRUD {
 					System.out.println();
 					return INVALID_INPUT_MESSAGE;
 				}
+
+				allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1).setStart("0000");
 
 				allTasksList.get(firstTaskForDateIndex + Integer.valueOf(number1) - 1).setEnd(endingTime);
 
@@ -1165,6 +1172,7 @@ public class CRUD {
 				}
 
 				String startTime = tempString.substring(0, hyphenIndex1).trim();
+
 				if (startTime.length() != 4) {
 					FlexWindow.getFeedback().appendText(INVALID_INPUT_MESSAGE + "\n");
 					FlexWindow.getFeedback().appendText("\n");
@@ -1189,6 +1197,7 @@ public class CRUD {
 				}
 
 				String endTime = tempString.substring(hyphenIndex1 + 1).trim();
+
 				if (endTime.length() != 4) {
 					FlexWindow.getFeedback().appendText(INVALID_INPUT_MESSAGE + "\n");
 					FlexWindow.getFeedback().appendText("\n");
@@ -1239,6 +1248,10 @@ public class CRUD {
 				// order WILL crash the program
 				allTasksList
 						.get(deadlineOrEventTasksList.size() + floatingTasksList.size() + Integer.valueOf(number1) - 1)
+						.setStart("0000");
+
+				allTasksList
+						.get(deadlineOrEventTasksList.size() + floatingTasksList.size() + Integer.valueOf(number1) - 1)
 						.setEnd(endTime);
 				allTasksList
 						.get(deadlineOrEventTasksList.size() + floatingTasksList.size() + Integer.valueOf(number1) - 1)
@@ -1249,6 +1262,7 @@ public class CRUD {
 				lastAction.setPreviousTask(new Task(allTasksList
 						.get(deadlineOrEventTasksList.size() + floatingTasksList.size() + Integer.valueOf(number1) - 1)
 						.getScheduleString()));
+
 			} else {
 				FlexWindow.getFeedback().appendText(INVALID_INPUT_MESSAGE + "\n");
 				FlexWindow.getFeedback().appendText("\n");

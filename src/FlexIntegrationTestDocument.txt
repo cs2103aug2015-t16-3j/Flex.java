@@ -4,7 +4,6 @@ Revise for EE2021 test; by 2358 on 23/11/2015
 Revise for CS2103/T test; by 2359 on 23/11/2015
 Revise for SSD1203 test; by 2359 on 30/11/2015
 Go to school on weekdays
-Go to school on weekdays
 Go to the market to buy groceries
 Go to the school website to check for uploaded assignments
 Save a backup copy of every school-related assignment on laptop, and in thumbdrive
