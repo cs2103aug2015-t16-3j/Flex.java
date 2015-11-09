@@ -66,11 +66,11 @@ public class Flex {
         
 		Command commandInput = ParserSplit.parse(command);
         
-	    // Note: clear the output display area after the user input command line
+	        // Note: clear the output display area after the user input command line
 		// has been entered
 		FlexWindow.getTextArea().setText("");
 		switch(commandInput.getCommandType()){
-		 // Case 1: adding a task
+		// Case 1: adding a task
 		case ADD:      String remainingCommandString = command.substring(whitespaceIndex + 1).trim();
 			           remainingCommandString.trim();
 
@@ -113,7 +113,7 @@ public class Flex {
 
 			           SortAndShow.readAndDisplayAll(filename);
 			           break;
-	    // Case 2: adding a task
+	        // Case 2: adding a task
 		case CHANGE:   String remainingCommandStringChange = command.substring(whitespaceIndex + 1).trim();
 		               remainingCommandStringChange.trim();
 
@@ -135,11 +135,11 @@ public class Flex {
 					   SortAndShow.readAndDisplayAll(filename);
 			           break;
 		
-	    // Case 3: Clear the entire .txt file
+	        // Case 3: Clear the entire .txt file
 		case CLEAR:    CRUD.clear(filename, lastAction);
 			           break;
 		
-        // Case 4: Deleting a task
+                // Case 4: Deleting a task
 		case DELETE:   String remainingCommandStringDelete = command.substring(whitespaceIndex + 1);
 					   remainingCommandStringDelete = remainingCommandStringDelete.trim();
 
@@ -160,10 +160,10 @@ public class Flex {
 			           SortAndShow.readAndDisplayAll(filename);
 			           break;
 		
-	    // Case 5:
+	        // Case 5:
 		// Mark deadline, event or floating tasks as done or not done
-        case MARK:     String remainingCommandStringMark = command.substring(whitespaceIndex + 1).trim();
-                       remainingCommandStringMark.trim();
+                case MARK:     String remainingCommandStringMark = command.substring(whitespaceIndex + 1).trim();
+                               remainingCommandStringMark.trim();
 
 		               if (remainingCommandStringMark.length() == 0) {
 		            	   // INVALID if the remaining command string is empty
@@ -181,9 +181,9 @@ public class Flex {
 		               SortAndShow.readAndDisplayAll(filename);
 			           break;
 		
-	   // Case 6: Search for tasks
-	   // (ignoring upper and lower cases),
-	   // and displaying the search results
+	        // Case 6: Search for tasks
+	        // (ignoring upper and lower cases),
+	   	// and displaying the search results
 		case SEARCH:   String remainingCommandStringSearch = command.substring(whitespaceIndex + 1).trim();
 		               remainingCommandStringSearch.trim();
 
@@ -203,8 +203,8 @@ public class Flex {
 
 			           break;
 		
-	    // Case 7:
-	    // Show tasks organized in groups
+	    	// Case 7:
+	    	// Show tasks organized in groups
 		// or show all tasks
 		// in the schedule file
 		// without altering/editing/overwriting the schedule file
@@ -295,14 +295,14 @@ public class Flex {
 			           }
 			           break;
 		
-	    // Case 8: undo the last action
-	    // Note: This method will call readAndExecuteCommand again
-		case UNDO:     CRUD.undo(filename, lastAction);
+	    	// Case 8: undo the last action
+	    	// Note: This method will call readAndExecuteCommand again
+	  	case UNDO:     CRUD.undo(filename, lastAction);
 
 		               SortAndShow.readAndDisplayAll(filename);
 			           break;
 	    
-	    // Case 9: The program Flex.java will exit itself in Command Line
+	    	// Case 9: The program Flex.java will exit itself in Command Line
 		// Prompt (cmd).
 		case EXIT:     FlexWindow.getFeedback().appendText(EXIT_MESSAGE + "\n");
 		               FlexWindow.getFeedback().appendText("\n");
@@ -313,7 +313,7 @@ public class Flex {
 
 		               System.exit(1);
 	                   break;
-	    // Case 10: invalid input
+	    	// Case 10: invalid input
 		default:       FlexWindow.getFeedback().appendText(INVALID_INPUT_MESSAGE + "\n");
 		               FlexWindow.getFeedback().appendText("\n");
 
