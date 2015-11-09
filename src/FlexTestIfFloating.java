@@ -28,7 +28,7 @@ import org.junit.Test;
 // done
 // add <taskname>, <start>-<end> every <day>, priority [done]
 
-public class FlexTest4 {
+public class FlexTestIfFloating {
 	@Test
 	public void testOutput() throws IOException {
 
@@ -62,42 +62,6 @@ public class FlexTest4 {
 		// semicolon invalid case
 		assertTrue(!Checker.isFloatingTaskOutput("task test test1; a"));
 
-		// done floating task input(user input command or file storage)
-		assertTrue(Checker.isDoneFloatingTaskInput("t [done]"));
-
-		assertTrue(!Checker.isDoneFloatingTaskInput("t[done]"));
-
-		assertTrue(!Checker.isDoneFloatingTaskInput("t [done"));
-
-		assertTrue(!Checker.isDoneFloatingTaskInput("t done]"));
-
-		assertTrue(!Checker.isDoneFloatingTaskInput("t [done]c"));
-
-		// semicolon invalid case
-		assertTrue(!Checker.isDoneFloatingTaskInput("t [done];"));
-
-		assertTrue(!Checker.isDoneFloatingTaskInput("task [don]; a"));
-
-		assertTrue(!Checker.isDoneFloatingTaskInput("task [don]; a"));
-
-		// done floating task output (GUI display)
-
-		assertTrue(Checker.isDoneFloatingTaskOutput("t [done]"));
-
-		assertTrue(!Checker.isDoneFloatingTaskOutput("t[done]"));
-
-		assertTrue(!Checker.isDoneFloatingTaskOutput("t [done"));
-
-		assertTrue(!Checker.isDoneFloatingTaskOutput("t done]"));
-
-		assertTrue(!Checker.isDoneFloatingTaskOutput("t [done]d"));
-
-		// semicolon invalid case
-		assertTrue(!Checker.isDoneFloatingTaskOutput("task [done];"));
-
-		assertTrue(!Checker.isDoneFloatingTaskOutput("task [don], a"));
-
-		assertTrue(!Checker.isDoneFloatingTaskOutput("task [don], a"));
 
 		// recurring task input
 		assertTrue(Checker.isRecurringTaskInput("task; 1258-1259 every monday"));

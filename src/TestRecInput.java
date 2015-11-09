@@ -9,10 +9,7 @@ import org.junit.Test;
 //input
 //add <taskname>; <start>-<end> every <day>
 
-//output
-//<taskname>, <start>-<end> every <day>
-
-public class FlexTestRec {
+public class TestRecInput {
 	
 	@Test
 	public void testOutput() throws IOException {

@@ -1,4 +1,4 @@
-//@@author A0124512W
+//@@author 
 
 import static org.junit.Assert.*;
 import java.io.IOException;
@@ -7,7 +7,7 @@ import org.junit.Test;
 // FlexTest1.java tests that valid dates in the required format are true, using valid date Strings, to test the 
 // logic of checkDate()
 
-public class FlexTest1 {
+public class TestDateFormat {
 
 	@Test
 	public void testOutput() throws IOException {

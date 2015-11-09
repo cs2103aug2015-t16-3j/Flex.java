@@ -1,4 +1,4 @@
-//@@author A0124512W
+//@@author 
 
 import static org.junit.Assert.*;
 import java.io.IOException;
@@ -10,7 +10,7 @@ import org.junit.Test;
 // checkDate() to verify the validity of the starting date of a week
 // Therefore, only valid dates are used as for generateNextDate() 
 
-public class FlexTest3 {
+public class TestValidDate {
 
 	// number of days in each month for non-leap years
 	private static final int JANUARY_DAYS = 31;

@@ -25,3 +25,26 @@
 /FlexWindow$3.class
 /HelpSheet.class
 /Method.class
+<<<<<<< HEAD
+/parserSplitUnitTest.class
+=======
+>>>>>>> 27c143a4e5829f29a4b30194e976d683a69d29f9
+/FlexTestIfFloating.class
+/TestDateFormat.class
+/TestDeadlineDoneInput.class
+/TestDeadlineDoneOutput.class
+/TestDeadlineInput.class
+/TestDeadlineOutput.class
+/TestEventDoneInput.class
+/TestEventDoneOutput.class
+/TestEventInput.class
+/TestEventOutput.class
+/TestFloatingDoneInput.class
+/TestFloatingDoneOutput.class
+/TestFloatingInput.class
+/TestFloatingOutput.class
+/TestRecBoundary.class
+/TestRecInput.class
+/TestRecOutput.class
+/TestValidDate.class
+/ParserSplitDeleteUnitTest.class
