@@ -1,6 +1,7 @@
+//@@ author A0131830U
 public class Command {
      public enum Type{
-    	 ADD,DELETE,CHANGE,UNDO,SHOW,DISPLAY,SEARCH,EXIT,INVALID
+    	 ADD,DELETE,CHANGE,UNDO,SHOW,MARK,SEARCH,CLEAR,EXIT,INVALID
      }
     
      private Type type;
@@ -21,6 +22,7 @@ public class Command {
      private String changedDay;
      private String changedPriority;
      private String showKeyword;
+     private String searchType;
      
      public Command(Type type){
     	 this.type = type;
@@ -81,8 +83,11 @@ public class Command {
      public String getShowKeyword(){
     	 return showKeyword;
      }
+     public String getSearchType(){
+    	 return searchType;
+     }
      
-     
+  //----------------------------------------------------------------------------------------   
      public void setTaskType(String taskType){
     	 this.taskType = taskType;
      }
@@ -135,5 +140,8 @@ public class Command {
      }
      public void setShowKeyword(String showKeyword){
     	 this.showKeyword = showKeyword;
+     }
+     public void setSearchType(String searchType){
+    	 this.searchType = searchType;
      }
 }
