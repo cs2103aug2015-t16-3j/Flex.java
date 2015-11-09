@@ -148,11 +148,12 @@ public class FlexWindow extends Application {
 	
 	// set the size of textAreas and textField
 	public void setTextAreaSize(){
-		textArea.setPrefHeight((height-50) *7 /9);
-		textArea.setMaxHeight(height *7 /9);
+		textArea.setPrefHeight(height *7 /9);
+		textArea.setMaxHeight(height *8 /9);
 		input.setPrefWidth(width);
-		feedback.setPrefHeight((height-50) /9);
+		feedback.setPrefHeight(height /9);
 		feedback.setMaxHeight(height /9);
+		feedback.setMinHeight(height/12);
 	}
 	
 	//Get the size of the screen and set place of the window in the screen
