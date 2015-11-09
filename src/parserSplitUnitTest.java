@@ -3,7 +3,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class parserSplitUnitTest {
+public class ParserSplitUnitTest {
 	Command addNormalEvent = ParserSplit.parse("add taskname; 1000-1100 on 01/01/2015; 1");
     Command addCommandDeadline = ParserSplit.parse("add taskname; by 1200 on 01/01/2015");
     Command addCommandFloating = ParserSplit.parse("add taskname");
