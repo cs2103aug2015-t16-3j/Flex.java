@@ -41,7 +41,7 @@ public class FlexWindow extends Application {
 	public void start(Stage primaryStage){
 		window = primaryStage;
 		window.setTitle("Flex");
-		setWindowSize();
+		getScreenSize();
 		
 		//Initialize variables
 		input = new TextField();
@@ -141,7 +141,7 @@ public class FlexWindow extends Application {
 	}
 	
 	private static void closeProgram(){
-		boolean result = ConfirmBox.display();
+		boolean result = ConfirmBox.confirm();
 		if(result)
 			window.close();
 	}
@@ -156,7 +156,7 @@ public class FlexWindow extends Application {
 	}
 	
 	//Get the size of the screen and set place of the window in the screen
-	private void setWindowSize(){
+	private void getScreenSize(){
 	    Screen screen = Screen.getPrimary();
 	    Rectangle2D bounds = screen.getVisualBounds();
 	    width = bounds.getWidth();

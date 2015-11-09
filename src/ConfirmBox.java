@@ -1,4 +1,4 @@
-//@@author A0131835J
+//@@author A0131835
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -13,7 +13,7 @@ public class ConfirmBox {
 
     static boolean answer;
 
-    public static boolean display() {
+    public static boolean confirm() {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Exit");
