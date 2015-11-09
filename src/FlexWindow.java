@@ -1,6 +1,6 @@
-//@@
-import java.io.IOException;
+//@@author A0131835J
 
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -22,8 +22,8 @@ public class FlexWindow extends Application {
 	private static TextField input;
 	private static TextArea textArea;
 	private static TextArea feedback;
-	private double width;
-	private double height;
+	private static double width;
+	private static double height;
 	private static String command;
 	private static Stage window;
 	private static String filename;
@@ -157,5 +157,13 @@ public class FlexWindow extends Application {
 	    height = bounds.getHeight()-50;
 	    window.setX(width/4);
 	    window.setY(height/6);
+	}
+	
+	public static double getHeight(){
+		return height;
+	}
+	
+	public static double getWidth(){
+		return width;
 	}
 }

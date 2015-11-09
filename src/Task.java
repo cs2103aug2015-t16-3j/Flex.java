@@ -95,6 +95,10 @@ public class Task {
 			this.taskVariables[3] = startingTime;
 			this.taskVariables[4] = endingTime;
 			this.taskVariables[5] = priority;
+
+			// set the comparison value
+			calculateAndSetComparisonValue(string);
+			
 			this.taskVariables[7] = this.taskVariables[0] + "; " + this.taskVariables[3] + "-" + this.taskVariables[4]
 					+ " on " + this.taskVariables[1] + "; " + this.taskVariables[5];
 			// <taskname>; <start>-<end> on <date>, <priority>
@@ -103,9 +107,6 @@ public class Task {
 			// set the null variables
 			this.taskVariables[2] = null;
 			this.taskVariables[6] = null;
-
-			// set the comparison value
-			calculateAndSetComparisonValue(string);
 
 		} else if (Checker.isDoneEventTaskInput(string)) {
 			// format: <taskname>; <start>-<end> on <date>; <priority> [done]
@@ -152,6 +153,10 @@ public class Task {
 			this.taskVariables[4] = endingTime;
 			this.taskVariables[5] = priority;
 			this.taskVariables[6] = DONE_STRING;
+
+			// set the comparison value
+			calculateAndSetComparisonValue(string);
+			
 			this.taskVariables[7] = this.taskVariables[0] + "; " + this.taskVariables[3] + "-" + this.taskVariables[4]
 					+ " on " + this.taskVariables[1] + "; " + this.taskVariables[5] + " " + DONE_STRING;
 			// <taskname>; <start>-<end> on <date>, <priority>
@@ -160,9 +165,6 @@ public class Task {
 
 			// set the null variables
 			this.taskVariables[2] = null;
-
-			// set the comparison value
-			calculateAndSetComparisonValue(string);
 
 		} else if (Checker.isDeadlineTaskInput(string)) {
 			// format: <taskname>; by <end> on <date>
@@ -195,17 +197,20 @@ public class Task {
 				this.taskVariables[1] = date.substring(1);
 			}
 			this.taskVariables[4] = endingTime;
+
+			// set the comparison value
+			calculateAndSetComparisonValue(string);
+			
 			this.taskVariables[7] = this.taskVariables[0] + "; by " + this.taskVariables[4] + " on "
 							+ this.taskVariables[1];
 			this.taskVariables[8] = this.taskVariables[0] + ", by " + this.taskVariables[4] + " (deadline)";
 
+			
 			// set the null variables
 			this.taskVariables[2] = null;
 			this.taskVariables[3] = null;
 			this.taskVariables[5] = null;
 			this.taskVariables[6] = null;
-
-			calculateAndSetComparisonValue(string);
 
 		} else if (Checker.isDoneDeadlineTaskInput(string)) {
 			// format: <taskname>; by <end> on <date> [done]
@@ -242,6 +247,10 @@ public class Task {
 			}
 			this.taskVariables[4] = endingTime;
 			this.taskVariables[6] = DONE_STRING;
+			
+			// set the comparison value
+			calculateAndSetComparisonValue(string);
+			
 			this.taskVariables[7] = this.taskVariables[0] + "; by " + this.taskVariables[4] + " on "
 					+ this.taskVariables[1] + " " + DONE_STRING;
 			this.taskVariables[8] = this.taskVariables[0] + ", by " + this.taskVariables[4] + " (deadline) "
@@ -251,8 +260,6 @@ public class Task {
 			this.taskVariables[2] = null;
 			this.taskVariables[3] = null;
 			this.taskVariables[5] = null;
-
-			calculateAndSetComparisonValue(string);
 
 		} else if (Checker.isRecurringTaskInput(string)) {
 			// format: <taskname>; <start>-<end> every <day>
@@ -375,6 +382,8 @@ public class Task {
 			// The year 2014
 			int year = Integer.valueOf(tempDateString.substring(slashIndex2 + 1).trim());
 
+			this.taskVariables[1] = day + "/" + month + "/" + year;
+			
 			// 8 hours
 			int startingTimeHours = Integer.valueOf(this.taskVariables[3].substring(0, 2).trim());
 
@@ -407,6 +416,8 @@ public class Task {
 			// The year 2014
 			int year = Integer.valueOf(tempDateString.substring(slashIndex2 + 1).trim());
 
+			this.taskVariables[1] = day + "/" + month + "/" + year;
+			
 			// 8 hours
 			int startingTimeHours = Integer.valueOf(this.taskVariables[3].substring(0, 2).trim());
 
@@ -441,6 +452,8 @@ public class Task {
 			// The year 2014
 			int year = Integer.valueOf(tempDateString.substring(slashIndex2 + 1).trim());
 
+			this.taskVariables[1] = day + "/" + month + "/" + year;
+			
 			int endingTimeTotal = Integer.valueOf(this.taskVariables[4].substring(0, 2)) * HOUR_MINUTES
 					+ Integer.valueOf(this.taskVariables[4].substring(2, 4));
 
@@ -470,6 +483,8 @@ public class Task {
 			// The year 2014
 			int year = Integer.valueOf(tempDateString.substring(slashIndex2 + 1).trim());
 
+			this.taskVariables[1] = day + "/" + month + "/" + year;
+			
 			int endingTimeTotal = Integer.valueOf(this.taskVariables[4].substring(0, 2)) * HOUR_MINUTES
 					+ Integer.valueOf(this.taskVariables[4].substring(2, 4));
 
