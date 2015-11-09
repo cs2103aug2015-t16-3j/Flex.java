@@ -1,3 +1,4 @@
+//@@author A0131835J
 // Flex.java
 // Uses Task objects from Task.java
 // Able to
@@ -38,7 +39,6 @@ public class Flex {
 	private static final String EXIT_MESSAGE = "Exiting the program.";
 
 	// Note: The programs starts by typing "java Flex" in command line prompt.
-	//@@author A0131835J
 
 	public static void processCommand(String input, String filename) {
 		command = input;
