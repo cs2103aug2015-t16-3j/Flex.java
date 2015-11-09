@@ -24,11 +24,8 @@ public class FlexWindow extends Application {
 	private static TextArea feedback;
 	private static double width;
 	private static double height;
-	private static String command;
 	private static Stage window;
-	private static String filename;
 	private static boolean haveFilename;
-	private static Button help;
 	private static final String FILENAME_INPUT_MESSAGE = "Welcome to Flex! Please enter the full path name of the .txt schedule file. E.g.: C:"
 			+ "\\" + "Users" + "\\" + "Owner" + "\\" + "Documents" + "\n" + "\\" + "Flex" + "." + "java" + "\\" + "src" + "\\"
 			+ "FlexTest" + "." + "txt";
@@ -41,14 +38,13 @@ public class FlexWindow extends Application {
 	public void start(Stage primaryStage){
 		window = primaryStage;
 		window.setTitle("Flex");
-		setSceneSize();
+		setWindowSize();
 
 		input = new TextField();
 		textArea = new TextArea(FILENAME_INPUT_MESSAGE);
 		feedback = new TextArea();
-		command = new String();
 		haveFilename = false;
-		help = new Button("Help");
+		Button help = new Button("Help");
 		
 		//Set GridPane
 		GridPane grid = new GridPane();
@@ -65,8 +61,8 @@ public class FlexWindow extends Application {
         setEditability();
         
         grid.add(help, 0, 0);
-		grid.add(feedback, 0, 4);
-        grid.add(input, 0, 5);
+		grid.add(feedback, 0, 2);
+        grid.add(input, 0, 3);
         grid.add(textArea, 0, 1);
 		input.setPromptText("command");
 
@@ -85,14 +81,13 @@ public class FlexWindow extends Application {
 			@Override
 			public void handle(KeyEvent event) {
 				if(event.getCode().equals(KeyCode.ENTER)){
+					String command = input.getText().trim();
 					if(haveFilename){
 						feedback.setText("");
 						textArea.setText("");
-						command = input.getText().trim();
-						filename = FindFilename.getFilename();
+						String filename = FindFilename.getFilename();
 						Flex.processCommand(command, filename);
 					}else{
-						command = input.getText().trim();
 						feedback.setText("");
 						textArea.setText("");
 						try {
@@ -150,7 +145,7 @@ public class FlexWindow extends Application {
 		feedback.setMaxHeight(height /9);
 	}
 	
-	private void setSceneSize(){
+	private void setWindowSize(){
 	    Screen screen = Screen.getPrimary();
 	    Rectangle2D bounds = screen.getVisualBounds();
 	    width = bounds.getWidth();
