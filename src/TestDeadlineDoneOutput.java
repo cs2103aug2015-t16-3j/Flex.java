@@ -1,4 +1,12 @@
+<<<<<<< HEAD
 //@@author 
+=======
+<<<<<<< HEAD
+
+=======
+//@@author A0131835J
+>>>>>>> fa73752610cb84d24203d771bb6708ec2ef706c9
+>>>>>>> 10ac6224e03db5f900e19b243c5669f2b421ebb9
 
 import static org.junit.Assert.*;
 import java.io.IOException;

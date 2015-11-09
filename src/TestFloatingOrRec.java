@@ -1,4 +1,4 @@
-//@@author A0124512W
+
 
 import static org.junit.Assert.*;
 import java.io.IOException;
@@ -28,7 +28,7 @@ import org.junit.Test;
 // done
 // add <taskname>, <start>-<end> every <day>, priority [done]
 
-public class FlexTestIfFloating {
+public class TestFloatingOrRec {
 	@Test
 	public void testOutput() throws IOException {
 
