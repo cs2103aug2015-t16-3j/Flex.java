@@ -817,7 +817,8 @@ public class Checker {
 
 		return true;
 	}
-
+	
+	//@@author A0131830U
 	// recurring task (not done) (GUI Display format)
 	// <taskname>, <start>-<end> every <day>, priority
 	static boolean isRecurringTaskOutput(String string) {
@@ -1108,7 +1109,7 @@ public class Checker {
 		return true;
 	}
     
-	//@@author A0131830U
+	
 	// <taskname>, <start>-<end> on <date>, <priority>
 	static boolean isEventTaskOutput(String string) {
 
