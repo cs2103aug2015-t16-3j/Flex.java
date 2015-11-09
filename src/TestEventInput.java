@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 
-=======
 //@@author A0131835J
->>>>>>> fa73752610cb84d24203d771bb6708ec2ef706c9
 
 import static org.junit.Assert.*;
 import java.io.IOException;
