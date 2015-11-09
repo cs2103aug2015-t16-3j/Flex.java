@@ -619,6 +619,9 @@ public class Task {
 	public void setDate(String newDate) {
 
 		this.taskVariables[1] = newDate;
+		if(taskVariables[1].indexOf("0")==0){
+			this.taskVariables[1] = newDate.substring(1);
+		}
 
 		// event task
 		if (Checker.isEventTaskInput(this.taskVariables[7])) {
