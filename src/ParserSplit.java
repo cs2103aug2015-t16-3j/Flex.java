@@ -1,3 +1,5 @@
+//@@ author A0131830U
+//ParserSplit is to parser the input command, find the command type and the arguments.
 import java.util.*;
 public class ParserSplit {
     private static final String COMMAND_ADD = "add";
@@ -41,13 +43,16 @@ public class ParserSplit {
     	}
     	return command;
     	} 
+    //split the input command into two parts
     private static ArrayList<String> splitString(String userInput){
     	String[] temp = userInput.trim().split(" ", 2);
     	return new ArrayList<String>(Arrays.asList(temp));
     }
+    // return the command type
     private static String getCommandType(ArrayList<String> parameters){
     	return parameters.get(0);
     }
+    //return the arguments
     private static String getArguments(ArrayList<String> parameters){
     	String nulltemp = "";
     	if(parameters.size()<2){
@@ -57,7 +62,7 @@ public class ParserSplit {
     	return temp;
         }
     
-    // add
+    // add command type
     private static Command addCommand(String arguments) {
     	if(arguments.trim().length()==0){
     		Command command = new Command(Command.Type.INVALID);
@@ -140,7 +145,7 @@ public class ParserSplit {
     	}
       
     }
-    // delete
+    // delete command type
     private static Command deleteCommand(String arguments){
     	if(arguments.trim().length()==0){
     		Command command = new Command(Command.Type.INVALID);
@@ -172,7 +177,7 @@ public class ParserSplit {
     	}
     	
     }
-    // change
+    // change command type
     private static Command changeCommand(String arguments) {
     	if(arguments.trim().length()==0){
     		Command command = new Command(Command.Type.INVALID);
@@ -287,7 +292,7 @@ public class ParserSplit {
     	}
     	return command;
     }
-    // search
+    // search command type
     private static Command searchCommand(String arguments){
     	if(arguments.trim().length()==0){
     		Command command = new Command(Command.Type.INVALID);
@@ -318,7 +323,7 @@ public class ParserSplit {
     	return command;
     }
    
-    // show
+    // show command type
     private static Command showCommand(String arguments){
     	if(arguments.trim().length()==0){
     		Command command = new Command(Command.Type.INVALID);
@@ -343,7 +348,7 @@ public class ParserSplit {
     	return command;
     }
     
-    // undo
+    // undo command type
     private static Command undoCommand(){
     	Command command = new Command(Command.Type.UNDO);
     	return command;
@@ -352,13 +357,13 @@ public class ParserSplit {
     	Command command = new Command(Command.Type.CLEAR);
     	return command;
     }
-    // exit 
+    // exit command type
     private static Command  exitCommand(){
     	Command command = new Command(Command.Type.EXIT);
     	return command;
     }
     
-    //invalid
+    //invalid command type
     private static Command invalidCommand(){
     	Command command = new Command(Command.Type.INVALID);
     	return command;
