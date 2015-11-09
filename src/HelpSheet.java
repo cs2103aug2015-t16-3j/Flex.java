@@ -1,3 +1,5 @@
+//@@author A0131835J
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -10,33 +12,31 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class HelpSheet {
-	Scene helpSheet;
 
-	public Scene getHelpSheet() {
-		return helpSheet;
-	}
-
+	@SuppressWarnings("unchecked")
 	public static void showHelpSheet() {
 		Stage window = new Stage();
+		double height = FlexWindow.getHeight();
+		double width = FlexWindow.getWidth();
 		window.setTitle("Help Sheet");
-		window.setHeight(600);
-		window.setWidth(950);
+		window.setHeight(height*3/5);
+		window.setWidth(width*3/5);
 
 		// Function column for Deadline
 		TableColumn<Method, Double> functionColumn = new TableColumn<>("Function");
-		functionColumn.setMinWidth(400);
+		functionColumn.setMinWidth(width*4/15);
 		functionColumn.setCellValueFactory(new PropertyValueFactory<>("function"));
 
 		// howToUse column for Deadline
 		TableColumn<Method, String> howToUseColumn = new TableColumn<>("How To Use");
-		howToUseColumn.setMinWidth(550);
+		howToUseColumn.setMinWidth(width*4/15);
 		howToUseColumn.setCellValueFactory(new PropertyValueFactory<>("howToUse"));
 
 		// set up the table
 		TableView<Method> table = new TableView<>();
 		table.setItems(getMethod());
 		table.getColumns().addAll(functionColumn, howToUseColumn);
-		table.setMinHeight(500);
+		table.setPrefHeight(height*11/20);
 		GridPane.setConstraints(table, 0, 0);
 
 		GridPane grid = new GridPane();
@@ -45,7 +45,7 @@ public class HelpSheet {
 		grid.setVgap(8);
 		grid.setPadding(new Insets(10, 10, 10, 10));
 		grid.getChildren().addAll(table);
-		Scene scene = new Scene(grid, 950, 600);
+		Scene scene = new Scene(grid, width, height);
 
 		window.setScene(scene);
 		window.show();

@@ -4,7 +4,6 @@
 import java.util.*;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -655,6 +654,8 @@ public class CRUD {
 
 			} else if (timeWhitespaceToIndex2 == 0) {
 
+				System.out.println("EVENT TIME TO ");
+				
 				tempString = tempString.substring(timeWhitespaceToIndex2 + 8).trim();
 
 				if (tempString.length() == 0) {
@@ -681,6 +682,9 @@ public class CRUD {
 
 				String startingTime = tempString.substring(0, hyphenIndex3).trim();
 
+				System.out.println("startingTime:" + startingTime);
+				
+				
 				if (startingTime.length() != 4) {
 					FlexWindow.getFeedback().appendText(INVALID_INPUT_MESSAGE + "\n");
 					FlexWindow.getFeedback().appendText("\n");
@@ -706,6 +710,8 @@ public class CRUD {
 
 				String endingTime = tempString.substring(hyphenIndex3 + 1).trim();
 
+				System.out.println("endingTime:" + endingTime);
+				
 				if (endingTime.length() != 4) {
 					FlexWindow.getFeedback().appendText(INVALID_INPUT_MESSAGE + "\n");
 					FlexWindow.getFeedback().appendText("\n");
@@ -731,11 +737,14 @@ public class CRUD {
 
 				int endTimeHours = Integer.valueOf(endingTime.substring(0, 2));
 				int endTimeMinutes = Integer.valueOf(endingTime.substring(2, 4));
-				int totalEndTime = endTimeHours + endTimeMinutes;
+				int totalEndTime = endTimeHours * HOUR_MINUTES + endTimeMinutes;
 				int startTimeHours = Integer.valueOf(startingTime.substring(0, 2));
 				int startTimeMinutes = Integer.valueOf(startingTime.substring(2, 4));
-				int totalStartTime = startTimeHours + startTimeMinutes;
+				int totalStartTime = startTimeHours * HOUR_MINUTES + startTimeMinutes;
 
+				System.out.println("totalEndTime:" + totalEndTime);
+				System.out.println("totalStartTime:" + totalStartTime);
+				
 				if (totalEndTime < totalStartTime) {
 					FlexWindow.getFeedback().appendText(INVALID_INPUT_MESSAGE + "\n");
 					FlexWindow.getFeedback().appendText("\n");
