@@ -1,4 +1,4 @@
-//@@author A0124512W
+//@@author A0124901R
 
 // Task.java
 // Contains the variables (attributes) in a Task
