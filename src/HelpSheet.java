@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 
 public class HelpSheet {
 
+	@SuppressWarnings("unchecked")
 	public static void showHelpSheet() {
 		Stage window = new Stage();
 		double height = FlexWindow.getHeight();
