@@ -1,4 +1,5 @@
 
+
 //@@author A0124512W
 
 import java.util.*;
@@ -11,8 +12,6 @@ public class ShowDays {
 
 	private static final Logger logger = Logger.getLogger(ShowDays.class.getName());
 
-	private static final String STARTING_DATE_REQUEST_MESSAGE = "Please enter the starting date (format: dd/mm/yyyy): "
-			+ "\n";
 
 	private static final String TASKS_FOR_WEEK_DISPLAYED_FRONT_MESSAGE = "The tasks for the whole week starting on ";
 	private static final String TASKS_FOR_WEEK_DISLAYED_BACK_MESSAGE = " are displayed.";
@@ -56,13 +55,6 @@ public class ShowDays {
 		if (reader != null) {
 			reader.close();
 		}
-
-		FlexWindow.getFeedback().appendText(STARTING_DATE_REQUEST_MESSAGE + "\n");
-		FlexWindow.getFeedback().appendText("\n");
-
-		logger.finest(STARTING_DATE_REQUEST_MESSAGE);
-		System.out.println(STARTING_DATE_REQUEST_MESSAGE);
-		System.out.println();
 
 		// day 1
 
