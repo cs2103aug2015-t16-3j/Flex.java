@@ -19,8 +19,11 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 public class FlexWindow extends Application {
+	//To take note of commands from the user
 	private static TextField input;
+	//To display the list of tasks
 	private static TextArea textArea;
+	//To display the feedback to users
 	private static TextArea feedback;
 	private static double width;
 	private static double height;
@@ -39,12 +42,21 @@ public class FlexWindow extends Application {
 		window = primaryStage;
 		window.setTitle("Flex");
 		setWindowSize();
-
+		
+		//Initialize variables
 		input = new TextField();
+		GridPane.setConstraints(input, 0, 3);
+		
 		textArea = new TextArea(FILENAME_INPUT_MESSAGE);
+		GridPane.setConstraints(textArea, 0, 1);
+		
 		feedback = new TextArea();
-		haveFilename = false;
+		GridPane.setConstraints(feedback, 0, 2);
+		
 		Button help = new Button("Help");
+		GridPane.setConstraints(help, 0, 0);
+		
+		haveFilename = false;
 		
 		//Set GridPane
 		GridPane grid = new GridPane();
@@ -52,18 +64,14 @@ public class FlexWindow extends Application {
         grid.setHgap(10);
         grid.setVgap(8);
         grid.setPadding(new Insets(10, 10, 10, 10));
-        Scene scene = new Scene(grid, width/2, height/1.5);
+        grid.getChildren().addAll(help, textArea, feedback, input);
  
         //Set textArea
         textArea.setPrefColumnCount(40);
         textArea.setPrefRowCount(20);
         setTextAreaSize();
         setEditability();
-        
-        grid.add(help, 0, 0);
-		grid.add(feedback, 0, 2);
-        grid.add(input, 0, 3);
-        grid.add(textArea, 0, 1);
+
 		input.setPromptText("command");
 
 		help.setOnAction(new EventHandler<ActionEvent>(){
@@ -74,7 +82,8 @@ public class FlexWindow extends Application {
 			}
 			
 		});
-		
+
+        Scene scene = new Scene(grid, width/2, height/1.5);
 		//Action when enter is pressed
 		scene.setOnKeyPressed(new EventHandler<KeyEvent>(){
 
@@ -137,6 +146,7 @@ public class FlexWindow extends Application {
 			window.close();
 	}
 	
+	// set the size of textAreas and textField
 	public void setTextAreaSize(){
 		textArea.setPrefHeight((height-50) *7 /9);
 		textArea.setMaxHeight(height *7 /9);
@@ -145,6 +155,7 @@ public class FlexWindow extends Application {
 		feedback.setMaxHeight(height /9);
 	}
 	
+	//Get the size of the screen and set place of the window in the screen
 	private void setWindowSize(){
 	    Screen screen = Screen.getPrimary();
 	    Rectangle2D bounds = screen.getVisualBounds();
