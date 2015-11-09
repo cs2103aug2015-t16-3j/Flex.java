@@ -16,6 +16,7 @@ public class HelpSheet {
 	@SuppressWarnings("unchecked")
 	public static void showHelpSheet() {
 		Stage window = new Stage();
+		
 		double height = FlexWindow.getHeight();
 		double width = FlexWindow.getWidth();
 		window.setTitle("Help Sheet");
