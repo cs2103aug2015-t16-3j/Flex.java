@@ -1,4 +1,4 @@
-//@@ author A0131830U
+//@@author A0131830U
 public class Command {
      public enum Type{
     	 ADD,DELETE,CHANGE,UNDO,SHOW,MARK,SEARCH,CLEAR,EXIT,INVALID

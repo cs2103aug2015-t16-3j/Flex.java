@@ -1,4 +1,4 @@
-//@@ author A0131830U
+//@@author A0131830U
 public class ParserSplitTest {
 	public static void main(String[] args){
 		//add normal task

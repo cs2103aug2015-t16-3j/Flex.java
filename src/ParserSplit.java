@@ -1,4 +1,4 @@
-//@@ author A0131830U
+//@@author A0131830U
 //ParserSplit is to parser the input command, find the command type and the arguments.
 import java.util.*;
 public class ParserSplit {
