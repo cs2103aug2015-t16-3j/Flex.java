@@ -10,6 +10,7 @@ public class parserSplitUnitTest {
 	
 	
 	@Test
+	//check for the add normal task
 	public void testAddCommandEvent(){
 		assertEquals("taskname", addNormalEvent .getTaskName());
 		assertEquals("1000", addNormalEvent .getstartTime());
@@ -18,16 +19,20 @@ public class parserSplitUnitTest {
 		assertEquals("1", addNormalEvent .getPriority());
 	}
 	
+	//check for the add deadline task
 	public void testAddDeadline(){
 		assertEquals("taskname", addCommandDeadline.getTaskName());
 		assertEquals("1200", addCommandDeadline.getEndTime());
 		assertEquals("01/01/2015",addCommandDeadline.getDate());
 	}
 	
+	//check for the add floating task
 	public void testAddFloating(){
 		assertEquals("taskname", addCommandFloating.getTaskName());
 	}
 	
+	
+	//check for the add recurring task
 	public void testAddRecurring(){
 		assertEquals("taskname", addCommandRecurring.getTaskName());
 		assertEquals("1000", addCommandRecurring.getstartTime());
